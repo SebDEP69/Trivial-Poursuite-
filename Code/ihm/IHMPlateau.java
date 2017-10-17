@@ -2,6 +2,7 @@ package ihm;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.awt.image.BufferedImage;
 import java.util.*;
 import java.util.List;
 
@@ -25,6 +26,7 @@ public class IHMPlateau extends JFrame implements MouseListener, MouseMotionList
   public IHMPlateau( String nom_jeu, Dimension dim){
 	  Dimension boardSize = dim; 
 	  
+	  
 	  this.setSize(dim);
 	  this.setTitle(nom_jeu);
 	  //  Use a Layered Pane for this this application
@@ -33,62 +35,147 @@ public class IHMPlateau extends JFrame implements MouseListener, MouseMotionList
 	  layeredPane.setPreferredSize(boardSize);
 	  layeredPane.addMouseListener(this);
 	  layeredPane.addMouseMotionListener(this);
+	  
+	  
+	  JPanel panelGeneral = new JPanel() {
+		  
+		private static final long serialVersionUID = 1L;
+		private Image image = 	 Toolkit.getDefaultToolkit().getImage("images/logo.jpg");
+		public Dimension getPreferredSize() { 
+			return new Dimension(image.getWidth(null), image.getHeight(null));}
+		
+		@Override
+		  public void paintComponent(Graphics g)
+		   {
+		     super.paintComponent(g);
+		     
+		     g.drawImage (image, 0, 0, null);
+		     repaint();
+		   }
+		  
+	  };
+	 // panelGeneral.getPreferredSize();
+	  panelGeneral.setLayout( new BorderLayout() );
+	  panelGeneral.setPreferredSize( boardSize );
+	  panelGeneral.setBounds(0, 0, boardSize.width, boardSize.height);
+	  
+	 
+	  
+	  layeredPane.add(panelGeneral, JLayeredPane.DEFAULT_LAYER);
+	  
+	  
+	  
+	  
+	
+	  
+	  
+	  JLabel nord = new JLabel(new ImageIcon("images/TitreTrivial.jpg"));
+	  nord.setBackground(Color.white);
+	  panelGeneral.add(nord, BorderLayout.NORTH);
+	  
+	  JPanel sud = new JPanel();
+	 // sud.setBackground(Color.RED);
+	  panelGeneral.add(sud, BorderLayout.SOUTH);
+	   
+	  JPanel WEST = new JPanel();
+	 // WEST.setBackground(Color.PINK);
+	  panelGeneral.add(WEST, BorderLayout.WEST);
+	   
+	  JPanel east = new JPanel();
+	  east.setLayout(new GridLayout(2,0));
+	  east.setBackground(Color.white);
+	  
+	  
+	  JLabel camemebertJoueurUn = new JLabel(new ImageIcon("images/Cam_joueur1.png"));
+	  JLabel camemebertJoueurdeux = new JLabel(new ImageIcon("images/Cam_joueur2.png"));
+	  	  
+	  east.add(camemebertJoueurUn);
+	  east.add(camemebertJoueurdeux);
+	  
+	
+	  
+	  panelGeneral.add(east, BorderLayout.EAST);
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  JPanel panelPlateau = new JPanel();
+	  
+	  panelPlateau.setLayout( new GridLayout(8, 8) );
+	  //panelPlateau.setBackground(new ImageIcon("image/logo.jpg"));
+	  panelGeneral.add(panelPlateau, BorderLayout.CENTER);
+	  
+	  creationplateau(panelPlateau);
+	  
+	  
+	  /*layeredPane.addMouseListener(this);
+	  layeredPane.addMouseMotionListener(this);*/
 	
 	  //Add a chess board to the Layered Pane 
 	  
-	  trivialBoard = new JPanel();
+	 /* trivialBoard = new JPanel();
 	  layeredPane.add(trivialBoard, JLayeredPane.DEFAULT_LAYER);
 	  trivialBoard.setLayout( new GridLayout(8, 8) );
 	  trivialBoard.setPreferredSize( boardSize );
 	  trivialBoard.setBounds(0, 0, boardSize.width, boardSize.height);
 	  
+	 */
 	 
-	 
-	 
+	  
 	  
   }
-  private void creationplateau() {
+  private void creationplateau(JPanel panelPlateau) {
 	  
 	  
-	  for (int i = 0; i < 64; i++) {
+	  for (int i = 0; i < 49; i++) {
 		  JPanel square = new JPanel( new BorderLayout() );
-		  trivialBoard.add( square );
+		  panelPlateau.add( square );
 		 
-		  int row = (i / 8) % 2;
-		  if (row == 0)
+		  int row = (i / 7) % 2;
+		  
+		  square.setOpaque(false);
+		  square.setBackground(Color.WHITE);
+		 /* if (row == 0)
 			  
 			  square.setBackground( i % 2 == 0 ? Color.black : Color.white );
 		  else
-			  square.setBackground( i % 2 == 0 ? Color.white : Color.black );
+			  square.setBackground( i % 2 == 0 ? Color.white : Color.black );*/
 	  }  
 	  
-	  ((JPanel) trivialBoard.getComponent(18)).add(new JLabel(new ImageIcon("image/logo.jpg")));
-	  ((JPanel) trivialBoard.getComponent(18)).setSize(100,10);
+	
+	  ((JPanel) panelPlateau.getComponent(18)).add(new JLabel(new ImageIcon("image/logo.jpg")));
+	  ((JPanel) panelPlateau.getComponent(18)).setSize(100,10);
 	  
 	  
 	  Couleur serie[] = {Couleur.VERT, Couleur.ORANGE,Couleur.BLEU, Couleur.ROUGE,Couleur.NOIR};
 	  int indexSerie=0;
 	  int indicesuperCam=1;
 	  int numeroCote =1;
-	  int indiceelement=10;
+	  int indiceelement=1;
 	  for (int numCase = 0; numCase < 24; numCase++) {
-			
+		  
+		((JPanel)  panelPlateau.getComponent(indiceelement)).setOpaque(true);
 		  switch (serie[indexSerie]) {
-	      case ROUGE : trivialBoard.getComponent(indiceelement).setBackground(Color.RED);
+	      case ROUGE : panelPlateau.getComponent(indiceelement).setBackground(Color.RED);
 	               break;
-	      case BLEU:   trivialBoard.getComponent(indiceelement).setBackground(Color.BLUE);
+	      case BLEU:   panelPlateau.getComponent(indiceelement).setBackground(Color.BLUE);
 	               break;
-	      case VERT: trivialBoard.getComponent(indiceelement).setBackground(Color.GREEN);
+	      case VERT: panelPlateau.getComponent(indiceelement).setBackground(Color.GREEN);
 	               break;
-	      case ORANGE:  trivialBoard.getComponent(indiceelement).setBackground(Color.ORANGE);
+	      case ORANGE:  panelPlateau.getComponent(indiceelement).setBackground(Color.ORANGE);
 	               break;
-	      case NOIR:  trivialBoard.getComponent(indiceelement).setBackground(Color.BLACK);
+	      case NOIR:  panelPlateau.getComponent(indiceelement).setBackground(Color.BLACK);
 	               break;
 		  }	
 		  
 		  
 		if (indicesuperCam %6 ==0) {
-			  ( (JPanel)trivialBoard.getComponent(indiceelement)).setBorder(BorderFactory.createMatteBorder(10, 10, 10, 10, Color.BLACK));
+			  ( (JPanel)panelPlateau.getComponent(indiceelement)).setBorder(BorderFactory.createMatteBorder(10, 10, 10, 10, Color.DARK_GRAY));
 			  
 			  numeroCote++;
 		} 
@@ -100,11 +187,11 @@ public class IHMPlateau extends JFrame implements MouseListener, MouseMotionList
 		  switch (numeroCote) {
 	      case 1 : indiceelement++;
 	               break;
-	      case 2:  indiceelement= indiceelement+8;
+	      case 2:  indiceelement= indiceelement+7;
 	               break;
 	      case 3: indiceelement--;
 	               break;
-	      case 4:  indiceelement= indiceelement-8;
+	      case 4:  indiceelement= indiceelement-7;
 	               break;
 		  }	
 		  
