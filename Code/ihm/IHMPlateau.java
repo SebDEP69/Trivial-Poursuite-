@@ -28,11 +28,11 @@ public class IHMPlateau extends JFrame implements MouseListener, MouseMotionList
 	  this.setSize(dim);
 	  this.setTitle(nom_jeu);
 	  //  Use a Layered Pane for this this application
-	  layeredPane = new JPanel(BorderLayout);
+	  layeredPane = new JLayeredPane();
 	  getContentPane().add(layeredPane);
 	  layeredPane.setPreferredSize(boardSize);
-	 /* layeredPane.addMouseListener(this);
-	  layeredPane.addMouseMotionListener(this);*/
+	  layeredPane.addMouseListener(this);
+	  layeredPane.addMouseMotionListener(this);
 	
 	  //Add a chess board to the Layered Pane 
 	  
@@ -42,6 +42,9 @@ public class IHMPlateau extends JFrame implements MouseListener, MouseMotionList
 	  trivialBoard.setPreferredSize( boardSize );
 	  trivialBoard.setBounds(0, 0, boardSize.width, boardSize.height);
 	  
+	 
+	 
+	 
 	  
   }
   private void creationplateau() {
