@@ -21,7 +21,7 @@ public class LauncherGUI {
 		
 
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setLocation(500, 30);
+		//frame.setLocation(500, 30);
 		frame.pack();
 		frame.setVisible(true);
 	}

@@ -24,8 +24,13 @@ public class IHMPlateau extends JFrame implements MouseListener, MouseMotionList
   int yInit;
  
   public IHMPlateau( String nom_jeu, Dimension dim){
-	  Dimension boardSize = dim;
-	  this.setSize(dim);
+	  
+	  //this.setExtendedState(this.MAXIMIZED_BOTH);
+	  
+	  Toolkit leKit = this.getToolkit();
+	  Dimension tailleFenetre = leKit.getScreenSize();
+	  Dimension boardSize = tailleFenetre;
+	  //this.setSize(dim);
 	  this.setTitle(nom_jeu);
 	  //  Use a Layered Pane for this this application
 	  layeredPane = new JLayeredPane();
@@ -181,18 +186,20 @@ public class IHMPlateau extends JFrame implements MouseListener, MouseMotionList
 
 		JFrame frame;	
 		Dimension dim;
-	
+		
 		dim = new Dimension(800, 800);
 		
 		frame = new IHMPlateau("TrivialPursuite",  dim);
 		
+	//	frame.pack();
+		//frame.setDefaultLookAndFeelDecorated(true);
+		//frame.setExtendedState(frame.MAXIMIZED_BOTH);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setLocation(600, 10);
-		frame.setSize(1000,1000);
+		//frame.setLocation(600, 10);
+		//frame.setSize(1000,1000);
 		frame.pack();
 		frame.setVisible(true);
 	}
-  
   
     
   public void mouseClicked(MouseEvent e) {
@@ -211,7 +218,10 @@ public class IHMPlateau extends JFrame implements MouseListener, MouseMotionList
 
 @Override
 public void update(Observable arg0, Object arg1) {
-	// TODO Auto-generated method stub
+	
+	// réactualiser l'interface, il faut aussi passer en paramètre les question si besoin pour pouvoir les afficher
+	
+	
 	
 }
 
@@ -222,7 +232,6 @@ public void mouseDragged(MouseEvent arg0) {
 	// TODO Auto-generated method stub
 	
 }
-
 
 
 @Override

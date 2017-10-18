@@ -9,6 +9,7 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Insets;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -39,6 +40,9 @@ public class TrivialPursuitGUI extends javax.swing.JFrame implements MouseListen
 	public TrivialPursuitGUI(String name, Dimension boardSize) {
 
 		super(name);
+		/* Toolkit leKit = this.getToolkit();
+		  Dimension tailleFenetre = leKit.getScreenSize();
+		   boardSize = tailleFenetre;*/
 		this.setSize(boardSize);
 
 		// Use a Layered Pane for this this application
