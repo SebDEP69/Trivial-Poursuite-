@@ -13,6 +13,15 @@ public class MystereRetourCaseDepart extends Mystere {
 	@Override
 	void Action(Joueur joueurcourant, ArrayList<Case> listecase, ArrayList<Joueur> listejoueur) {
 		
+			Case caseJoueur = joueurcourant.getCaseCourant();
+			
+			if(caseJoueur.getNumero() == 0){
+				System.out.println("Vous etes deja sur la case depart");
+			}
+			else{
+				caseJoueur.setNumero(0);
+				joueurcourant.setCaseCourante(caseJoueur);
+			}
 	}
 
 }
