@@ -37,8 +37,6 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 
-import ihm.IHMPlateau;
-
 
 
 public class ChessGameGUI extends javax.swing.JFrame implements MouseListener,
@@ -101,7 +99,7 @@ public class ChessGameGUI extends javax.swing.JFrame implements MouseListener,
 		
 	      JPanel texte1 = new JPanel();
 	      centre.add((JPanel) texte1);
-	      JLabel txt1 = new JLabel("Bienvenu sur le jeu Trivial Pursuit, pour lancer une partie cliquez sur : « Début de la partie »");
+	      JLabel txt1 = new JLabel("Bienvenu sur le jeu Trivial Pursuit, pour lancer une partie cliquez sur : ï¿½ Dï¿½but de la partie ï¿½");
 	      txt1.setHorizontalTextPosition(JLabel.CENTER); 
 	      txt1.setFont(new Font("Apple Chancery",Font.PLAIN,30));
 	     // texte1.setBackground(Color.cyan);
@@ -158,7 +156,7 @@ public class ChessGameGUI extends javax.swing.JFrame implements MouseListener,
          sud.add((JPanel) square3);
          JLabel text = new JLabel();
          //square3.setBackground(Color.gray);
-         text.setText(text.getText()+"Réalisé par Depasse, De Paoli, Begni, Dumas");
+         text.setText(text.getText()+"Rï¿½alisï¿½ par Depasse, De Paoli, Begni, Dumas");
          text.setFont(new Font("Apple Chancery",Font.ITALIC,15));
          square3.add(text);
          square3.setVisible(true);
@@ -166,7 +164,7 @@ public class ChessGameGUI extends javax.swing.JFrame implements MouseListener,
          
          JPanel bouton1 = new JPanel();
          col1.add((JPanel) bouton1);
-         JButton btn1 = new JButton("Début de la partie");
+         JButton btn1 = new JButton("Dï¿½but de la partie");
          //bouton1.setBackground(Color.green);
          
          btn1.addActionListener(new ActionListener() {
@@ -206,7 +204,7 @@ public class ChessGameGUI extends javax.swing.JFrame implements MouseListener,
          
          JPanel bouton3 = new JPanel();
          col1.add((JPanel) bouton3);
-         JButton btn3 = new JButton("Règles du jeu");
+         JButton btn3 = new JButton("Rï¿½gles du jeu");
          //bouton3.setBackground(Color.yellow);
          btn3.setPreferredSize(new Dimension(150, 100));
          btn3.setFont(new Font("Calibri",Font.PLAIN,15));
