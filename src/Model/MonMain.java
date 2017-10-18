@@ -27,10 +27,11 @@ public class MonMain {
 		listeCarteVert.add(new Question("question vert2", "reponse vert1", TypeCarte.Question ,Couleur.VERT));
 		
 		
-		listeCarteMystere.add(new MystereEnleverCamembert());
+		//listeCarteMystere.add(new MystereEnleverCamembert());
+		//listeCarteMystere.add(new MystereRetourCaseDepart());
+		listeCarteMystere.add(new MystereProchainCamembert());
 		
 		int nombreCasePlateau = 24;
-		
 		
 		Plateau monPlateau = new Plateau(listeCarteRouge, listeCarteOrange, listeCarteBleu, listeCarteVert, listeCarteMystere, nombreCasePlateau);
 		
@@ -42,10 +43,11 @@ public class MonMain {
 		System.out.println(maCarte.getCouleur()+ "   "+ maCarte.getTypeCarte()+ "  "+ maCarte.getQuestion());
 		*/
 		// test la fonction liste de Case
-	/*	ArrayList<Case> listeCase= monPlateau.getListeCase();
+		
+		ArrayList<Case> listeCase= monPlateau.getListeCase();
 		for (Case case1 : listeCase) {
-		//	System.out.println(case1.getCouleur() +"  " +case1.getNumero() + " " +case1.isSuperCamembert());
-		}*/
+		System.out.println(case1.getCouleur() +"  " +case1.getNumero() + " " +case1.isSuperCamembert());
+		}
 		
 		
 		
@@ -69,7 +71,27 @@ public class MonMain {
 		/*for (PartCamembert part : joueur1.getCamembert().getListePart()) {
 			System.out.println(part.getCouleur());
 		}*/
+		
+		
+		// Test fonction Retour case depart
+		
+		/*MystereRetourCaseDepart retourDepart = new MystereRetourCaseDepart();
+		Joueur joueur1 = new Joueur(CouleurPion.BLEU, "Anthony", new Case(Couleur.BLEU, 5, false));
+		System.out.println(joueur1.getCaseCourant().getNumero());
+		
+		retourDepart.Action(joueur1, null, null);
+		
+		System.out.println(joueur1.getCaseCourant().getNumero());*/
 
+		// Test fonction Prochain camembert
+		/*
+		MystereProchainCamembert prochainCamembert = new MystereProchainCamembert();
+		Joueur joueur1 = new Joueur(CouleurPion.BLEU, "Anthony", new Case(Couleur.BLEU, 7, false));
+		System.out.println(joueur1.getCaseCourant().getNumero());
+		
+		prochainCamembert.Action(joueur1, monPlateau.getListeCase(), null);
+		
+		System.out.println(joueur1.getCaseCourant().getNumero());*/
 		
 		
 		
