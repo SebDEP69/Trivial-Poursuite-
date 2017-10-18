@@ -8,7 +8,7 @@ public class MystereEnleverCamembert extends Mystere {
 		super();
 	}
 
-	//M�thode classe MystereEnleverCamembert
+	//Methode classe MystereEnleverCamembert
 	@Override
 	void Action(Joueur joueurcourant, ArrayList<Case> listecase, ArrayList<Joueur> listejoueur) {
 		

@@ -17,7 +17,7 @@ public class Joueur {
 		this.caseCourante = casejoueur;
 	}
 
-	//M�thode classe Joueur
+	//Methode classe Joueur
 	public Pion getPion(){
 		return this.pion;
 	}

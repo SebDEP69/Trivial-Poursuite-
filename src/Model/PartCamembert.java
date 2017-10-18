@@ -12,7 +12,7 @@ public class PartCamembert {
 
 
 
-	//M�thode classe PartCamembert
+	//Methode classe PartCamembert
 	public Couleur getCouleur(){
 		return this.couleur;
 	}

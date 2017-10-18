@@ -12,7 +12,7 @@ public class Pion {
 
 
 
-	//M�thode classe Pion
+	//Methode classe Pion
 	public CouleurPion getCouleurPion(){
 		return this.couleurPion;
 	}

@@ -8,7 +8,7 @@ public abstract class Mystere extends Carte{
 		super(TypeCarte.Mystere,Couleur.NOIR);
 	}
 	
-	//M�thode classe Mystere
+	//Methode classe Mystere
 	abstract void Action(Joueur joueurcourant ,  ArrayList<Case> listecase, ArrayList<Joueur> listejoueur);
 	
 

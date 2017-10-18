@@ -1,9 +1,9 @@
 package Model;
 import java.util.ArrayList;
 
-public class Myst�reRejouer extends Mystere{
+public class MystereRejouer extends Mystere{
 
-	public Myst�reRejouer() {
+	public MystereRejouer() {
 		super();
 	}
 

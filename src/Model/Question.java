@@ -12,7 +12,7 @@ public class Question extends Carte{
 		this.reponse = reponse;
 	}
 
-	//M�thode classe Question
+	//Methode classe Question
 	public String getQuestion() {
 		return question;
 	}

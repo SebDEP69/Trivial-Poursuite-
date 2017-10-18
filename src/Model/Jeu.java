@@ -16,7 +16,7 @@ public class Jeu {
 		
 	}
 	
-	//M�thode classe Jeu
+	//Methode classe Jeu
 	public int LanceDeDes(){
 		return 0;
 		
