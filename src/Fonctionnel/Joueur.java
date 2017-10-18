@@ -31,7 +31,7 @@ public class Joueur {
 	}
 	
 	
-	private void setCaseCourante(Case newCase) {
+	public void setCaseCourante(Case newCase) {
 		this.caseCourante = newCase;
 	}
 
