@@ -22,7 +22,7 @@ public class LauncherGUI {
 		JFrame frame;
 		Dimension dim;
 
-		dim = new Dimension(750, 750);
+		dim = new Dimension(1000, 1000);
 
 		frame = new ChessGameGUI("Trivial Pursuit", dim);
 		
