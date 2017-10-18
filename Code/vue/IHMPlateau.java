@@ -1,4 +1,4 @@
-package vue;
+package ihm;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -37,23 +37,7 @@ public class IHMPlateau extends JFrame implements MouseListener, MouseMotionList
 	  layeredPane.addMouseMotionListener(this);
 	  
 	  
-	  JPanel panelGeneral = new JPanel() {
-		  
-		private static final long serialVersionUID = 1L;
-		private Image image = 	 Toolkit.getDefaultToolkit().getImage("images/logo.jpg");
-		public Dimension getPreferredSize() { 
-			return new Dimension(image.getWidth(null), image.getHeight(null));}
-		
-		@Override
-		  public void paintComponent(Graphics g)
-		   {
-		     super.paintComponent(g);
-		     
-		     g.drawImage (image, 0, 0, null);
-		     repaint();
-		   }
-		  
-	  };
+	  JPanel panelGeneral = new JPanel();
 	 // panelGeneral.getPreferredSize();
 	  panelGeneral.setLayout( new BorderLayout() );
 	  panelGeneral.setPreferredSize( boardSize );
@@ -104,7 +88,23 @@ public class IHMPlateau extends JFrame implements MouseListener, MouseMotionList
 	  
 	  
 	  
-	  JPanel panelPlateau = new JPanel();
+	  JPanel panelPlateau = new JPanel(){
+		  
+		private static final long serialVersionUID = 1L;
+		private Image image = 	 Toolkit.getDefaultToolkit().getImage("images/logo.jpg");
+		public Dimension getPreferredSize() { 
+			return new Dimension(image.getWidth(null), image.getHeight(null));}
+		
+		@Override
+		  public void paintComponent(Graphics g)
+		   {
+		     super.paintComponent(g);
+		     
+		     g.drawImage (image, 65, 55, null);
+		     repaint();
+		   }
+		  
+	  };
 	  
 	  panelPlateau.setLayout( new GridLayout(8, 8) );
 	  //panelPlateau.setBackground(new ImageIcon("image/logo.jpg"));
