@@ -1,4 +1,4 @@
-package Fonctionnel;
+package Model;
 
 public class Case {
 

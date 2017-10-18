@@ -1,4 +1,4 @@
-package Fonctionnel;
+package Model;
 
 public class Pion {
 
@@ -12,7 +12,7 @@ public class Pion {
 
 
 
-	//Méthode classe Pion
+	//Mï¿½thode classe Pion
 	public CouleurPion getCouleurPion(){
 		return this.couleurPion;
 	}

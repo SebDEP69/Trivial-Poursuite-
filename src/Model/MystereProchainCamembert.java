@@ -1,4 +1,4 @@
-package Fonctionnel;
+package Model;
 import java.util.ArrayList;
 
 public class MystereProchainCamembert extends Mystere{
@@ -9,7 +9,7 @@ public class MystereProchainCamembert extends Mystere{
 	
 	}
 
-	//Méthode classe MystereProchainCamembert
+	//Mï¿½thode classe MystereProchainCamembert
 	@Override
 	void Action(Joueur joueurcourant, ArrayList<Case> listecase, ArrayList<Joueur> listejoueur) {
 		

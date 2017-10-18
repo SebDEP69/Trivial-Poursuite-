@@ -1,4 +1,4 @@
-package Fonctionnel;
+package Model;
 import java.util.ArrayList;
 
 public class MysterePerteCamembert extends Mystere{
@@ -9,14 +9,14 @@ public class MysterePerteCamembert extends Mystere{
 
 	}
 
-	//Méthode classe MysterePerteCamembert
+	//Mï¿½thode classe MysterePerteCamembert
 	@Override
 	void Action(Joueur joueurcourant, ArrayList<Case> listecase, ArrayList<Joueur> listejoueur) {
 		
 		if (joueurcourant.getCamembert().RetirerPartCamemebert()) {
-			System.out.println("un camembert à été retirer");
+			System.out.println("un camembert ï¿½ ï¿½tï¿½ retirer");
 		}else {
-			System.out.println("impossible de retirer un camembert du joueur car il ne possède pas de camembert");
+			System.out.println("impossible de retirer un camembert du joueur car il ne possï¿½de pas de camembert");
 		}
 		
 	}

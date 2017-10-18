@@ -1,4 +1,4 @@
-package Fonctionnel;
+package Model;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -16,7 +16,7 @@ public class Jeu {
 		
 	}
 	
-	//Méthode classe Jeu
+	//Mï¿½thode classe Jeu
 	public int LanceDeDes(){
 		return 0;
 		

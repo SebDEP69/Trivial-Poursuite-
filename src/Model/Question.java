@@ -1,4 +1,4 @@
-package Fonctionnel;
+package Model;
 
 public class Question extends Carte{
 	
@@ -12,7 +12,7 @@ public class Question extends Carte{
 		this.reponse = reponse;
 	}
 
-	//Méthode classe Question
+	//Mï¿½thode classe Question
 	public String getQuestion() {
 		return question;
 	}

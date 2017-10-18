@@ -1,4 +1,4 @@
-package Fonctionnel;
+package Model;
 import java.util.ArrayList;
 
 public class MonMain {

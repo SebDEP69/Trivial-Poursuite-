@@ -1,4 +1,4 @@
-package Fonctionnel;
+package Model;
 import java.util.ArrayList;
 
 public abstract class Mystere extends Carte{
@@ -8,7 +8,7 @@ public abstract class Mystere extends Carte{
 		super(TypeCarte.Mystere,Couleur.NOIR);
 	}
 	
-	//Méthode classe Mystere
+	//Mï¿½thode classe Mystere
 	abstract void Action(Joueur joueurcourant ,  ArrayList<Case> listecase, ArrayList<Joueur> listejoueur);
 	
 

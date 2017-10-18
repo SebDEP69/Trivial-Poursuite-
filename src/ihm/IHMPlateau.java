@@ -8,8 +8,8 @@ import java.util.List;
 
 import javax.swing.*;
 
-import Fonctionnel.Case;
-import Fonctionnel.Couleur;
+import Model.Case;
+import Model.Couleur;
  
 
 public class IHMPlateau extends JFrame implements MouseListener, MouseMotionListener, Observer {

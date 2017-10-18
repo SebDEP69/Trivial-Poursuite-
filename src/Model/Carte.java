@@ -1,4 +1,4 @@
-package Fonctionnel;
+package Model;
 
 public abstract class Carte {
 
@@ -11,7 +11,7 @@ public abstract class Carte {
 		this.couleur = couleur;
 	}
 	
-	//Méthode classe Carte
+	//Mï¿½thode classe Carte
 	public TypeCarte getTypeCarte() {
 		return typeCarte;
 	}

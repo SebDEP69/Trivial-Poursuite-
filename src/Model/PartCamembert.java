@@ -1,4 +1,4 @@
-package Fonctionnel;
+package Model;
 
 public class PartCamembert {
 
@@ -12,7 +12,7 @@ public class PartCamembert {
 
 
 
-	//Méthode classe PartCamembert
+	//Mï¿½thode classe PartCamembert
 	public Couleur getCouleur(){
 		return this.couleur;
 	}

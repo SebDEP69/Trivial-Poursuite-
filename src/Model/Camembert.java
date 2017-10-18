@@ -1,4 +1,4 @@
-package Fonctionnel;
+package Model;
 import java.util.ArrayList;
 
 public class Camembert {
@@ -13,7 +13,7 @@ public class Camembert {
 	
 		
 	
-	//Méthode classe Camembert
+	//Mï¿½thode classe Camembert
 	public boolean Vide(){
 		if(listePart.size() == 0){
 			return true;

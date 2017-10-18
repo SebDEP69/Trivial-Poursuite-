@@ -1,4 +1,4 @@
-package Fonctionnel;
+package Model;
 
 public class Joueur {
 
@@ -17,7 +17,7 @@ public class Joueur {
 		this.caseCourante = casejoueur;
 	}
 
-	//Méthode classe Joueur
+	//Mï¿½thode classe Joueur
 	public Pion getPion(){
 		return this.pion;
 	}

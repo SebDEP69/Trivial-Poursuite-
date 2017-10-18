@@ -1,4 +1,4 @@
-package Fonctionnel;
+package Model;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
@@ -11,7 +11,7 @@ public class MystereGainCamembert extends Mystere{
 
 	}
 
-	//Méthode classe MystereGainCamembert
+	//Mï¿½thode classe MystereGainCamembert
 	@Override
 	void Action(Joueur joueurcourant, ArrayList<Case> listecase, ArrayList<Joueur> listejoueur) {
 

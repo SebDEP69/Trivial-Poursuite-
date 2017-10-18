@@ -1,4 +1,4 @@
-package Fonctionnel;
+package Model;
 import java.util.ArrayList;
 
 public class MystereRetourCaseDepart extends Mystere {
@@ -9,7 +9,7 @@ public class MystereRetourCaseDepart extends Mystere {
 		
 	}
 
-	//Méthode classe MystereRetourCaseDepart
+	//Mï¿½thode classe MystereRetourCaseDepart
 	@Override
 	void Action(Joueur joueurcourant, ArrayList<Case> listecase, ArrayList<Joueur> listejoueur) {
 		

@@ -1,9 +1,9 @@
-package Fonctionnel;
+package Model;
 import java.util.ArrayList;
 
-public class MystèreRejouer extends Mystere{
+public class Mystï¿½reRejouer extends Mystere{
 
-	public MystèreRejouer() {
+	public Mystï¿½reRejouer() {
 		super();
 	}
 
