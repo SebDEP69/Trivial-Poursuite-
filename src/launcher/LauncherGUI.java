@@ -6,7 +6,7 @@ import java.util.Observer;
 import javax.swing.JFrame;
 
 
-import vue.ChessGameGUI;
+import vue.TrivialPursuitGUI;
 
 public class LauncherGUI {
 
@@ -17,7 +17,7 @@ public class LauncherGUI {
 
 		dim = new Dimension(1000, 1000);
 
-		frame = new ChessGameGUI("Trivial Pursuit", dim);
+		frame = new TrivialPursuitGUI("Trivial Pursuit", dim);
 		
 
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

@@ -28,7 +28,7 @@ import javax.swing.UIManager;
 
 
 
-public class ChessGameGUI extends javax.swing.JFrame implements MouseListener,
+public class TrivialPursuitGUI extends javax.swing.JFrame implements MouseListener,
 		MouseMotionListener, Observer {
 
 	private JLayeredPane layeredPane;
@@ -36,7 +36,7 @@ public class ChessGameGUI extends javax.swing.JFrame implements MouseListener,
 	private JPanel sud;
 	private JPanel centre;
 	
-	public ChessGameGUI(String name, Dimension boardSize) {
+	public TrivialPursuitGUI(String name, Dimension boardSize) {
 
 		super(name);
 		this.setSize(boardSize);
@@ -149,8 +149,6 @@ public class ChessGameGUI extends javax.swing.JFrame implements MouseListener,
 				frame = new IHMPlateau("TrivialPursuite",  dim);
 				
 				frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-				frame.setLocation(600, 10);
-				frame.setSize(1000,1000);
 				frame.pack();
 				frame.setVisible(true);
 				
