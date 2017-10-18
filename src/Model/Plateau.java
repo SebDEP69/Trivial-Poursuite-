@@ -21,6 +21,7 @@ public class Plateau {
 		this.listeCarteVert = listeCarteVert;
 		this.listeCarteMystere = listeCarteMystere;
 		this.nombreCasePlateau = nombreCasePlateau;
+		this.listeCase = new ArrayList<Case>();
 		InitListCase();
 		
 	}
