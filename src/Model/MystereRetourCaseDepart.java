@@ -9,7 +9,7 @@ public class MystereRetourCaseDepart extends Mystere {
 		
 	}
 
-	//M�thode classe MystereRetourCaseDepart
+	//Methode classe MystereRetourCaseDepart
 	@Override
 	void Action(Joueur joueurcourant, ArrayList<Case> listecase, ArrayList<Joueur> listejoueur) {
 		

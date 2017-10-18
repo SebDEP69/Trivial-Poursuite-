@@ -13,7 +13,7 @@ public class Camembert {
 	
 		
 	
-	//M�thode classe Camembert
+	//Methode classe Camembert
 	public boolean Vide(){
 		if(listePart.size() == 0){
 			return true;

@@ -11,7 +11,7 @@ public abstract class Carte {
 		this.couleur = couleur;
 	}
 	
-	//M�thode classe Carte
+	//Methode classe Carte
 	public TypeCarte getTypeCarte() {
 		return typeCarte;
 	}

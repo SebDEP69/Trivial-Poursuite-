@@ -8,13 +8,6 @@ import javax.swing.JFrame;
 
 import vue.ChessGameGUI;
 
-/**
- * @author Floriane SANCHIS - Tanguy DUMAS
- *  Lance l'ex�cution d'un jeu d'�chec en mode
- *  graphique. La vue (ChessGameGUI) observe le mod�le (ChessGame) les
- *  �changes passent par le contr�leur (ChessGameControlers)
- * 
- */
 public class LauncherGUI {
 
 	public LauncherGUI(){

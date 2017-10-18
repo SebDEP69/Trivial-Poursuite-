@@ -101,7 +101,7 @@ public class ChessGameGUI extends javax.swing.JFrame implements MouseListener,
 		
 	      JPanel texte1 = new JPanel();
 	      centre.add((JPanel) texte1);
-	      JLabel txt1 = new JLabel("Bienvenu sur le jeu Trivial Pursuit, pour lancer une partie cliquez sur : Début de la partie");
+	      JLabel txt1 = new JLabel("Bienvenu sur le jeu Trivial Pursuit, pour lancer une partie cliquez sur : Debut de la partie");
 	      txt1.setHorizontalTextPosition(JLabel.CENTER); 
 	      txt1.setFont(new Font("Apple Chancery",Font.PLAIN,30));
 	     // texte1.setBackground(Color.cyan);

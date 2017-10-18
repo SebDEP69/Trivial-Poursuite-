@@ -18,15 +18,13 @@ public class IHMPlateau extends JFrame implements MouseListener, MouseMotionList
   JLabel chessPiece;
   int xAdjustment;
   int yAdjustment;
-  /** colonne (métier) */
+  /** colonne (metier) */
   int xInit;
-  /** ligne (métier) */
+  /** ligne (metier) */
   int yInit;
  
   public IHMPlateau( String nom_jeu, Dimension dim){
-	  Dimension boardSize = dim; 
-	  
-	  
+	  Dimension boardSize = dim;
 	  this.setSize(dim);
 	  this.setTitle(nom_jeu);
 	  //  Use a Layered Pane for this this application
@@ -42,17 +40,8 @@ public class IHMPlateau extends JFrame implements MouseListener, MouseMotionList
 	  panelGeneral.setLayout( new BorderLayout() );
 	  panelGeneral.setPreferredSize( boardSize );
 	  panelGeneral.setBounds(0, 0, boardSize.width, boardSize.height);
-	  
-	 
-	  
 	  layeredPane.add(panelGeneral, JLayeredPane.DEFAULT_LAYER);
-	  
-	  
-	  
-	  
-	
-	  
-	  
+ 
 	  JLabel nord = new JLabel(new ImageIcon("images/TitreTrivial.jpg"));
 	  nord.setBackground(Color.white);
 	  panelGeneral.add(nord, BorderLayout.NORTH);
@@ -75,18 +64,7 @@ public class IHMPlateau extends JFrame implements MouseListener, MouseMotionList
 	  	  
 	  east.add(camemebertJoueurUn);
 	  east.add(camemebertJoueurdeux);
-	  
-	
-	  
 	  panelGeneral.add(east, BorderLayout.EAST);
-	  
-	  
-	  
-	  
-	  
-	  
-	  
-	  
 	  
 	  JPanel panelPlateau = new JPanel(){
 		  
@@ -124,10 +102,7 @@ public class IHMPlateau extends JFrame implements MouseListener, MouseMotionList
 	  trivialBoard.setPreferredSize( boardSize );
 	  trivialBoard.setBounds(0, 0, boardSize.width, boardSize.height);
 	  
-	 */
-	 
-	  
-	  
+	 */ 
   }
   private void creationplateau(JPanel panelPlateau) {
 	  
