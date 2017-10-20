@@ -2,6 +2,8 @@ package Model;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import javax.management.ListenerNotFoundException;
+
 public class Jeu {
 	
 	private Joueur joueurCourant;
@@ -25,17 +27,25 @@ public class Jeu {
 	
 	//Methode classe Jeu
 	public int LanceDeDes(){
-		return (int) (Math.random() * 6);
+		return (int) ((Math.random() * 5)+1);
 		
 	}
 	
 	public void AvancerJoueur(int lancerdes){
 		
 		int indiceCaseCourante = this.joueurCourant.getCaseCourant().getNumero();
-		
-		Case newCase = this.plateau.getCasePosition(indiceCaseCourante+lancerdes);
+		int resultatDes = indiceCaseCourante+lancerdes;
 
-		this.joueurCourant.setCaseCourante(newCase);
+		
+		if(resultatDes > 23){
+			resultatDes = resultatDes - 24;
+		}
+			Case newCase = this.plateau.getCasePosition(resultatDes);
+			this.joueurCourant.setCaseCourante(newCase);
+
+		
+		
+
 		
 	}
 	
@@ -48,8 +58,14 @@ public class Jeu {
 		
 	}
 	
-	public boolean ChangementJoueur(){
-		return false;
+	public void ChangementJoueur(){
+		
+		if(this.joueurCourant == this.listeJoueur.get(0)){
+			this.joueurCourant = this.listeJoueur.get(1);
+		}
+		else{
+			this.joueurCourant = this.listeJoueur.get(0);
+		}
 		
 	}
 	
@@ -133,14 +149,11 @@ public class Jeu {
 		
 	}
 	
-	
-	
-	
-	
+
 	public static void main(String[] args) {
 		
-		
 		Jeu monJeu = new Jeu();
+		System.out.println(monJeu.getJoueurCourant().getNom());
 		int lancer = monJeu.LanceDeDes();
 		Case caseJoueur = monJeu.getJoueurCourant().getCaseCourant();
 		System.out.println(caseJoueur.getNumero() + " " + caseJoueur.getCouleur());
@@ -149,6 +162,10 @@ public class Jeu {
 		monJeu.AvancerJoueur(lancer);
 		 caseJoueur = monJeu.getJoueurCourant().getCaseCourant();
 		System.out.println(caseJoueur.getNumero() + " " + caseJoueur.getCouleur());
+		
+		monJeu.ChangementJoueur();
+		System.out.println(monJeu.getJoueurCourant().getNom());
+		
 	}
 
 }
