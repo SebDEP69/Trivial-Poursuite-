@@ -114,7 +114,12 @@ public class Plateau {
 		return listeCase;
 			
 	}
+	
+	public Case getCasePosition(int position){
+		return this.listeCase.get(position);
+	}
 
+	
 	private int getNombreCasePlateau() {
 		return nombreCasePlateau;
 	}

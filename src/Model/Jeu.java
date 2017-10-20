@@ -2,6 +2,8 @@ package Model;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import javax.management.ListenerNotFoundException;
+
 public class Jeu {
 	
 	private Joueur joueurCourant;
@@ -16,14 +18,34 @@ public class Jeu {
 		
 	}
 	
+	
+	
+	public ArrayList<Joueur> getListeJoueur(){
+		
+		return this.listeJoueur;
+	}
+	
 	//Methode classe Jeu
 	public int LanceDeDes(){
-		return 0;
+		return (int) ((Math.random() * 5)+1);
 		
 	}
 	
-	private boolean AvancerJoueur(){
-		return false;
+	public void AvancerJoueur(int lancerdes){
+		
+		int indiceCaseCourante = this.joueurCourant.getCaseCourant().getNumero();
+		int resultatDes = indiceCaseCourante+lancerdes;
+
+		
+		if(resultatDes > 23){
+			resultatDes = resultatDes - 24;
+		}
+			Case newCase = this.plateau.getCasePosition(resultatDes);
+			this.joueurCourant.setCaseCourante(newCase);
+
+		
+		
+
 		
 	}
 	
@@ -31,13 +53,19 @@ public class Jeu {
 		
 	}
 	
-	private Carte TirerUneCarte(){
+	public Carte TirerUneCarte(){
 		return null;
 		
 	}
 	
-	private boolean ChangementJoueur(){
-		return false;
+	public void ChangementJoueur(){
+		
+		if(this.joueurCourant == this.listeJoueur.get(0)){
+			this.joueurCourant = this.listeJoueur.get(1);
+		}
+		else{
+			this.joueurCourant = this.listeJoueur.get(0);
+		}
 		
 	}
 	
@@ -46,16 +74,16 @@ public class Jeu {
 		
 	}
 	
-	private Joueur getJoueurCourant(){
+	public Joueur getJoueurCourant(){
 		return this.joueurCourant;
 	}
 	
-	private boolean GainCamembert(){
+	public boolean GainCamembert(){
 		return false;
 		
 	}
 	
-	private boolean PoserUneQuestion(Carte carte){
+	public boolean PoserUneQuestion(Carte carte){
 		return false;
 		
 	}
@@ -64,7 +92,7 @@ public class Jeu {
 		
 	}
 	
-	private void OrdreJoueurDebut(){
+	public void OrdreJoueurDebut(){
 		
 		int indiceJoueur = (int) (Math.random() * 2);
 		
@@ -78,7 +106,7 @@ public class Jeu {
 		
 	}
 	
-	private boolean ActionCaseMystere(){
+	public boolean ActionCaseMystere(){
 		return false;
 		
 	}
@@ -95,11 +123,11 @@ public class Jeu {
 		CouleurPion couleurPion;
 		for (int i = 0; i < 2; i++) {
 			
-			System.out.println("Nom du joueur "+(i+1));
+			System.out.println("Nom du joueur "+(i+1)+"?");
 		
 			nomjoueur  = sc.nextLine();
 			
-			System.out.println("Couleur du joueur1"+(i+1));
+			System.out.println("Couleur du joueur1"+(i+1)+"?");
 			
 			choixCouleurPionjoueur  = sc.nextLine();
 			
@@ -121,19 +149,23 @@ public class Jeu {
 		
 	}
 	
-	
-	
-	
-	
+
 	public static void main(String[] args) {
 		
-		
-		
-		
 		Jeu monJeu = new Jeu();
+		System.out.println(monJeu.getJoueurCourant().getNom());
+		int lancer = monJeu.LanceDeDes();
+		Case caseJoueur = monJeu.getJoueurCourant().getCaseCourant();
+		System.out.println(caseJoueur.getNumero() + " " + caseJoueur.getCouleur());
+		System.out.println(lancer);
 		
+		monJeu.AvancerJoueur(lancer);
+		 caseJoueur = monJeu.getJoueurCourant().getCaseCourant();
+		System.out.println(caseJoueur.getNumero() + " " + caseJoueur.getCouleur());
 		
-	
+		monJeu.ChangementJoueur();
+		System.out.println(monJeu.getJoueurCourant().getNom());
+		
 	}
 
 }
