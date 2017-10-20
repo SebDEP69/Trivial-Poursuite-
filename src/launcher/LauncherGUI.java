@@ -18,8 +18,6 @@ public class LauncherGUI {
 		dim = new Dimension(1000, 1000);
 
 		frame = new TrivialPursuitGUI("Trivial Pursuit", dim);
-		
-
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		//frame.setLocation(500, 30);
 		frame.pack();
