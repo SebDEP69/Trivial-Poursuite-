@@ -27,7 +27,7 @@ public class Jeu {
 		
 	}
 	
-	private void TourJoueur(){
+	public void TourJoueur(){
 		
 	}
 	
