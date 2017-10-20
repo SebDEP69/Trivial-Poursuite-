@@ -15,7 +15,7 @@ public class LauncherGUI {
 		JFrame frame;
 		Dimension dim;
 
-		dim = new Dimension(1000, 1000);
+		dim = new Dimension(800, 800);
 
 		frame = new TrivialPursuitGUI("Trivial Pursuit", dim);
 		

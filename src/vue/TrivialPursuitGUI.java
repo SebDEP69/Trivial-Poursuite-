@@ -37,39 +37,41 @@ public class TrivialPursuitGUI extends javax.swing.JFrame implements MouseListen
 	private JPanel sud;
 	private JPanel centre;
 	
-	public TrivialPursuitGUI(String name, Dimension boardSize) {
+	public TrivialPursuitGUI(String name, Dimension dim) {
 
 		super(name);
-		/* Toolkit leKit = this.getToolkit();
-		  Dimension tailleFenetre = leKit.getScreenSize();
-		   boardSize = tailleFenetre;*/
-		this.setSize(boardSize);
 
-		// Use a Layered Pane for this this application
-		layeredPane = new JLayeredPane();
-		getContentPane().add(layeredPane);
-		layeredPane.setPreferredSize(boardSize);
-		layeredPane.addMouseListener(this);
-		layeredPane.addMouseMotionListener(this);
-		
-		/*// Add a chess board to the Layered Pane
-		chessBoard = new JPanel();
-		layeredPane.add(chessBoard, JLayeredPane.DEFAULT_LAYER);
-		chessBoard.setLayout(new BorderLayout());
-		chessBoard.setPreferredSize(boardSize);
-		chessBoard.setBounds(0, 0, boardSize.width, boardSize.height);
-		chessBoard.setBorder(BorderFactory.createLineBorder(Color.black));
-		chessBoard.setBackground(Color.blue);*/
+		  Toolkit leKit = this.getToolkit();
+		  Dimension tailleFenetre = leKit.getScreenSize();
+		  Dimension boardSize = tailleFenetre;
+		  //this.setSize(dim);
+		  this.setTitle(name);
+		  //  Use a Layered Pane for this this application
+		  layeredPane = new JLayeredPane();
+		  getContentPane().add(layeredPane);
+		  layeredPane.setPreferredSize(boardSize);
+		  layeredPane.addMouseListener(this);
+		  layeredPane.addMouseMotionListener(this);
+		  
+		  JPanel panelGeneral = new JPanel();
+			 // panelGeneral.getPreferredSize();
+			  panelGeneral.setLayout( new BorderLayout() );
+			  panelGeneral.setPreferredSize( boardSize );
+			  panelGeneral.setBounds(0, 0, boardSize.width, boardSize.height);
+			  layeredPane.add(panelGeneral, JLayeredPane.DEFAULT_LAYER);
+
 	
 	
 		nord = new JPanel();
 		nord.setLayout(new GridLayout(1,3));
+		panelGeneral.add(nord, BorderLayout.NORTH);
 
 		sud = new JPanel();
-		sud.setPreferredSize(new Dimension(100,60));
+		panelGeneral.add(sud, BorderLayout.SOUTH);
 		
 		centre = new JPanel();
 		centre.setLayout(new GridBagLayout());
+		panelGeneral.add(centre, BorderLayout.CENTER);
 		
 		// CENTRE HAUT // 
 	     JPanel texte1 = new JPanel();
@@ -77,7 +79,7 @@ public class TrivialPursuitGUI extends javax.swing.JFrame implements MouseListen
 	     centre.add((JPanel) texte1);
 	     JLabel txt1 = new JLabel("Bienvenue sur le jeu Trivial Pursuit, pour lancer une partie cliquez sur : Debut de la partie");
 	     txt1.setHorizontalTextPosition(JLabel.CENTER); 
-	     txt1.setFont(new Font("Freestyle Script",Font.PLAIN,50));
+	     txt1.setFont(new Font("Freestyle Script",Font.PLAIN,25));
 	   // texte1.setBackground(Color.cyan);
 	     texte1.add(txt1);
 	     texte1.setVisible(true);
@@ -262,13 +264,7 @@ public class TrivialPursuitGUI extends javax.swing.JFrame implements MouseListen
 		 centre.add(btn6, i);
          
 	        
-		this.getContentPane().add(centre, BorderLayout.CENTER);
-		this.getContentPane().add(nord, BorderLayout.NORTH);
-		this.getContentPane().add(sud, BorderLayout.SOUTH);
-		//this.getContentPane().add(new JButton (), BorderLayout.WEST);
-		//this.getContentPane().add(new JButton (), BorderLayout.EAST);
-	    this.setVisible(true);
-        
+	
 	}
 
 	@Override
