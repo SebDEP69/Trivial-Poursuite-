@@ -19,8 +19,7 @@ public class MystereRetourCaseDepart extends Mystere {
 				System.out.println("Vous etes deja sur la case depart");
 			}
 			else{
-				caseJoueur.setNumero(0);
-				joueurcourant.setCaseCourante(caseJoueur);
+				joueurcourant.setCaseCourante(listecase.get(0));
 			}
 	}
 

@@ -21,15 +21,23 @@ public class Case {
 		return numero;
 	}
 	
-	public void setNumero(int numero){
-		this.numero = numero;
-	}
 
 	public boolean isSuperCamembert() {
 		return superCamembert;
 	}
 
-	
+	public  Boolean isQuestion() {
+		
+		Boolean valeurretour = false;
+		if (this.getCouleur() == Couleur.NOIR) {
+			valeurretour = false;
+		} else {
+			valeurretour = true;
+		}
+		
+		
+		return valeurretour;
+	}
 	
 	
 	

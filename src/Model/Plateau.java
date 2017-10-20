@@ -37,8 +37,8 @@ public class Plateau {
 		this.listeCase = new ArrayList<Case>();
 		
 		
-		listeCarteRouge.add(new Question("question rouge1", "reponse rouge1", TypeCarte.Question ,Couleur.ROUGE));
-		listeCarteRouge.add(new Question("question rouge2", "reponse rouge2", TypeCarte.Question ,Couleur.ROUGE));
+		listeCarteRouge.add(new Question("question rouge1", "reponse1 rouge1", TypeCarte.Question ,Couleur.ROUGE));
+		listeCarteRouge.add(new Question("question rouge2", "reponse1 rouge2", TypeCarte.Question ,Couleur.ROUGE));
 		
 		listeCarteOrange.add(new Question("question orange1", "reponse orange1", TypeCarte.Question ,Couleur.ORANGE));
 		listeCarteOrange.add(new Question("question orange2", "reponse orange2", TypeCarte.Question ,Couleur.ORANGE));
@@ -49,8 +49,8 @@ public class Plateau {
 		listeCarteVert.add(new Question("question vert1", "reponse vert1", TypeCarte.Question ,Couleur.VERT));
 		listeCarteVert.add(new Question("question vert2", "reponse vert2", TypeCarte.Question ,Couleur.VERT));
 		
-		listeCarteMystere.add(new MysterePerteCamembert());
-		listeCarteMystere.add(new MystereGainCamembert());
+		listeCarteMystere.add(new MystereRetourCaseDepart());
+		//listeCarteMystere.add(new MystereGainCamembert());
 		
 		
 		this.nombreCasePlateau = 24;
@@ -109,16 +109,22 @@ public class Plateau {
 		}		
 	}
 	
+	
+	
+	public Case getCasePosition(int position) {
+		return this.listeCase.get(position);		
+	}
+	
+	
+	
+	
 	public ArrayList<Case> getListeCase(){
 		
 		return listeCase;
 			
 	}
-	
-	public Case getCasePosition(int position){
-		return this.listeCase.get(position);
-	}
 
+	
 	
 	private int getNombreCasePlateau() {
 		return nombreCasePlateau;

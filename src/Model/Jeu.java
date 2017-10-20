@@ -2,8 +2,6 @@ package Model;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import javax.management.ListenerNotFoundException;
-
 public class Jeu {
 	
 	private Joueur joueurCourant;
@@ -33,6 +31,7 @@ public class Jeu {
 	
 	public void AvancerJoueur(int lancerdes){
 		
+		
 		int indiceCaseCourante = this.joueurCourant.getCaseCourant().getNumero();
 		int resultatDes = indiceCaseCourante+lancerdes;
 
@@ -44,8 +43,6 @@ public class Jeu {
 			this.joueurCourant.setCaseCourante(newCase);
 
 		
-		
-
 		
 	}
 	
@@ -60,10 +57,9 @@ public class Jeu {
 	
 	public void ChangementJoueur(){
 		
-		if(this.joueurCourant == this.listeJoueur.get(0)){
+		if (this.joueurCourant == this.listeJoueur.get(0)) {
 			this.joueurCourant = this.listeJoueur.get(1);
-		}
-		else{
+		}else {
 			this.joueurCourant = this.listeJoueur.get(0);
 		}
 		
@@ -106,8 +102,24 @@ public class Jeu {
 		
 	}
 	
-	public boolean ActionCaseMystere(){
-		return false;
+	
+	public Question ActionCaseQuestion() {
+		
+		Couleur couleurquestion = this.joueurCourant.getCaseCourant().getCouleur();
+		Carte carte = this.plateau.TirerCarte(couleurquestion);
+	
+		return (Question) carte;
+	}
+	
+		
+	public void ActionCaseMystere(){
+		
+		Carte carte = this.plateau.TirerCarte(Couleur.NOIR);
+		
+		if (carte.getTypeCarte() == TypeCarte.Mystere) {
+			((Mystere) carte).Action(this.joueurCourant, this.plateau.getListeCase(), listeJoueur);
+		}
+		
 		
 	}
 	
@@ -149,11 +161,14 @@ public class Jeu {
 		
 	}
 	
-
+	
+	
+	
+	
 	public static void main(String[] args) {
 		
+		
 		Jeu monJeu = new Jeu();
-		System.out.println(monJeu.getJoueurCourant().getNom());
 		int lancer = monJeu.LanceDeDes();
 		Case caseJoueur = monJeu.getJoueurCourant().getCaseCourant();
 		System.out.println(caseJoueur.getNumero() + " " + caseJoueur.getCouleur());
@@ -162,10 +177,6 @@ public class Jeu {
 		monJeu.AvancerJoueur(lancer);
 		 caseJoueur = monJeu.getJoueurCourant().getCaseCourant();
 		System.out.println(caseJoueur.getNumero() + " " + caseJoueur.getCouleur());
-		
-		monJeu.ChangementJoueur();
-		System.out.println(monJeu.getJoueurCourant().getNom());
-		
 	}
 
 }

@@ -11,5 +11,5 @@ public abstract class Mystere extends Carte{
 	//Methode classe Mystere
 	abstract void Action(Joueur joueurcourant ,  ArrayList<Case> listecase, ArrayList<Joueur> listejoueur);
 	
-
+	
 }

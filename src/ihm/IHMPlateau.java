@@ -9,8 +9,10 @@ import java.util.List;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
+import Controler.TrivialControler;
 import Model.Case;
 import Model.Couleur;
+import observable.TrivialPursuite;
  
 
 public class IHMPlateau extends JFrame implements MouseListener, MouseMotionListener, Observer {
@@ -22,11 +24,12 @@ public class IHMPlateau extends JFrame implements MouseListener, MouseMotionList
   int xInit;
   /** ligne (metier) */
   int yInit;
- 
-  public IHMPlateau( String nom_jeu, Dimension dim){
+  private  TrivialControler trivialControler;
+  
+  public IHMPlateau( String nom_jeu, TrivialControler trivialControler,  Dimension dim){
 	  
 	  //this.setExtendedState(this.MAXIMIZED_BOTH);
-	  
+	  this.trivialControler = trivialControler;
 	  Toolkit leKit = this.getToolkit();
 	  Dimension tailleFenetre = leKit.getScreenSize();
 	  Dimension boardSize = tailleFenetre;
@@ -64,7 +67,21 @@ public class IHMPlateau extends JFrame implements MouseListener, MouseMotionList
 	  
 	  JLabel numero = new JLabel();
 	  numero.setLayout(new GridLayout(3,2));
-	  numero.add(new Button("Lancer le dÃ©"));
+	  
+	  
+	  JButton btnLancerLesDes = new JButton("Lancer les des");
+	  
+	  
+	  btnLancerLesDes.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+				trivialControler.lancerLesDes();
+
+			}
+		});
+	  numero.add(btnLancerLesDes);
 	  numero.add(new Button("1"));
 	  numero.add(new Button("2"));
 	  numero.add(new Button("3"));
@@ -248,13 +265,18 @@ public class IHMPlateau extends JFrame implements MouseListener, MouseMotionList
   public static void main(String[] args) {
 
 
-		JFrame frame;	
+	  JFrame frame;	
 		Dimension dim;
 		
 		dim = new Dimension(800, 800);
 		
-		frame = new IHMPlateau("TrivialPursuite",  dim);
+		TrivialPursuite trivialPursuite = new TrivialPursuite();
+		TrivialControler trivialControler = new TrivialControler(trivialPursuite);
 		
+		
+		frame = new IHMPlateau("TrivialPursuite",trivialControler,  dim);
+		
+		trivialPursuite.addObserver((Observer) frame);
 	//	frame.pack();
 		//frame.setDefaultLookAndFeelDecorated(true);
 		//frame.setExtendedState(frame.MAXIMIZED_BOTH);
@@ -280,14 +302,30 @@ public class IHMPlateau extends JFrame implements MouseListener, MouseMotionList
 
 
 
-@Override
-public void update(Observable arg0, Object arg1) {
-	
-	// rï¿½actualiser l'interface, il faut aussi passer en paramï¿½tre les question si besoin pour pouvoir les afficher
-	
-	
-	
-}
+  @Override
+  public void update(Observable arg0, Object arg1) {
+  	
+  	// réactualiser l'interface, il faut aussi passer en paramètre les question si besoin pour pouvoir les afficher
+  	System.out.println("j'ai bien tout reçu");
+  	
+  	
+  	/* TO DO
+  	 * 
+  	 * ajouter un atribut message dans JEU pour pouvoir passez les messages à afficher
+  	 * 
+  	 * removeAll du panel EST, CENTRE et OUEST
+  	 * 
+  	 * Refaire le plateau CENTRE avec les cases et les pion qui ont changer de place
+  	 * 
+  	 * OUEST refaire les camembert avec les part
+  	 * 
+  	 * EST affichier la question s'il y en a une
+  	 * 
+  	 * 
+  	 * 
+  	 */
+  	
+  }
 
 
 

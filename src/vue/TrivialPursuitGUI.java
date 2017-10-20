@@ -1,6 +1,7 @@
 package vue;
 
 import ihm.IHMPlateau;
+import observable.TrivialPursuite;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -25,7 +26,9 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
-import javax.swing.UIManager; 
+import javax.swing.UIManager;
+
+import Controler.TrivialControler; 
 
 
 
@@ -148,13 +151,22 @@ public class TrivialPursuitGUI extends javax.swing.JFrame implements MouseListen
 			public void actionPerformed(ActionEvent e) {
 				JFrame frame;	
 				Dimension dim;
-			
+				
 				dim = new Dimension(800, 800);
 				
+				TrivialPursuite trivialPursuite = new TrivialPursuite();
+				TrivialControler trivialControler = new TrivialControler(trivialPursuite);
 				
-				frame = new IHMPlateau("TrivialPursuite",  dim);
 				
+				frame = new IHMPlateau("TrivialPursuite",trivialControler,  dim);
+				
+				trivialPursuite.addObserver((Observer) frame);
+			//	frame.pack();
+				//frame.setDefaultLookAndFeelDecorated(true);
+				//frame.setExtendedState(frame.MAXIMIZED_BOTH);
 				frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+				//frame.setLocation(600, 10);
+				//frame.setSize(1000,1000);
 				frame.pack();
 				frame.setVisible(true);
 				

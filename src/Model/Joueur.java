@@ -22,6 +22,10 @@ public class Joueur {
 		return this.pion;
 	}
 	
+	public String getNom() {
+		return nom;
+	}
+
 	public Camembert getCamembert(){
 		return this.camembert;
 	}
@@ -39,10 +43,6 @@ public class Joueur {
 		
 		return this.getCamembert().ContientPart(couleur);
 		
-	}
-	
-	public String getNom(){
-		return this.nom;
 	}
 	
 }
