@@ -7,6 +7,7 @@ import java.util.*;
 import java.util.List;
 
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 
 import Model.Case;
 import Model.Couleur;
@@ -15,7 +16,6 @@ import Model.Couleur;
 public class IHMPlateau extends JFrame implements MouseListener, MouseMotionListener, Observer {
   JLayeredPane layeredPane;
   JPanel trivialBoard, startDragCase;
-  JLabel chessPiece;
   int xAdjustment;
   int yAdjustment;
   /** colonne (metier) */
@@ -47,7 +47,7 @@ public class IHMPlateau extends JFrame implements MouseListener, MouseMotionList
 	  panelGeneral.setBounds(0, 0, boardSize.width, boardSize.height);
 	  layeredPane.add(panelGeneral, JLayeredPane.DEFAULT_LAYER);
  
-	  JLabel nord = new JLabel(new ImageIcon("images/TitreTrivial.jpg"));
+	  JLabel nord = new JLabel(new ImageIcon("images/title.png"));
 	  nord.setBackground(Color.white);
 	  panelGeneral.add(nord, BorderLayout.NORTH);
 	  
@@ -55,23 +55,77 @@ public class IHMPlateau extends JFrame implements MouseListener, MouseMotionList
 	 // sud.setBackground(Color.RED);
 	  panelGeneral.add(sud, BorderLayout.SOUTH);
 	   
-	  JPanel WEST = new JPanel();
+	  JPanel west = new JPanel();
+	  west.setLayout(new GridLayout(4,0));
 	 // WEST.setBackground(Color.PINK);
-	  panelGeneral.add(WEST, BorderLayout.WEST);
+	  //panelGeneral.add(west, BorderLayout.WEST);
+	  JLabel de = new JLabel(new ImageIcon("images/de.png"));
+	 
+	  
+	  JLabel numero = new JLabel();
+	  numero.setLayout(new GridLayout(3,2));
+	  numero.add(new Button("Lancer le dé"));
+	  numero.add(new Button("1"));
+	  numero.add(new Button("2"));
+	  numero.add(new Button("3"));
+	  numero.add(new Button("4"));
+	  numero.add(new Button("5"));
+	  numero.add(new Button("6"));
+	 
+	  JLabel categorie = new JLabel();
+	  categorie.setLayout(new GridLayout(6,6));
+	  //JPanel categorie = new JPanel();
+      //categorie.setLayout(new GridLayout(6,6));
+     
+	  categorie.add(new JLabel(new ImageIcon("images/noir.png")));
+	  categorie.add(new JLabel("Catégorie Mystère"));
+	  
+	  categorie.add(new JLabel(new ImageIcon("images/bleu.png")));
+	  categorie.add(new JLabel("Catégorie Le-saviez-vous ?"));
+
+	  categorie.add(new JLabel(new ImageIcon("images/rouge.png")));
+	  categorie.add(new JLabel("Catégorie Innovations"));
+	  
+	  categorie.add(new JLabel(new ImageIcon("images/orange.png")));
+	  categorie.add(new JLabel("Catégorie Blague"));
+	  
+	  categorie.add(new JLabel(new ImageIcon("images/vert.png")));
+	  categorie.add(new JLabel("Catégorie CPE"));
+	  
+	  categorie.add(new JLabel(new ImageIcon("images/super.png")));
+	  categorie.add(new JLabel("Super Camembert"));
+   
+	  west.add(de);
+	  west.add(numero);
+	  west.add(categorie);
+	  panelGeneral.add(west,BorderLayout.WEST);
 	   
 	  JPanel east = new JPanel();
-	  east.setLayout(new GridLayout(2,0));
-	  east.setBackground(Color.white);
+	  east.setLayout(new GridLayout(3,0));
 	  
+	  JLabel camemebertJoueurUn = new JLabel(new ImageIcon("images/j1.png"));
+	  camemebertJoueurUn.setBorder(BorderFactory.createLineBorder(Color.black));
+	  JLabel camemebertJoueurdeux = new JLabel(new ImageIcon("images/j2.png"));
+	  camemebertJoueurdeux.setBorder(BorderFactory.createLineBorder(Color.black));
 	  
-	  JLabel camemebertJoueurUn = new JLabel(new ImageIcon("images/Cam_joueur1.png"));
-	  JLabel camemebertJoueurdeux = new JLabel(new ImageIcon("images/Cam_joueur2.png"));
-	  	  
 	  east.add(camemebertJoueurUn);
 	  east.add(camemebertJoueurdeux);
 	  panelGeneral.add(east, BorderLayout.EAST);
+	  ///////////////////////////////////////////
+	  //   			 PLATEAU   			      //
+	  //////////////////////////////////////////
 	  
-	  JPanel panelPlateau = new JPanel(){
+	  JPanel panelPlat = new JPanel();
+		 // panelGeneral.getPreferredSize();
+	  		panelPlat.setLayout( new BorderLayout() );
+	  		panelPlat.setPreferredSize( boardSize );
+	  		panelPlat.setBounds(0, 0, boardSize.width, boardSize.height);
+	  		panelGeneral.add(panelPlat, BorderLayout.CENTER);
+	  		
+	  		//panelPlat.setBackground(Color.ORANGE);
+	  		
+	  		
+	    /*JPanel panelPlat = new JPanel(){
 		  
 		private static final long serialVersionUID = 1L;
 		private Image image = 	 Toolkit.getDefaultToolkit().getImage("images/logo.jpg");
@@ -87,13 +141,22 @@ public class IHMPlateau extends JFrame implements MouseListener, MouseMotionList
 		     repaint();
 		   }
 		  
-	  };
+	  };*/
 	  
-	  panelPlateau.setLayout( new GridLayout(8, 8) );
-	  //panelPlateau.setBackground(new ImageIcon("image/logo.jpg"));
-	  panelGeneral.add(panelPlateau, BorderLayout.CENTER);
+	  panelPlat.setLayout( new GridLayout(8, 8,1,1) );
+	  creationplateau(panelPlat);
 	  
-	  creationplateau(panelPlateau);
+	  
+	  /*JPanel panelInterieurPlat = new JPanel();
+		 // panelGeneral.getPreferredSize();
+	        panelInterieurPlat.setLayout( new BorderLayout() );
+	        panelInterieurPlat.setPreferredSize( boardSize );
+	        panelInterieurPlat.setBounds(0, 0, boardSize.width, boardSize.height);
+	  		panelPlat.add(panelInterieurPlat);
+	  		
+	  		panelInterieurPlat.setBackground(Color.YELLOW);
+	  
+	 */
 	  
 	  
 	  /*layeredPane.addMouseListener(this);
@@ -109,12 +172,12 @@ public class IHMPlateau extends JFrame implements MouseListener, MouseMotionList
 	  
 	 */ 
   }
-  private void creationplateau(JPanel panelPlateau) {
+  private void creationplateau(JPanel panelPlat) {
 	  
 	  
 	  for (int i = 0; i < 49; i++) {
 		  JPanel square = new JPanel( new BorderLayout() );
-		  panelPlateau.add( square );
+		  panelPlat.add( square );
 		 
 		  int row = (i / 7) % 2;
 		  
@@ -128,8 +191,8 @@ public class IHMPlateau extends JFrame implements MouseListener, MouseMotionList
 	  }  
 	  
 	
-	  ((JPanel) panelPlateau.getComponent(18)).add(new JLabel(new ImageIcon("image/logo.jpg")));
-	  ((JPanel) panelPlateau.getComponent(18)).setSize(100,10);
+	  ((JPanel) panelPlat.getComponent(18)).add(new JLabel(new ImageIcon("image/logo.jpg")));
+	  ((JPanel) panelPlat.getComponent(18)).setSize(100,10);
 	  
 	  
 	  Couleur serie[] = {Couleur.VERT, Couleur.ORANGE,Couleur.BLEU, Couleur.ROUGE,Couleur.NOIR};
@@ -139,23 +202,23 @@ public class IHMPlateau extends JFrame implements MouseListener, MouseMotionList
 	  int indiceelement=1;
 	  for (int numCase = 0; numCase < 24; numCase++) {
 		  
-		((JPanel)  panelPlateau.getComponent(indiceelement)).setOpaque(true);
+		((JPanel)  panelPlat.getComponent(indiceelement)).setOpaque(true);
 		  switch (serie[indexSerie]) {
-	      case ROUGE : panelPlateau.getComponent(indiceelement).setBackground(Color.RED);
+	      case ROUGE : panelPlat.getComponent(indiceelement).setBackground(Color.RED);
 	               break;
-	      case BLEU:   panelPlateau.getComponent(indiceelement).setBackground(Color.BLUE);
+	      case BLEU:   panelPlat.getComponent(indiceelement).setBackground(Color.BLUE);
 	               break;
-	      case VERT: panelPlateau.getComponent(indiceelement).setBackground(Color.GREEN);
+	      case VERT: panelPlat.getComponent(indiceelement).setBackground(Color.GREEN);
 	               break;
-	      case ORANGE:  panelPlateau.getComponent(indiceelement).setBackground(Color.ORANGE);
+	      case ORANGE:  panelPlat.getComponent(indiceelement).setBackground(Color.ORANGE);
 	               break;
-	      case NOIR:  panelPlateau.getComponent(indiceelement).setBackground(Color.BLACK);
+	      case NOIR:  panelPlat.getComponent(indiceelement).setBackground(Color.BLACK);
 	               break;
 		  }	
 		  
 		  
 		if (indicesuperCam %6 ==0) {
-			  ( (JPanel)panelPlateau.getComponent(indiceelement)).setBorder(BorderFactory.createMatteBorder(10, 10, 10, 10, Color.DARK_GRAY));
+			  ( (JPanel)panelPlat.getComponent(indiceelement)).setBorder(BorderFactory.createMatteBorder(10, 10, 10, 10, Color.DARK_GRAY));
 			  
 			  numeroCote++;
 		} 
@@ -180,6 +243,7 @@ public class IHMPlateau extends JFrame implements MouseListener, MouseMotionList
 	  
 	  
   }
+  
   
   public static void main(String[] args) {
 
@@ -219,7 +283,7 @@ public class IHMPlateau extends JFrame implements MouseListener, MouseMotionList
 @Override
 public void update(Observable arg0, Object arg1) {
 	
-	// r�actualiser l'interface, il faut aussi passer en param�tre les question si besoin pour pouvoir les afficher
+	// r�actualiser l'interface, il faut aussi passer en param�tre les question si besoin pour pouvoir les afficher
 	
 	
 	
