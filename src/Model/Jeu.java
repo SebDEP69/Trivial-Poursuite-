@@ -11,8 +11,8 @@ public class Jeu {
 	//Constructeur
 	public Jeu(){
 		this.plateau = new Plateau();
-		this.CreationJoueur();
-		this.OrdreJoueurDebut();
+		//this.CreationJoueur();
+		//this.OrdreJoueurDebut();
 		
 	}
 	
@@ -88,18 +88,18 @@ public class Jeu {
 		
 	}
 	
-	public void OrdreJoueurDebut(){
+	public String OrdreJoueurDebut(){
 		
-		int indiceJoueur = (int) (Math.random() * 2);
-		
+		int indiceJoueur = (int) ((Math.random() * 2)+1);
+		String message ="";
 		if (indiceJoueur == 1) {
-			System.out.println("le joueur 1 commence");
+			message ="C'est "+ this.listeJoueur.get(0).getNom()+" qui commence commence";
 			this.joueurCourant = this.listeJoueur.get(0);
 		} else {
-			System.out.println("le joueur 2 commence");
+			message ="C'est "+ this.listeJoueur.get(1).getNom()+" qui commence commence";
 			this.joueurCourant = this.listeJoueur.get(1);
 		}
-		
+		return message;
 	}
 	
 	
@@ -125,11 +125,15 @@ public class Jeu {
 	
 	
 	
-	private void CreationJoueur() {
+	public void CreationJoueur(String nomjoueurun, String nomJoueurdeux, CouleurPion couleurJoueurun, CouleurPion couleurJoueurdeux) {
 		
 		
 		Case caseDepart = this.plateau.getListeCase().get(0);
-		Scanner sc = new Scanner(System.in);
+		
+		this.listeJoueur.add(new Joueur(couleurJoueurun, nomjoueurun,caseDepart));
+		this.listeJoueur.add(new Joueur(couleurJoueurdeux, nomJoueurdeux,caseDepart));
+		
+		/*Scanner sc = new Scanner(System.in);
 		String nomjoueur;
 		String choixCouleurPionjoueur;
 		CouleurPion couleurPion;
@@ -157,7 +161,7 @@ public class Jeu {
 			
 			this.listeJoueur.add(new Joueur(couleurPion, nomjoueur,caseDepart));
 		}
-		
+		*/
 		
 	}
 	

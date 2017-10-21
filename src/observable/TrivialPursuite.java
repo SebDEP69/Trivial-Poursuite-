@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 
+import Model.CouleurPion;
 import Model.Jeu;
 import Model.Question;
 
@@ -13,6 +14,8 @@ public class TrivialPursuite extends Observable {
 
 	public TrivialPursuite() {
 		super();
+		
+		
 		this.jeu = new Jeu();
 		//this.notifyObservers(jeu.getListeJoueur());
 		// ajouter la notifyObservers ici
@@ -22,6 +25,35 @@ public class TrivialPursuite extends Observable {
 	public boolean isEnd() {
 		
 		return this.jeu.FinDuJeu();
+	}
+	
+	public void creationJoueur(String nomjoueurun, String nomJoueurdeux, CouleurPion couleurJoueurun, CouleurPion couleurJoueurdeux) {
+		
+		System.out.println("je crée les joueur ");
+		
+		
+		/*
+		 * 0 : Position joueur 1
+		 * 1 : Position joueur 2
+		 * 2 : Question / message action mystère 
+		 * 3 : Nombre lancerDes
+		 * 4-7 : Réponse
+		 * 
+		 * 
+		 * 
+		 */
+		this.jeu.CreationJoueur(nomjoueurun,nomJoueurdeux,couleurJoueurun,couleurJoueurdeux);
+		String joueurCommence = this.jeu.OrdreJoueurDebut();
+		
+		String positionj1 = ((Integer) this.jeu.getListeJoueur().get(0).getCaseCourant().getNumero()).toString();
+		String positionj2 = ((Integer) this.jeu.getListeJoueur().get(1).getCaseCourant().getNumero()).toString();
+		
+		ArrayList<String> infoForIHM = new ArrayList<String>();
+		infoForIHM.add(positionj1);
+		infoForIHM.add(positionj2);
+		infoForIHM.add(joueurCommence); // utiliser ca pour dire le joueur qui commence
+		infoForIHM.add("");
+		this.notifyObservers(infoForIHM);
 	}
 	
 	// s'occupe de faire toute les étapes d'un tour
@@ -62,8 +94,8 @@ public class TrivialPursuite extends Observable {
 		/*
 		 * 0 : Position joueur 1
 		 * 1 : Position joueur 2
-		 * 2 : Nombre lancerDes
-		 * 3 : Question / message action mystère
+		 * 2 : Question / message action mystère 
+		 * 3 : Nombre lancerDes
 		 * 4-7 : Réponse
 		 * 
 		 * 
@@ -76,8 +108,8 @@ public class TrivialPursuite extends Observable {
 		ArrayList<String> infoForIHM = new ArrayList<String>();
 		infoForIHM.add(positionj1);
 		infoForIHM.add(positionj2);
-		infoForIHM.add(lancer);
 		infoForIHM.add(messageQuestionMystère);
+		infoForIHM.add(lancer);
 		infoForIHM.add(reponse);
 		
 		
