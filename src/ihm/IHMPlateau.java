@@ -19,16 +19,19 @@ import observable.TrivialPursuite;
 public class IHMPlateau extends JFrame implements MouseListener, MouseMotionListener, Observer {
 	JLayeredPane layeredPane;
 	JPanel trivialBoard, plateauPanel, questionPanel,camembertPanel,titlePanel;
-	HashMap<Integer, Integer> numcaseToindicePanel;
+
+	ArrayList<int[]> numcaseToindicePanel;
 	Dimension boardSize;
 	private  TrivialControler trivialControler;
 
 	public IHMPlateau( String nom_jeu, TrivialControler trivialControler,  Dimension dim){
 
-		numcaseToindicePanel = new HashMap<Integer,Integer>();
+		numcaseToindicePanel = new ArrayList<int[]>();
 		//this.setExtendedState(this.MAXIMIZED_BOTH);
 		this.trivialControler = trivialControler;
-		boardSize = this.getToolkit().getScreenSize();
+		int width = (int) (this.getToolkit().getScreenSize().getWidth() );
+		int height = (int) (this.getToolkit().getScreenSize().getHeight());
+		boardSize = new Dimension(width, height) ;
 		this.setTitle(nom_jeu);
 		layeredPane = new JLayeredPane();
 		getContentPane().add(layeredPane);
@@ -72,6 +75,8 @@ public class IHMPlateau extends JFrame implements MouseListener, MouseMotionList
 		// CENTRE
 		plateauPanel = new JPanel();
 		GridBagLayout gridbagcentre = new GridBagLayout();
+		plateauPanel.setPreferredSize( boardSize );
+		plateauPanel.setBounds(0, 0, boardSize.width, boardSize.height);
 		plateauPanel.setLayout(gridbagcentre);
 
 		Dimension dimensionJTF = new Dimension(100,30);
@@ -127,11 +132,6 @@ public class IHMPlateau extends JFrame implements MouseListener, MouseMotionList
 
 			}
 		});
-
-
-
-
-
 
 		plateauPanel.add(btnlancer);
 		trivialBoard.add(plateauPanel,BorderLayout.CENTER);
@@ -231,80 +231,112 @@ public class IHMPlateau extends JFrame implements MouseListener, MouseMotionList
 
 	private void creationplateau() {
 
-
-		for (int i = 0; i < 49; i++) {
-			JPanel square = new JPanel( new BorderLayout() );
-			plateauPanel.add( square );
-
-			int row = (i / 7) % 2;
-
-			square.setOpaque(false);
-			square.setBackground(Color.WHITE);
-			/* if (row == 0)
-
-			  square.setBackground( i % 2 == 0 ? Color.black : Color.white );
-		  else
-			  square.setBackground( i % 2 == 0 ? Color.white : Color.black );*/
-		}  
-
-
-		// ((JPanel) plateauPanel.getComponent(18)).add(new JLabel(new ImageIcon("image/logo.jpg")));
-		// ((JPanel) plateauPanel.getComponent(18)).setSize(100,10);
-
-
-		Couleur serie[] = {Couleur.VERT, Couleur.ORANGE,Couleur.BLEU, Couleur.ROUGE,Couleur.NOIR};
-		int indexSerie=0;
-		int indicesuperCam=1;
-		int numeroCote =1;
-		int indiceelement=1;
-		for (int numCase = 0; numCase < 24; numCase++) {
-
-			numcaseToindicePanel.put(numCase, indiceelement);
-
-			((JPanel)  plateauPanel.getComponent(indiceelement)).setOpaque(true);
-			switch (serie[indexSerie]) {
-			case ROUGE : plateauPanel.getComponent(indiceelement).setBackground(Color.RED);
-			break;
-			case BLEU:   plateauPanel.getComponent(indiceelement).setBackground(Color.BLUE);
-			break;
-			case VERT: plateauPanel.getComponent(indiceelement).setBackground(Color.GREEN);
-			break;
-			case ORANGE:  plateauPanel.getComponent(indiceelement).setBackground(Color.ORANGE);
-			break;
-			case NOIR:  plateauPanel.getComponent(indiceelement).setBackground(Color.BLACK);
-			break;
-			}	
-
-
-
-			if (indicesuperCam %6 ==0) {
-				( (JPanel)plateauPanel.getComponent(indiceelement)).setBorder(BorderFactory.createMatteBorder(10, 10, 10, 10, Color.DARK_GRAY));
-				numeroCote++;
-			} 
-
-
-			if (indexSerie==4) {indexSerie=0;}
-			else {indexSerie++;}
-
-			switch (numeroCote) {
-			case 1 : indiceelement++;
-			break;
-			case 2:  indiceelement= indiceelement+7;
-			break;
-			case 3: indiceelement--;
-			break;
-			case 4:  indiceelement= indiceelement-7;
-			break;
-			}	
-
-			indicesuperCam++;
+		///////////////////////////////////////////
+		//   			 HAUT   	            //
+		//////////////////////////////////////////
+		Color serieCouleurHaut[] = {Color.GREEN, Color.ORANGE,Color.BLUE, Color.RED,Color.BLACK};
+		JPanel haut = new JPanel( new GridLayout(1, 7));
+		haut.setPreferredSize( new Dimension(0,100));
+		haut.setName("en haut");
+		
+		
+		JPanel caseun = new JPanel( );
+		caseun.setName("case depart");
+		caseun.setBackground(Color.RED);
+		caseun.setBorder(BorderFactory.createMatteBorder(10, 10, 10, 10, Color.DARK_GRAY));
+		haut.add(caseun);
+		
+		for (Color couleur : serieCouleurHaut) {
+			JPanel square = new JPanel(  );
+			square.setBackground(couleur);
+			haut.add(square);
 		}
-
-
-
-
+		JPanel lastCase = new JPanel( );
+		lastCase.setBackground(Color.GREEN);
+		lastCase.setBorder(BorderFactory.createMatteBorder(10, 10, 10, 10, Color.DARK_GRAY));
+		haut.add(lastCase);
+		plateauPanel.add(haut, BorderLayout.NORTH);
+		
+		System.out.println(haut.getComponent(0));
+		
+		
+		
+		for (int i = 1; i < 7; i++) {
+			int[] coordonnee = {0,i};
+			numcaseToindicePanel.add( coordonnee);
+		}
+		
+		///////////////////////////////////////////
+		//   			 DROITE   		        //
+		//////////////////////////////////////////
+		Color serieCouleurdroite[] = { Color.ORANGE,Color.BLUE, Color.RED,Color.BLACK,Color.GREEN};
+		JPanel droite = new JPanel( new GridLayout(5, 1));
+		droite.setPreferredSize( new Dimension(200,0));
+		
+		for (Color couleur : serieCouleurdroite) {
+			JPanel square = new JPanel( );
+			square.setBackground(couleur);
+			droite.add(square);
+		}
+		plateauPanel.add(droite, BorderLayout.EAST);
+		
+		for (int i = 0; i < 5; i++) {
+			int[] coordonnee = {1,i};
+			numcaseToindicePanel.add( coordonnee);
+		}
+		///////////////////////////////////////////
+		//   			 BAS   		            //
+		//////////////////////////////////////////
+		Color serieCouleurBas[] = { Color.ORANGE,Color.GREEN,Color.BLACK,Color.RED,Color.BLUE };
+		JPanel bas = new JPanel( new GridLayout(1, 7));
+		bas.setPreferredSize( new Dimension(0,100));
+		
+		JPanel basun = new JPanel(  );
+		basun.setBackground(Color.BLUE);
+		basun.setBorder(BorderFactory.createMatteBorder(10, 10, 10, 10, Color.DARK_GRAY));
+		bas.add(basun);
+		
+		for (Color couleur : serieCouleurBas) {
+			JPanel square = new JPanel(  );
+			square.setBackground(couleur);
+			bas.add(square);
+		}
+		JPanel lastBas = new JPanel( );
+		lastBas.setBackground(Color.ORANGE);
+		lastBas.setBorder(BorderFactory.createMatteBorder(10, 10, 10, 10, Color.DARK_GRAY));
+		bas.add(lastBas);
+		plateauPanel.add(bas, BorderLayout.SOUTH);
+		
+		for (int i = 6; i >= 0; i--) {
+			int[] coordonnee = {2,i};
+			numcaseToindicePanel.add( coordonnee);
+		}
+		///////////////////////////////////////////
+		//   			 GAUCHE   		        //
+		//////////////////////////////////////////
+		Color serieCouleurGauche[] = { Color.BLUE,Color.ORANGE, Color.GREEN,Color.BLACK,Color.RED};
+		JPanel gauche = new JPanel( new GridLayout(5, 1));
+		gauche.setPreferredSize( new Dimension(200,0));
+		
+		
+		for (Color couleur : serieCouleurGauche) {
+			JPanel square = new JPanel( );
+			square.setBackground(couleur);
+			gauche.add(square);
+		}
+		for (int i = 4; i >= 0 ; i--) {
+			int[] coordonnee = {3,i};
+			numcaseToindicePanel.add( coordonnee);
+		}
+		
+		int[] coordonnee = {0,0};
+		numcaseToindicePanel.add( coordonnee);
+		
+		plateauPanel.add(gauche, BorderLayout.WEST);
+		
 	}
 
+	
 	private void creationPanelQuestion(String lancede) 
 	{
 
@@ -364,45 +396,6 @@ public class IHMPlateau extends JFrame implements MouseListener, MouseMotionList
 
 	}
 
-	public static void main(String[] args) {
-
-
-		JFrame frame;	
-		Dimension dim;
-
-		dim = new Dimension(800, 800);
-
-		TrivialPursuite trivialPursuite = new TrivialPursuite();
-		TrivialControler trivialControler = new TrivialControler(trivialPursuite);
-
-
-		frame = new IHMPlateau("TrivialPursuite",trivialControler,  dim);
-
-		trivialPursuite.addObserver((Observer) frame);
-		//	frame.pack();
-		//frame.setDefaultLookAndFeelDecorated(true);
-		//frame.setExtendedState(frame.MAXIMIZED_BOTH);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		//frame.setLocation(600, 10);
-		//frame.setSize(1000,1000);
-		frame.pack();
-		frame.setVisible(true);
-	}
-
-	public void mouseClicked(MouseEvent e) {
-
-	}
-	public void mouseMoved(MouseEvent e) {
-	}
-	public void mouseEntered(MouseEvent e){
-
-	}
-	public void mouseExited(MouseEvent e) {
-
-	}
-
-
-
 	@SuppressWarnings("unchecked")
 	@Override
 	public void update(Observable arg0, Object info) {
@@ -456,7 +449,7 @@ public class IHMPlateau extends JFrame implements MouseListener, MouseMotionList
 		 */
 
 		///////////////////////////////////////////
-		//   		 affiche le lancer + QUESTION   //
+		//  affiche le lancer de dé + QUESTION   //
 		////////////////////////////////////////// 
 		if (((ArrayList<String>) info).size() >3) {
 			this.creationPanelQuestion(( (ArrayList<String>) info).get(3) ) ;
@@ -473,23 +466,72 @@ public class IHMPlateau extends JFrame implements MouseListener, MouseMotionList
 		//////////////////////////////////////////
 
 		//plateauPanel = new JPanel();
-		plateauPanel.setLayout( new GridLayout(7, 7,1,1) );
-
+		//plateauPanel.setLayout( new GridLayout(7, 7,1,1) );
+		plateauPanel.setLayout(new BorderLayout());
+		plateauPanel.setPreferredSize( boardSize );
+		plateauPanel.setBounds(0, 0, boardSize.width, boardSize.height);
+		//plateauPanel.setBackground(Color.RED);
 		this.creationplateau();
-
+		/*int casee = 0;
+		for (int[] coord : numcaseToindicePanel) {
+			System.out.println("Case :"+casee+" border :"+coord[0]+ " component :"+coord[1]);
+			casee++;
+		}*/
 
 		///////////////////////////////////////////
 		//   			 MESSAGE     		      //
 		//////////////////////////////////////////
 		if (((ArrayList<String>) info).size() >2) {
 			JLabel message = new JLabel( ( (ArrayList<String>) info).get(2) );
-			this.questionPanel.add(message);
+			this.plateauPanel.add(message, BorderLayout.CENTER);
 		}
 
+		
+		
+		
 		///////////////////////////////////////////
-		//   			 PLACEMENT PION		      //
+		//   			 PLACEMENT PION	        //
 		//////////////////////////////////////////
+		
 		System.out.println( " joueur 1 case"+((ArrayList<String>) info).get(0));
+		System.out.println( " joueur 2 case"+((ArrayList<String>) info).get(1));
+		
+		
+		
+		/*
+		 * JOUEUR 1
+		 */
+		int casejUn = Integer.parseInt( ((ArrayList<String>) info).get(0));
+		
+		int[] coord = numcaseToindicePanel.get(casejUn);
+		JPanel border = ((JPanel) plateauPanel.getComponent(coord[0]));
+		JPanel componentBorder = ((JPanel) border.getComponent(coord[1]));
+		
+		System.out.println(componentBorder);
+		int xj1 = componentBorder.getX();
+		int yj1 = componentBorder.getY();
+		System.out.println(xj1+"  "+ yj1);
+		componentBorder.add( new JLabel(new ImageIcon("images/j1.png")));
+		//ImgPion pionjun = new ImgPion("images/j1.png", xj1,yj1);
+		//componentBorder.add(pionjun);
+		
+		
+		/*
+		 * JOUEUR 2
+		 */
+		int casejdeux = Integer.parseInt( ((ArrayList<String>) info).get(1));
+		
+		int[] coordj2 = numcaseToindicePanel.get(casejdeux);
+		border = ((JPanel) plateauPanel.getComponent(coordj2[0]));
+		componentBorder = ((JPanel) border.getComponent(coordj2[1]));
+		
+		System.out.println(componentBorder.getName());
+		int xj2 = componentBorder.getX();
+		int yj2 = componentBorder.getY();
+		System.out.println(xj2+"  "+ yj2);
+		componentBorder.add( new JLabel(new ImageIcon("images/j2.png")));
+		
+		/*System.out.println( " joueur 1 case"+((ArrayList<String>) info).get(0));
 		System.out.println( " joueur 2 case"+((ArrayList<String>) info).get(1));
 		int positionj1 = numcaseToindicePanel.get(Integer.parseInt( ((ArrayList<String>) info).get(0)));
 		int positionj2 = numcaseToindicePanel.get(Integer.parseInt( ((ArrayList<String>) info).get(1)));
@@ -505,6 +547,49 @@ public class IHMPlateau extends JFrame implements MouseListener, MouseMotionList
 		ImgPion pionjdeux = new ImgPion("images/j2.png", xj2,yj2);
 		((JPanel) plateauPanel.getComponent(positionj2)).add(pionjdeux);
 
+*/
+	
+	
+	
+	this.revalidate();
+	
+	}
+
+
+	public static void main(String[] args) {
+
+
+		JFrame frame;	
+		Dimension dim;
+
+		dim = new Dimension(800, 800);
+
+		TrivialPursuite trivialPursuite = new TrivialPursuite();
+		TrivialControler trivialControler = new TrivialControler(trivialPursuite);
+
+
+		frame = new IHMPlateau("TrivialPursuite",trivialControler,  dim);
+
+		trivialPursuite.addObserver((Observer) frame);
+		//	frame.pack();
+		//frame.setDefaultLookAndFeelDecorated(true);
+		//frame.setExtendedState(frame.MAXIMIZED_BOTH);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		//frame.setLocation(600, 10);
+		//frame.setSize(1000,1000);
+		frame.pack();
+		frame.setVisible(true);
+	}
+
+	public void mouseClicked(MouseEvent e) {
+
+	}
+	public void mouseMoved(MouseEvent e) {
+	}
+	public void mouseEntered(MouseEvent e){
+
+	}
+	public void mouseExited(MouseEvent e) {
 
 	}
 

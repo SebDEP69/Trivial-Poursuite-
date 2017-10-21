@@ -93,10 +93,10 @@ public class Jeu {
 		int indiceJoueur = (int) ((Math.random() * 2)+1);
 		String message ="";
 		if (indiceJoueur == 1) {
-			message ="C'est "+ this.listeJoueur.get(0).getNom()+" qui commence commence";
+			message ="C'est "+ this.listeJoueur.get(0).getNom()+" qui commence";
 			this.joueurCourant = this.listeJoueur.get(0);
 		} else {
-			message ="C'est "+ this.listeJoueur.get(1).getNom()+" qui commence commence";
+			message ="C'est "+ this.listeJoueur.get(1).getNom()+" qui commence";
 			this.joueurCourant = this.listeJoueur.get(1);
 		}
 		return message;
