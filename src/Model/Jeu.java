@@ -69,7 +69,8 @@ public class Jeu {
 		boolean isCamenbertPlein = false;
 		Joueur j ;
 		int indiceJ=0;
-		while (!isCamenbertPlein && indiceJ <= listeJoueur.size())
+		System.out.println(listeJoueur.size());
+		while (!isCamenbertPlein && (indiceJ < listeJoueur.size()))
 		{
 			j = listeJoueur.get(indiceJ);
 			isCamenbertPlein = j.getCamembert().Plein();

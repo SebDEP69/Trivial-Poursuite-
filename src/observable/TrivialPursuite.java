@@ -6,6 +6,7 @@ import java.util.Observer;
 
 import Model.CouleurPion;
 import Model.Jeu;
+import Model.Joueur;
 import Model.Question;
 
 public class TrivialPursuite extends Observable {
@@ -32,28 +33,12 @@ public class TrivialPursuite extends Observable {
 		System.out.println("je crée les joueur ");
 		
 		
-		/*
-		 * 0 : Position joueur 1
-		 * 1 : Position joueur 2
-		 * 2 : Message action mystère 
-		 * 3 : Nombre lancerDes
-		 * 4 : Object Question
-		 * 
-		 * 
-		 * 
-		 */
 		this.jeu.CreationJoueur(nomjoueurun,nomJoueurdeux,couleurJoueurun,couleurJoueurdeux);
 		String joueurCommence = this.jeu.OrdreJoueurDebut();
 		
-		int positionj1 = this.jeu.getListeJoueur().get(0).getCaseCourant().getNumero();
-		int positionj2 = this.jeu.getListeJoueur().get(1).getCaseCourant().getNumero();
+
 		
-		ArrayList<Object> infoForIHM = new ArrayList<Object>();
-		infoForIHM.add(positionj1);//0
-		infoForIHM.add(positionj2);//1
-		infoForIHM.add(joueurCommence); // utiliser ca pour dire le joueur qui commence //2
-		infoForIHM.add("");//3
-		this.notifyObservers(infoForIHM);
+		this.envoiInfo(joueurCommence,"",null);
 	}
 	
 	// s'occupe de faire toute les étapes d'un tour
@@ -73,49 +58,24 @@ public class TrivialPursuite extends Observable {
 		String[] choix= null;
 		if (this.jeu.getJoueurCourant().getCaseCourant().isQuestion()) { // si c'est une question on pose la question
 			
-			System.out.println("pose une question");
+			//System.out.println("pose une question");
 			//System.out.println(this.jeu.getJoueurCourant().getCaseCourant().getCouleur());
 			
 			question = this.jeu.ActionCaseQuestion();
-			System.out.println(question.getQuestion());			
+			//System.out.println(question.getQuestion());			
 		}else {// si c'est une case mystère
 			
-			System.out.println("action case mystère");
+			//System.out.println("action case mystère");
 			this.jeu.ActionCaseMystere();
 			messageMystère = "action case mystère"; // récupe le message de la fonction action mystère
 			System.out.println(" nouvelle case" + this.jeu.getJoueurCourant().getCaseCourant().getNumero());
 			this.jeu.ChangementJoueur();
 		}
 		
-		/*
-		 * 0 : Position joueur 1
-		 * 1 : Position joueur 2
-		 * 2 : Message action mystère 
-		 * 3 : Nombre lancerDes
-		 * 4 : Object Question
-		 * 
-		 * 
-		 * 
-		 */
-		
-		int positionj1 = this.jeu.getListeJoueur().get(0).getCaseCourant().getNumero();
-		int positionj2 = this.jeu.getListeJoueur().get(1).getCaseCourant().getNumero();
+	
 		String lancer = ((Integer) lancerDes).toString();
-		ArrayList<Object> infoForIHM = new ArrayList<Object>();
-		infoForIHM.add(positionj1);//0
-		infoForIHM.add(positionj2);//1
-		infoForIHM.add(messageMystère);//2
-		infoForIHM.add(lancer);//3
-		infoForIHM.add(question); //4
-			
-		
-		
-		this.notifyObservers(infoForIHM);
+		this.envoiInfo(messageMystère,lancer,question);
 	}
-	
-	
-	
-	
 	
 	public void validerReponse(Question question, String reponse) {
 		
@@ -125,7 +85,7 @@ public class TrivialPursuite extends Observable {
 		if (question.isBonneReponse(reponse)) {
 			rejoue=true;
 			// si le joueur est sur une case super camembert
-			if (this.jeu.getJoueurCourant().getCaseCourant().isSuperCamembert()) {
+			//if (this.jeu.getJoueurCourant().getCaseCourant().isSuperCamembert()) {
 				// si la part a bien été ajouter
 				if (this.jeu.getJoueurCourant().getCamembert().AjoutPartCamembert(question.getCouleur())) { 
 					message = "Bravo vous avez gagner une part de camembert";
@@ -133,47 +93,51 @@ public class TrivialPursuite extends Observable {
 					message = "Vous avez répondu juste mais vous possédez déjà une part de camembert "+question.getCouleur();
 				}
 			//si c'est pas une super camembert
-			}else {
+		/*	}else {
 				message = "Bravo vous avez répondu juste";
-			}
+			}*/
 			//si on a pas répondu juste
 		}else {
 			message = "Mauvaise réponse";
 		}
 		
 		
-		
-		if (!rejoue) { // si le joueur a pas répondu juste il ne rejoue pas
-			this.jeu.ChangementJoueur();
-			message= message+", C'est au tour de "+this.jeu.getJoueurCourant().getNom();
-		}else{
-			message= message+", vous pouvez rejouer";
+		if (isEnd()) {
+			message = message+ "\n Bravo "+this.jeu.getJoueurCourant().getNom()+" a gagné la partie";
+		}else {
+			if (!rejoue) { // si le joueur a pas répondu juste il ne rejoue pas
+				this.jeu.ChangementJoueur();
+				message= message+", C'est au tour de "+this.jeu.getJoueurCourant().getNom();
+			}else{
+				message= message+", vous pouvez rejouer";
+			}
 		}
+		this.envoiInfo(message,"",null);
+	}
+	
+	
+	private void envoiInfo(String message, String lancerDes,Question question) {
+		
+		ArrayList<Object> infoForIHM = new ArrayList<Object>();
+		
 		/*
-		 * 0 : Position joueur 1
-		 * 1 : Position joueur 2
+		 * 0 : is end game
+		 * 1 : listejoueur
 		 * 2 : Message action mystère 
 		 * 3 : Nombre lancerDes
 		 * 4 : Object Question
-		 * 
-		 * 
-		 * 
 		 */
-		int positionj1 = this.jeu.getListeJoueur().get(0).getCaseCourant().getNumero();
-		int positionj2 = this.jeu.getListeJoueur().get(1).getCaseCourant().getNumero();
-		String lancer = "";
-		ArrayList<Object> infoForIHM = new ArrayList<Object>();
-		
-		infoForIHM.add(positionj1);//0
-		infoForIHM.add(positionj2);//1
+		infoForIHM.add(isEnd());//0
+		infoForIHM.add(this.jeu.getListeJoueur());//1
 		infoForIHM.add(message);//2
-		infoForIHM.add(lancer);//3
-		infoForIHM.add(null); //4	
+		infoForIHM.add(lancerDes);//3
+		infoForIHM.add(question); //4	
+		
 		
 		
 		this.notifyObservers(infoForIHM);
+		
 	}
-	
 	
 	/* (non-Javadoc)
 	 * @see java.util.Observable#notifyObservers(java.lang.Object)

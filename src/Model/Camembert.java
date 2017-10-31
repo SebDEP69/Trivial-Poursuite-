@@ -37,7 +37,7 @@ public class Camembert {
 		boolean valeurDeRetour = false;
 		int i =0;
 		while(!valeurDeRetour && i<listePart.size()) {
-			if(listePart.get(i).getCouleur().equals(couleur)){
+			if(listePart.get(i).getCouleur() == couleur){
 				valeurDeRetour = true;
 			}
 			else{
@@ -51,7 +51,7 @@ public class Camembert {
 	public boolean AjoutPartCamembert(Couleur couleur){
 		boolean ok=false;
 		if(Plein() || ContientPart(couleur)){
-			System.out.println("Erreur");
+			System.out.println("Erreur dans l'ajout d'une part");
 			ok=false;
 		}
 		else{
@@ -79,6 +79,12 @@ public class Camembert {
 		
 	}
 
+/*
+	public void afficher() {
+		for (PartCamembert partCamembert : listePart) {
+			System.out.println(partCamembert.getCouleur());
+		}
+	}*/
 	
 	
 	

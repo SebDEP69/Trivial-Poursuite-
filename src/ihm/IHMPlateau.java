@@ -3,9 +3,12 @@ package ihm;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.*;
 import java.util.List;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
@@ -13,6 +16,7 @@ import Controler.TrivialControler;
 import Model.Case;
 import Model.Couleur;
 import Model.CouleurPion;
+import Model.Joueur;
 import Model.Question;
 import observable.TrivialPursuite;
 
@@ -31,7 +35,7 @@ public class IHMPlateau extends JFrame implements MouseListener, MouseMotionList
 		this.trivialControler = trivialControler;
 		int width = (int) (this.getToolkit().getScreenSize().getWidth() );
 		int height = (int) (this.getToolkit().getScreenSize().getHeight());
-		boardSize = new Dimension(width, height-100) ;
+		boardSize = new Dimension(width, height) ;
 		this.setTitle(nom_jeu);
 		this.setSize(boardSize);
 		layeredPane = new JLayeredPane();
@@ -224,35 +228,110 @@ public class IHMPlateau extends JFrame implements MouseListener, MouseMotionList
 		 */ 
 	}
 
-	private void creationPanelCamembert()
+	private void creationPanelCamembert(ArrayList<Joueur> listeDesJoueur)
 	{
 
 		///////////////////////////////////////////
 		//   			 CAMEMBERT 	            //
 		//////////////////////////////////////////
 		
-		JLabel camemebertJoueurUn = new JLabel(new ImageIcon("images/j1.png"));
+		Image cam;
+	//	Image camJdeux;
+		try {
+			int indicejoueur = 1;
+			for (Joueur joueur : listeDesJoueur) {
+				String[] listeImage = {"","","",""};
+				if (joueur.getCamembert().ContientPart(Couleur.BLEU)) {
+					listeImage[0] = "images/joueur"+indicejoueur+"-1.png";
+				}else {
+					listeImage[0] = null;
+				}
+				
+				if (joueur.getCamembert().ContientPart(Couleur.ROUGE)) {
+					listeImage[1] = "images/joueur"+indicejoueur+"-2.png";
+				}else {
+					listeImage[1] = null;
+				}
+				
+				if (joueur.getCamembert().ContientPart(Couleur.ORANGE)) {
+					listeImage[2] = "images/joueur"+indicejoueur+"-3.png";
+				}else {
+					listeImage[2] = null;
+				}
+				
+				if (joueur.getCamembert().ContientPart(Couleur.VERT)) {
+					listeImage[3] = "images/joueur"+indicejoueur+"-4.png";
+				}else {
+					listeImage[3] = null;
+				}
+				cam = imageCamembertWithPart("images/j"+indicejoueur+".png",listeImage[0],listeImage[1],listeImage[2],listeImage[3]);
+				JLabel camemebertJoueur = new JLabel(new ImageIcon(cam));
+				camemebertJoueur.setBorder(BorderFactory.createLineBorder(Color.black));
+				camembertPanel.add(camemebertJoueur);
+				indicejoueur++;
+			}
+			
+			
+			//camJun = imageCamembertWithPart("images/j1.png","images/joueur1-1.png","images/joueur1-2.png","images/joueur1-3.png","images/joueur1-4.png");
+		} catch (IOException e) {e.printStackTrace();}
+			
+		
+		/*// JOUEUR 1
+		JLabel camemebertJoueurUn = new JLabel(new ImageIcon(camJun));
 		camemebertJoueurUn.setBorder(BorderFactory.createLineBorder(Color.black));
+		try {
+			camJdeux = imageCamembertWithPart("images/j1.png","images/joueur2-1.png","images/joueur2-2.png","images/joueur2-3.png","images/joueur2-4.png");
+		} catch (IOException e) {e.printStackTrace();}
 		
 		
-		JLabel camemebertJoueurdeux = new JLabel(new ImageIcon("images/j2.png"));
+		
+		// JOUEUR 2
+		JLabel camemebertJoueurdeux = new JLabel(new ImageIcon(camJdeux));
 		camemebertJoueurdeux.setBorder(BorderFactory.createLineBorder(Color.black));
 
 		camembertPanel.add(camemebertJoueurUn);
 		camembertPanel.add(camemebertJoueurdeux);
 		
+		*/
+	}
+	
+	public static BufferedImage imageCamembertWithPart(String pathcam, String partBleu, String partRouge, String partOrange
+													,String partvert) throws IOException{ 
 		
-		/*
-		 * BufferedImage image1, BufferedImage image2
-		 * Graphics2D g2d = image1.createGraphics(); 
+		Image imagetemp1 = ImageIO.read(new File(pathcam));
+		BufferedImage image1 = (BufferedImage) imagetemp1;
+		
+		
+
+		Graphics2D g2d = image1.createGraphics(); 
 		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, 
 		                RenderingHints.VALUE_ANTIALIAS_ON); 
 		g2d.setRenderingHint(RenderingHints.KEY_ALPHA_INTERPOLATION, 
 		                RenderingHints.VALUE_ALPHA_INTERPOLATION_QUALITY); 
+	    if (partBleu !=null) {
+	    	Image imagetemp = ImageIO.read(new File(partBleu));
+			BufferedImage image = (BufferedImage) imagetemp;
+			g2d.drawImage(image, 7, 2, 78,78, null); 
+		}
+	    if (partRouge !=null) {
+	    	Image imagetemp = ImageIO.read(new File(partRouge));
+			BufferedImage image = (BufferedImage) imagetemp;
+			g2d.drawImage(image, 85, 2, 78,78, null); 
+		}
+	    if (partvert !=null) {
+	    	Image imagetemp = ImageIO.read(new File(partvert));
+			BufferedImage image = (BufferedImage) imagetemp;
+			g2d.drawImage(image, 7, 80, 78,78, null); 
+		}
+	    if (partOrange !=null) {
+	    	Image imagetemp = ImageIO.read(new File(partOrange));
+			BufferedImage image = (BufferedImage) imagetemp;
+			g2d.drawImage(image, 85, 80, 78,78, null); 
+		}
+	    
+		g2d.dispose(); 
 	  
-		g2d.drawImage(image2, 0, 0, null); 
-	  
-		g2d.dispose(); */
+		return image1 ; 
 	}
 
 	private void creationplateau() {
@@ -500,147 +579,150 @@ public class IHMPlateau extends JFrame implements MouseListener, MouseMotionList
 	public void update(Observable arg0, Object info) {
 
 		// réactualiser l'interface, il faut aussi passer en paramètre les question si besoin pour pouvoir les afficher
-		System.out.println("j'ai bien tout reçu");
-
-
-		/* TO DO
-		 * 
-		 * ajouter un atribut message dans JEU pour pouvoir passez les messages à afficher
-		 * 
-		 * removeAll du panel EST, CENTRE et OUEST
-		 * 
-		 * Refaire le plateau CENTRE avec les cases et les pion qui ont changer de place
-		 * 
-		 * Gerer la possition des deux pion sur la même case
-		 * 
-		 * OUEST refaire les camembert avec les part
-		 * 
-		 * EST affichier la question s'il y en a une
-		 * 
-		 * 
-		 * 
-		 */
 
 
 		/*for (int i = 0; i < trivialBoard.getComponentCount(); i++) {
   		((JPanel)trivialBoard.getComponent(i)).removeAll();
 	}*/
 
+		if ( (Boolean) ((ArrayList<Object>)info).get(0))  { // si c'est la fin du game
+			
+			this.plateauPanel.removeAll();
+			this.questionPanel.removeAll();
+			this.camembertPanel.removeAll();
+			ArrayList<Joueur> listeDesJoueur = ((ArrayList<Joueur>) ((ArrayList<Object>) info).get(1));
+			this.creationPanelCamembert(listeDesJoueur);
+			
+			this.creationplateau();
+			JLabel message = new JLabel( (String) ( (ArrayList<Object>) info).get(2) );
+			this.plateauPanel.add(message, BorderLayout.CENTER);
+			
+		}else {
+			
 
-		this.camembertPanel.removeAll();
-		this.desPanel.removeAll();
-		this.plateauPanel.removeAll();
-		this.questionPanel.removeAll();
-		//this.titlePanel.removeAll();
+			this.camembertPanel.removeAll();
+			this.desPanel.removeAll();
+			this.plateauPanel.removeAll();
+			this.questionPanel.removeAll();
+			//this.titlePanel.removeAll();
 
-		///////////////////////////////////////////
-		//   		 TITRE  					 //
-		////////////////////////////////////////// 
+			///////////////////////////////////////////
+			//   		 TITRE  					 //
+			////////////////////////////////////////// 
 
-		/*JLabel titleLabel = new JLabel(new ImageIcon("images/title.png"));
+			/*JLabel titleLabel = new JLabel(new ImageIcon("images/title.png"));
  	titlePanel.add(titleLabel);
 	trivialBoard.add(titlePanel, BorderLayout.NORTH);
-		 */
+			 */
 
-		/* JPanel sud = new JPanel();
+			/* JPanel sud = new JPanel();
 	 // sud.setBackground(Color.RED);
 	  trivialBoard.add(sud, BorderLayout.SOUTH);
-		 */
+			 */
 
-		///////////////////////////////////////////
-		//  affiche le lancer de dé + QUESTION   //
-		////////////////////////////////////////// 
-		if (((ArrayList<String>) info).size() >3) {
-			if ( ((ArrayList<Object>) info).size() >4 && ((ArrayList<Object>) info).get(4) != null) {// si ya une question
-				this.creationPanelDes(( (ArrayList<String>) info).get(3), true) ;
-			}else{
-				this.creationPanelDes(( (ArrayList<String>) info).get(3), false) ;
+			///////////////////////////////////////////
+			//  affiche le lancer de dé + QUESTION   //
+			////////////////////////////////////////// 
+			if (((ArrayList<String>) info).size() >3) {
+				if ( ((ArrayList<Object>) info).size() >4 && ((ArrayList<Object>) info).get(4) != null) {// si ya une question
+					this.creationPanelDes(( (ArrayList<String>) info).get(3), true) ;
+				}else{
+					this.creationPanelDes(( (ArrayList<String>) info).get(3), false) ;
+				}
+
 			}
-			
-		}
 
-		///////////////////////////////////////////
-		//   			 CAMEMBERT 			      //
-		//////////////////////////////////////////
 
-		this.creationPanelCamembert();
 
-		///////////////////////////////////////////
-		//   			 PLATEAU   			      //
-		//////////////////////////////////////////
 
-		//plateauPanel = new JPanel();
-		//plateauPanel.setLayout( new GridLayout(7, 7,1,1) );
-		plateauPanel.setLayout(new BorderLayout());
-		//plateauPanel.setPreferredSize( boardSize );
-		//plateauPanel.setBounds(0, 0, boardSize.width, boardSize.height);
-		//plateauPanel.setBackground(Color.RED);
-		this.creationplateau();
-		/*int casee = 0;
+
+			///////////////////////////////////////////
+			//   			 CAMEMBERT 			      //
+			//////////////////////////////////////////
+
+			ArrayList<Joueur> listeDesJoueur = ((ArrayList<Joueur>) ((ArrayList<Object>) info).get(1));
+			this.creationPanelCamembert(listeDesJoueur);
+
+			///////////////////////////////////////////
+			//   			 PLATEAU   			      //
+			//////////////////////////////////////////
+
+			//plateauPanel = new JPanel();
+			//plateauPanel.setLayout( new GridLayout(7, 7,1,1) );
+			plateauPanel.setLayout(new BorderLayout());
+			//plateauPanel.setPreferredSize( boardSize );
+			//plateauPanel.setBounds(0, 0, boardSize.width, boardSize.height);
+			//plateauPanel.setBackground(Color.RED);
+			this.creationplateau();
+			/*int casee = 0;
 		for (int[] coord : numcaseToindicePanel) {
 			System.out.println("Case :"+casee+" border :"+coord[0]+ " component :"+coord[1]);
 			casee++;
 		}*/
 
-		///////////////////////////////////////////
-		//   			 MESSAGE     		      //
-		//////////////////////////////////////////
-//		if (((ArrayList<String>) info).size() >2) {
-//			JLabel message = new JLabel( ( (ArrayList<String>) info).get(2) );
-//			this.plateauPanel.add(message, BorderLayout.CENTER);
-//		}
-		if ( ((ArrayList<Object>) info).size() >4 && ((ArrayList<Object>) info).get(4) != null) { // si on a une question
-			creationPanelQuestion( (Question) ((ArrayList<Object>) info).get(4));
-		}else{ // si on est sur une case mystère 
-			JLabel message = new JLabel( (String) ( (ArrayList<Object>) info).get(2) );
-			this.plateauPanel.add(message, BorderLayout.CENTER);
-		}
+			///////////////////////////////////////////
+			//   			 MESSAGE     		      //
+			//////////////////////////////////////////
+			//		if (((ArrayList<String>) info).size() >2) {
+			//			JLabel message = new JLabel( ( (ArrayList<String>) info).get(2) );
+			//			this.plateauPanel.add(message, BorderLayout.CENTER);
+			//		}
+			if ( ((ArrayList<Object>) info).size() >4 && ((ArrayList<Object>) info).get(4) != null) { // si on a une question
+				creationPanelQuestion( (Question) ((ArrayList<Object>) info).get(4));
+			}else{ // si on est sur une case mystère 
+				JLabel message = new JLabel( (String) ( (ArrayList<Object>) info).get(2) );
+				this.plateauPanel.add(message, BorderLayout.CENTER);
+			}
 
-		
-		
-		//this.pack();
-		///////////////////////////////////////////
-		//   			 PLACEMENT PION	        //
-		//////////////////////////////////////////
-		
-		//System.out.println( " joueur 1 case"+((ArrayList<Object>) info).get(0));
-		//System.out.println( " joueur 2 case"+((ArrayList<Object>) info).get(1));
-		
-		
-		this.pack();
-		/*
-		 * JOUEUR 1
-		 */
-		int casejUn = (Integer)( (ArrayList<Object>) info).get(0);
-		
-		int[] coord = numcaseToindicePanel.get(casejUn);
-		System.out.println("coord ="+coord[0]+ "" + coord[1]);
-		JPanel border = ((JPanel) plateauPanel.getComponent(coord[0]));
-		JPanel componentBorder = ((JPanel) border.getComponent(coord[1]));
-		ImageIcon iconj1 = new ImageIcon(new ImageIcon("images/j1.png").getImage().getScaledInstance(75, 75, Image.SCALE_DEFAULT));
-		JLabel pionj1 = new JLabel(iconj1);
-		componentBorder.add(pionj1);
-		
-		
-		/*
-		 * JOUEUR 2
-		 */
-		int casejdeux = (Integer)( (ArrayList<Object>) info).get(1);
-		
-		int[] coordj2 = numcaseToindicePanel.get(casejdeux);
-		border = ((JPanel) plateauPanel.getComponent(coordj2[0]));
-		componentBorder = ((JPanel) border.getComponent(coordj2[1]));
-		ImageIcon iconj2 = new ImageIcon(new ImageIcon("images/j1.png").getImage().getScaledInstance(75, 75, Image.SCALE_DEFAULT));
-		JLabel pionj2 = new JLabel(iconj2);
-		componentBorder.add(pionj2);
-		//System.out.println(componentBorder.getName());
-		//int xj2 = componentBorder.getX();
-		//int yj2 = componentBorder.getY();
-		//System.out.println(xj2+"  "+ yj2);
-		//ImgPion pionjun = new ImgPion("images/j1.png", xj1,yj1);
-		//componentBorder.add( new JLabel(new ImageIcon("images/j2.png")));
-		
-		/*
+
+
+			//this.pack();
+			///////////////////////////////////////////
+			//   			 PLACEMENT PION	        //
+			//////////////////////////////////////////
+
+			//System.out.println( " joueur 1 case"+((ArrayList<Object>) info).get(0));
+			//System.out.println( " joueur 2 case"+((ArrayList<Object>) info).get(1));
+
+
+			this.pack();
+			/*
+			 * JOUEUR 1
+			 */
+			int casejUn = listeDesJoueur.get(0).getCaseCourant().getNumero();
+			//int casejUn = (Integer)( (ArrayList<Object>) info).get(0);
+
+
+
+			int[] coord = numcaseToindicePanel.get(casejUn);
+			//System.out.println("coord ="+coord[0]+ "" + coord[1]);
+			JPanel border = ((JPanel) plateauPanel.getComponent(coord[0]));
+			JPanel componentBorder = ((JPanel) border.getComponent(coord[1]));
+			ImageIcon iconj1 = new ImageIcon(new ImageIcon("images/j1.png").getImage().getScaledInstance(75, 75, Image.SCALE_DEFAULT));
+			JLabel pionj1 = new JLabel(iconj1);
+			componentBorder.add(pionj1);
+
+
+			/*
+			 * JOUEUR 2
+			 */
+			int casejdeux = listeDesJoueur.get(1).getCaseCourant().getNumero();
+			//int casejdeux = (Integer)( (ArrayList<Object>) info).get(1);
+
+			int[] coordj2 = numcaseToindicePanel.get(casejdeux);
+			border = ((JPanel) plateauPanel.getComponent(coordj2[0]));
+			componentBorder = ((JPanel) border.getComponent(coordj2[1]));
+			ImageIcon iconj2 = new ImageIcon(new ImageIcon("images/j1.png").getImage().getScaledInstance(75, 75, Image.SCALE_DEFAULT));
+			JLabel pionj2 = new JLabel(iconj2);
+			componentBorder.add(pionj2);
+			//System.out.println(componentBorder.getName());
+			//int xj2 = componentBorder.getX();
+			//int yj2 = componentBorder.getY();
+			//System.out.println(xj2+"  "+ yj2);
+			//ImgPion pionjun = new ImgPion("images/j1.png", xj1,yj1);
+			//componentBorder.add( new JLabel(new ImageIcon("images/j2.png")));
+
+			/*
 		int positionj1 = numcaseToindicePanel.get(Integer.parseInt( ((ArrayList<String>) info).get(0)));
 		int positionj2 = numcaseToindicePanel.get(Integer.parseInt( ((ArrayList<String>) info).get(1)));
 
@@ -655,11 +737,12 @@ public class IHMPlateau extends JFrame implements MouseListener, MouseMotionList
 		ImgPion pionjdeux = new ImgPion("images/j2.png", xj2,yj2);
 		((JPanel) plateauPanel.getComponent(positionj2)).add(pionjdeux);
 
-*/
-	
-	
-	
-	this.revalidate();
+			 */
+
+
+		}
+			this.revalidate();
+		
 	
 	}
 
