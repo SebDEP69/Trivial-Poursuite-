@@ -13,18 +13,28 @@ public class MonMain {
 		ArrayList<Carte> listeCarteVert = new ArrayList<Carte>();
 		ArrayList<Carte> listeCarteMystere = new ArrayList<Carte>();
 		
+		String[] choixRougeun = {"repRed1","repRed2","repRed3","repRed4"};
+		String[] choixRougedeux = {"repRed5","repRed6","repRed7","repRed8"};
+		listeCarteRouge.add(new Question("question rouge1", 1,choixRougeun ,Couleur.ROUGE));
+		listeCarteRouge.add(new Question("question rouge2", 1, choixRougedeux ,Couleur.ROUGE));
 		
-		listeCarteRouge.add(new Question("question rouge1", "reponse rouge1", TypeCarte.Question ,Couleur.ROUGE));
-		listeCarteRouge.add(new Question("question rouge2", "reponse rouge1", TypeCarte.Question ,Couleur.ROUGE));
 		
-		listeCarteOrange.add(new Question("question orange1", "reponse orange1", TypeCarte.Question ,Couleur.ORANGE));
-		listeCarteOrange.add(new Question("question orange2", "reponse orange1", TypeCarte.Question ,Couleur.ORANGE));
+		String[] choixOrangeun = {"repOrange1","repOrange2","repOrange3","repOrange4"};
+		String[] choixOrangedeux = {"repOrange5","repOrange6","repOrange7","repOrange8"};
+		listeCarteOrange.add(new Question("question orange1", 1, choixOrangeun ,Couleur.ORANGE));
+		listeCarteOrange.add(new Question("question orange2", 1, choixOrangedeux ,Couleur.ORANGE));
 		
-		listeCarteBleu.add(new Question("question bleu1", "reponse bleu1", TypeCarte.Question ,Couleur.BLEU));
-		listeCarteBleu.add(new Question("question bleu2", "reponse bleu1", TypeCarte.Question ,Couleur.BLEU));
 		
-		listeCarteVert.add(new Question("question vert1", "reponse vert1", TypeCarte.Question ,Couleur.VERT));
-		listeCarteVert.add(new Question("question vert2", "reponse vert1", TypeCarte.Question ,Couleur.VERT));
+		String[] choixBleueun = {"repBleu1","repBleu2","repBleu3","repBleu4"};
+		String[] choixBleudeux = {"repBleu5","repBleu6","repBleu7","repBleu8"};
+		listeCarteBleu.add(new Question("question bleu1", 1, choixBleueun ,Couleur.BLEU));
+		listeCarteBleu.add(new Question("question bleu2", 1, choixBleudeux ,Couleur.BLEU));
+		
+		
+		String[] choixVertun = {"repert1","reperte2","repert3","repert4"};
+		String[] choixVertdeux = {"repert5","repert6","repert7","repert8"};
+		listeCarteVert.add(new Question("question vert1", 1, choixVertun ,Couleur.VERT));
+		listeCarteVert.add(new Question("question vert2", 1, choixVertdeux ,Couleur.VERT));
 		
 		
 		//listeCarteMystere.add(new MystereEnleverCamembert());

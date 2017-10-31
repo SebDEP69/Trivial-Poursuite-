@@ -3,12 +3,14 @@ package Model;
 public class Question extends Carte{
 	
 	private String question;
-	private String reponse;
+	private int reponse;
+	private String[] choix;
 	
 	//Constructeur
-	public Question(String question, String reponse,TypeCarte typeCarte, Couleur couleur) {
-		super(typeCarte, couleur);
+	public Question(String question, int reponse ,String[] choix, Couleur couleur) {
+		super(TypeCarte.Question, couleur);
 		this.question = question;
+		this.choix = choix;
 		this.reponse = reponse;
 	}
 
@@ -17,11 +19,18 @@ public class Question extends Carte{
 		return question;
 	}
 
+	public String[] getChoix() {
+		return choix;
+	}
 
-	public String getReponse() {
+	public int getReponse() {
 		return reponse;
 	}
 
+	public boolean isBonneReponse(String reponse){
+		
+		return (this.choix[this.reponse] == reponse);
+	}
 	
 	
 	

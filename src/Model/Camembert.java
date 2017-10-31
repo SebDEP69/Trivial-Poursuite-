@@ -48,15 +48,18 @@ public class Camembert {
 		return valeurDeRetour;
 	}
 	
-	public void AjoutPartCamembert(Couleur couleur){
+	public boolean AjoutPartCamembert(Couleur couleur){
+		boolean ok=false;
 		if(Plein() || ContientPart(couleur)){
 			System.out.println("Erreur");
+			ok=false;
 		}
 		else{
 			System.out.println("ajout de la part de camembert " + couleur);
 			listePart.add(new PartCamembert(couleur));
+			ok=true;
 		}
-		
+		return ok;
 	}
 	
 	

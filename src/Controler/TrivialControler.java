@@ -1,6 +1,7 @@
 package Controler;
 
 import Model.CouleurPion;
+import Model.Question;
 import observable.TrivialPursuite;
 
 public class TrivialControler {
@@ -24,6 +25,11 @@ public class TrivialControler {
 	public boolean isEnd() {
 		
 		return this.trivialPursuite.isEnd();
+	}
+
+	public void validerReponse(Question question,String reponse) {
+		// TODO Auto-generated method stub
+		this.trivialPursuite.validerReponse(question,reponse);
 	}
 	
 }

@@ -13,13 +13,13 @@ import Controler.TrivialControler;
 import Model.Case;
 import Model.Couleur;
 import Model.CouleurPion;
+import Model.Question;
 import observable.TrivialPursuite;
 
 
 public class IHMPlateau extends JFrame implements MouseListener, MouseMotionListener, Observer {
 	JLayeredPane layeredPane;
-	JPanel trivialBoard, plateauPanel, questionPanel,camembertPanel,titlePanel;
-
+	JPanel trivialBoard, plateauPanel, desPanel, camembertPanel, titlePanel, questionPanel;
 	ArrayList<int[]> numcaseToindicePanel;
 	Dimension boardSize;
 	private  TrivialControler trivialControler;
@@ -31,23 +31,26 @@ public class IHMPlateau extends JFrame implements MouseListener, MouseMotionList
 		this.trivialControler = trivialControler;
 		int width = (int) (this.getToolkit().getScreenSize().getWidth() );
 		int height = (int) (this.getToolkit().getScreenSize().getHeight());
-		boardSize = new Dimension(width, height) ;
+		boardSize = new Dimension(width, height-100) ;
 		this.setTitle(nom_jeu);
+		this.setSize(boardSize);
 		layeredPane = new JLayeredPane();
 		getContentPane().add(layeredPane);
 		layeredPane.setPreferredSize(boardSize);
 
 
-
 		trivialBoard = new JPanel();
 		trivialBoard.setLayout( new BorderLayout() );
-		trivialBoard.setPreferredSize( boardSize );
+		//trivialBoard.setPreferredSize( boardSize );
 		trivialBoard.setBounds(0, 0, boardSize.width, boardSize.height);
 		layeredPane.add(trivialBoard, JLayeredPane.DEFAULT_LAYER);
 
 		//HAUT
 		this.titlePanel = new JPanel();
-		JLabel titleLabel = new JLabel(new ImageIcon("images/title.png"));
+		ImageIcon imageTitle = new ImageIcon("images/title.png");
+		JLabel titleLabel = new JLabel(imageTitle);
+		titlePanel.setPreferredSize(new Dimension(0, imageTitle.getIconHeight()));
+		System.out.println(imageTitle.getIconHeight());
 		titlePanel.add(titleLabel);
 		titlePanel.setBackground(Color.white);
 		trivialBoard.add(titlePanel, BorderLayout.NORTH);
@@ -56,16 +59,21 @@ public class IHMPlateau extends JFrame implements MouseListener, MouseMotionList
 
 
 		//GAUCHE
-		questionPanel = new JPanel();
-		questionPanel.setLayout(new GridLayout(5,0));
-		trivialBoard.add(questionPanel,BorderLayout.WEST);
+		desPanel = new JPanel();
+		desPanel.setLayout(new GridLayout(5,0));
+		desPanel.setPreferredSize( new Dimension(200,0));
+		trivialBoard.add(desPanel,BorderLayout.WEST);
 
 		//DROITE
 		camembertPanel = new JPanel();
 		camembertPanel.setLayout(new GridLayout(3,0));
+		camembertPanel.setPreferredSize( new Dimension(200,0));
 		trivialBoard.add(camembertPanel, BorderLayout.EAST);
 
 
+		// CENTRE
+		questionPanel = new JPanel();
+		questionPanel.setLayout(new GridLayout(2,0));		
 
 
 		///////////////////////////////////////////
@@ -75,8 +83,8 @@ public class IHMPlateau extends JFrame implements MouseListener, MouseMotionList
 		// CENTRE
 		plateauPanel = new JPanel();
 		GridBagLayout gridbagcentre = new GridBagLayout();
-		plateauPanel.setPreferredSize( boardSize );
-		plateauPanel.setBounds(0, 0, boardSize.width, boardSize.height);
+		//plateauPanel.setPreferredSize( boardSize );
+		//plateauPanel.setBounds(0, 0, boardSize.width, boardSize.height);
 		plateauPanel.setLayout(gridbagcentre);
 
 		Dimension dimensionJTF = new Dimension(100,30);
@@ -110,7 +118,7 @@ public class IHMPlateau extends JFrame implements MouseListener, MouseMotionList
 		plateauPanel.add(couleurPionJoueurdeux);
 
 
-		JButton btnlancer = new JButton("Lance");
+		JButton btnlancer = new JButton("Lancer");
 		btnlancer.addActionListener(new ActionListener() {
 
 			@Override
@@ -138,7 +146,7 @@ public class IHMPlateau extends JFrame implements MouseListener, MouseMotionList
 
 
 
-
+		this.pack();
 
 		/*
 	  trivialBoard = new JPanel();
@@ -219,14 +227,32 @@ public class IHMPlateau extends JFrame implements MouseListener, MouseMotionList
 	private void creationPanelCamembert()
 	{
 
-
+		///////////////////////////////////////////
+		//   			 CAMEMBERT 	            //
+		//////////////////////////////////////////
+		
 		JLabel camemebertJoueurUn = new JLabel(new ImageIcon("images/j1.png"));
 		camemebertJoueurUn.setBorder(BorderFactory.createLineBorder(Color.black));
+		
+		
 		JLabel camemebertJoueurdeux = new JLabel(new ImageIcon("images/j2.png"));
 		camemebertJoueurdeux.setBorder(BorderFactory.createLineBorder(Color.black));
 
 		camembertPanel.add(camemebertJoueurUn);
 		camembertPanel.add(camemebertJoueurdeux);
+		
+		
+		/*
+		 * BufferedImage image1, BufferedImage image2
+		 * Graphics2D g2d = image1.createGraphics(); 
+		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, 
+		                RenderingHints.VALUE_ANTIALIAS_ON); 
+		g2d.setRenderingHint(RenderingHints.KEY_ALPHA_INTERPOLATION, 
+		                RenderingHints.VALUE_ALPHA_INTERPOLATION_QUALITY); 
+	  
+		g2d.drawImage(image2, 0, 0, null); 
+	  
+		g2d.dispose(); */
 	}
 
 	private void creationplateau() {
@@ -236,7 +262,9 @@ public class IHMPlateau extends JFrame implements MouseListener, MouseMotionList
 		//////////////////////////////////////////
 		Color serieCouleurHaut[] = {Color.GREEN, Color.ORANGE,Color.BLUE, Color.RED,Color.BLACK};
 		JPanel haut = new JPanel( new GridLayout(1, 7));
-		haut.setPreferredSize( new Dimension(0,100));
+		
+		System.out.println("plateau" + plateauPanel.getHeight());
+		haut.setPreferredSize( new Dimension(0,(plateauPanel.getHeight()/7)));
 		haut.setName("en haut");
 		
 		
@@ -257,7 +285,7 @@ public class IHMPlateau extends JFrame implements MouseListener, MouseMotionList
 		haut.add(lastCase);
 		plateauPanel.add(haut, BorderLayout.NORTH);
 		
-		System.out.println(haut.getComponent(0));
+		//System.out.println(haut.getComponent(0));
 		
 		
 		
@@ -271,8 +299,8 @@ public class IHMPlateau extends JFrame implements MouseListener, MouseMotionList
 		//////////////////////////////////////////
 		Color serieCouleurdroite[] = { Color.ORANGE,Color.BLUE, Color.RED,Color.BLACK,Color.GREEN};
 		JPanel droite = new JPanel( new GridLayout(5, 1));
-		droite.setPreferredSize( new Dimension(200,0));
-		
+		droite.setPreferredSize( new Dimension((plateauPanel.getWidth()/7),0));
+		droite.setName("Droite");
 		for (Color couleur : serieCouleurdroite) {
 			JPanel square = new JPanel( );
 			square.setBackground(couleur);
@@ -289,8 +317,8 @@ public class IHMPlateau extends JFrame implements MouseListener, MouseMotionList
 		//////////////////////////////////////////
 		Color serieCouleurBas[] = { Color.ORANGE,Color.GREEN,Color.BLACK,Color.RED,Color.BLUE };
 		JPanel bas = new JPanel( new GridLayout(1, 7));
-		bas.setPreferredSize( new Dimension(0,100));
-		
+		bas.setPreferredSize( new Dimension(0,(plateauPanel.getHeight()/7)));
+		bas.setName("BAS");
 		JPanel basun = new JPanel(  );
 		basun.setBackground(Color.BLUE);
 		basun.setBorder(BorderFactory.createMatteBorder(10, 10, 10, 10, Color.DARK_GRAY));
@@ -316,8 +344,8 @@ public class IHMPlateau extends JFrame implements MouseListener, MouseMotionList
 		//////////////////////////////////////////
 		Color serieCouleurGauche[] = { Color.BLUE,Color.ORANGE, Color.GREEN,Color.BLACK,Color.RED};
 		JPanel gauche = new JPanel( new GridLayout(5, 1));
-		gauche.setPreferredSize( new Dimension(200,0));
-		
+		gauche.setPreferredSize( new Dimension((plateauPanel.getWidth()/7),0));
+		gauche.setName("gauche");
 		
 		for (Color couleur : serieCouleurGauche) {
 			JPanel square = new JPanel( );
@@ -337,31 +365,99 @@ public class IHMPlateau extends JFrame implements MouseListener, MouseMotionList
 	}
 
 	
-	private void creationPanelQuestion(String lancede) 
+	private void creationPanelQuestion(Question question){
+		
+		
+		
+		///////////////////////////////////////////
+		//   			 QUESTION 	            //
+		//////////////////////////////////////////
+				
+		//QUESTION 
+		questionPanel = new JPanel(new GridLayout(2,0));
+		JLabel questionLabel = new JLabel( question.getQuestion() );
+		this.questionPanel.add(questionLabel);
+		
+		
+		// REPONSES
+		String[] reponses = question.getChoix();
+		ButtonGroup groupButton = new ButtonGroup();
+		JPanel reponsePanel = new JPanel(new GridLayout(5,0));
+		// Réponse 1
+		JRadioButton rep1 = new JRadioButton(reponses[0]);
+		rep1.setActionCommand(rep1.getText());
+		groupButton.add(rep1);
+		reponsePanel.add(rep1);
+		
+		//Réponse 2
+		JRadioButton rep2 = new JRadioButton(reponses[1]);
+		rep2.setActionCommand(rep2.getText());
+		groupButton.add(rep2);
+		reponsePanel.add(rep2);
+		
+		//Réponse 3
+		JRadioButton rep3 = new JRadioButton(reponses[2]);
+		rep3.setActionCommand(rep3.getText());
+		groupButton.add(rep3);
+		reponsePanel.add(rep3);
+		
+		//Réponse 4
+		JRadioButton rep4 = new JRadioButton(reponses[3]);
+		rep4.setActionCommand(rep4.getText());
+		groupButton.add(rep4);
+		reponsePanel.add(rep4);
+		
+		JButton valider= new JButton("Valider la reponse");
+		valider.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (groupButton.getSelection() !=null) {
+					String reponse =groupButton.getSelection().getActionCommand();
+					System.out.println("bouton selected "+groupButton.getSelection().getActionCommand());
+					trivialControler.validerReponse(question, reponse);
+				}else{
+					System.out.println("selectioner une réponse");
+				}
+				
+
+			}
+		});
+		reponsePanel.add(valider);
+		
+		this.questionPanel.add(reponsePanel);
+		this.plateauPanel.add(questionPanel, BorderLayout.CENTER);		
+	}
+	
+	private void creationPanelDes(String lancede, boolean isQuestion) 
 	{
 
 		///////////////////////////////////////////
-		//   			 QUESTION 		         //
+		//   			 LANCER LES DES 		         //
 		//////////////////////////////////////////
 
 
 
-		JLabel imagede = new JLabel(new ImageIcon("images/de.png"));
+		//JLabel imagede = new JLabel(new ImageIcon("images/de.png"));
 		JLabel de = new JLabel(new ImageIcon("images/de"+lancede+".png"));
 
 
 		//JLabel numero = new JLabel();
 		//numero.setLayout(new GridLayout(3,2));
-		JButton btnLancerLesDes = new JButton("Lancer les des",new ImageIcon("images/de.png"));  
-		btnLancerLesDes.addActionListener(new ActionListener() {
+		JButton btnLancerLesDes = new JButton(new ImageIcon("images/de"+lancede+".png"));  
+		
+		if (!isQuestion) {
+			btnLancerLesDes.addActionListener(new ActionListener() {
 
-			@Override
-			public void actionPerformed(ActionEvent e) {
+				@Override
+				public void actionPerformed(ActionEvent e) {
 
-				trivialControler.lancerLesDes();
+					trivialControler.lancerLesDes();
 
-			}
-		});
+				}
+			});
+		}
+		
 
 
 		JLabel categorie = new JLabel();
@@ -387,11 +483,14 @@ public class IHMPlateau extends JFrame implements MouseListener, MouseMotionList
 		categorie.add(new JLabel(new ImageIcon("images/super.png")));
 		categorie.add(new JLabel("Super Camembert"));
 
-		questionPanel.add(de);
+		/*if (!(lancede == "")) {
+			desPanel.add(de);
+		}*/
+		
 		//questionPanel.add(imagede);
-		questionPanel.add(btnLancerLesDes);
+		desPanel.add(btnLancerLesDes);
 
-		questionPanel.add(categorie);
+		desPanel.add(categorie);
 
 
 	}
@@ -423,15 +522,15 @@ public class IHMPlateau extends JFrame implements MouseListener, MouseMotionList
 		 */
 
 
-
 		/*for (int i = 0; i < trivialBoard.getComponentCount(); i++) {
   		((JPanel)trivialBoard.getComponent(i)).removeAll();
 	}*/
 
 
 		this.camembertPanel.removeAll();
-		this.questionPanel.removeAll();
+		this.desPanel.removeAll();
 		this.plateauPanel.removeAll();
+		this.questionPanel.removeAll();
 		//this.titlePanel.removeAll();
 
 		///////////////////////////////////////////
@@ -452,7 +551,12 @@ public class IHMPlateau extends JFrame implements MouseListener, MouseMotionList
 		//  affiche le lancer de dé + QUESTION   //
 		////////////////////////////////////////// 
 		if (((ArrayList<String>) info).size() >3) {
-			this.creationPanelQuestion(( (ArrayList<String>) info).get(3) ) ;
+			if ( ((ArrayList<Object>) info).size() >4 && ((ArrayList<Object>) info).get(4) != null) {// si ya une question
+				this.creationPanelDes(( (ArrayList<String>) info).get(3), true) ;
+			}else{
+				this.creationPanelDes(( (ArrayList<String>) info).get(3), false) ;
+			}
+			
 		}
 
 		///////////////////////////////////////////
@@ -468,8 +572,8 @@ public class IHMPlateau extends JFrame implements MouseListener, MouseMotionList
 		//plateauPanel = new JPanel();
 		//plateauPanel.setLayout( new GridLayout(7, 7,1,1) );
 		plateauPanel.setLayout(new BorderLayout());
-		plateauPanel.setPreferredSize( boardSize );
-		plateauPanel.setBounds(0, 0, boardSize.width, boardSize.height);
+		//plateauPanel.setPreferredSize( boardSize );
+		//plateauPanel.setBounds(0, 0, boardSize.width, boardSize.height);
 		//plateauPanel.setBackground(Color.RED);
 		this.creationplateau();
 		/*int casee = 0;
@@ -481,58 +585,62 @@ public class IHMPlateau extends JFrame implements MouseListener, MouseMotionList
 		///////////////////////////////////////////
 		//   			 MESSAGE     		      //
 		//////////////////////////////////////////
-		if (((ArrayList<String>) info).size() >2) {
-			JLabel message = new JLabel( ( (ArrayList<String>) info).get(2) );
+//		if (((ArrayList<String>) info).size() >2) {
+//			JLabel message = new JLabel( ( (ArrayList<String>) info).get(2) );
+//			this.plateauPanel.add(message, BorderLayout.CENTER);
+//		}
+		if ( ((ArrayList<Object>) info).size() >4 && ((ArrayList<Object>) info).get(4) != null) { // si on a une question
+			creationPanelQuestion( (Question) ((ArrayList<Object>) info).get(4));
+		}else{ // si on est sur une case mystère 
+			JLabel message = new JLabel( (String) ( (ArrayList<Object>) info).get(2) );
 			this.plateauPanel.add(message, BorderLayout.CENTER);
 		}
 
 		
 		
-		
+		//this.pack();
 		///////////////////////////////////////////
 		//   			 PLACEMENT PION	        //
 		//////////////////////////////////////////
 		
-		System.out.println( " joueur 1 case"+((ArrayList<String>) info).get(0));
-		System.out.println( " joueur 2 case"+((ArrayList<String>) info).get(1));
+		//System.out.println( " joueur 1 case"+((ArrayList<Object>) info).get(0));
+		//System.out.println( " joueur 2 case"+((ArrayList<Object>) info).get(1));
 		
 		
-		
+		this.pack();
 		/*
 		 * JOUEUR 1
 		 */
-		int casejUn = Integer.parseInt( ((ArrayList<String>) info).get(0));
+		int casejUn = (Integer)( (ArrayList<Object>) info).get(0);
 		
 		int[] coord = numcaseToindicePanel.get(casejUn);
+		System.out.println("coord ="+coord[0]+ "" + coord[1]);
 		JPanel border = ((JPanel) plateauPanel.getComponent(coord[0]));
 		JPanel componentBorder = ((JPanel) border.getComponent(coord[1]));
-		
-		System.out.println(componentBorder);
-		int xj1 = componentBorder.getX();
-		int yj1 = componentBorder.getY();
-		System.out.println(xj1+"  "+ yj1);
-		componentBorder.add( new JLabel(new ImageIcon("images/j1.png")));
-		//ImgPion pionjun = new ImgPion("images/j1.png", xj1,yj1);
-		//componentBorder.add(pionjun);
+		ImageIcon iconj1 = new ImageIcon(new ImageIcon("images/j1.png").getImage().getScaledInstance(75, 75, Image.SCALE_DEFAULT));
+		JLabel pionj1 = new JLabel(iconj1);
+		componentBorder.add(pionj1);
 		
 		
 		/*
 		 * JOUEUR 2
 		 */
-		int casejdeux = Integer.parseInt( ((ArrayList<String>) info).get(1));
+		int casejdeux = (Integer)( (ArrayList<Object>) info).get(1);
 		
 		int[] coordj2 = numcaseToindicePanel.get(casejdeux);
 		border = ((JPanel) plateauPanel.getComponent(coordj2[0]));
 		componentBorder = ((JPanel) border.getComponent(coordj2[1]));
+		ImageIcon iconj2 = new ImageIcon(new ImageIcon("images/j1.png").getImage().getScaledInstance(75, 75, Image.SCALE_DEFAULT));
+		JLabel pionj2 = new JLabel(iconj2);
+		componentBorder.add(pionj2);
+		//System.out.println(componentBorder.getName());
+		//int xj2 = componentBorder.getX();
+		//int yj2 = componentBorder.getY();
+		//System.out.println(xj2+"  "+ yj2);
+		//ImgPion pionjun = new ImgPion("images/j1.png", xj1,yj1);
+		//componentBorder.add( new JLabel(new ImageIcon("images/j2.png")));
 		
-		System.out.println(componentBorder.getName());
-		int xj2 = componentBorder.getX();
-		int yj2 = componentBorder.getY();
-		System.out.println(xj2+"  "+ yj2);
-		componentBorder.add( new JLabel(new ImageIcon("images/j2.png")));
-		
-		/*System.out.println( " joueur 1 case"+((ArrayList<String>) info).get(0));
-		System.out.println( " joueur 2 case"+((ArrayList<String>) info).get(1));
+		/*
 		int positionj1 = numcaseToindicePanel.get(Integer.parseInt( ((ArrayList<String>) info).get(0)));
 		int positionj2 = numcaseToindicePanel.get(Integer.parseInt( ((ArrayList<String>) info).get(1)));
 
@@ -581,6 +689,7 @@ public class IHMPlateau extends JFrame implements MouseListener, MouseMotionList
 		frame.setVisible(true);
 	}
 
+	
 	public void mouseClicked(MouseEvent e) {
 
 	}

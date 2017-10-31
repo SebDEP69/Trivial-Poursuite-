@@ -66,8 +66,16 @@ public class Jeu {
 	}
 	
 	public boolean FinDuJeu(){
-		return false;
-		
+		boolean isCamenbertPlein = false;
+		Joueur j ;
+		int indiceJ=0;
+		while (!isCamenbertPlein && indiceJ <= listeJoueur.size())
+		{
+			j = listeJoueur.get(indiceJ);
+			isCamenbertPlein = j.getCamembert().Plein();
+			indiceJ++;
+		}
+		return isCamenbertPlein;
 	}
 	
 	public Joueur getJoueurCourant(){
@@ -117,7 +125,7 @@ public class Jeu {
 		Carte carte = this.plateau.TirerCarte(Couleur.NOIR);
 		
 		if (carte.getTypeCarte() == TypeCarte.Mystere) {
-			((Mystere) carte).Action(this.joueurCourant, this.plateau.getListeCase(), listeJoueur);
+			((Mystere) carte).Action(this.joueurCourant, this.plateau.getListeCase(), listeJoueur); // ici peut faire retourner un message de l'action
 		}
 		
 		
