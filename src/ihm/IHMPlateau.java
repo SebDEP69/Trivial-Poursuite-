@@ -240,30 +240,7 @@ public class IHMPlateau extends JFrame implements MouseListener, MouseMotionList
 		try {
 			int indicejoueur = 1;
 			for (Joueur joueur : listeDesJoueur) {
-				String[] listeImage = {"","","",""};
-				if (joueur.getCamembert().ContientPart(Couleur.BLEU)) {
-					listeImage[0] = "images/joueur"+indicejoueur+"-1.png";
-				}else {
-					listeImage[0] = null;
-				}
-				
-				if (joueur.getCamembert().ContientPart(Couleur.ROUGE)) {
-					listeImage[1] = "images/joueur"+indicejoueur+"-2.png";
-				}else {
-					listeImage[1] = null;
-				}
-				
-				if (joueur.getCamembert().ContientPart(Couleur.ORANGE)) {
-					listeImage[2] = "images/joueur"+indicejoueur+"-3.png";
-				}else {
-					listeImage[2] = null;
-				}
-				
-				if (joueur.getCamembert().ContientPart(Couleur.VERT)) {
-					listeImage[3] = "images/joueur"+indicejoueur+"-4.png";
-				}else {
-					listeImage[3] = null;
-				}
+				String[] listeImage = listeImageCamembert(joueur,indicejoueur);				
 				cam = imageCamembertWithPart("images/j"+indicejoueur+".png",listeImage[0],listeImage[1],listeImage[2],listeImage[3]);
 				JLabel camemebertJoueur = new JLabel(new ImageIcon(cam));
 				camemebertJoueur.setBorder(BorderFactory.createLineBorder(Color.black));
@@ -293,6 +270,36 @@ public class IHMPlateau extends JFrame implements MouseListener, MouseMotionList
 		camembertPanel.add(camemebertJoueurdeux);
 		
 		*/
+	}
+	
+	private String[] listeImageCamembert(Joueur joueur, int numJoueur) {
+		
+		
+		String[] listeImage = {"","","",""};
+		if (joueur.getCamembert().ContientPart(Couleur.BLEU)) {
+			listeImage[0] = "images/joueur"+numJoueur+"-1.png";
+		}else {
+			listeImage[0] = null;
+		}
+		
+		if (joueur.getCamembert().ContientPart(Couleur.ROUGE)) {
+			listeImage[1] = "images/joueur"+numJoueur+"-2.png";
+		}else {
+			listeImage[1] = null;
+		}
+		
+		if (joueur.getCamembert().ContientPart(Couleur.ORANGE)) {
+			listeImage[2] = "images/joueur"+numJoueur+"-3.png";
+		}else {
+			listeImage[2] = null;
+		}
+		
+		if (joueur.getCamembert().ContientPart(Couleur.VERT)) {
+			listeImage[3] = "images/joueur"+numJoueur+"-4.png";
+		}else {
+			listeImage[3] = null;
+		}
+		return listeImage;
 	}
 	
 	public static BufferedImage imageCamembertWithPart(String pathcam, String partBleu, String partRouge, String partOrange
@@ -698,10 +705,19 @@ public class IHMPlateau extends JFrame implements MouseListener, MouseMotionList
 			//System.out.println("coord ="+coord[0]+ "" + coord[1]);
 			JPanel border = ((JPanel) plateauPanel.getComponent(coord[0]));
 			JPanel componentBorder = ((JPanel) border.getComponent(coord[1]));
-			ImageIcon iconj1 = new ImageIcon(new ImageIcon("images/j1.png").getImage().getScaledInstance(75, 75, Image.SCALE_DEFAULT));
-			JLabel pionj1 = new JLabel(iconj1);
-			componentBorder.add(pionj1);
-
+			
+			String[] listeImage = listeImageCamembert(listeDesJoueur.get(0),1);				
+			try {
+			Image cam = imageCamembertWithPart("images/j1.png",listeImage[0],listeImage[1],listeImage[2],listeImage[3]);
+			
+			JLabel camemebertJoueur1 = new JLabel((new ImageIcon(cam.getScaledInstance(75, 75, Image.SCALE_DEFAULT))));
+			//ImageIcon iconj1 = new ImageIcon(new ImageIcon("images/j1.png").getImage().getScaledInstance(75, 75, Image.SCALE_DEFAULT));
+			//JLabel pionj1 = new JLabel(iconj1);
+			componentBorder.add(camemebertJoueur1);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 
 			/*
 			 * JOUEUR 2
@@ -712,9 +728,25 @@ public class IHMPlateau extends JFrame implements MouseListener, MouseMotionList
 			int[] coordj2 = numcaseToindicePanel.get(casejdeux);
 			border = ((JPanel) plateauPanel.getComponent(coordj2[0]));
 			componentBorder = ((JPanel) border.getComponent(coordj2[1]));
-			ImageIcon iconj2 = new ImageIcon(new ImageIcon("images/j1.png").getImage().getScaledInstance(75, 75, Image.SCALE_DEFAULT));
-			JLabel pionj2 = new JLabel(iconj2);
-			componentBorder.add(pionj2);
+			
+			listeImage = listeImageCamembert(listeDesJoueur.get(1),2);	
+			try {
+				Image cam = imageCamembertWithPart("images/j2.png",listeImage[0],listeImage[1],listeImage[2],listeImage[3]);
+			
+				JLabel camemebertJoueur2 = new JLabel((new ImageIcon(cam.getScaledInstance(75, 75, Image.SCALE_DEFAULT))));
+				componentBorder.add(camemebertJoueur2);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			
+			
+			
+			
+			//ImageIcon iconj2 = new ImageIcon(new ImageIcon("images/j1.png").getImage().getScaledInstance(75, 75, Image.SCALE_DEFAULT));
+			//JLabel pionj2 = new JLabel(iconj2);
+			//componentBorder.add(pionj2);
 			//System.out.println(componentBorder.getName());
 			//int xj2 = componentBorder.getX();
 			//int yj2 = componentBorder.getY();
