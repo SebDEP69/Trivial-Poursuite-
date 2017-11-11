@@ -5,7 +5,6 @@ import java.awt.Image;
 import java.awt.Toolkit;
 
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 
 public class ImgPion extends JLabel {
     private static final long serialVersionUID = -9129537057351390955L;

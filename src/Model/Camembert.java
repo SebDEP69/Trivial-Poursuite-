@@ -79,6 +79,18 @@ public class Camembert {
 		
 	}
 
+
+
+	@Override
+	public String toString() {
+		
+		String val ="";
+		for (PartCamembert partCamembert : listePart) {
+			val = val + partCamembert.toString()+"\n";
+		}
+		return val;
+	}
+
 /*
 	public void afficher() {
 		for (PartCamembert partCamembert : listePart) {

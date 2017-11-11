@@ -1,8 +1,6 @@
 package launcher;
 
 import java.awt.Dimension;
-import java.util.Observer;
-
 import javax.swing.JFrame;
 
 
@@ -28,6 +26,7 @@ public class LauncherGUI {
 	 */
 	public static void main(String[] args) {
 
+		@SuppressWarnings("unused")
 		LauncherGUI launcher = new LauncherGUI();
 		
 	}

@@ -44,6 +44,15 @@ public class Joueur {
 		return this.getCamembert().ContientPart(couleur);
 		
 	}
+
+	@Override
+	public String toString() {
+		
+		String returnvalue ="" ;
+		returnvalue = this.getNom() +":\n";
+		returnvalue = returnvalue + this.getCamembert().toString();
+		return returnvalue;
+	}
 	
 }
 

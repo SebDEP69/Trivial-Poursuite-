@@ -26,12 +26,12 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
-import javax.swing.UIManager;
 
 import Controler.TrivialControler; 
 
 
 
+@SuppressWarnings("serial")
 public class TrivialPursuitGUI extends javax.swing.JFrame implements MouseListener,
 		MouseMotionListener, Observer {
 

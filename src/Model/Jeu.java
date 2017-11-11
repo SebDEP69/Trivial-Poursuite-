@@ -1,6 +1,5 @@
 package Model;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class Jeu {
 	
@@ -121,14 +120,14 @@ public class Jeu {
 	}
 	
 		
-	public void ActionCaseMystere(){
+	public String ActionCaseMystere(){
 		
 		Carte carte = this.plateau.TirerCarte(Couleur.NOIR);
-		
+		String message ="";
 		if (carte.getTypeCarte() == TypeCarte.Mystere) {
-			((Mystere) carte).Action(this.joueurCourant, this.plateau.getListeCase(), listeJoueur); // ici peut faire retourner un message de l'action
+			message= ((Mystere) carte).Action(this.joueurCourant, this.plateau.getListeCase(), listeJoueur); // ici peut faire retourner un message de l'action
 		}
-		
+		return message;
 		
 	}
 	

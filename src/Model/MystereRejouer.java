@@ -8,9 +8,9 @@ public class MystereRejouer extends Mystere{
 	}
 
 	@Override
-	void Action(Joueur joueurcourant, ArrayList<Case> listecase, ArrayList<Joueur> listejoueur) {
+	String Action(Joueur joueurcourant, ArrayList<Case> listecase, ArrayList<Joueur> listejoueur) {
 		
-		
+		return "Vous pouvez rejouer";
 	}
 
 }

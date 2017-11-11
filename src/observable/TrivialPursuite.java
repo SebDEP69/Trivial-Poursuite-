@@ -6,7 +6,6 @@ import java.util.Observer;
 
 import Model.CouleurPion;
 import Model.Jeu;
-import Model.Joueur;
 import Model.Question;
 
 public class TrivialPursuite extends Observable {
@@ -55,21 +54,20 @@ public class TrivialPursuite extends Observable {
 		
 		Question question = null;
 		String messageMystère= "";
-		String[] choix= null;
 		if (this.jeu.getJoueurCourant().getCaseCourant().isQuestion()) { // si c'est une question on pose la question
 			
-			//System.out.println("pose une question");
-			//System.out.println(this.jeu.getJoueurCourant().getCaseCourant().getCouleur());
-			
 			question = this.jeu.ActionCaseQuestion();
-			//System.out.println(question.getQuestion());			
 		}else {// si c'est une case mystère
 			
-			//System.out.println("action case mystère");
-			this.jeu.ActionCaseMystere();
-			messageMystère = "action case mystère"; // récupe le message de la fonction action mystère
-			System.out.println(" nouvelle case" + this.jeu.getJoueurCourant().getCaseCourant().getNumero());
-			this.jeu.ChangementJoueur();
+			
+			messageMystère = this.jeu.ActionCaseMystere();
+			if (!messageMystère.equals("Vous pouvez rejouer"))
+			{
+				this.jeu.ChangementJoueur();
+			}
+			
+			
+			messageMystère = "Vous etes tombe sur une case mystere \n" +messageMystère;
 		}
 		
 	

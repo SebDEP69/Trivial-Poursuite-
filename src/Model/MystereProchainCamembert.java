@@ -11,7 +11,7 @@ public class MystereProchainCamembert extends Mystere{
 
 	//Methode classe MystereProchainCamembert
 	@Override
-	void Action(Joueur joueurcourant, ArrayList<Case> listecase, ArrayList<Joueur> listejoueur) {
+	String Action(Joueur joueurcourant, ArrayList<Case> listecase, ArrayList<Joueur> listejoueur) {
 		
 		boolean trouveCaseCamembert = false;
 		Case caseJoueur = joueurcourant.getCaseCourant();
@@ -28,7 +28,7 @@ public class MystereProchainCamembert extends Mystere{
 			}
 			i++;
 		}
-		
+		return "";
 	}
 
 }

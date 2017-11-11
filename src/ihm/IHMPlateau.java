@@ -6,14 +6,9 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.*;
-import java.util.List;
-
 import javax.imageio.ImageIO;
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
-
 import Controler.TrivialControler;
-import Model.Case;
 import Model.Couleur;
 import Model.CouleurPion;
 import Model.Joueur;
@@ -21,6 +16,7 @@ import Model.Question;
 import observable.TrivialPursuite;
 
 
+@SuppressWarnings("serial")
 public class IHMPlateau extends JFrame implements MouseListener, MouseMotionListener, Observer {
 	JLayeredPane layeredPane;
 	JPanel trivialBoard, plateauPanel, desPanel, camembertPanel, titlePanel, questionPanel;
@@ -35,7 +31,7 @@ public class IHMPlateau extends JFrame implements MouseListener, MouseMotionList
 		this.trivialControler = trivialControler;
 		int width = (int) (this.getToolkit().getScreenSize().getWidth() );
 		int height = (int) (this.getToolkit().getScreenSize().getHeight());
-		boardSize = new Dimension(width, height) ;
+		boardSize = new Dimension(width-100, height-100) ;
 		this.setTitle(nom_jeu);
 		this.setSize(boardSize);
 		layeredPane = new JLayeredPane();
@@ -98,14 +94,14 @@ public class IHMPlateau extends JFrame implements MouseListener, MouseMotionList
 		JLabel labelcouleurjoueurun = new JLabel("Couleur joueur 1 :");
 		JTextField textNomJoueurun = new JTextField();
 		textNomJoueurun.setPreferredSize(dimensionJTF);
-		JComboBox<CouleurPion> couleurPionJoueurun = new JComboBox(CouleurduPion);
+		JComboBox<CouleurPion> couleurPionJoueurun = new JComboBox<CouleurPion>(CouleurduPion);
 
 		//###### JOUEUR 2
 		JLabel labelnomjoueurdeux = new JLabel("Nom joueur 2 :");
 		JLabel labelcouleurjoueurdeux = new JLabel("Couleur joueur 2 :");
 		JTextField textNomJoueurdeux = new JTextField();
 		textNomJoueurdeux.setPreferredSize(dimensionJTF);
-		JComboBox<CouleurPion> couleurPionJoueurdeux = new JComboBox(CouleurduPion);
+		JComboBox<CouleurPion> couleurPionJoueurdeux = new JComboBox<CouleurPion>(CouleurduPion);
 
 
 
@@ -240,7 +236,7 @@ public class IHMPlateau extends JFrame implements MouseListener, MouseMotionList
 		try {
 			int indicejoueur = 1;
 			for (Joueur joueur : listeDesJoueur) {
-				String[] listeImage = listeImageCamembert(joueur,indicejoueur);				
+				String[] listeImage = listeImageCamembert(joueur,indicejoueur);	
 				cam = imageCamembertWithPart("images/j"+indicejoueur+".png",listeImage[0],listeImage[1],listeImage[2],listeImage[3]);
 				JLabel camemebertJoueur = new JLabel(new ImageIcon(cam));
 				camemebertJoueur.setBorder(BorderFactory.createLineBorder(Color.black));
@@ -525,7 +521,7 @@ public class IHMPlateau extends JFrame implements MouseListener, MouseMotionList
 
 
 		//JLabel imagede = new JLabel(new ImageIcon("images/de.png"));
-		JLabel de = new JLabel(new ImageIcon("images/de"+lancede+".png"));
+		//JLabel de = new JLabel(new ImageIcon("images/de"+lancede+".png"));
 
 
 		//JLabel numero = new JLabel();
