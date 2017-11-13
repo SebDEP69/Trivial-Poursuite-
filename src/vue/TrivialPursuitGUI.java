@@ -150,7 +150,7 @@ public class TrivialPursuitGUI extends javax.swing.JFrame implements MouseListen
 				TrivialControler trivialControler = new TrivialControler(trivialPursuite);
 				
 				
-				frame = new IHMPlateau("TrivialPursuite",trivialControler,  dim);
+				frame = new IHMPlateau("Trivial Pursuit",trivialControler,  dim);
 				
 				trivialPursuite.addObserver((Observer) frame);
 				frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

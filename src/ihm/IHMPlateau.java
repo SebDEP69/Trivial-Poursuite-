@@ -14,6 +14,7 @@ import Model.CouleurPion;
 import Model.Joueur;
 import Model.Question;
 import observable.TrivialPursuite;
+import vue.TrivialPursuitGUI;
 
 
 @SuppressWarnings("serial")
@@ -61,6 +62,25 @@ public class IHMPlateau extends JFrame implements MouseListener, MouseMotionList
 		desPanel.setLayout(new GridLayout(5,0));
 		desPanel.setPreferredSize( new Dimension(200,0));
 		trivialBoard.add(desPanel,BorderLayout.WEST);
+		JButton retour = new JButton("Retour");
+		desPanel.add(retour);
+		retour.addActionListener(new ActionListener() {
+				
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					JFrame frame;	
+					Dimension dim;
+					
+					dim = new Dimension(800, 800);
+					
+					frame = new TrivialPursuitGUI("Trivial Pursuit", dim);
+					frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+					frame.pack();
+					frame.setVisible(true);
+
+					
+				}
+			});
 
 		//DROITE
 		camembertPanel = new JPanel();
@@ -459,25 +479,25 @@ public class IHMPlateau extends JFrame implements MouseListener, MouseMotionList
 		String[] reponses = question.getChoix();
 		ButtonGroup groupButton = new ButtonGroup();
 		JPanel reponsePanel = new JPanel(new GridLayout(5,0));
-		// Réponse 1
+		// Rï¿½ponse 1
 		JRadioButton rep1 = new JRadioButton(reponses[0]);
 		rep1.setActionCommand(rep1.getText());
 		groupButton.add(rep1);
 		reponsePanel.add(rep1);
 		
-		//Réponse 2
+		//Rï¿½ponse 2
 		JRadioButton rep2 = new JRadioButton(reponses[1]);
 		rep2.setActionCommand(rep2.getText());
 		groupButton.add(rep2);
 		reponsePanel.add(rep2);
 		
-		//Réponse 3
+		//Rï¿½ponse 3
 		JRadioButton rep3 = new JRadioButton(reponses[2]);
 		rep3.setActionCommand(rep3.getText());
 		groupButton.add(rep3);
 		reponsePanel.add(rep3);
 		
-		//Réponse 4
+		//Rï¿½ponse 4
 		JRadioButton rep4 = new JRadioButton(reponses[3]);
 		rep4.setActionCommand(rep4.getText());
 		groupButton.add(rep4);
@@ -569,7 +589,7 @@ public class IHMPlateau extends JFrame implements MouseListener, MouseMotionList
 	@Override
 	public void update(Observable arg0, Object info) {
 
-		// réactualiser l'interface, il faut aussi passer en paramètre les question si besoin pour pouvoir les afficher
+		// rï¿½actualiser l'interface, il faut aussi passer en paramï¿½tre les question si besoin pour pouvoir les afficher
 
 
 		/*for (int i = 0; i < trivialBoard.getComponentCount(); i++) {
@@ -611,7 +631,7 @@ public class IHMPlateau extends JFrame implements MouseListener, MouseMotionList
 			 */
 
 			///////////////////////////////////////////
-			//  affiche le lancer de dé + QUESTION   //
+			//  affiche le lancer de dï¿½ + QUESTION   //
 			////////////////////////////////////////// 
 			if (((ArrayList<String>) info).size() >3) {
 				if ( ((ArrayList<Object>) info).size() >4 && ((ArrayList<Object>) info).get(4) != null) {// si ya une question
@@ -659,7 +679,7 @@ public class IHMPlateau extends JFrame implements MouseListener, MouseMotionList
 			//		}
 			if ( ((ArrayList<Object>) info).size() >4 && ((ArrayList<Object>) info).get(4) != null) { // si on a une question
 				creationPanelQuestion( (Question) ((ArrayList<Object>) info).get(4));
-			}else{ // si on est sur une case mystère 
+			}else{ // si on est sur une case mystï¿½re 
 				JLabel message = new JLabel( (String) ( (ArrayList<Object>) info).get(2) );
 				this.plateauPanel.add(message, BorderLayout.CENTER);
 			}
