@@ -38,7 +38,7 @@ public class TrivialPursuite extends Observable {
 		this.envoiInfo(joueurCommence,"",null);
 	}
 	
-	// s'occupe de faire toute les étapes d'un tour
+	// s'occupe de faire toute les etapes d'un tour
 	public void lancerLesDes() {
 		
 		int lancerDes = this.jeu.LanceDeDes();
@@ -50,48 +50,46 @@ public class TrivialPursuite extends Observable {
 						+this.jeu.getJoueurCourant().getCaseCourant().getCouleur());
 		
 		Question question = null;
-		String messageMystère= "";
+		String messageMystere= "";
 		if (this.jeu.getJoueurCourant().getCaseCourant().isQuestion()) { // si c'est une question on pose la question
 			
 			question = this.jeu.ActionCaseQuestion();
-		}else {// si c'est une case mystère
+		}else {// si c'est une case mystere
 			
 			
-			messageMystère = this.jeu.ActionCaseMystere();
-			if (!messageMystère.equals("Vous pouvez rejouer"))
+			messageMystere = this.jeu.ActionCaseMystere();
+			if (!messageMystere.equals("Vous pouvez rejouer"))
 			{
 				this.jeu.ChangementJoueur();
 			}
-			
-			
-			messageMystère = "Vous etes tombe sur une case mystere \n" +messageMystère;
+			messageMystere = "Vous etes tombe sur une case mystere \n" +messageMystere;
 		}
 		
 	
 		String lancer = ((Integer) lancerDes).toString();
-		this.envoiInfo(messageMystère,lancer,question);
+		this.envoiInfo(messageMystere,lancer,question);
 	}
 	
 	public void validerReponse(Question question, String reponse) {
 		
 		String message="";
 		boolean rejoue=false;
-		// si le joueur à répondu la bonne réponse
+		// si le joueur a repondu la bonne reponse
 		if (question.isBonneReponse(reponse)) {
 			rejoue=true;
 			// si le joueur est sur une case super camembert
 			if (this.jeu.getJoueurCourant().getCaseCourant().isSuperCamembert()) {
-				// si la part a bien été ajouter
+				// si la part a bien ete ajouter
 				if (this.jeu.getJoueurCourant().getCamembert().AjoutPartCamembert(question.getCouleur())) { 
 					message = "Bravo vous avez gagne une part de camembert";
-				}else { // si on a déjà la part de camembert
+				}else { // si on a deja la part de camembert
 					message = "Vous avez repondu juste, mais vous possedez deje une part de camembert "+question.getCouleur();
 				}
 			//si c'est pas une super camembert
 			}else {
 				message = "Bravo vous avez repondu juste";
 			}
-			//si on a pas répondu juste
+			//si on a pas repondu juste
 		}else {
 			message = "Mauvaise reponse";
 		}
@@ -100,7 +98,7 @@ public class TrivialPursuite extends Observable {
 		if (isEnd()) {
 			message = message+ "\n Bravo "+this.jeu.getJoueurCourant().getNom()+" a gagne la partie";
 		}else {
-			if (!rejoue) { // si le joueur a pas répondu juste il ne rejoue pas
+			if (!rejoue) { // si le joueur a pas repondu juste il ne rejoue pas
 				this.jeu.ChangementJoueur();
 				message= message+", C'est au tour de "+this.jeu.getJoueurCourant().getNom();
 			}else{
@@ -118,7 +116,7 @@ public class TrivialPursuite extends Observable {
 		/*
 		 * 0 : is end game
 		 * 1 : listejoueur
-		 * 2 : Message action mystère 
+		 * 2 : Message action mystere 
 		 * 3 : Nombre lancerDes
 		 * 4 : Object Question
 		 */
