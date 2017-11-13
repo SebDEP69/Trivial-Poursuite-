@@ -79,12 +79,18 @@ public class Camembert {
 		
 	}
 
-/*
-	public void afficher() {
+
+
+	@Override
+	public String toString() {
+		
+		String val ="";
 		for (PartCamembert partCamembert : listePart) {
-			System.out.println(partCamembert.getCouleur());
+			val = val + partCamembert.toString()+"\n";
 		}
-	}*/
+		return val;
+	}
+
 	
 	
 	

@@ -37,8 +37,7 @@ public class MonMain {
 		listeCarteVert.add(new Question("question vert2", 1, choixVertdeux ,Couleur.VERT));
 		
 		
-		//listeCarteMystere.add(new MystereEnleverCamembert());
-		//listeCarteMystere.add(new MystereRetourCaseDepart());
+
 		listeCarteMystere.add(new MystereProchainCamembert());
 		
 		int nombreCasePlateau = 24;

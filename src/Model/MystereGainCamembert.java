@@ -13,7 +13,7 @@ public class MystereGainCamembert extends Mystere{
 
 	//Methode classe MystereGainCamembert
 	@Override
-	void Action(Joueur joueurcourant, ArrayList<Case> listecase, ArrayList<Joueur> listejoueur) {
+	String Action(Joueur joueurcourant, ArrayList<Case> listecase, ArrayList<Joueur> listejoueur) {
 
 		Camembert camembertjoueur = joueurcourant.getCamembert();
 		Couleur serie[] = {Couleur.VERT, Couleur.ORANGE,Couleur.BLEU, Couleur.ROUGE};
@@ -54,6 +54,7 @@ public class MystereGainCamembert extends Mystere{
 		}
 
 		sc.close();
+		return "";
 	}
 
 }

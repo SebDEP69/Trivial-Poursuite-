@@ -1,4 +1,6 @@
 package Model;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class Plateau {
@@ -36,7 +38,7 @@ public class Plateau {
 		this.listeCarteMystere = new ArrayList<Carte>();
 		this.listeCase = new ArrayList<Case>();
 		
-		String[] choixRougeun = {"repRed1","repRed2","repRed3","repRed4"};
+		/*String[] choixRougeun = {"repRed1","repRed2","repRed3","repRed4"};
 		String[] choixRougedeux = {"repRed5","repRed6","repRed7","repRed8"};
 		listeCarteRouge.add(new Question("question rouge1", 1,choixRougeun ,Couleur.ROUGE));
 		listeCarteRouge.add(new Question("question rouge2", 1, choixRougedeux ,Couleur.ROUGE));
@@ -58,10 +60,22 @@ public class Plateau {
 		String[] choixVertdeux = {"repert5","repert6","repert7","repert8"};
 		listeCarteVert.add(new Question("question vert1", 1, choixVertun ,Couleur.VERT));
 		listeCarteVert.add(new Question("question vert2", 1, choixVertdeux ,Couleur.VERT));
-		
+		*/
+		BaseQuestionCSV BDD ;
+		try {
+			BDD = new BaseQuestionCSV("BDDQuestion.csv");
+			BDD.EnregistrementQuestion();
+			this.listeCarteRouge = BDD.getQuestionROUGE();
+			this.listeCarteOrange = BDD.getQuestionORANGE();
+			this.listeCarteBleu = BDD.getQuestionBLEU();
+			this.listeCarteVert = BDD.getQuestionVERT();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		listeCarteMystere.add(new MysterePerteCamembert());
+		listeCarteMystere.add(new MystereRejouer());
 		listeCarteMystere.add(new MystereRetourCaseDepart());
-		//listeCarteMystere.add(new MystereGainCamembert());
-		
 		
 		this.nombreCasePlateau = 24;
 		InitListCase();

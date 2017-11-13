@@ -1,6 +1,5 @@
 package Model;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class Jeu {
 	
@@ -11,8 +10,6 @@ public class Jeu {
 	//Constructeur
 	public Jeu(){
 		this.plateau = new Plateau();
-		//this.CreationJoueur();
-		//this.OrdreJoueurDebut();
 		
 	}
 	
@@ -121,14 +118,14 @@ public class Jeu {
 	}
 	
 		
-	public void ActionCaseMystere(){
+	public String ActionCaseMystere(){
 		
 		Carte carte = this.plateau.TirerCarte(Couleur.NOIR);
-		
+		String message ="";
 		if (carte.getTypeCarte() == TypeCarte.Mystere) {
-			((Mystere) carte).Action(this.joueurCourant, this.plateau.getListeCase(), listeJoueur); // ici peut faire retourner un message de l'action
+			message= ((Mystere) carte).Action(this.joueurCourant, this.plateau.getListeCase(), listeJoueur); // ici peut faire retourner un message de l'action
 		}
-		
+		return message;
 		
 	}
 	
@@ -142,36 +139,6 @@ public class Jeu {
 		this.listeJoueur.add(new Joueur(couleurJoueurun, nomjoueurun,caseDepart));
 		this.listeJoueur.add(new Joueur(couleurJoueurdeux, nomJoueurdeux,caseDepart));
 		
-		/*Scanner sc = new Scanner(System.in);
-		String nomjoueur;
-		String choixCouleurPionjoueur;
-		CouleurPion couleurPion;
-		for (int i = 0; i < 2; i++) {
-			
-			System.out.println("Nom du joueur "+(i+1)+"?");
-		
-			nomjoueur  = sc.nextLine();
-			
-			System.out.println("Couleur du joueur1"+(i+1)+"?");
-			
-			choixCouleurPionjoueur  = sc.nextLine();
-			
-			switch (choixCouleurPionjoueur) {
-	          case "rouge" : couleurPion = CouleurPion.ROUGE;
-	                   break;
-	          case "bleu":    couleurPion = CouleurPion.BLEU;
-	                   break;
-	          case "orange": couleurPion = CouleurPion.ORANGE;
-	                   break;
-	          case "vert":  couleurPion = CouleurPion.VERT;
-	                   break;
-	          default : couleurPion = CouleurPion.ROUGE;
-		  }
-			
-			this.listeJoueur.add(new Joueur(couleurPion, nomjoueur,caseDepart));
-		}
-		*/
-		
 	}
 	
 	
@@ -179,8 +146,7 @@ public class Jeu {
 	
 	
 	public static void main(String[] args) {
-		
-		
+				
 		Jeu monJeu = new Jeu();
 		int lancer = monJeu.LanceDeDes();
 		Case caseJoueur = monJeu.getJoueurCourant().getCaseCourant();

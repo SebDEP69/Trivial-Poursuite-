@@ -6,14 +6,9 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.*;
-import java.util.List;
-
 import javax.imageio.ImageIO;
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
-
 import Controler.TrivialControler;
-import Model.Case;
 import Model.Couleur;
 import Model.CouleurPion;
 import Model.Joueur;
@@ -21,6 +16,7 @@ import Model.Question;
 import observable.TrivialPursuite;
 
 
+@SuppressWarnings("serial")
 public class IHMPlateau extends JFrame implements MouseListener, MouseMotionListener, Observer {
 	JLayeredPane layeredPane;
 	JPanel trivialBoard, plateauPanel, desPanel, camembertPanel, titlePanel, questionPanel;
@@ -31,7 +27,6 @@ public class IHMPlateau extends JFrame implements MouseListener, MouseMotionList
 	public IHMPlateau( String nom_jeu, TrivialControler trivialControler,  Dimension dim){
 
 		numcaseToindicePanel = new ArrayList<int[]>();
-		//this.setExtendedState(this.MAXIMIZED_BOTH);
 		this.trivialControler = trivialControler;
 		int width = (int) (this.getToolkit().getScreenSize().getWidth() );
 		int height = (int) (this.getToolkit().getScreenSize().getHeight());
@@ -45,7 +40,6 @@ public class IHMPlateau extends JFrame implements MouseListener, MouseMotionList
 
 		trivialBoard = new JPanel();
 		trivialBoard.setLayout( new BorderLayout() );
-		//trivialBoard.setPreferredSize( boardSize );
 		trivialBoard.setBounds(0, 0, boardSize.width, boardSize.height);
 		layeredPane.add(trivialBoard, JLayeredPane.DEFAULT_LAYER);
 
@@ -87,8 +81,6 @@ public class IHMPlateau extends JFrame implements MouseListener, MouseMotionList
 		// CENTRE
 		plateauPanel = new JPanel();
 		GridBagLayout gridbagcentre = new GridBagLayout();
-		//plateauPanel.setPreferredSize( boardSize );
-		//plateauPanel.setBounds(0, 0, boardSize.width, boardSize.height);
 		plateauPanel.setLayout(gridbagcentre);
 
 		Dimension dimensionJTF = new Dimension(100,30);
@@ -98,14 +90,14 @@ public class IHMPlateau extends JFrame implements MouseListener, MouseMotionList
 		JLabel labelcouleurjoueurun = new JLabel("Couleur joueur 1 :");
 		JTextField textNomJoueurun = new JTextField();
 		textNomJoueurun.setPreferredSize(dimensionJTF);
-		JComboBox<CouleurPion> couleurPionJoueurun = new JComboBox(CouleurduPion);
+		JComboBox<CouleurPion> couleurPionJoueurun = new JComboBox<CouleurPion>(CouleurduPion);
 
 		//###### JOUEUR 2
 		JLabel labelnomjoueurdeux = new JLabel("Nom joueur 2 :");
 		JLabel labelcouleurjoueurdeux = new JLabel("Couleur joueur 2 :");
 		JTextField textNomJoueurdeux = new JTextField();
 		textNomJoueurdeux.setPreferredSize(dimensionJTF);
-		JComboBox<CouleurPion> couleurPionJoueurdeux = new JComboBox(CouleurduPion);
+		JComboBox<CouleurPion> couleurPionJoueurdeux = new JComboBox<CouleurPion>(CouleurduPion);
 
 
 
@@ -240,7 +232,7 @@ public class IHMPlateau extends JFrame implements MouseListener, MouseMotionList
 		try {
 			int indicejoueur = 1;
 			for (Joueur joueur : listeDesJoueur) {
-				String[] listeImage = listeImageCamembert(joueur,indicejoueur);				
+				String[] listeImage = listeImageCamembert(joueur,indicejoueur);	
 				cam = imageCamembertWithPart("images/j"+indicejoueur+".png",listeImage[0],listeImage[1],listeImage[2],listeImage[3]);
 				JLabel camemebertJoueur = new JLabel(new ImageIcon(cam));
 				camemebertJoueur.setBorder(BorderFactory.createLineBorder(Color.black));
@@ -249,7 +241,6 @@ public class IHMPlateau extends JFrame implements MouseListener, MouseMotionList
 			}
 			
 			
-			//camJun = imageCamembertWithPart("images/j1.png","images/joueur1-1.png","images/joueur1-2.png","images/joueur1-3.png","images/joueur1-4.png");
 		} catch (IOException e) {e.printStackTrace();}
 			
 		
@@ -371,7 +362,6 @@ public class IHMPlateau extends JFrame implements MouseListener, MouseMotionList
 		haut.add(lastCase);
 		plateauPanel.add(haut, BorderLayout.NORTH);
 		
-		//System.out.println(haut.getComponent(0));
 		
 		
 		
@@ -458,9 +448,13 @@ public class IHMPlateau extends JFrame implements MouseListener, MouseMotionList
 		///////////////////////////////////////////
 		//   			 QUESTION 	            //
 		//////////////////////////////////////////
-				
+		questionPanel = new JPanel(new GridLayout(3,0));	
+		
+		//TITRE
+		JLabel titreLabel = new JLabel( question.getTheme() );
+		this.questionPanel.add(titreLabel);
+		
 		//QUESTION 
-		questionPanel = new JPanel(new GridLayout(2,0));
 		JLabel questionLabel = new JLabel( question.getQuestion() );
 		this.questionPanel.add(questionLabel);
 		
@@ -503,7 +497,7 @@ public class IHMPlateau extends JFrame implements MouseListener, MouseMotionList
 					System.out.println("bouton selected "+groupButton.getSelection().getActionCommand());
 					trivialControler.validerReponse(question, reponse);
 				}else{
-					System.out.println("selectioner une réponse");
+					System.out.println("selectioner une reponse");
 				}
 				
 
@@ -525,7 +519,7 @@ public class IHMPlateau extends JFrame implements MouseListener, MouseMotionList
 
 
 		//JLabel imagede = new JLabel(new ImageIcon("images/de.png"));
-		JLabel de = new JLabel(new ImageIcon("images/de"+lancede+".png"));
+		//JLabel de = new JLabel(new ImageIcon("images/de"+lancede+".png"));
 
 
 		//JLabel numero = new JLabel();
@@ -548,8 +542,6 @@ public class IHMPlateau extends JFrame implements MouseListener, MouseMotionList
 
 		JLabel categorie = new JLabel();
 		categorie.setLayout(new GridLayout(6,2));
-		//JPanel categorie = new JPanel();
-		//categorie.setLayout(new GridLayout(6,6));
 
 		categorie.add(new JLabel(new ImageIcon("images/noir.png")));
 		categorie.add(new JLabel("Categorie Mystere"));
@@ -568,10 +560,6 @@ public class IHMPlateau extends JFrame implements MouseListener, MouseMotionList
 
 		categorie.add(new JLabel(new ImageIcon("images/super.png")));
 		categorie.add(new JLabel("Super Camembert"));
-
-		/*if (!(lancede == "")) {
-			desPanel.add(de);
-		}*/
 		
 		//questionPanel.add(imagede);
 		desPanel.add(btnLancerLesDes);
@@ -611,7 +599,6 @@ public class IHMPlateau extends JFrame implements MouseListener, MouseMotionList
 			this.desPanel.removeAll();
 			this.plateauPanel.removeAll();
 			this.questionPanel.removeAll();
-			//this.titlePanel.removeAll();
 
 			///////////////////////////////////////////
 			//   		 TITRE  					 //
@@ -697,12 +684,10 @@ public class IHMPlateau extends JFrame implements MouseListener, MouseMotionList
 			 * JOUEUR 1
 			 */
 			int casejUn = listeDesJoueur.get(0).getCaseCourant().getNumero();
-			//int casejUn = (Integer)( (ArrayList<Object>) info).get(0);
 
 
 
 			int[] coord = numcaseToindicePanel.get(casejUn);
-			//System.out.println("coord ="+coord[0]+ "" + coord[1]);
 			JPanel border = ((JPanel) plateauPanel.getComponent(coord[0]));
 			JPanel componentBorder = ((JPanel) border.getComponent(coord[1]));
 			
@@ -711,11 +696,8 @@ public class IHMPlateau extends JFrame implements MouseListener, MouseMotionList
 			Image cam = imageCamembertWithPart("images/j1.png",listeImage[0],listeImage[1],listeImage[2],listeImage[3]);
 			
 			JLabel camemebertJoueur1 = new JLabel((new ImageIcon(cam.getScaledInstance(75, 75, Image.SCALE_DEFAULT))));
-			//ImageIcon iconj1 = new ImageIcon(new ImageIcon("images/j1.png").getImage().getScaledInstance(75, 75, Image.SCALE_DEFAULT));
-			//JLabel pionj1 = new JLabel(iconj1);
 			componentBorder.add(camemebertJoueur1);
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 
@@ -723,7 +705,6 @@ public class IHMPlateau extends JFrame implements MouseListener, MouseMotionList
 			 * JOUEUR 2
 			 */
 			int casejdeux = listeDesJoueur.get(1).getCaseCourant().getNumero();
-			//int casejdeux = (Integer)( (ArrayList<Object>) info).get(1);
 
 			int[] coordj2 = numcaseToindicePanel.get(casejdeux);
 			border = ((JPanel) plateauPanel.getComponent(coordj2[0]));
@@ -736,7 +717,6 @@ public class IHMPlateau extends JFrame implements MouseListener, MouseMotionList
 				JLabel camemebertJoueur2 = new JLabel((new ImageIcon(cam.getScaledInstance(75, 75, Image.SCALE_DEFAULT))));
 				componentBorder.add(camemebertJoueur2);
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			
@@ -794,12 +774,7 @@ public class IHMPlateau extends JFrame implements MouseListener, MouseMotionList
 		frame = new IHMPlateau("TrivialPursuite",trivialControler,  dim);
 
 		trivialPursuite.addObserver((Observer) frame);
-		//	frame.pack();
-		//frame.setDefaultLookAndFeelDecorated(true);
-		//frame.setExtendedState(frame.MAXIMIZED_BOTH);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		//frame.setLocation(600, 10);
-		//frame.setSize(1000,1000);
 		frame.pack();
 		frame.setVisible(true);
 	}

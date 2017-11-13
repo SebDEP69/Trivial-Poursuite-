@@ -11,7 +11,7 @@ public class MystereRetourCaseDepart extends Mystere {
 
 	//Methode classe MystereRetourCaseDepart
 	@Override
-	void Action(Joueur joueurcourant, ArrayList<Case> listecase, ArrayList<Joueur> listejoueur) {
+	String Action(Joueur joueurcourant, ArrayList<Case> listecase, ArrayList<Joueur> listejoueur) {
 		
 			Case caseJoueur = joueurcourant.getCaseCourant();
 			
@@ -21,6 +21,7 @@ public class MystereRetourCaseDepart extends Mystere {
 			else{
 				joueurcourant.setCaseCourante(listecase.get(0));
 			}
+			return "Retour a la case depart";
 	}
 
 }

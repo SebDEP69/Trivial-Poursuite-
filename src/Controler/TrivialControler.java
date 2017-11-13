@@ -28,7 +28,6 @@ public class TrivialControler {
 	}
 
 	public void validerReponse(Question question,String reponse) {
-		// TODO Auto-generated method stub
 		this.trivialPursuite.validerReponse(question,reponse);
 	}
 	

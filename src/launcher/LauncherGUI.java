@@ -1,8 +1,6 @@
 package launcher;
 
 import java.awt.Dimension;
-import java.util.Observer;
-
 import javax.swing.JFrame;
 
 
@@ -19,7 +17,6 @@ public class LauncherGUI {
 
 		frame = new TrivialPursuitGUI("Trivial Pursuit", dim);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		//frame.setLocation(500, 30);
 		frame.pack();
 		frame.setVisible(true);
 	}
@@ -28,6 +25,7 @@ public class LauncherGUI {
 	 */
 	public static void main(String[] args) {
 
+		@SuppressWarnings("unused")
 		LauncherGUI launcher = new LauncherGUI();
 		
 	}

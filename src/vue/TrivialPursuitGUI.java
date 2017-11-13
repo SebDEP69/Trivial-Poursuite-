@@ -26,12 +26,12 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
-import javax.swing.UIManager;
 
 import Controler.TrivialControler; 
 
 
 
+@SuppressWarnings("serial")
 public class TrivialPursuitGUI extends javax.swing.JFrame implements MouseListener,
 		MouseMotionListener, Observer {
 
@@ -47,7 +47,6 @@ public class TrivialPursuitGUI extends javax.swing.JFrame implements MouseListen
 		  Toolkit leKit = this.getToolkit();
 		  Dimension tailleFenetre = leKit.getScreenSize();
 		  Dimension boardSize = tailleFenetre;
-		  //this.setSize(dim);
 		  this.setTitle(name);
 		  //  Use a Layered Pane for this this application
 		  layeredPane = new JLayeredPane();
@@ -57,7 +56,6 @@ public class TrivialPursuitGUI extends javax.swing.JFrame implements MouseListen
 		  layeredPane.addMouseMotionListener(this);
 		  
 		  JPanel panelGeneral = new JPanel();
-			 // panelGeneral.getPreferredSize();
 			  panelGeneral.setLayout( new BorderLayout() );
 			  panelGeneral.setPreferredSize( boardSize );
 			  panelGeneral.setBounds(0, 0, boardSize.width, boardSize.height);
@@ -83,7 +81,6 @@ public class TrivialPursuitGUI extends javax.swing.JFrame implements MouseListen
 	     JLabel txt1 = new JLabel("Bienvenue sur le jeu Trivial Pursuit, pour lancer une partie cliquez sur : Debut de la partie");
 	     txt1.setHorizontalTextPosition(JLabel.CENTER); 
 	     txt1.setFont(new Font("Freestyle Script",Font.PLAIN,25));
-	   // texte1.setBackground(Color.cyan);
 	     texte1.add(txt1);
 	     texte1.setVisible(true);
 	     GridBagConstraints a = new GridBagConstraints();    
@@ -99,7 +96,6 @@ public class TrivialPursuitGUI extends javax.swing.JFrame implements MouseListen
 		// NORD GAUCHE
 		 JPanel square = new JPanel();
 		 nord.add((JPanel) square);
-	     //square.setBackground(Color.blue);
 	     Icon joueur1 = new ImageIcon("images/j1.png");
 	     JLabel player1 = new JLabel();
 	     player1.setIcon(joueur1);
@@ -109,7 +105,6 @@ public class TrivialPursuitGUI extends javax.swing.JFrame implements MouseListen
 	     // NORD MILIEU
 	     JPanel square1 = new JPanel();
 	     nord.add((JPanel) square1);
-        // square1.setBackground(Color.red);
          Icon titre = new ImageIcon("images/title.png");
          JLabel title = new JLabel();
          title.setIcon(titre);
@@ -119,7 +114,6 @@ public class TrivialPursuitGUI extends javax.swing.JFrame implements MouseListen
 	     // NORD DROIT
          JPanel square2 = new JPanel();
          nord.add((JPanel) square2);
-         //square2.setBackground(Color.orange);
          Icon joueur2 = new ImageIcon("images/j2.png");
          JLabel player2 = new JLabel();
          player2.setIcon(joueur2);
@@ -131,7 +125,6 @@ public class TrivialPursuitGUI extends javax.swing.JFrame implements MouseListen
          JPanel square3 = new JPanel();
          sud.add((JPanel) square3);
          JLabel text = new JLabel();
-         //square3.setBackground(Color.gray);
          text.setText(text.getText()+"Realise par Depasse, De Paoli, Begni, Dumas");
          text.setFont(new Font("Apple Chancery",Font.ITALIC,15));
          square3.add(text);
@@ -144,7 +137,6 @@ public class TrivialPursuitGUI extends javax.swing.JFrame implements MouseListen
          btn1.setBackground(javax.swing.UIManager.getDefaults().getColor("Button.light"));
          btn1.setFocusable(false);
          btn1.setFont(new Font("Calibri", Font.BOLD, 20));
-         //bouton1.setBackground(Color.green);
          btn1.addActionListener(new ActionListener() {
 			
 			@Override
@@ -161,12 +153,7 @@ public class TrivialPursuitGUI extends javax.swing.JFrame implements MouseListen
 				frame = new IHMPlateau("TrivialPursuite",trivialControler,  dim);
 				
 				trivialPursuite.addObserver((Observer) frame);
-			//	frame.pack();
-				//frame.setDefaultLookAndFeelDecorated(true);
-				//frame.setExtendedState(frame.MAXIMIZED_BOTH);
 				frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-				//frame.setLocation(600, 10);
-				//frame.setSize(1000,1000);
 				frame.pack();
 				frame.setVisible(true);
 				
@@ -189,7 +176,6 @@ public class TrivialPursuitGUI extends javax.swing.JFrame implements MouseListen
          JPanel bouton2 = new JPanel();
          centre.add((JPanel) bouton2);
          JButton btn2 = new JButton("<Html><center>Rejouer une partie<Html>");
-         //bouton2.setBackground(Color.pink);
          btn2.setPreferredSize(new Dimension(180, 100));
          btn2.setBackground(javax.swing.UIManager.getDefaults().getColor("Button.light"));
          btn2.setFocusable(false);
@@ -208,7 +194,6 @@ public class TrivialPursuitGUI extends javax.swing.JFrame implements MouseListen
          JPanel bouton3 = new JPanel();
          centre.add((JPanel) bouton3);
          JButton btn3 = new JButton("<Html><center>Regles du jeu<Html>");
-         //bouton3.setBackground(Color.yellow);
          btn3.setPreferredSize(new Dimension(180, 100));
          btn3.setBackground(javax.swing.UIManager.getDefaults().getColor("Button.light"));
          btn3.setFocusable(false);
@@ -226,7 +211,6 @@ public class TrivialPursuitGUI extends javax.swing.JFrame implements MouseListen
          JPanel bouton4 = new JPanel();
          centre.add((JPanel) bouton4);
          JButton btn4 = new JButton("<Html><center>Score de la partie<Html>");
-         //bouton4.setBackground(Color.cyan);
          btn4.setPreferredSize(new Dimension(180, 100));
          btn4.setBackground(javax.swing.UIManager.getDefaults().getColor("Button.light"));
          btn4.setFocusable(false);
@@ -244,7 +228,6 @@ public class TrivialPursuitGUI extends javax.swing.JFrame implements MouseListen
          JPanel bouton5 = new JPanel();
          centre.add((JPanel) bouton5);
          JButton btn5 = new JButton("<Html><center>Personnalisation<Html>");
-         //bouton5.setBackground(Color.MAGENTA);
          btn5.setPreferredSize(new Dimension(180, 100));
          btn5.setBackground(javax.swing.UIManager.getDefaults().getColor("Button.light"));
          btn5.setFocusable(false);
@@ -263,7 +246,6 @@ public class TrivialPursuitGUI extends javax.swing.JFrame implements MouseListen
          JButton btn6 = new JButton("<Html><center>Historique des parties<Html>");
          btn6.setBackground(javax.swing.UIManager.getDefaults().getColor("Button.light"));
          btn6.setFocusable(false);
-         //bouton6.setBackground(Color.LIGHT_GRAY);
          btn6.setPreferredSize(new Dimension(200, 250));
          btn6.setFont(new Font("Calibri", Font.BOLD, 20));
          bouton6.add(btn6);

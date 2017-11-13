@@ -5,7 +5,6 @@ import java.awt.Image;
 import java.awt.Toolkit;
 
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 
 public class ImgPion extends JLabel {
     private static final long serialVersionUID = -9129537057351390955L;
@@ -20,7 +19,7 @@ public class ImgPion extends JLabel {
         setBounds(coordX, coordY, 55, 55);
     }
     public void paintComponent(Graphics g) {
-        //tu peux changer la taille ici
+        //Changer la taille ici
         g.drawImage(img, coordX, coordY, 50, 50, this);
     }
 }
