@@ -59,11 +59,7 @@ public class Plateau {
 		listeCarteVert.add(new Question("question vert1", 1, choixVertun ,Couleur.VERT));
 		listeCarteVert.add(new Question("question vert2", 1, choixVertdeux ,Couleur.VERT));
 		
-		//listeCarteMystere.add(new MystereRetourCaseDepart());
-	//	listeCarteMystere.add(new MystereRejouer());
 		listeCarteMystere.add(new MysterePerteCamembert());
-		
-		//listeCarteMystere.add(new MystereGainCamembert());
 		
 		
 		this.nombreCasePlateau = 24;

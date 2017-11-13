@@ -19,7 +19,7 @@ public class ImgPion extends JLabel {
         setBounds(coordX, coordY, 55, 55);
     }
     public void paintComponent(Graphics g) {
-        //tu peux changer la taille ici
+        //Changer la taille ici
         g.drawImage(img, coordX, coordY, 50, 50, this);
     }
 }

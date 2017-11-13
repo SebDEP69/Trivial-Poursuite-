@@ -91,12 +91,6 @@ public class Camembert {
 		return val;
 	}
 
-/*
-	public void afficher() {
-		for (PartCamembert partCamembert : listePart) {
-			System.out.println(partCamembert.getCouleur());
-		}
-	}*/
 	
 	
 	
