@@ -54,8 +54,6 @@ public class IHMPlateau extends JFrame implements MouseListener, MouseMotionList
 		trivialBoard.add(titlePanel, BorderLayout.NORTH);
 
 
-
-
 		//GAUCHE
 		desPanel = new JPanel();
 		desPanel.setLayout(new GridLayout(5,0));
@@ -82,23 +80,23 @@ public class IHMPlateau extends JFrame implements MouseListener, MouseMotionList
 		plateauPanel = new JPanel();
 		GridBagLayout gridbagcentre = new GridBagLayout();
 		plateauPanel.setLayout(gridbagcentre);
+	
 
-		Dimension dimensionJTF = new Dimension(100,30);
+		Dimension dimensionJTF = new Dimension(100,100);
 		CouleurPion CouleurduPion[] = {CouleurPion.VERT, CouleurPion.ORANGE,CouleurPion.BLEU, CouleurPion.ROUGE};
 		//###### JOUEUR 1
-		JLabel labelnomjoueurun = new JLabel("Nom joueur 1 :");
+		JLabel labelnomjoueurun = new JLabel("Joueur 1 ");
 		JLabel labelcouleurjoueurun = new JLabel("Couleur joueur 1 :");
 		JTextField textNomJoueurun = new JTextField();
 		textNomJoueurun.setPreferredSize(dimensionJTF);
 		JComboBox<CouleurPion> couleurPionJoueurun = new JComboBox<CouleurPion>(CouleurduPion);
 
 		//###### JOUEUR 2
-		JLabel labelnomjoueurdeux = new JLabel("Nom joueur 2 :");
+		JLabel labelnomjoueurdeux = new JLabel("Joueur 2 ");
 		JLabel labelcouleurjoueurdeux = new JLabel("Couleur joueur 2 :");
 		JTextField textNomJoueurdeux = new JTextField();
 		textNomJoueurdeux.setPreferredSize(dimensionJTF);
-		JComboBox<CouleurPion> couleurPionJoueurdeux = new JComboBox<CouleurPion>(CouleurduPion);
-
+		JComboBox<CouleurPion> couleurPionJoueurdeux = new JComboBox<CouleurPion>(CouleurduPion); 
 
 
 		// nom des joueurs
@@ -112,6 +110,7 @@ public class IHMPlateau extends JFrame implements MouseListener, MouseMotionList
 		plateauPanel.add(couleurPionJoueurun);
 		plateauPanel.add(labelcouleurjoueurdeux);
 		plateauPanel.add(couleurPionJoueurdeux);
+		
 
 
 		JButton btnlancer = new JButton("Lancer");
@@ -132,7 +131,7 @@ public class IHMPlateau extends JFrame implements MouseListener, MouseMotionList
 				System.out.println(couleurjoueurun);
 				System.out.println(couleurjoueurdeux);
 
-				trivialControler.creationJoueur(nomjoueurun,nomjoueurdeux,couleurjoueurun,couleurjoueurdeux);
+				trivialControler.creationJoueur(nomjoueurun,nomjoueurdeux, couleurjoueurun, couleurjoueurdeux);
 
 			}
 		});
@@ -459,25 +458,25 @@ public class IHMPlateau extends JFrame implements MouseListener, MouseMotionList
 		String[] reponses = question.getChoix();
 		ButtonGroup groupButton = new ButtonGroup();
 		JPanel reponsePanel = new JPanel(new GridLayout(5,0));
-		// Réponse 1
+		// Rï¿½ponse 1
 		JRadioButton rep1 = new JRadioButton(reponses[0]);
 		rep1.setActionCommand(rep1.getText());
 		groupButton.add(rep1);
 		reponsePanel.add(rep1);
 		
-		//Réponse 2
+		//Rï¿½ponse 2
 		JRadioButton rep2 = new JRadioButton(reponses[1]);
 		rep2.setActionCommand(rep2.getText());
 		groupButton.add(rep2);
 		reponsePanel.add(rep2);
 		
-		//Réponse 3
+		//Rï¿½ponse 3
 		JRadioButton rep3 = new JRadioButton(reponses[2]);
 		rep3.setActionCommand(rep3.getText());
 		groupButton.add(rep3);
 		reponsePanel.add(rep3);
 		
-		//Réponse 4
+		//Rï¿½ponse 4
 		JRadioButton rep4 = new JRadioButton(reponses[3]);
 		rep4.setActionCommand(rep4.getText());
 		groupButton.add(rep4);
@@ -520,6 +519,7 @@ public class IHMPlateau extends JFrame implements MouseListener, MouseMotionList
 
 		//JLabel numero = new JLabel();
 		//numero.setLayout(new GridLayout(3,2));
+		
 		JButton btnLancerLesDes = new JButton(new ImageIcon("images/de"+lancede+".png"));  
 		
 		if (!isQuestion) {
@@ -540,26 +540,29 @@ public class IHMPlateau extends JFrame implements MouseListener, MouseMotionList
 		categorie.setLayout(new GridLayout(6,2));
 
 		categorie.add(new JLabel(new ImageIcon("images/noir.png")));
-		categorie.add(new JLabel("Categorie Mystere"));
+		categorie.add(new JLabel("Mystere"));
 
 		categorie.add(new JLabel(new ImageIcon("images/bleu.png")));
-		categorie.add(new JLabel("Categorie Le-saviez-vous ?"));
+		categorie.add(new JLabel("Le-saviez-vous ?"));
 
 		categorie.add(new JLabel(new ImageIcon("images/rouge.png")));
-		categorie.add(new JLabel("Categorie Innovations"));
+		categorie.add(new JLabel("Innovations"));
 
 		categorie.add(new JLabel(new ImageIcon("images/orange.png")));
-		categorie.add(new JLabel("Categorie Blague"));
+		categorie.add(new JLabel("Blague"));
 
 		categorie.add(new JLabel(new ImageIcon("images/vert.png")));
-		categorie.add(new JLabel("Categorie CPE"));
+		categorie.add(new JLabel("CPE"));
 
 		categorie.add(new JLabel(new ImageIcon("images/super.png")));
 		categorie.add(new JLabel("Super Camembert"));
 		
 		//questionPanel.add(imagede);
+		
+		JLabel titreLancerDes = new JLabel();
+		titreLancerDes.add(new JLabel("Bouton de lancement des des"));  
+		desPanel.add(titreLancerDes); 
 		desPanel.add(btnLancerLesDes);
-
 		desPanel.add(categorie);
 
 
@@ -569,7 +572,7 @@ public class IHMPlateau extends JFrame implements MouseListener, MouseMotionList
 	@Override
 	public void update(Observable arg0, Object info) {
 
-		// réactualiser l'interface, il faut aussi passer en paramètre les question si besoin pour pouvoir les afficher
+		// rï¿½actualiser l'interface, il faut aussi passer en paramï¿½tre les question si besoin pour pouvoir les afficher
 
 
 		/*for (int i = 0; i < trivialBoard.getComponentCount(); i++) {
@@ -611,7 +614,7 @@ public class IHMPlateau extends JFrame implements MouseListener, MouseMotionList
 			 */
 
 			///////////////////////////////////////////
-			//  affiche le lancer de dé + QUESTION   //
+			//  affiche le lancer de dï¿½ + QUESTION   //
 			////////////////////////////////////////// 
 			if (((ArrayList<String>) info).size() >3) {
 				if ( ((ArrayList<Object>) info).size() >4 && ((ArrayList<Object>) info).get(4) != null) {// si ya une question
@@ -659,7 +662,7 @@ public class IHMPlateau extends JFrame implements MouseListener, MouseMotionList
 			//		}
 			if ( ((ArrayList<Object>) info).size() >4 && ((ArrayList<Object>) info).get(4) != null) { // si on a une question
 				creationPanelQuestion( (Question) ((ArrayList<Object>) info).get(4));
-			}else{ // si on est sur une case mystère 
+			}else{ // si on est sur une case mystï¿½re 
 				JLabel message = new JLabel( (String) ( (ArrayList<Object>) info).get(2) );
 				this.plateauPanel.add(message, BorderLayout.CENTER);
 			}
