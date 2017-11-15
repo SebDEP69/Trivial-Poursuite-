@@ -11,6 +11,7 @@ import javax.swing.*;
 import javax.swing.Timer;
 
 import Controler.TrivialControler;
+import Model.ButtonJolie;
 import Model.Couleur;
 import Model.CouleurPion;
 import Model.Joueur;
@@ -89,17 +90,19 @@ public class IHMPlateau extends JFrame implements MouseListener, MouseMotionList
 		GridBagLayout gridbagcentre = new GridBagLayout();
 		plateauPanel.setLayout(gridbagcentre);
 
-		Dimension dimensionJTF = new Dimension(100,30);
+		Dimension dimensionJTF = new Dimension(150,40);
 		CouleurPion CouleurduPion[] = {CouleurPion.VERT, CouleurPion.ORANGE,CouleurPion.BLEU, CouleurPion.ROUGE};
 		//###### JOUEUR 1
-		JLabel labelnomjoueurun = new JLabel("Nom joueur 1 :");
+		JLabel labelnomjoueurun = new JLabel("Nom joueur 1 : ");
+		labelnomjoueurun.setFont(new Font("Calibri", Font.BOLD, 23));
 		//JLabel labelcouleurjoueurun = new JLabel("Couleur joueur 1 :");
 		JTextField textNomJoueurun = new JTextField();
 		textNomJoueurun.setPreferredSize(dimensionJTF);
 		JComboBox<CouleurPion> couleurPionJoueurun = new JComboBox<CouleurPion>(CouleurduPion);
-
+		
 		//###### JOUEUR 2
-		JLabel labelnomjoueurdeux = new JLabel("Nom joueur 2 :");
+		JLabel labelnomjoueurdeux = new JLabel("Nom joueur 2 : ");
+		labelnomjoueurdeux.setFont(new Font("Calibri", Font.BOLD, 23));
 		//JLabel labelcouleurjoueurdeux = new JLabel("Couleur joueur 2 :");
 		JTextField textNomJoueurdeux = new JTextField();
 		textNomJoueurdeux.setPreferredSize(dimensionJTF);
@@ -120,8 +123,9 @@ public class IHMPlateau extends JFrame implements MouseListener, MouseMotionList
 		plateauPanel.add(couleurPionJoueurdeux);
 		 */
 		
-		// Bouton création des joueurs
-		JButton btnlancer = new JButton("Lancer");
+		// Bouton crï¿½ation des joueurs
+		ButtonJolie btnlancer = new ButtonJolie("Lancer");
+		//JButton btnlancer = new JButton("Lancer");
 		
 		btnlancer.addActionListener(new ActionListener() {
 
@@ -445,28 +449,28 @@ public class IHMPlateau extends JFrame implements MouseListener, MouseMotionList
 		ButtonGroup groupButton = new ButtonGroup();
 		JPanel reponsePanel = new JPanel(new GridLayout(5,0));
 		
-		// Réponse 1
+		// Rï¿½ponse 1
 		JRadioButton rep1 = new JRadioButton(reponses[0]);
 		//rep1.setBackground(questionPanel.getBackground());
 		rep1.setActionCommand(rep1.getText());
 		groupButton.add(rep1);
 		reponsePanel.add(rep1);
 		
-		//Réponse 2
+		//Rï¿½ponse 2
 		JRadioButton rep2 = new JRadioButton(reponses[1]);
 		rep2.setBackground(questionPanel.getBackground());
 		rep2.setActionCommand(rep2.getText());
 		groupButton.add(rep2);
 		reponsePanel.add(rep2);
 		
-		//Réponse 3
+		//Rï¿½ponse 3
 		JRadioButton rep3 = new JRadioButton(reponses[2]);
 		rep3.setBackground(questionPanel.getBackground());
 		rep3.setActionCommand(rep3.getText());
 		groupButton.add(rep3);
 		reponsePanel.add(rep3);
 		
-		//Réponse 4
+		//Rï¿½ponse 4
 		JRadioButton rep4 = new JRadioButton(reponses[3]);
 		rep4.setBackground(questionPanel.getBackground());
 		rep4.setActionCommand(rep4.getText());
@@ -566,7 +570,7 @@ public class IHMPlateau extends JFrame implements MouseListener, MouseMotionList
 			this.questionPanel.removeAll();
 
 			///////////////////////////////////////////
-			//  affiche le lancer de dé + QUESTION   //
+			//  affiche le lancer de dï¿½ + QUESTION   //
 			////////////////////////////////////////// 
 			if (((ArrayList<String>) info).size() >3) {
 				if ( ((ArrayList<Object>) info).size() >4 && ((ArrayList<Object>) info).get(4) != null) {// si ya une question
@@ -597,7 +601,7 @@ public class IHMPlateau extends JFrame implements MouseListener, MouseMotionList
 			//////////////////////////////////////////
 			if ( ((ArrayList<Object>) info).size() >4 && ((ArrayList<Object>) info).get(4) != null) { // si on a une question
 				creationPanelQuestion( (Question) ((ArrayList<Object>) info).get(4));
-			}else{ // si on est sur une case mystère 
+			}else{ // si on est sur une case mystï¿½re 
 				JLabel message = new JLabel( (String) ( (ArrayList<Object>) info).get(2) );
 				this.plateauPanel.add(message, BorderLayout.CENTER);
 			}
