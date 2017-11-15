@@ -8,6 +8,8 @@ import java.io.IOException;
 import java.util.*;
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import javax.swing.Timer;
+
 import Controler.TrivialControler;
 import Model.Couleur;
 import Model.CouleurPion;
@@ -23,7 +25,10 @@ public class IHMPlateau extends JFrame implements MouseListener, MouseMotionList
 	ArrayList<int[]> numcaseToindicePanel;
 	Dimension boardSize;
 	private  TrivialControler trivialControler;
-
+	//private int x; 
+	//Timer tm = new Timer(5, this);
+	
+	
 	public IHMPlateau( String nom_jeu, TrivialControler trivialControler,  Dimension dim){
 
 		numcaseToindicePanel = new ArrayList<int[]>();
@@ -48,18 +53,14 @@ public class IHMPlateau extends JFrame implements MouseListener, MouseMotionList
 		ImageIcon imageTitle = new ImageIcon("images/title.png");
 		JLabel titleLabel = new JLabel(imageTitle);
 		titlePanel.setPreferredSize(new Dimension(0, imageTitle.getIconHeight()));
-		System.out.println(imageTitle.getIconHeight());
 		titlePanel.add(titleLabel);
 		titlePanel.setBackground(Color.white);
 		trivialBoard.add(titlePanel, BorderLayout.NORTH);
 
-
-
-
 		//GAUCHE
 		desPanel = new JPanel();
 		desPanel.setLayout(new GridLayout(5,0));
-		desPanel.setPreferredSize( new Dimension(200,0));
+		desPanel.setPreferredSize( new Dimension(250,0));
 		trivialBoard.add(desPanel,BorderLayout.WEST);
 
 		//DROITE
@@ -73,7 +74,12 @@ public class IHMPlateau extends JFrame implements MouseListener, MouseMotionList
 		questionPanel = new JPanel();
 		questionPanel.setLayout(new GridLayout(2,0));		
 
+		//affiche le formulaire de creation de joueur
+		formulaireCreationJoueur();
+	
+	}
 
+	private void formulaireCreationJoueur() {
 		///////////////////////////////////////////
 		//   	 FORMULAIRE CREATION JOUEUR	      //
 		//////////////////////////////////////////
@@ -87,139 +93,52 @@ public class IHMPlateau extends JFrame implements MouseListener, MouseMotionList
 		CouleurPion CouleurduPion[] = {CouleurPion.VERT, CouleurPion.ORANGE,CouleurPion.BLEU, CouleurPion.ROUGE};
 		//###### JOUEUR 1
 		JLabel labelnomjoueurun = new JLabel("Nom joueur 1 :");
-		JLabel labelcouleurjoueurun = new JLabel("Couleur joueur 1 :");
+		//JLabel labelcouleurjoueurun = new JLabel("Couleur joueur 1 :");
 		JTextField textNomJoueurun = new JTextField();
 		textNomJoueurun.setPreferredSize(dimensionJTF);
 		JComboBox<CouleurPion> couleurPionJoueurun = new JComboBox<CouleurPion>(CouleurduPion);
 
 		//###### JOUEUR 2
 		JLabel labelnomjoueurdeux = new JLabel("Nom joueur 2 :");
-		JLabel labelcouleurjoueurdeux = new JLabel("Couleur joueur 2 :");
+		//JLabel labelcouleurjoueurdeux = new JLabel("Couleur joueur 2 :");
 		JTextField textNomJoueurdeux = new JTextField();
 		textNomJoueurdeux.setPreferredSize(dimensionJTF);
 		JComboBox<CouleurPion> couleurPionJoueurdeux = new JComboBox<CouleurPion>(CouleurduPion);
 
-
-
+		
+		
 		// nom des joueurs
 		plateauPanel.add(labelnomjoueurun);
 		plateauPanel.add(textNomJoueurun);
 		plateauPanel.add(labelnomjoueurdeux);
 		plateauPanel.add(textNomJoueurdeux);
 
-		// couleur des joueur
-		plateauPanel.add(labelcouleurjoueurun);
+		// couleur des joueurs
+		/*plateauPanel.add(labelcouleurjoueurun);
 		plateauPanel.add(couleurPionJoueurun);
 		plateauPanel.add(labelcouleurjoueurdeux);
 		plateauPanel.add(couleurPionJoueurdeux);
-
-
+		 */
+		
+		// Bouton création des joueurs
 		JButton btnlancer = new JButton("Lancer");
+		
 		btnlancer.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-
-
 				String nomjoueurun = textNomJoueurun.getText();
 				String nomjoueurdeux = textNomJoueurdeux.getText();
 				CouleurPion couleurjoueurun = (CouleurPion) couleurPionJoueurun.getSelectedItem();
 				CouleurPion couleurjoueurdeux = (CouleurPion) couleurPionJoueurdeux.getSelectedItem();
-
-
-				System.out.println(nomjoueurun);
-				System.out.println(nomjoueurdeux);
-				System.out.println(couleurjoueurun);
-				System.out.println(couleurjoueurdeux);
-
 				trivialControler.creationJoueur(nomjoueurun,nomjoueurdeux,couleurjoueurun,couleurjoueurdeux);
-
 			}
 		});
-
 		plateauPanel.add(btnlancer);
 		trivialBoard.add(plateauPanel,BorderLayout.CENTER);
-
-
-
 		this.pack();
-
-		/*
-	  trivialBoard = new JPanel();
-	 // panelGeneral.getPreferredSize();
-	  trivialBoard.setLayout( new BorderLayout() );
-	  trivialBoard.setPreferredSize( boardSize );
-	  trivialBoard.setBounds(0, 0, boardSize.width, boardSize.height);
-	  layeredPane.add(trivialBoard, JLayeredPane.DEFAULT_LAYER);
-
-	  JLabel nord = new JLabel(new ImageIcon("images/title.png"));
-	  nord.setBackground(Color.white);
-	  trivialBoard.add(nord, BorderLayout.NORTH);
-
-	  JPanel sud = new JPanel();
-	 // sud.setBackground(Color.RED);
-	  trivialBoard.add(sud, BorderLayout.SOUTH);
-
-	  ///////////////////////////////////////////
-	  //   			 QUESTION 			      //
-	  //////////////////////////////////////////
-	  questionPanel = new JPanel();
-	  questionPanel.setLayout(new GridLayout(5,0));
-	  this.creationPanelQuestion("");
-	  trivialBoard.add(questionPanel,BorderLayout.WEST);
-
-
-
-	  ///////////////////////////////////////////
-	  //   			 CAMEMBERT 			      //
-	  //////////////////////////////////////////
-
-	  camembertPanel = new JPanel();
-	  camembertPanel.setLayout(new GridLayout(3,0));
-	  this.creationPanelCamembert();
-	  trivialBoard.add(camembertPanel, BorderLayout.EAST);
-
-
-	  ///////////////////////////////////////////
-	  //   			 PLATEAU   			      //
-	  //////////////////////////////////////////
-
-	  plateauPanel = new JPanel();
-	  // panelGeneral.getPreferredSize();
-	  plateauPanel.setLayout( new BorderLayout() );
-	  plateauPanel.setPreferredSize( boardSize );
-	  plateauPanel.setBounds(0, 0, boardSize.width, boardSize.height);
-	  trivialBoard.add(plateauPanel, BorderLayout.CENTER);
-	  plateauPanel.setLayout( new GridLayout(7, 7,1,1) );
-	  this.creationplateau();
-
-		 */ 
-		/*JPanel panelInterieurPlat = new JPanel();
-		 // panelGeneral.getPreferredSize();
-	        panelInterieurPlat.setLayout( new BorderLayout() );
-	        panelInterieurPlat.setPreferredSize( boardSize );
-	        panelInterieurPlat.setBounds(0, 0, boardSize.width, boardSize.height);
-	  		panelPlat.add(panelInterieurPlat);
-
-	  		panelInterieurPlat.setBackground(Color.YELLOW);
-
-		 */
-
-
-		/*layeredPane.addMouseListener(this);
-	  layeredPane.addMouseMotionListener(this);*/
-
-		//Add a chess board to the Layered Pane 
-
-		/* trivialBoard = new JPanel();
-	  layeredPane.add(trivialBoard, JLayeredPane.DEFAULT_LAYER);
-	  trivialBoard.setLayout( new GridLayout(8, 8) );
-	  trivialBoard.setPreferredSize( boardSize );
-	  trivialBoard.setBounds(0, 0, boardSize.width, boardSize.height);
-
-		 */ 
+		
 	}
-
 	private void creationPanelCamembert(ArrayList<Joueur> listeDesJoueur)
 	{
 
@@ -227,156 +146,179 @@ public class IHMPlateau extends JFrame implements MouseListener, MouseMotionList
 		//   			 CAMEMBERT 	            //
 		//////////////////////////////////////////
 		
+		/*
+		 * ROLE : PERMET DE CREE LE PANEL POUR AFFICHER LES CAMEMBERT DES JOUEURS
+		 * 
+		 * PARAM : LA LISTE DES JOUEURS
+		 * 
+		 */
 		Image cam;
-	//	Image camJdeux;
 		try {
 			int indicejoueur = 1;
+			// ON PARTCOURT LA LISTE DES JOUEURS
 			for (Joueur joueur : listeDesJoueur) {
+				// RECUPERE LA LISTE DES IMAGE DES PART QUE CONTIENT LE JOUEUR
 				String[] listeImage = listeImageCamembert(joueur,indicejoueur);	
+				// ON MET LES PART DE CAMEMBERT SUR L IAMGE DE CAMEMBERT
 				cam = imageCamembertWithPart("images/j"+indicejoueur+".png",listeImage[0],listeImage[1],listeImage[2],listeImage[3]);
+				// ON CREE LE CAMEMBERT POUR L AFFICHER
 				JLabel camemebertJoueur = new JLabel(new ImageIcon(cam));
 				camemebertJoueur.setBorder(BorderFactory.createLineBorder(Color.black));
 				camembertPanel.add(camemebertJoueur);
 				indicejoueur++;
 			}
 			
-			
-		} catch (IOException e) {e.printStackTrace();}
-			
+		} catch (IOException e) {e.printStackTrace();}	
 		
-		/*// JOUEUR 1
-		JLabel camemebertJoueurUn = new JLabel(new ImageIcon(camJun));
-		camemebertJoueurUn.setBorder(BorderFactory.createLineBorder(Color.black));
-		try {
-			camJdeux = imageCamembertWithPart("images/j1.png","images/joueur2-1.png","images/joueur2-2.png","images/joueur2-3.png","images/joueur2-4.png");
-		} catch (IOException e) {e.printStackTrace();}
-		
-		
-		
-		// JOUEUR 2
-		JLabel camemebertJoueurdeux = new JLabel(new ImageIcon(camJdeux));
-		camemebertJoueurdeux.setBorder(BorderFactory.createLineBorder(Color.black));
-
-		camembertPanel.add(camemebertJoueurUn);
-		camembertPanel.add(camemebertJoueurdeux);
-		
-		*/
 	}
 	
 	private String[] listeImageCamembert(Joueur joueur, int numJoueur) {
 		
-		
+		/*
+		 * ROLE : PERMET DE FAIRE LA LISTE DES CHEMINS DES IMAGES DE PART DE CAMEMBERT QUE POSSEDE UN JOUEUR
+		 * 
+		 * PARAM : UN OBJET JOUEUR
+		 * 		   LE NUMERO DU JOUEUR (ORDRE DANS LE QUELLE IL JOUE)
+		 * 
+		 * RETURN : RETOURNE UN TABLEAU DE STRING CONTENANT LES CHEMINS DES IMAGES DE PART DE CAMEMBERT QUE POSSEDE
+		 * 			LE JOUEUR
+		 * 
+		 */
 		String[] listeImage = {"","","",""};
-		if (joueur.getCamembert().ContientPart(Couleur.BLEU)) {
-			listeImage[0] = "images/joueur"+numJoueur+"-1.png";
-		}else {
-			listeImage[0] = null;
-		}
-		
-		if (joueur.getCamembert().ContientPart(Couleur.ROUGE)) {
-			listeImage[1] = "images/joueur"+numJoueur+"-2.png";
-		}else {
-			listeImage[1] = null;
-		}
-		
-		if (joueur.getCamembert().ContientPart(Couleur.ORANGE)) {
-			listeImage[2] = "images/joueur"+numJoueur+"-3.png";
-		}else {
-			listeImage[2] = null;
-		}
-		
-		if (joueur.getCamembert().ContientPart(Couleur.VERT)) {
-			listeImage[3] = "images/joueur"+numJoueur+"-4.png";
-		}else {
-			listeImage[3] = null;
+		Couleur[] listeCouleur = {Couleur.BLEU,Couleur.ROUGE,Couleur.ORANGE,Couleur.VERT};
+		int indice = 0;
+		// CHECK POUR CHAQUE COULEUR DE PART SI LE JOUEUR CONTIENT LA PART OU PAS
+		// SI IL POSSEDE LA PART ALORS ON AJOUTE LE CHEMIN DE L IMAGE DE LA PART
+		for (Couleur couleur : listeCouleur) {
+			if (joueur.getCamembert().ContientPart(couleur)) {
+				listeImage[indice] = "images/joueur"+numJoueur+"-"+couleur+".png";
+			}else {
+				listeImage[indice] = null;
+			}
+			indice++;
 		}
 		return listeImage;
 	}
 	
 	public static BufferedImage imageCamembertWithPart(String pathcam, String partBleu, String partRouge, String partOrange
 													,String partvert) throws IOException{ 
-		
+
+
+		/*
+		 *  ROLE :CETTE FONCTION PERMET DE DESSINER LES PART DE CAMEMBERT SUR LE CAMEMBERT
+		 * 		  CE QUI PERMET D AVOIR UNE IMAGE AVEC LES PART SUR LES CAMEMEBERT
+		 * 
+		 * PARAM : CHEMIN DE L IMAGE DU CAMEMBERT
+		 * 		   CHEMIN DE L IMAGE DE LA PART BLEU
+		 *    	   CHEMIN DE L IMAGE DE LA PART ROUGE
+		 *     	   CHEMIN DE L IMAGE DE LA PART PRANGE
+		 *         CHEMIN DE L IMAGE DE LA PART VERT
+		 *         
+		 * RETURN : RETOURNE UNE IMAGE AVEC LE CAMEMBERT ET CES PART
+		 * 
+		 */
 		Image imagetemp1 = ImageIO.read(new File(pathcam));
 		BufferedImage image1 = (BufferedImage) imagetemp1;
-		
-		
-
 		Graphics2D g2d = image1.createGraphics(); 
-		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, 
-		                RenderingHints.VALUE_ANTIALIAS_ON); 
-		g2d.setRenderingHint(RenderingHints.KEY_ALPHA_INTERPOLATION, 
-		                RenderingHints.VALUE_ALPHA_INTERPOLATION_QUALITY); 
-	    if (partBleu !=null) {
-	    	Image imagetemp = ImageIO.read(new File(partBleu));
+		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,RenderingHints.VALUE_ANTIALIAS_ON); 
+		g2d.setRenderingHint(RenderingHints.KEY_ALPHA_INTERPOLATION,RenderingHints.VALUE_ALPHA_INTERPOLATION_QUALITY); 
+
+		// AJOUTE LA PART BLEU SUR LE CAMEMEBERT
+		if (partBleu !=null) {
+			Image imagetemp = ImageIO.read(new File(partBleu));
 			BufferedImage image = (BufferedImage) imagetemp;
 			g2d.drawImage(image, 7, 2, 78,78, null); 
 		}
-	    if (partRouge !=null) {
-	    	Image imagetemp = ImageIO.read(new File(partRouge));
+		// AJOUTE LA PART ROUGE SUR LE CAMEMEBERT
+		if (partRouge !=null) {
+			Image imagetemp = ImageIO.read(new File(partRouge));
 			BufferedImage image = (BufferedImage) imagetemp;
 			g2d.drawImage(image, 85, 2, 78,78, null); 
 		}
-	    if (partvert !=null) {
-	    	Image imagetemp = ImageIO.read(new File(partvert));
+		// AJOUTE LA PART VERTE SUR LE CAMEMEBERT
+		if (partvert !=null) {
+			Image imagetemp = ImageIO.read(new File(partvert));
 			BufferedImage image = (BufferedImage) imagetemp;
 			g2d.drawImage(image, 7, 80, 78,78, null); 
 		}
-	    if (partOrange !=null) {
-	    	Image imagetemp = ImageIO.read(new File(partOrange));
+		// AJOUTE LA PART ORANGE SUR LE CAMEMEBERT
+		if (partOrange !=null) {
+			Image imagetemp = ImageIO.read(new File(partOrange));
 			BufferedImage image = (BufferedImage) imagetemp;
 			g2d.drawImage(image, 85, 80, 78,78, null); 
 		}
-	    
+
 		g2d.dispose(); 
-	  
 		return image1 ; 
 	}
 
 	private void creationplateau() {
 
+		
+		/*
+		 * LE PLATEAU EST UN BORDER LAYOUT (NORD,SUD,EST,OUEST,CENTRE)
+		 * 
+		 * LES CASES SE TROUVE DANS LES PARTIES NORD,SUD,EST,OUEST
+		 * 
+		 * LES CASES SUPER CAMEMBERT DES ANGLES SE TROUVE DANS LES PARTIE NORD ET SUD
+		 * 
+		 * LA PARTIE CENTRE SERA RESERVER AU MESSAGE ET QUESTION POUR LES JOUEURS
+		 * 
+		 * LA CREATION DES CASES SE FAIT DANS LE SENS DES AIGUILLES D UNE MONTRE
+		 * 
+		 * HAUT => DROITE => BAS => GAUCHE
+		 */
+		
 		///////////////////////////////////////////
 		//   			 HAUT   	            //
 		//////////////////////////////////////////
-		Color serieCouleurHaut[] = {Color.GREEN, Color.ORANGE,Color.BLUE, Color.RED,Color.BLACK};
-		JPanel haut = new JPanel( new GridLayout(1, 7));
 		
-		System.out.println("plateau" + plateauPanel.getHeight());
+		// PARAMETRE DE LA PARTIE HAUT
+		JPanel haut = new JPanel( new GridLayout(1, 7));
 		haut.setPreferredSize( new Dimension(0,(plateauPanel.getHeight()/7)));
 		haut.setName("en haut");
 		
-		
+		//PREMIER CASE SUPER CAMEMBERT DU HAUT
 		JPanel caseun = new JPanel( );
-		caseun.setName("case depart");
 		caseun.setBackground(Color.RED);
 		caseun.setBorder(BorderFactory.createMatteBorder(10, 10, 10, 10, Color.DARK_GRAY));
 		haut.add(caseun);
 		
+		// CREATION DES CASES "NORMALE"
+		Color serieCouleurHaut[] = {Color.GREEN, Color.ORANGE,Color.BLUE, Color.RED,Color.BLACK};
 		for (Color couleur : serieCouleurHaut) {
-			JPanel square = new JPanel(  );
+			JPanel square = new JPanel();
 			square.setBackground(couleur);
+			
 			haut.add(square);
 		}
+		
+		// DERNIERE CASE SUPER CAMEMBERT DU HAUT
 		JPanel lastCase = new JPanel( );
 		lastCase.setBackground(Color.GREEN);
 		lastCase.setBorder(BorderFactory.createMatteBorder(10, 10, 10, 10, Color.DARK_GRAY));
 		haut.add(lastCase);
 		plateauPanel.add(haut, BorderLayout.NORTH);
 		
-		
-		
-		
+		// AJOUT DES COORDONER DES CASES DU HAUT POUR FAIRE LA TRANSISTION ENTRE LE NUMERO DE CASE DU JOUEUR ET
+		// LES COORDONEES DANS L IHM
 		for (int i = 1; i < 7; i++) {
 			int[] coordonnee = {0,i};
-			numcaseToindicePanel.add( coordonnee);
+			numcaseToindicePanel.add(coordonnee);
 		}
 		
 		///////////////////////////////////////////
 		//   			 DROITE   		        //
 		//////////////////////////////////////////
-		Color serieCouleurdroite[] = { Color.ORANGE,Color.BLUE, Color.RED,Color.BLACK,Color.GREEN};
+		
+		// PARAMETRE DE LA PARTIE DROITE
 		JPanel droite = new JPanel( new GridLayout(5, 1));
 		droite.setPreferredSize( new Dimension((plateauPanel.getWidth()/7),0));
 		droite.setName("Droite");
+		
+		
+		// CREATION DES CASES "NORMALE"
+		Color serieCouleurdroite[] = { Color.ORANGE,Color.BLUE, Color.RED,Color.BLACK,Color.GREEN};
 		for (Color couleur : serieCouleurdroite) {
 			JPanel square = new JPanel( );
 			square.setBackground(couleur);
@@ -384,109 +326,154 @@ public class IHMPlateau extends JFrame implements MouseListener, MouseMotionList
 		}
 		plateauPanel.add(droite, BorderLayout.EAST);
 		
+		// AJOUT DES COORDONER DES CASES DU HAUT POUR FAIRE LA TRANSISTION ENTRE LE NUMERO DE CASE DU JOUEUR ET
+		// LES COORDONEES DANS L IHM
 		for (int i = 0; i < 5; i++) {
 			int[] coordonnee = {1,i};
 			numcaseToindicePanel.add( coordonnee);
 		}
+		
+		
 		///////////////////////////////////////////
 		//   			 BAS   		            //
 		//////////////////////////////////////////
-		Color serieCouleurBas[] = { Color.ORANGE,Color.GREEN,Color.BLACK,Color.RED,Color.BLUE };
+		
+		// PARAMETRE DE LA PARTIE BAS
 		JPanel bas = new JPanel( new GridLayout(1, 7));
 		bas.setPreferredSize( new Dimension(0,(plateauPanel.getHeight()/7)));
 		bas.setName("BAS");
+		
+		//PREMIER CASE SUPER CAMEMBERT DU BAS
 		JPanel basun = new JPanel(  );
 		basun.setBackground(Color.BLUE);
 		basun.setBorder(BorderFactory.createMatteBorder(10, 10, 10, 10, Color.DARK_GRAY));
 		bas.add(basun);
 		
+		// CREATION DES CASES "NORMALE"
+		Color serieCouleurBas[] = { Color.ORANGE,Color.GREEN,Color.BLACK,Color.RED,Color.BLUE };
 		for (Color couleur : serieCouleurBas) {
 			JPanel square = new JPanel(  );
 			square.setBackground(couleur);
 			bas.add(square);
 		}
+		
+		//DERNIERE CASE SUPER CAMEMBERT DU BAS
 		JPanel lastBas = new JPanel( );
 		lastBas.setBackground(Color.ORANGE);
 		lastBas.setBorder(BorderFactory.createMatteBorder(10, 10, 10, 10, Color.DARK_GRAY));
 		bas.add(lastBas);
 		plateauPanel.add(bas, BorderLayout.SOUTH);
 		
+		
+		// AJOUT DES COORDONER DES CASES DU HAUT POUR FAIRE LA TRANSISTION ENTRE LE NUMERO DE CASE DU JOUEUR ET
+		// LES COORDONEES DANS L IHM
 		for (int i = 6; i >= 0; i--) {
 			int[] coordonnee = {2,i};
 			numcaseToindicePanel.add( coordonnee);
 		}
+		
+		
 		///////////////////////////////////////////
 		//   			 GAUCHE   		        //
 		//////////////////////////////////////////
-		Color serieCouleurGauche[] = { Color.BLUE,Color.ORANGE, Color.GREEN,Color.BLACK,Color.RED};
+		
+		// PARAMETRE DE LA PARTIE GAUCHE
 		JPanel gauche = new JPanel( new GridLayout(5, 1));
 		gauche.setPreferredSize( new Dimension((plateauPanel.getWidth()/7),0));
 		gauche.setName("gauche");
 		
+		// CREATION DES CASES "NORMALE"
+		Color serieCouleurGauche[] = { Color.BLUE,Color.ORANGE, Color.GREEN,Color.BLACK,Color.RED};
 		for (Color couleur : serieCouleurGauche) {
 			JPanel square = new JPanel( );
 			square.setBackground(couleur);
 			gauche.add(square);
 		}
+		plateauPanel.add(gauche, BorderLayout.WEST);
+		
+		// AJOUT DES COORDONER DES CASES DU HAUT POUR FAIRE LA TRANSISTION ENTRE LE NUMERO DE CASE DU JOUEUR ET
+		// LES COORDONEES DANS L IHM
 		for (int i = 4; i >= 0 ; i--) {
 			int[] coordonnee = {3,i};
 			numcaseToindicePanel.add( coordonnee);
 		}
 		
+		// AJOUT DES COORDONNEES DE LA DERNIERE CASE DU PLATEAU QUI SE TROUVE DANS LA PARTIE HAUT
 		int[] coordonnee = {0,0};
 		numcaseToindicePanel.add( coordonnee);
-		
-		plateauPanel.add(gauche, BorderLayout.WEST);
-		
 	}
 
 	
 	private void creationPanelQuestion(Question question){
 		
-		
-		
 		///////////////////////////////////////////
 		//   			 QUESTION 	            //
 		//////////////////////////////////////////
-		questionPanel = new JPanel(new GridLayout(3,0));	
 		
-		//TITRE
-		JLabel titreLabel = new JLabel( question.getTheme() );
-		this.questionPanel.add(titreLabel);
+		// AFFICHAGE DE L IMAGE DU TYPE DE LA QUESTION ET CHANGEMENT DE LA COULEUR DE FOND
+		questionPanel = new JPanel(new GridLayout(3,0));
+		Couleur couleur = question.getCouleur();
+		JLabel imageTypeQuestion = new JLabel();
+		switch (couleur) {
+		case ROUGE:
+			questionPanel.setBackground(Color.red);
+			imageTypeQuestion = new JLabel( new ImageIcon("images/innovation.png"));
+			break;
+		case BLEU:
+			questionPanel.setBackground(Color.blue);
+			imageTypeQuestion = new JLabel(new ImageIcon("images/lesaviezvous.png"));
+			break;
+		case VERT:
+			questionPanel.setBackground(Color.green);
+			imageTypeQuestion = new JLabel( new ImageIcon("images/cpe.png"));
+			break;
+		case ORANGE:
+			questionPanel.setBackground(Color.orange);
+			imageTypeQuestion = new JLabel(new ImageIcon("images/blague.png") );
+			break;
+		default:
+			break;
+		}		
+		this.questionPanel.add(imageTypeQuestion);
 		
 		//QUESTION 
 		JLabel questionLabel = new JLabel( question.getQuestion() );
 		this.questionPanel.add(questionLabel);
 		
-		
 		// REPONSES
 		String[] reponses = question.getChoix();
 		ButtonGroup groupButton = new ButtonGroup();
 		JPanel reponsePanel = new JPanel(new GridLayout(5,0));
+		
 		// Réponse 1
 		JRadioButton rep1 = new JRadioButton(reponses[0]);
+		rep1.setBackground(questionPanel.getBackground());
 		rep1.setActionCommand(rep1.getText());
 		groupButton.add(rep1);
 		reponsePanel.add(rep1);
 		
 		//Réponse 2
 		JRadioButton rep2 = new JRadioButton(reponses[1]);
+		rep2.setBackground(questionPanel.getBackground());
 		rep2.setActionCommand(rep2.getText());
 		groupButton.add(rep2);
 		reponsePanel.add(rep2);
 		
 		//Réponse 3
 		JRadioButton rep3 = new JRadioButton(reponses[2]);
+		rep3.setBackground(questionPanel.getBackground());
 		rep3.setActionCommand(rep3.getText());
 		groupButton.add(rep3);
 		reponsePanel.add(rep3);
 		
 		//Réponse 4
 		JRadioButton rep4 = new JRadioButton(reponses[3]);
+		rep4.setBackground(questionPanel.getBackground());
 		rep4.setActionCommand(rep4.getText());
 		groupButton.add(rep4);
 		reponsePanel.add(rep4);
 		
+		// bouton valider reponse
 		JButton valider= new JButton("Valider la reponse");
 		valider.addActionListener(new ActionListener() {
 
@@ -494,7 +481,6 @@ public class IHMPlateau extends JFrame implements MouseListener, MouseMotionList
 			public void actionPerformed(ActionEvent e) {
 				if (groupButton.getSelection() !=null) {
 					String reponse =groupButton.getSelection().getActionCommand();
-					System.out.println("bouton selected "+groupButton.getSelection().getActionCommand());
 					trivialControler.validerReponse(question, reponse);
 				}else{
 					System.out.println("selectioner une reponse");
@@ -504,28 +490,16 @@ public class IHMPlateau extends JFrame implements MouseListener, MouseMotionList
 			}
 		});
 		reponsePanel.add(valider);
-		
 		this.questionPanel.add(reponsePanel);
 		this.plateauPanel.add(questionPanel, BorderLayout.CENTER);		
 	}
 	
 	private void creationPanelDes(String lancede, boolean isQuestion) 
 	{
-
 		///////////////////////////////////////////
-		//   			 LANCER LES DES 		         //
+		//   			 LANCER LES DES	         //
 		//////////////////////////////////////////
-
-
-
-		//JLabel imagede = new JLabel(new ImageIcon("images/de.png"));
-		//JLabel de = new JLabel(new ImageIcon("images/de"+lancede+".png"));
-
-
-		//JLabel numero = new JLabel();
-		//numero.setLayout(new GridLayout(3,2));
 		JButton btnLancerLesDes = new JButton(new ImageIcon("images/de"+lancede+".png"));  
-		
 		if (!isQuestion) {
 			btnLancerLesDes.addActionListener(new ActionListener() {
 
@@ -538,49 +512,42 @@ public class IHMPlateau extends JFrame implements MouseListener, MouseMotionList
 			});
 		}
 		
-
-
 		JLabel categorie = new JLabel();
 		categorie.setLayout(new GridLayout(6,2));
 
 		categorie.add(new JLabel(new ImageIcon("images/noir.png")));
-		categorie.add(new JLabel("Categorie Mystere"));
+		categorie.add(new JLabel("Mystere"));
 
 		categorie.add(new JLabel(new ImageIcon("images/bleu.png")));
-		categorie.add(new JLabel("Categorie Le-saviez-vous ?"));
+		categorie.add(new JLabel("Le-saviez-vous ?"));
 
 		categorie.add(new JLabel(new ImageIcon("images/rouge.png")));
-		categorie.add(new JLabel("Categorie Innovations"));
+		categorie.add(new JLabel("Innovations"));
 
 		categorie.add(new JLabel(new ImageIcon("images/orange.png")));
-		categorie.add(new JLabel("Categorie Blague"));
+		categorie.add(new JLabel("Blague"));
 
 		categorie.add(new JLabel(new ImageIcon("images/vert.png")));
-		categorie.add(new JLabel("Categorie CPE"));
+		categorie.add(new JLabel("CPE"));
 
 		categorie.add(new JLabel(new ImageIcon("images/super.png")));
 		categorie.add(new JLabel("Super Camembert"));
 		
-		//questionPanel.add(imagede);
 		desPanel.add(btnLancerLesDes);
-
 		desPanel.add(categorie);
-
-
 	}
 
+	
+	
+	
+	
+	
 	@SuppressWarnings("unchecked")
 	@Override
 	public void update(Observable arg0, Object info) {
-
-		// réactualiser l'interface, il faut aussi passer en paramètre les question si besoin pour pouvoir les afficher
-
-
-		/*for (int i = 0; i < trivialBoard.getComponentCount(); i++) {
-  		((JPanel)trivialBoard.getComponent(i)).removeAll();
-	}*/
-
-		if ( (Boolean) ((ArrayList<Object>)info).get(0))  { // si c'est la fin du game
+		
+		//FIN DU GAME
+		if ( (Boolean) ((ArrayList<Object>)info).get(0))  { 
 			
 			this.plateauPanel.removeAll();
 			this.questionPanel.removeAll();
@@ -592,27 +559,11 @@ public class IHMPlateau extends JFrame implements MouseListener, MouseMotionList
 			JLabel message = new JLabel( (String) ( (ArrayList<Object>) info).get(2) );
 			this.plateauPanel.add(message, BorderLayout.CENTER);
 			
-		}else {
-			
-
+		}else { // SI CEST PAS LA FIN DU GAME
 			this.camembertPanel.removeAll();
 			this.desPanel.removeAll();
 			this.plateauPanel.removeAll();
 			this.questionPanel.removeAll();
-
-			///////////////////////////////////////////
-			//   		 TITRE  					 //
-			////////////////////////////////////////// 
-
-			/*JLabel titleLabel = new JLabel(new ImageIcon("images/title.png"));
- 	titlePanel.add(titleLabel);
-	trivialBoard.add(titlePanel, BorderLayout.NORTH);
-			 */
-
-			/* JPanel sud = new JPanel();
-	 // sud.setBackground(Color.RED);
-	  trivialBoard.add(sud, BorderLayout.SOUTH);
-			 */
 
 			///////////////////////////////////////////
 			//  affiche le lancer de dé + QUESTION   //
@@ -626,10 +577,6 @@ public class IHMPlateau extends JFrame implements MouseListener, MouseMotionList
 
 			}
 
-
-
-
-
 			///////////////////////////////////////////
 			//   			 CAMEMBERT 			      //
 			//////////////////////////////////////////
@@ -641,26 +588,13 @@ public class IHMPlateau extends JFrame implements MouseListener, MouseMotionList
 			//   			 PLATEAU   			      //
 			//////////////////////////////////////////
 
-			//plateauPanel = new JPanel();
-			//plateauPanel.setLayout( new GridLayout(7, 7,1,1) );
 			plateauPanel.setLayout(new BorderLayout());
-			//plateauPanel.setPreferredSize( boardSize );
-			//plateauPanel.setBounds(0, 0, boardSize.width, boardSize.height);
-			//plateauPanel.setBackground(Color.RED);
 			this.creationplateau();
-			/*int casee = 0;
-		for (int[] coord : numcaseToindicePanel) {
-			System.out.println("Case :"+casee+" border :"+coord[0]+ " component :"+coord[1]);
-			casee++;
-		}*/
+		
 
 			///////////////////////////////////////////
 			//   			 MESSAGE     		      //
 			//////////////////////////////////////////
-			//		if (((ArrayList<String>) info).size() >2) {
-			//			JLabel message = new JLabel( ( (ArrayList<String>) info).get(2) );
-			//			this.plateauPanel.add(message, BorderLayout.CENTER);
-			//		}
 			if ( ((ArrayList<Object>) info).size() >4 && ((ArrayList<Object>) info).get(4) != null) { // si on a une question
 				creationPanelQuestion( (Question) ((ArrayList<Object>) info).get(4));
 			}else{ // si on est sur une case mystère 
@@ -668,15 +602,9 @@ public class IHMPlateau extends JFrame implements MouseListener, MouseMotionList
 				this.plateauPanel.add(message, BorderLayout.CENTER);
 			}
 
-
-
-			//this.pack();
 			///////////////////////////////////////////
 			//   			 PLACEMENT PION	        //
 			//////////////////////////////////////////
-
-			//System.out.println( " joueur 1 case"+((ArrayList<Object>) info).get(0));
-			//System.out.println( " joueur 2 case"+((ArrayList<Object>) info).get(1));
 
 
 			this.pack();
@@ -684,8 +612,6 @@ public class IHMPlateau extends JFrame implements MouseListener, MouseMotionList
 			 * JOUEUR 1
 			 */
 			int casejUn = listeDesJoueur.get(0).getCaseCourant().getNumero();
-
-
 
 			int[] coord = numcaseToindicePanel.get(casejUn);
 			JPanel border = ((JPanel) plateauPanel.getComponent(coord[0]));
@@ -697,6 +623,17 @@ public class IHMPlateau extends JFrame implements MouseListener, MouseMotionList
 			
 			JLabel camemebertJoueur1 = new JLabel((new ImageIcon(cam.getScaledInstance(75, 75, Image.SCALE_DEFAULT))));
 			componentBorder.add(camemebertJoueur1);
+			
+			
+			
+		
+			
+			System.out.println(border.getX()+" "+border.getY());
+			System.out.println(componentBorder.getX()+" "+componentBorder.getY());
+			
+			
+			
+			
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -719,60 +656,34 @@ public class IHMPlateau extends JFrame implements MouseListener, MouseMotionList
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-			
-			
-			
-			
-			
-			//ImageIcon iconj2 = new ImageIcon(new ImageIcon("images/j1.png").getImage().getScaledInstance(75, 75, Image.SCALE_DEFAULT));
-			//JLabel pionj2 = new JLabel(iconj2);
-			//componentBorder.add(pionj2);
-			//System.out.println(componentBorder.getName());
-			//int xj2 = componentBorder.getX();
-			//int yj2 = componentBorder.getY();
-			//System.out.println(xj2+"  "+ yj2);
-			//ImgPion pionjun = new ImgPion("images/j1.png", xj1,yj1);
-			//componentBorder.add( new JLabel(new ImageIcon("images/j2.png")));
-
-			/*
-		int positionj1 = numcaseToindicePanel.get(Integer.parseInt( ((ArrayList<String>) info).get(0)));
-		int positionj2 = numcaseToindicePanel.get(Integer.parseInt( ((ArrayList<String>) info).get(1)));
-
-		int xj1 = ((JPanel) plateauPanel.getComponent(positionj1)).getX();
-		int yj1 = ((JPanel) plateauPanel.getComponent(positionj1)).getY();
-		ImgPion pionjun = new ImgPion("images/j1.png", xj1,yj1);
-		((JPanel) plateauPanel.getComponent(positionj1)).add(pionjun);
-
-		//x = x + (pionjun.getWidth()*2);
-		int xj2 = ((JPanel) plateauPanel.getComponent(positionj2)).getX();
-		int yj2 = ((JPanel) plateauPanel.getComponent(positionj2)).getY();
-		ImgPion pionjdeux = new ImgPion("images/j2.png", xj2,yj2);
-		((JPanel) plateauPanel.getComponent(positionj2)).add(pionjdeux);
-
-			 */
-
-
 		}
 			this.revalidate();
-		
-	
 	}
 
 
+	/*public void paintCompomnent(Graphics g) {
+		
+		super.paintComponents(g);
+		
+		g.setColor(Color.RED);
+		g.fillRect(x, 500, 500,500);
+		tm.start();
+	}
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		x = x+2;
+		System.out.println("test");
+		plateauPanel.repaint();
+		
+	}*/
+	
 	public static void main(String[] args) {
-
-
 		JFrame frame;	
 		Dimension dim;
-
 		dim = new Dimension(800, 800);
-
 		TrivialPursuite trivialPursuite = new TrivialPursuite();
 		TrivialControler trivialControler = new TrivialControler(trivialPursuite);
-
-
 		frame = new IHMPlateau("TrivialPursuite",trivialControler,  dim);
-
 		trivialPursuite.addObserver((Observer) frame);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.pack();
@@ -781,7 +692,6 @@ public class IHMPlateau extends JFrame implements MouseListener, MouseMotionList
 
 	
 	public void mouseClicked(MouseEvent e) {
-
 	}
 	public void mouseMoved(MouseEvent e) {
 	}
@@ -791,15 +701,11 @@ public class IHMPlateau extends JFrame implements MouseListener, MouseMotionList
 	public void mouseExited(MouseEvent e) {
 
 	}
-
-
-
 	@Override
 	public void mouseDragged(MouseEvent arg0) {
 		// TODO Auto-generated method stub
 
 	}
-
 
 	@Override
 	public void mousePressed(MouseEvent e) {
@@ -807,11 +713,11 @@ public class IHMPlateau extends JFrame implements MouseListener, MouseMotionList
 
 	}
 
-
-
 	@Override
 	public void mouseReleased(MouseEvent e) {
 		// TODO Auto-generated method stub
 
 	}
+
+	
 }

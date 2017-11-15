@@ -27,8 +27,6 @@ public class Plateau {
 		InitListCase();
 		
 	}
-	
-	
 	public Plateau () {
 		
 		this.listeCarteRouge = new ArrayList<Carte>();
@@ -86,8 +84,7 @@ public class Plateau {
 	// renvoie une carte de la couleur demander
 	public Carte TirerCarte(Couleur couleur) {
 		
-		Carte carteRetour = null;
-				
+		Carte carteRetour = null;		
 		int index =0;
 		ArrayList<Carte> listeTEMP= new ArrayList<Carte>();
 		
@@ -106,7 +103,6 @@ public class Plateau {
 		  
 		  index = (int) (Math.random() * listeTEMP.size()) ;
     	  carteRetour = listeTEMP.get(index);
-		
 		return carteRetour;
 	}
 	
@@ -115,7 +111,6 @@ public class Plateau {
 	private void InitListCase() {
 		
 		Couleur serie[] = {Couleur.VERT, Couleur.ORANGE,Couleur.BLEU, Couleur.ROUGE,Couleur.NOIR};
-		
 		int indexSerie=0;
 		for (int numCase = 0; numCase < getNombreCasePlateau(); numCase++) {
 			
@@ -142,10 +137,8 @@ public class Plateau {
 	
 	
 	
-	public ArrayList<Case> getListeCase(){
-		
+	public ArrayList<Case> getListeCase(){	
 		return listeCase;
-			
 	}
 
 	

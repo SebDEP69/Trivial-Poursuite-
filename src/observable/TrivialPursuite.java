@@ -14,27 +14,17 @@ public class TrivialPursuite extends Observable {
 
 	public TrivialPursuite() {
 		super();
-		
-		
 		this.jeu = new Jeu();
 	}
 	
 	
-	public boolean isEnd() {
-		
-		return this.jeu.FinDuJeu();
-	}
+	public boolean isEnd() { return this.jeu.FinDuJeu(); }
 	
 	public void creationJoueur(String nomjoueurun, String nomJoueurdeux, CouleurPion couleurJoueurun, CouleurPion couleurJoueurdeux) {
 		
-		System.out.println("je creer les joueurs ");
-		
-		
+		//System.out.println("je creer les joueurs ");
 		this.jeu.CreationJoueur(nomjoueurun,nomJoueurdeux,couleurJoueurun,couleurJoueurdeux);
 		String joueurCommence = this.jeu.OrdreJoueurDebut();
-		
-
-		
 		this.envoiInfo(joueurCommence,"",null);
 	}
 	
@@ -55,19 +45,13 @@ public class TrivialPursuite extends Observable {
 			
 			question = this.jeu.ActionCaseQuestion();
 		}else {// si c'est une case mystère
-			
-			
 			messageMystere = this.jeu.ActionCaseMystere();
 			if (!messageMystere.equals("Vous pouvez rejouer"))
 			{
 				this.jeu.ChangementJoueur();
 			}
-			
-			
 			messageMystere = "Vous etes tombe sur une case mystere \n" +messageMystere;
 		}
-		
-	
 		String lancer = ((Integer) lancerDes).toString();
 		this.envoiInfo(messageMystere,lancer,question);
 	}
@@ -80,7 +64,7 @@ public class TrivialPursuite extends Observable {
 		if (question.isBonneReponse(reponse)) {
 			rejoue=true;
 			// si le joueur est sur une case super camembert
-			if (this.jeu.getJoueurCourant().getCaseCourant().isSuperCamembert()) {
+			//if (this.jeu.getJoueurCourant().getCaseCourant().isSuperCamembert()) {
 				// si la part a bien été ajouter
 				if (this.jeu.getJoueurCourant().getCamembert().AjoutPartCamembert(question.getCouleur())) { 
 					message = "Bravo vous avez gagne une part de camembert";
@@ -88,14 +72,13 @@ public class TrivialPursuite extends Observable {
 					message = "Vous avez repondu juste, mais vous possedez deje une part de camembert "+question.getCouleur();
 				}
 			//si c'est pas une super camembert
-			}else {
+		/*	}else {
 				message = "Bravo vous avez repondu juste";
-			}
+			}*/
 			//si on a pas répondu juste
 		}else {
 			message = "Mauvaise reponse";
 		}
-		
 		
 		if (isEnd()) {
 			message = message+ "\n Bravo "+this.jeu.getJoueurCourant().getNom()+" a gagne la partie";
@@ -117,9 +100,9 @@ public class TrivialPursuite extends Observable {
 		
 		/*
 		 * 0 : is end game
-		 * 1 : listejoueur
-		 * 2 : Message action mystère 
-		 * 3 : Nombre lancerDes
+		 * 1 : liste des joueurs
+		 * 2 : Message a afficher à l'utilisateur
+		 * 3 : Nombre lancerDes / ou chaine vide si pas de lancer a renvoyer
 		 * 4 : Object Question
 		 */
 		infoForIHM.add(isEnd());//0
@@ -127,8 +110,6 @@ public class TrivialPursuite extends Observable {
 		infoForIHM.add(message);//2
 		infoForIHM.add(lancerDes);//3
 		infoForIHM.add(question); //4	
-		
-		
 		
 		this.notifyObservers(infoForIHM);
 		
@@ -151,8 +132,5 @@ public class TrivialPursuite extends Observable {
 		super.addObserver(o);
 		
 	}
-	
-	
-	
 	
 }

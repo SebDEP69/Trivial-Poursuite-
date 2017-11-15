@@ -46,19 +46,19 @@ public class BaseQuestionCSV {
 				switch (couleur) {
 				case ROUGE:
 					this.questionROUGE.add(question);
-					System.out.println("ajoute de "+question.getCouleur()+ " "+question.getQuestion());
+					//System.out.println("ajoute de "+question.getCouleur()+ " "+question.getQuestion());
 					break;
 				case BLEU:
 					this.questionBLEU.add(question);
-					System.out.println("ajoute de "+question.getCouleur()+ " "+question.getQuestion());
+					//System.out.println("ajoute de "+question.getCouleur()+ " "+question.getQuestion());
 					break;
 				case ORANGE:
 					this.questionORANGE.add(question);
-					System.out.println("ajoute de "+question.getCouleur()+ " "+question.getQuestion());
+					//System.out.println("ajoute de "+question.getCouleur()+ " "+question.getQuestion());
 					break;
 				case VERT:
 					this.questionVERT.add(question);
-					System.out.println("ajoute de "+question.getCouleur()+ " "+question.getQuestion());
+					//System.out.println("ajoute de "+question.getCouleur()+ " "+question.getQuestion());
 					break;
 				default:
 					break;

@@ -66,7 +66,6 @@ public class Jeu {
 		boolean isCamenbertPlein = false;
 		Joueur j ;
 		int indiceJ=0;
-		System.out.println(listeJoueur.size());
 		while (!isCamenbertPlein && (indiceJ < listeJoueur.size()))
 		{
 			j = listeJoueur.get(indiceJ);
