@@ -78,7 +78,7 @@ public class TrivialPursuite extends Observable {
 			//si on a pas répondu juste
 		}else {
 			message = "Mauvaise reponse";
-		}
+		}	
 		
 		if (isEnd()) {
 			message = message+ "\n Bravo "+this.jeu.getJoueurCourant().getNom()+" a gagne la partie";

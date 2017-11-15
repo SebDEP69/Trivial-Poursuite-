@@ -1,7 +1,6 @@
 package vue;
 
 import ihm.IHMPlateau;
-import javafx.scene.layout.Background;
 import observable.TrivialPursuite;
 
 import java.awt.BorderLayout;

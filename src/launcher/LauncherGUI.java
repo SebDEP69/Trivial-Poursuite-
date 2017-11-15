@@ -1,10 +1,9 @@
 package launcher;
 
-import java.awt.Color;
 import java.awt.Dimension;
 import javax.swing.JFrame;
 
-import Model.BackgroundPanel;
+
 import vue.TrivialPursuitGUI;
 
 public class LauncherGUI {
@@ -20,7 +19,6 @@ public class LauncherGUI {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.pack();
 		frame.setVisible(true);
-		
 	}
 	/**
 	 * @param args
