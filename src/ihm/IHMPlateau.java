@@ -9,6 +9,7 @@ import java.util.*;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.Timer;
+import javax.swing.border.Border;
 
 import Controler.TrivialControler;
 import Model.ButtonJolie;
@@ -22,12 +23,12 @@ import observable.TrivialPursuite;
 @SuppressWarnings("serial")
 public class IHMPlateau extends JFrame implements MouseListener, MouseMotionListener, Observer {
 	JLayeredPane layeredPane;
-	JPanel trivialBoard, desPanel, plateauPanel,camembertPanel, titlePanel, questionPanel;
+	JPanel trivialBoard, desPanel, plateauPanel,camembertPanel, titlePanel, questionPanel,selectPersoUn,selectPersoDeux;
 	
 	ArrayList<int[]> numcaseToindicePanel;
 	Dimension boardSize;
 	private  TrivialControler trivialControler;
-	ImageIcon imgPersoUn,imgPersoDeux;
+	JLabel imgPersoUn,imgPersoDeux;
 	//private int x; 
 	//Timer tm = new Timer(5, this);
 	
@@ -79,13 +80,25 @@ public class IHMPlateau extends JFrame implements MouseListener, MouseMotionList
 		questionPanel.setLayout(new GridLayout(2,0));		
 
 		//affiche le formulaire de creation de joueur
-		imgPersoUn= new ImageIcon("images/macron.png");
-		imgPersoDeux= new ImageIcon("images/macron.png");		
+		imgPersoUn= new JLabel(new ImageIcon("images/macron.png"));
+		imgPersoUn.setName("macron");
+		imgPersoDeux= new JLabel(new ImageIcon("images/macron.png"));
+		imgPersoDeux.setName("macron");
 		formulaireCreationJoueur();
 	
 	}
 	
-	
+	private void changePerso(JPanel panelJoueur, JLabel imgPerso) {
+		
+		JPanel panelName = (JPanel) panelJoueur.getComponent(0);
+		JPanel panelBouton  = (JPanel) panelJoueur.getComponent(2);
+		panelJoueur.removeAll();
+		panelJoueur.add(panelName,BorderLayout.NORTH);
+		panelJoueur.add(imgPerso, BorderLayout.CENTER);
+		panelJoueur.add(panelBouton, BorderLayout.SOUTH);
+		panelJoueur.repaint();
+		pack();
+	}
 	
 	private void formulaireCreationJoueur() {
 		///////////////////////////////////////////
@@ -95,60 +108,134 @@ public class IHMPlateau extends JFrame implements MouseListener, MouseMotionList
 		plateauPanel = new JPanel(new BorderLayout());
 		
 		JPanel tekkenVue = new JPanel(new GridLayout(0, 2));
-		tekkenVue.setBackground(Color.pink);
-		
+			
 		
 		//###### JOUEUR 1
-		JPanel panelJoueurun = new JPanel(new GridLayout(2, 0));
-		panelJoueurun.removeAll();
-		JLabel imagePersoUn = new JLabel(imgPersoUn);
-		panelJoueurun.add(imagePersoUn);
+		//JPanel panelJoueurun = new JPanel(new GridLayout(2, 0));
+		JPanel panelJoueurun = new JPanel(new BorderLayout());
+		
+		//nom joueur
+		JPanel panelNomJoueurUn = new JPanel(new GridLayout(0,2));		
+		JLabel labelNomJUn = new JLabel("Nom de joueur");
+		JTextField nomJoueurUn = new JTextField();
+		panelNomJoueurUn.add(labelNomJUn);
+		panelNomJoueurUn.add(nomJoueurUn);
+		panelJoueurun.add(panelNomJoueurUn, BorderLayout.NORTH);
+		
+		// image principale
+		panelJoueurun.add(imgPersoUn, BorderLayout.CENTER);
 		
 		// partie select perso
-		JPanel selectPersoUn = new JPanel(new GridLayout(0, 4));
-		
-		JButton btnMacron = new JButton(new ImageIcon("images/macron.png"));
+		selectPersoUn = new JPanel(new GridLayout(0, 4));
+		JButton btnMacron = new ButtonJolie(new ImageIcon("images/macron.png"));
 		JButton btnMerkel= new JButton(new ImageIcon("images/merkel.png"));
 		JButton btnPoutine = new JButton(new ImageIcon("images/poutine.png"));
 		JButton btnTrump = new JButton(new ImageIcon("images/trump.png"));
 		
+		
+		btnMacron.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				imgPersoUn = new JLabel(new ImageIcon("images/macron.png"));
+				imgPersoUn.setName("macron");
+				changePerso(panelJoueurun,imgPersoUn);				
+			}
+		});
 		btnMerkel.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				System.out.println("test");
-				
-				// faire une fonction avec cette merde
-				panelJoueurun.removeAll();
-				panelJoueurun.add( new JLabel(new ImageIcon("images/merkel.png")));
-				selectPersoUn.add(btnMacron);
-				selectPersoUn.add(btnMerkel);
-				selectPersoUn.add(btnPoutine);
-				selectPersoUn.add(btnTrump);
-				panelJoueurun.add(selectPersoUn);
-				panelJoueurun.repaint();
-				pack();
-				//formulaireCreationJoueur();
-				
+				imgPersoUn = new JLabel(new ImageIcon("images/merkel.png"));
+				imgPersoUn.setName("merkel");
+				changePerso(panelJoueurun,imgPersoUn);					
+			}
+		});
+		btnPoutine.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				imgPersoUn = new JLabel(new ImageIcon("images/poutine.png"));
+				imgPersoUn.setName("poutine");
+				changePerso(panelJoueurun,imgPersoUn);					
+			}
+		});
+		btnTrump.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				imgPersoUn = new JLabel(new ImageIcon("images/trump.png"));
+				imgPersoUn.setName("trump");
+				changePerso(panelJoueurun,imgPersoUn);					
 			}
 		});
 		selectPersoUn.add(btnMacron);
 		selectPersoUn.add(btnMerkel);
 		selectPersoUn.add(btnPoutine);
 		selectPersoUn.add(btnTrump);
-		panelJoueurun.add(selectPersoUn);
+		selectPersoUn.setPreferredSize(new Dimension(0, 100));
+		panelJoueurun.add(selectPersoUn, BorderLayout.SOUTH);
 		
-		
-		
+			
 		
 		//###### JOUEUR 2
-		JPanel panelJoueurdeux = new JPanel(new GridLayout(2, 0));
-		//panelJoueurdeux.setBackground(Color.blue);
-		JLabel imagePersoDeux = new JLabel(imgPersoDeux);
-		panelJoueurdeux.add(imagePersoDeux);
+		JPanel panelJoueurdeux = new JPanel(new BorderLayout());
+		//nom joueur
+		JPanel panelNomJoueurDeux = new JPanel(new GridLayout(0,2));		
+		JLabel labelNomJDeux = new JLabel("Nom de joueur");
+		JTextField nomJoueurDeux = new JTextField();
+		panelNomJoueurDeux.add(labelNomJDeux);
+		panelNomJoueurDeux.add(nomJoueurDeux);
+		panelJoueurdeux.add(panelNomJoueurDeux, BorderLayout.NORTH);
+		
+		// image principale
+		panelJoueurdeux.add(imgPersoDeux, BorderLayout.CENTER);		
+		// partie select perso
+		selectPersoDeux = new JPanel(new GridLayout(0, 4));
+
+		JButton btnMacrondeux = new JButton(new ImageIcon("images/macron.png"));
+		JButton btnMerkeldeux= new JButton(new ImageIcon("images/merkel.png"));
+		JButton btnPoutinedeux = new JButton(new ImageIcon("images/poutine.png"));
+		JButton btnTrumpdeux = new JButton(new ImageIcon("images/trump.png"));
+
+		btnMacrondeux.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				imgPersoDeux = new JLabel(new ImageIcon("images/macron.png"));
+				imgPersoDeux.setName("macron");
+				changePerso(panelJoueurdeux,imgPersoDeux);				
+			}
+		});
+		btnMerkeldeux.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				imgPersoDeux = new JLabel(new ImageIcon("images/merkel.png"));
+				imgPersoDeux.setName("merkel");
+				changePerso(panelJoueurdeux,imgPersoDeux);					
+			}
+		});
+		btnPoutinedeux.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				imgPersoDeux = new JLabel(new ImageIcon("images/poutine.png"));
+				imgPersoDeux.setName("poutine");
+				changePerso(panelJoueurdeux,imgPersoDeux);					
+			}
+		});
+		btnTrumpdeux.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				imgPersoDeux = new JLabel(new ImageIcon("images/trump.png"));
+				imgPersoDeux.setName("trump");
+				changePerso(panelJoueurdeux,imgPersoDeux);					
+			}
+		});
+		selectPersoDeux.add(btnMacrondeux);
+		selectPersoDeux.add(btnMerkeldeux);
+		selectPersoDeux.add(btnPoutinedeux);
+		selectPersoDeux.add(btnTrumpdeux);
+		selectPersoDeux.setPreferredSize(new Dimension(0, 100));
+		panelJoueurdeux.add(selectPersoDeux, BorderLayout.SOUTH);	
 		
 		
 		tekkenVue.add(panelJoueurun);
-		tekkenVue.add(panelJoueurdeux);
+		tekkenVue.add(panelJoueurdeux);		
 		/*Dimension dimensionJTF = new Dimension(100,30);
 		CouleurPion CouleurduPion[] = {CouleurPion.MACRON, CouleurPion.MERKEL,CouleurPion.POUTINE, CouleurPion.TRUMP};
 		//###### JOUEUR 1
@@ -183,20 +270,36 @@ public class IHMPlateau extends JFrame implements MouseListener, MouseMotionList
 		// Bouton création des joueurs
 		JPanel panelButonLancer = new JPanel();
 		panelButonLancer.setPreferredSize(new Dimension(0, 100));
-		panelButonLancer.setBackground(Color.RED);
-		
 		ButtonJolie btnlancer = new ButtonJolie("Lancer");
 		
 		btnlancer.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				/*String nomjoueurun = textNomJoueurun.getText();
-				String nomjoueurdeux = textNomJoueurdeux.getText();
-				CouleurPion couleurjoueurun = (CouleurPion) couleurPionJoueurun.getSelectedItem();
-				CouleurPion couleurjoueurdeux = (CouleurPion) couleurPionJoueurdeux.getSelectedItem();
-				trivialControler.creationJoueur(nomjoueurun,nomjoueurdeux,couleurjoueurun,couleurjoueurdeux);*/
-				trivialControler.creationJoueur("toto","titi",CouleurPion.MACRON,CouleurPion.MACRON);
+				String nomjoueurun = nomJoueurUn.getText();
+				String nomjoueurdeux = nomJoueurDeux.getText();
+				CouleurPion couleurjoueur[]= {CouleurPion.MACRON,CouleurPion.MACRON};
+				String liString[] = {""+imgPersoUn.getText(),""+imgPersoDeux.getText()};
+				for (int indice = 0; indice < liString.length; indice++) {
+					switch (liString[indice]) {
+					case "macron":
+						couleurjoueur[indice] = CouleurPion.MACRON;
+						break;
+					case "merkel":
+						couleurjoueur[indice] = CouleurPion.MERKEL;
+						break;
+					case "poutine":
+						couleurjoueur[indice] = CouleurPion.POUTINE;
+						break;
+					case "trump":
+						couleurjoueur[indice] = CouleurPion.TRUMP;
+						break;
+					default:
+						break;
+					}
+				}
+				trivialControler.creationJoueur(nomjoueurun,nomjoueurdeux,couleurjoueur[0],couleurjoueur[1]);
+				//trivialControler.creationJoueur("toto","titi",CouleurPion.MACRON,CouleurPion.MACRON);
 			}
 		});
 		panelButonLancer.add(btnlancer);		
