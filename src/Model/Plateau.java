@@ -1,5 +1,4 @@
 package Model;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -71,6 +70,7 @@ public class Plateau {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		//listeCarteMystere.add(new MystereProchainCamembert());
 		listeCarteMystere.add(new MysterePerteCamembert());
 		listeCarteMystere.add(new MystereRejouer());
 		listeCarteMystere.add(new MystereRetourCaseDepart());

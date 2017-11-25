@@ -127,11 +127,14 @@ public class IHMPlateau extends JFrame implements MouseListener, MouseMotionList
 		
 		// partie select perso
 		selectPersoUn = new JPanel(new GridLayout(0, 4));
-		JButton btnMacron = new ButtonJolie(new ImageIcon("images/macron.png"));
+		/*JButton btnMacron = new ButtonJolie(new ImageIcon("images/macron.png"));
 		JButton btnMerkel= new JButton(new ImageIcon("images/merkel.png"));
 		JButton btnPoutine = new JButton(new ImageIcon("images/poutine.png"));
-		JButton btnTrump = new JButton(new ImageIcon("images/trump.png"));
-		
+		JButton btnTrump = new JButton(new ImageIcon("images/trump.png"));*/
+		JButton btnMacron = new ButtonJolie("Macron");
+		JButton btnMerkel= new ButtonJolie("Merkel");
+		JButton btnPoutine = new ButtonJolie("Poutine");
+		JButton btnTrump = new ButtonJolie("Trump");
 		
 		btnMacron.addActionListener(new ActionListener() {
 			@Override
@@ -189,10 +192,14 @@ public class IHMPlateau extends JFrame implements MouseListener, MouseMotionList
 		// partie select perso
 		selectPersoDeux = new JPanel(new GridLayout(0, 4));
 
-		JButton btnMacrondeux = new JButton(new ImageIcon("images/macron.png"));
+		/*JButton btnMacrondeux = new JButton(new ImageIcon("images/macron.png"));
 		JButton btnMerkeldeux= new JButton(new ImageIcon("images/merkel.png"));
 		JButton btnPoutinedeux = new JButton(new ImageIcon("images/poutine.png"));
-		JButton btnTrumpdeux = new JButton(new ImageIcon("images/trump.png"));
+		JButton btnTrumpdeux = new JButton(new ImageIcon("images/trump.png"));*/
+		JButton btnMacrondeux = new ButtonJolie("Macron");
+		JButton btnMerkeldeux= new ButtonJolie("Merkel");
+		JButton btnPoutinedeux = new ButtonJolie("Poutine");
+		JButton btnTrumpdeux = new ButtonJolie("Trump");
 
 		btnMacrondeux.addActionListener(new ActionListener() {
 			@Override
@@ -233,6 +240,8 @@ public class IHMPlateau extends JFrame implements MouseListener, MouseMotionList
 		selectPersoDeux.setPreferredSize(new Dimension(0, 100));
 		panelJoueurdeux.add(selectPersoDeux, BorderLayout.SOUTH);	
 		
+		panelJoueurun.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 5, Color.DARK_GRAY));
+		panelJoueurdeux.setBorder(BorderFactory.createMatteBorder(0, 5, 0, 0, Color.DARK_GRAY));
 		
 		tekkenVue.add(panelJoueurun);
 		tekkenVue.add(panelJoueurdeux);		
@@ -279,7 +288,8 @@ public class IHMPlateau extends JFrame implements MouseListener, MouseMotionList
 				String nomjoueurun = nomJoueurUn.getText();
 				String nomjoueurdeux = nomJoueurDeux.getText();
 				CouleurPion couleurjoueur[]= {CouleurPion.MACRON,CouleurPion.MACRON};
-				String liString[] = {""+imgPersoUn.getText(),""+imgPersoDeux.getText()};
+				String liString[] = {""+imgPersoUn.getName(),""+imgPersoDeux.getName()};
+				
 				for (int indice = 0; indice < liString.length; indice++) {
 					switch (liString[indice]) {
 					case "macron":
@@ -358,11 +368,12 @@ public class IHMPlateau extends JFrame implements MouseListener, MouseMotionList
 		String[] listeImage = {"","","",""};
 		Couleur[] listeCouleur = {Couleur.BLEU,Couleur.ROUGE,Couleur.ORANGE,Couleur.VERT};
 		int indice = 0;
+		String perso = joueur.getPion().getCouleurPion().toString().toLowerCase();
 		// CHECK POUR CHAQUE COULEUR DE PART SI LE JOUEUR CONTIENT LA PART OU PAS
 		// SI IL POSSEDE LA PART ALORS ON AJOUTE LE CHEMIN DE L IMAGE DE LA PART
 		for (Couleur couleur : listeCouleur) {
 			if (joueur.getCamembert().ContientPart(couleur)) {
-				listeImage[indice] = "images/joueur"+numJoueur+"-"+couleur+".png";
+				listeImage[indice] = "images/"+perso+"_"+couleur+".png";
 			}else {
 				listeImage[indice] = null;
 			}
@@ -425,7 +436,6 @@ public class IHMPlateau extends JFrame implements MouseListener, MouseMotionList
 
 	private void creationplateau() {
 
-		
 		/*
 		 * LE PLATEAU EST UN BORDER LAYOUT (NORD,SUD,EST,OUEST,CENTRE)
 		 * 
@@ -756,7 +766,7 @@ public class IHMPlateau extends JFrame implements MouseListener, MouseMotionList
 
 			ArrayList<Joueur> listeDesJoueur = ((ArrayList<Joueur>) ((ArrayList<Object>) info).get(1));
 			this.creationPanelCamembert(listeDesJoueur);
-
+			this.pack();
 			///////////////////////////////////////////
 			//   			 PLATEAU   			      //
 			//////////////////////////////////////////
@@ -778,9 +788,9 @@ public class IHMPlateau extends JFrame implements MouseListener, MouseMotionList
 			///////////////////////////////////////////
 			//   			 PLACEMENT PION	        //
 			//////////////////////////////////////////
+			
 
-
-			this.pack();
+			
 			/*
 			 * JOUEUR 1
 			 */
