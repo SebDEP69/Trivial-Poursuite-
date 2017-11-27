@@ -47,13 +47,13 @@ public class IHMPlateau extends JFrame implements MouseListener, MouseMotionList
 		layeredPane.add(trivialBoard, JLayeredPane.DEFAULT_LAYER);
 
 		//HAUT
-		this.titlePanel = new JPanel();
+		/*this.titlePanel = new JPanel();
 		ImageIcon imageTitle = new ImageIcon("images/title.png");
 		JLabel titleLabel = new JLabel(imageTitle);
 		titlePanel.setPreferredSize(new Dimension(0, imageTitle.getIconHeight()));
 		titlePanel.add(titleLabel);
 		titlePanel.setBackground(Color.white);
-		trivialBoard.add(titlePanel, BorderLayout.NORTH);
+		trivialBoard.add(titlePanel, BorderLayout.NORTH);*/
 
 		//GAUCHE
 		desPanel = new JPanel();
