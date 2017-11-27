@@ -78,10 +78,10 @@ public class TrivialPursuite extends Observable {
 			//si on a pas répondu juste
 		}else {
 			message = "Mauvaise reponse";
-		}
+		}	
 		
 		if (isEnd()) {
-			message = message+ "\n Bravo "+this.jeu.getJoueurCourant().getNom()+" a gagne la partie";
+			message = " Bravo "+this.jeu.getJoueurCourant().getNom()+" a gagne la partie";
 		}else {
 			if (!rejoue) { // si le joueur a pas répondu juste il ne rejoue pas
 				this.jeu.ChangementJoueur();

@@ -9,8 +9,10 @@ import java.util.*;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.Timer;
+import javax.swing.border.Border;
 
 import Controler.TrivialControler;
+import Model.ButtonJolie;
 import Model.Couleur;
 import Model.CouleurPion;
 import Model.Joueur;
@@ -21,16 +23,20 @@ import observable.TrivialPursuite;
 @SuppressWarnings("serial")
 public class IHMPlateau extends JFrame implements MouseListener, MouseMotionListener, Observer {
 	JLayeredPane layeredPane;
-	JPanel trivialBoard, plateauPanel, desPanel, camembertPanel, titlePanel, questionPanel;
+	JPanel trivialBoard, desPanel, plateauPanel,camembertPanel, titlePanel, questionPanel,selectPersoUn,selectPersoDeux;
+	
 	ArrayList<int[]> numcaseToindicePanel;
 	Dimension boardSize;
 	private  TrivialControler trivialControler;
+	JLabel imgPersoUn,imgPersoDeux;
 	//private int x; 
 	//Timer tm = new Timer(5, this);
 	
 	
 	public IHMPlateau( String nom_jeu, TrivialControler trivialControler,  Dimension dim){
-
+		
+		
+		
 		numcaseToindicePanel = new ArrayList<int[]>();
 		this.trivialControler = trivialControler;
 		int width = (int) (this.getToolkit().getScreenSize().getWidth() );
@@ -60,13 +66,12 @@ public class IHMPlateau extends JFrame implements MouseListener, MouseMotionList
 		//GAUCHE
 		desPanel = new JPanel();
 		desPanel.setLayout(new GridLayout(5,0));
-		desPanel.setPreferredSize( new Dimension(250,0));
 		trivialBoard.add(desPanel,BorderLayout.WEST);
 
 		//DROITE
 		camembertPanel = new JPanel();
 		camembertPanel.setLayout(new GridLayout(3,0));
-		camembertPanel.setPreferredSize( new Dimension(200,0));
+		
 		trivialBoard.add(camembertPanel, BorderLayout.EAST);
 
 
@@ -75,22 +80,173 @@ public class IHMPlateau extends JFrame implements MouseListener, MouseMotionList
 		questionPanel.setLayout(new GridLayout(2,0));		
 
 		//affiche le formulaire de creation de joueur
+		imgPersoUn= new JLabel(new ImageIcon("images/macron.png"));
+		imgPersoUn.setName("macron");
+		imgPersoDeux= new JLabel(new ImageIcon("images/macron.png"));
+		imgPersoDeux.setName("macron");
 		formulaireCreationJoueur();
 	
 	}
-
+	
+	private void changePerso(JPanel panelJoueur, JLabel imgPerso) {
+		
+		JPanel panelName = (JPanel) panelJoueur.getComponent(0);
+		JPanel panelBouton  = (JPanel) panelJoueur.getComponent(2);
+		panelJoueur.removeAll();
+		panelJoueur.add(panelName,BorderLayout.NORTH);
+		panelJoueur.add(imgPerso, BorderLayout.CENTER);
+		panelJoueur.add(panelBouton, BorderLayout.SOUTH);
+		panelJoueur.repaint();
+		pack();
+	}
+	
 	private void formulaireCreationJoueur() {
 		///////////////////////////////////////////
 		//   	 FORMULAIRE CREATION JOUEUR	      //
 		//////////////////////////////////////////
-
 		// CENTRE
-		plateauPanel = new JPanel();
-		GridBagLayout gridbagcentre = new GridBagLayout();
-		plateauPanel.setLayout(gridbagcentre);
+		plateauPanel = new JPanel(new BorderLayout());
+		
+		JPanel tekkenVue = new JPanel(new GridLayout(0, 2));
+			
+		
+		//###### JOUEUR 1
+		//JPanel panelJoueurun = new JPanel(new GridLayout(2, 0));
+		JPanel panelJoueurun = new JPanel(new BorderLayout());
+		
+		//nom joueur
+		JPanel panelNomJoueurUn = new JPanel(new GridLayout(0,2));		
+		JLabel labelNomJUn = new JLabel("Nom de joueur");
+		JTextField nomJoueurUn = new JTextField();
+		panelNomJoueurUn.add(labelNomJUn);
+		panelNomJoueurUn.add(nomJoueurUn);
+		panelJoueurun.add(panelNomJoueurUn, BorderLayout.NORTH);
+		
+		// image principale
+		panelJoueurun.add(imgPersoUn, BorderLayout.CENTER);
+		
+		// partie select perso
+		selectPersoUn = new JPanel(new GridLayout(0, 4));
+		/*JButton btnMacron = new ButtonJolie(new ImageIcon("images/macron.png"));
+		JButton btnMerkel= new JButton(new ImageIcon("images/merkel.png"));
+		JButton btnPoutine = new JButton(new ImageIcon("images/poutine.png"));
+		JButton btnTrump = new JButton(new ImageIcon("images/trump.png"));*/
+		JButton btnMacron = new ButtonJolie("Macron");
+		JButton btnMerkel= new ButtonJolie("Merkel");
+		JButton btnPoutine = new ButtonJolie("Poutine");
+		JButton btnTrump = new ButtonJolie("Trump");
+		
+		btnMacron.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				imgPersoUn = new JLabel(new ImageIcon("images/macron.png"));
+				imgPersoUn.setName("macron");
+				changePerso(panelJoueurun,imgPersoUn);				
+			}
+		});
+		btnMerkel.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				imgPersoUn = new JLabel(new ImageIcon("images/merkel.png"));
+				imgPersoUn.setName("merkel");
+				changePerso(panelJoueurun,imgPersoUn);					
+			}
+		});
+		btnPoutine.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				imgPersoUn = new JLabel(new ImageIcon("images/poutine.png"));
+				imgPersoUn.setName("poutine");
+				changePerso(panelJoueurun,imgPersoUn);					
+			}
+		});
+		btnTrump.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				imgPersoUn = new JLabel(new ImageIcon("images/trump.png"));
+				imgPersoUn.setName("trump");
+				changePerso(panelJoueurun,imgPersoUn);					
+			}
+		});
+		selectPersoUn.add(btnMacron);
+		selectPersoUn.add(btnMerkel);
+		selectPersoUn.add(btnPoutine);
+		selectPersoUn.add(btnTrump);
+		selectPersoUn.setPreferredSize(new Dimension(0, 100));
+		panelJoueurun.add(selectPersoUn, BorderLayout.SOUTH);
+		
+			
+		
+		//###### JOUEUR 2
+		JPanel panelJoueurdeux = new JPanel(new BorderLayout());
+		//nom joueur
+		JPanel panelNomJoueurDeux = new JPanel(new GridLayout(0,2));		
+		JLabel labelNomJDeux = new JLabel("Nom de joueur");
+		JTextField nomJoueurDeux = new JTextField();
+		panelNomJoueurDeux.add(labelNomJDeux);
+		panelNomJoueurDeux.add(nomJoueurDeux);
+		panelJoueurdeux.add(panelNomJoueurDeux, BorderLayout.NORTH);
+		
+		// image principale
+		panelJoueurdeux.add(imgPersoDeux, BorderLayout.CENTER);		
+		// partie select perso
+		selectPersoDeux = new JPanel(new GridLayout(0, 4));
 
-		Dimension dimensionJTF = new Dimension(100,30);
-		CouleurPion CouleurduPion[] = {CouleurPion.VERT, CouleurPion.ORANGE,CouleurPion.BLEU, CouleurPion.ROUGE};
+		/*JButton btnMacrondeux = new JButton(new ImageIcon("images/macron.png"));
+		JButton btnMerkeldeux= new JButton(new ImageIcon("images/merkel.png"));
+		JButton btnPoutinedeux = new JButton(new ImageIcon("images/poutine.png"));
+		JButton btnTrumpdeux = new JButton(new ImageIcon("images/trump.png"));*/
+		JButton btnMacrondeux = new ButtonJolie("Macron");
+		JButton btnMerkeldeux= new ButtonJolie("Merkel");
+		JButton btnPoutinedeux = new ButtonJolie("Poutine");
+		JButton btnTrumpdeux = new ButtonJolie("Trump");
+
+		btnMacrondeux.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				imgPersoDeux = new JLabel(new ImageIcon("images/macron.png"));
+				imgPersoDeux.setName("macron");
+				changePerso(panelJoueurdeux,imgPersoDeux);				
+			}
+		});
+		btnMerkeldeux.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				imgPersoDeux = new JLabel(new ImageIcon("images/merkel.png"));
+				imgPersoDeux.setName("merkel");
+				changePerso(panelJoueurdeux,imgPersoDeux);					
+			}
+		});
+		btnPoutinedeux.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				imgPersoDeux = new JLabel(new ImageIcon("images/poutine.png"));
+				imgPersoDeux.setName("poutine");
+				changePerso(panelJoueurdeux,imgPersoDeux);					
+			}
+		});
+		btnTrumpdeux.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				imgPersoDeux = new JLabel(new ImageIcon("images/trump.png"));
+				imgPersoDeux.setName("trump");
+				changePerso(panelJoueurdeux,imgPersoDeux);					
+			}
+		});
+		selectPersoDeux.add(btnMacrondeux);
+		selectPersoDeux.add(btnMerkeldeux);
+		selectPersoDeux.add(btnPoutinedeux);
+		selectPersoDeux.add(btnTrumpdeux);
+		selectPersoDeux.setPreferredSize(new Dimension(0, 100));
+		panelJoueurdeux.add(selectPersoDeux, BorderLayout.SOUTH);	
+		
+		panelJoueurun.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 5, Color.DARK_GRAY));
+		panelJoueurdeux.setBorder(BorderFactory.createMatteBorder(0, 5, 0, 0, Color.DARK_GRAY));
+		
+		tekkenVue.add(panelJoueurun);
+		tekkenVue.add(panelJoueurdeux);		
+		/*Dimension dimensionJTF = new Dimension(100,30);
+		CouleurPion CouleurduPion[] = {CouleurPion.MACRON, CouleurPion.MERKEL,CouleurPion.POUTINE, CouleurPion.TRUMP};
 		//###### JOUEUR 1
 		JLabel labelnomjoueurun = new JLabel("Nom joueur 1 :");
 		//JLabel labelcouleurjoueurun = new JLabel("Couleur joueur 1 :");
@@ -109,10 +265,10 @@ public class IHMPlateau extends JFrame implements MouseListener, MouseMotionList
 		
 		// nom des joueurs
 		plateauPanel.add(labelnomjoueurun);
-		plateauPanel.add(textNomJoueurun);
+		//plateauPanel.add(textNomJoueurun);
 		plateauPanel.add(labelnomjoueurdeux);
-		plateauPanel.add(textNomJoueurdeux);
-
+		//plateauPanel.add(textNomJoueurdeux);
+		 */
 		// couleur des joueurs
 		/*plateauPanel.add(labelcouleurjoueurun);
 		plateauPanel.add(couleurPionJoueurun);
@@ -121,23 +277,46 @@ public class IHMPlateau extends JFrame implements MouseListener, MouseMotionList
 		 */
 		
 		// Bouton création des joueurs
-		JButton btnlancer = new JButton("Lancer");
+		JPanel panelButonLancer = new JPanel();
+		panelButonLancer.setPreferredSize(new Dimension(0, 100));
+		ButtonJolie btnlancer = new ButtonJolie("Lancer");
 		
 		btnlancer.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				String nomjoueurun = textNomJoueurun.getText();
-				String nomjoueurdeux = textNomJoueurdeux.getText();
-				CouleurPion couleurjoueurun = (CouleurPion) couleurPionJoueurun.getSelectedItem();
-				CouleurPion couleurjoueurdeux = (CouleurPion) couleurPionJoueurdeux.getSelectedItem();
-				trivialControler.creationJoueur(nomjoueurun,nomjoueurdeux,couleurjoueurun,couleurjoueurdeux);
+				String nomjoueurun = nomJoueurUn.getText();
+				String nomjoueurdeux = nomJoueurDeux.getText();
+				CouleurPion couleurjoueur[]= {CouleurPion.MACRON,CouleurPion.MACRON};
+				String liString[] = {""+imgPersoUn.getName(),""+imgPersoDeux.getName()};
+				
+				for (int indice = 0; indice < liString.length; indice++) {
+					switch (liString[indice]) {
+					case "macron":
+						couleurjoueur[indice] = CouleurPion.MACRON;
+						break;
+					case "merkel":
+						couleurjoueur[indice] = CouleurPion.MERKEL;
+						break;
+					case "poutine":
+						couleurjoueur[indice] = CouleurPion.POUTINE;
+						break;
+					case "trump":
+						couleurjoueur[indice] = CouleurPion.TRUMP;
+						break;
+					default:
+						break;
+					}
+				}
+				trivialControler.creationJoueur(nomjoueurun,nomjoueurdeux,couleurjoueur[0],couleurjoueur[1]);
+				//trivialControler.creationJoueur("toto","titi",CouleurPion.MACRON,CouleurPion.MACRON);
 			}
 		});
-		plateauPanel.add(btnlancer);
+		panelButonLancer.add(btnlancer);		
+		plateauPanel.add(tekkenVue,BorderLayout.CENTER);
+		plateauPanel.add(panelButonLancer,BorderLayout.SOUTH);
 		trivialBoard.add(plateauPanel,BorderLayout.CENTER);
 		this.pack();
-		
 	}
 	private void creationPanelCamembert(ArrayList<Joueur> listeDesJoueur)
 	{
@@ -152,6 +331,8 @@ public class IHMPlateau extends JFrame implements MouseListener, MouseMotionList
 		 * PARAM : LA LISTE DES JOUEURS
 		 * 
 		 */
+		
+		camembertPanel.setPreferredSize( new Dimension(200,0));
 		Image cam;
 		try {
 			int indicejoueur = 1;
@@ -187,11 +368,12 @@ public class IHMPlateau extends JFrame implements MouseListener, MouseMotionList
 		String[] listeImage = {"","","",""};
 		Couleur[] listeCouleur = {Couleur.BLEU,Couleur.ROUGE,Couleur.ORANGE,Couleur.VERT};
 		int indice = 0;
+		String perso = joueur.getPion().getCouleurPion().toString().toLowerCase();
 		// CHECK POUR CHAQUE COULEUR DE PART SI LE JOUEUR CONTIENT LA PART OU PAS
 		// SI IL POSSEDE LA PART ALORS ON AJOUTE LE CHEMIN DE L IMAGE DE LA PART
 		for (Couleur couleur : listeCouleur) {
 			if (joueur.getCamembert().ContientPart(couleur)) {
-				listeImage[indice] = "images/joueur"+numJoueur+"-"+couleur+".png";
+				listeImage[indice] = "images/"+perso+"_"+couleur+".png";
 			}else {
 				listeImage[indice] = null;
 			}
@@ -254,7 +436,6 @@ public class IHMPlateau extends JFrame implements MouseListener, MouseMotionList
 
 	private void creationplateau() {
 
-		
 		/*
 		 * LE PLATEAU EST UN BORDER LAYOUT (NORD,SUD,EST,OUEST,CENTRE)
 		 * 
@@ -499,6 +680,8 @@ public class IHMPlateau extends JFrame implements MouseListener, MouseMotionList
 		///////////////////////////////////////////
 		//   			 LANCER LES DES	         //
 		//////////////////////////////////////////
+		
+		desPanel.setPreferredSize( new Dimension(250,0));
 		JButton btnLancerLesDes = new JButton(new ImageIcon("images/de"+lancede+".png"));  
 		if (!isQuestion) {
 			btnLancerLesDes.addActionListener(new ActionListener() {
@@ -583,7 +766,7 @@ public class IHMPlateau extends JFrame implements MouseListener, MouseMotionList
 
 			ArrayList<Joueur> listeDesJoueur = ((ArrayList<Joueur>) ((ArrayList<Object>) info).get(1));
 			this.creationPanelCamembert(listeDesJoueur);
-
+			this.pack();
 			///////////////////////////////////////////
 			//   			 PLATEAU   			      //
 			//////////////////////////////////////////
@@ -605,9 +788,9 @@ public class IHMPlateau extends JFrame implements MouseListener, MouseMotionList
 			///////////////////////////////////////////
 			//   			 PLACEMENT PION	        //
 			//////////////////////////////////////////
+			
 
-
-			this.pack();
+			
 			/*
 			 * JOUEUR 1
 			 */
@@ -620,20 +803,8 @@ public class IHMPlateau extends JFrame implements MouseListener, MouseMotionList
 			String[] listeImage = listeImageCamembert(listeDesJoueur.get(0),1);				
 			try {
 			Image cam = imageCamembertWithPart("images/j1.png",listeImage[0],listeImage[1],listeImage[2],listeImage[3]);
-			
 			JLabel camemebertJoueur1 = new JLabel((new ImageIcon(cam.getScaledInstance(75, 75, Image.SCALE_DEFAULT))));
-			componentBorder.add(camemebertJoueur1);
-			
-			
-			
-		
-			
-			System.out.println(border.getX()+" "+border.getY());
-			System.out.println(componentBorder.getX()+" "+componentBorder.getY());
-			
-			
-			
-			
+			componentBorder.add(camemebertJoueur1);			
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
