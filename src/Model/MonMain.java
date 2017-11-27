@@ -15,26 +15,26 @@ public class MonMain {
 		
 		String[] choixRougeun = {"repRed1","repRed2","repRed3","repRed4"};
 		String[] choixRougedeux = {"repRed5","repRed6","repRed7","repRed8"};
-		listeCarteRouge.add(new Question("question rouge1", 1,choixRougeun ,Couleur.ROUGE));
-		listeCarteRouge.add(new Question("question rouge2", 1, choixRougedeux ,Couleur.ROUGE));
+		listeCarteRouge.add(new Question("question rouge1", 1,choixRougeun ,Couleur.ROUGE,"description"));
+		listeCarteRouge.add(new Question("question rouge2", 1, choixRougedeux ,Couleur.ROUGE,"description"));
 		
 		
 		String[] choixOrangeun = {"repOrange1","repOrange2","repOrange3","repOrange4"};
 		String[] choixOrangedeux = {"repOrange5","repOrange6","repOrange7","repOrange8"};
-		listeCarteOrange.add(new Question("question orange1", 1, choixOrangeun ,Couleur.ORANGE));
-		listeCarteOrange.add(new Question("question orange2", 1, choixOrangedeux ,Couleur.ORANGE));
+		listeCarteOrange.add(new Question("question orange1", 1, choixOrangeun ,Couleur.ORANGE,"description"));
+		listeCarteOrange.add(new Question("question orange2", 1, choixOrangedeux ,Couleur.ORANGE,"description"));
 		
 		
 		String[] choixBleueun = {"repBleu1","repBleu2","repBleu3","repBleu4"};
 		String[] choixBleudeux = {"repBleu5","repBleu6","repBleu7","repBleu8"};
-		listeCarteBleu.add(new Question("question bleu1", 1, choixBleueun ,Couleur.BLEU));
-		listeCarteBleu.add(new Question("question bleu2", 1, choixBleudeux ,Couleur.BLEU));
+		listeCarteBleu.add(new Question("question bleu1", 1, choixBleueun ,Couleur.BLEU,"description"));
+		listeCarteBleu.add(new Question("question bleu2", 1, choixBleudeux ,Couleur.BLEU,"description"));
 		
 		
 		String[] choixVertun = {"repert1","reperte2","repert3","repert4"};
 		String[] choixVertdeux = {"repert5","repert6","repert7","repert8"};
-		listeCarteVert.add(new Question("question vert1", 1, choixVertun ,Couleur.VERT));
-		listeCarteVert.add(new Question("question vert2", 1, choixVertdeux ,Couleur.VERT));
+		listeCarteVert.add(new Question("question vert1", 1, choixVertun ,Couleur.VERT,"description"));
+		listeCarteVert.add(new Question("question vert2", 1, choixVertdeux ,Couleur.VERT,"description"));
 		
 		
 

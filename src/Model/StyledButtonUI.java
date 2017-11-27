@@ -7,7 +7,6 @@ import java.awt.RenderingHints;
 
 import javax.swing.AbstractButton;
 import javax.swing.JComponent;
-import javax.swing.JLabel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.plaf.basic.BasicButtonUI;
 
