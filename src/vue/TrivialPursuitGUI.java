@@ -45,37 +45,36 @@ public class TrivialPursuitGUI extends javax.swing.JFrame implements MouseListen
 	private JPanel est;
 	private JPanel ouest;
 	
-	public TrivialPursuitGUI(String name, Dimension dim) {
+	public TrivialPursuitGUI(String name) {
 
 		super(name);
 
-		  Toolkit leKit = this.getToolkit();
-		  Dimension tailleFenetre = leKit.getScreenSize();
-		  Dimension boardSize = tailleFenetre;
-		  this.setTitle(name);
-		  //  Use a Layered Pane for this this application
-		  layeredPane = new JLayeredPane();
-		  getContentPane().add(layeredPane);
-		  layeredPane.setPreferredSize(boardSize);
-		  layeredPane.addMouseListener(this);
-		  layeredPane.addMouseMotionListener(this);
-		  
-	
-	
-		  JPanel panelGeneral = new JPanel();
-			  panelGeneral.setLayout( new BorderLayout() );
-			  panelGeneral.setPreferredSize( boardSize );
-			  panelGeneral.setBounds(0, 0, boardSize.width, boardSize.height);
-			  layeredPane.add(panelGeneral, JLayeredPane.DEFAULT_LAYER);
+		Toolkit leKit = this.getToolkit();
+		Dimension boardSize = leKit.getScreenSize();
+		this.setTitle(name);
+		//  Use a Layered Pane for this this application
+		layeredPane = new JLayeredPane();
+		getContentPane().add(layeredPane);
+		layeredPane.setPreferredSize(boardSize);
+		layeredPane.addMouseListener(this);
+		layeredPane.addMouseMotionListener(this);
+
+
+
+		JPanel panelGeneral = new JPanel();
+		panelGeneral.setLayout( new BorderLayout() );
+		panelGeneral.setPreferredSize( boardSize );
+		panelGeneral.setBounds(0, 0, boardSize.width, boardSize.height);
+		layeredPane.add(panelGeneral, JLayeredPane.DEFAULT_LAYER);
 			  
 			  
 		est = new JPanel();
 		panelGeneral.add(est, BorderLayout.EAST);
-		est.setBackground(Color.ORANGE);
+		//est.setBackground(Color.ORANGE);
 				
 		ouest = new JPanel();
 		panelGeneral.add(ouest, BorderLayout.WEST);
-		ouest.setBackground(Color.BLUE);
+		//ouest.setBackground(Color.BLUE);
 		
 		nord = new JPanel();
 		panelGeneral.add(nord, BorderLayout.NORTH);
@@ -139,23 +138,14 @@ public class TrivialPursuitGUI extends javax.swing.JFrame implements MouseListen
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				JFrame frame;	
-				Dimension dim;
-				
-				dim = new Dimension(800, 800);
-				
 				TrivialPursuite trivialPursuite = new TrivialPursuite();
 				TrivialControler trivialControler = new TrivialControler(trivialPursuite);
-				
-				
-				frame = new IHMPlateau("Trivial Pursuit",trivialControler,  dim);
-				
+				JFrame frame = new IHMPlateau("Trivial Pursuit",trivialControler);
 				trivialPursuite.addObserver((Observer) frame);
-				frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-				frame.pack();
+				setVisible(false);
+				dispose();
+				frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 				frame.setVisible(true);
-			
-				
 			}
 		});
          

@@ -69,7 +69,7 @@ public class TrivialPursuite extends Observable {
 				if (this.jeu.getJoueurCourant().getCamembert().AjoutPartCamembert(question.getCouleur())) { 
 					message = "Bravo vous avez gagne une part de camembert";
 				}else { // si on a déjà la part de camembert
-					message = "Vous avez repondu juste, mais vous possedez deje une part de camembert "+question.getCouleur();
+					message = "Vous avez repondu juste, mais vous possedez deja une part de camembert "+question.getCouleur();
 				}
 			//si c'est pas une super camembert
 		/*	}else {
@@ -77,9 +77,10 @@ public class TrivialPursuite extends Observable {
 			}*/
 			//si on a pas répondu juste
 		}else {
-			message = "Mauvaise reponse";
+			message = "Mauvaise reponse <br> la reponse est : "+question.getReponse();
 		}	
 		
+		message = "<html>"+ message +"<br>" +question.getDescription() +"</html>";
 		if (isEnd()) {
 			message = " Bravo "+this.jeu.getJoueurCourant().getNom()+" a gagne la partie";
 		}else {

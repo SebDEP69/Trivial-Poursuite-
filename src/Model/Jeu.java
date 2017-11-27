@@ -112,7 +112,6 @@ public class Jeu {
 		
 		Couleur couleurquestion = this.joueurCourant.getCaseCourant().getCouleur();
 		Carte carte = this.plateau.TirerCarte(couleurquestion);
-	
 		return (Question) carte;
 	}
 	

@@ -87,22 +87,22 @@ public class Plateau {
 		Carte carteRetour = null;		
 		int index =0;
 		ArrayList<Carte> listeTEMP= new ArrayList<Carte>();
-		
-		  switch (couleur) {
-	          case ROUGE : listeTEMP = listeCarteRouge;
-	                   break;
-	          case BLEU:    listeTEMP = listeCarteBleu;
-	                   break;
-	          case VERT: listeTEMP = listeCarteVert;
-	                   break;
-	          case ORANGE:  listeTEMP = listeCarteOrange;
-	                   break;
-	          case NOIR:  listeTEMP = listeCarteMystere;
-	                   break;
-		  }
-		  
-		  index = (int) (Math.random() * listeTEMP.size()) ;
-    	  carteRetour = listeTEMP.get(index);
+
+		switch (couleur) {
+		case ROUGE : listeTEMP = listeCarteRouge;
+		break;
+		case BLEU:    listeTEMP = listeCarteBleu;
+		break;
+		case VERT: listeTEMP = listeCarteVert;
+		break;
+		case ORANGE:  listeTEMP = listeCarteOrange;
+		break;
+		case NOIR:  listeTEMP = listeCarteMystere;
+		break;
+		}
+
+		index = (int) (Math.random() * (listeTEMP.size()-1)+1) ;
+		carteRetour = listeTEMP.get(index);
 		return carteRetour;
 	}
 	
