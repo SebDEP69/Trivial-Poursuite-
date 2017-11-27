@@ -162,7 +162,7 @@ public class TrivialPursuitGUI extends javax.swing.JFrame implements MouseListen
          
          
          
-         JPanel bouton2 = new JPanel();
+        /* JPanel bouton2 = new JPanel();
          centre.add((JPanel) bouton2);
          ButtonJolie btn2 = new ButtonJolie("<Html><center>Rejouer une partie<Html>");
          btn2.setPreferredSize(new Dimension(180, 100));
@@ -174,7 +174,7 @@ public class TrivialPursuitGUI extends javax.swing.JFrame implements MouseListen
 		 e.insets = new Insets(-20,100,-30,100);
 		 e.fill = GridBagConstraints.HORIZONTAL;
 		 centre.add(btn2, e);
-         
+         */
          
          
          JPanel bouton3 = new JPanel();
