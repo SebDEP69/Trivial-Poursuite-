@@ -30,7 +30,8 @@ import javax.swing.JPanel;
 
 import Controler.TrivialControler;
 import Model.BackgroundPanel;
-import Model.ButtonJolie; 
+import Model.ButtonJolie;
+import Model.Regles; 
 
 
 
@@ -162,7 +163,7 @@ public class TrivialPursuitGUI extends javax.swing.JFrame implements MouseListen
          
          
          
-        /* JPanel bouton2 = new JPanel();
+         JPanel bouton2 = new JPanel();
          centre.add((JPanel) bouton2);
          ButtonJolie btn2 = new ButtonJolie("<Html><center>Rejouer une partie<Html>");
          btn2.setPreferredSize(new Dimension(180, 100));
@@ -174,12 +175,28 @@ public class TrivialPursuitGUI extends javax.swing.JFrame implements MouseListen
 		 e.insets = new Insets(-20,100,-30,100);
 		 e.fill = GridBagConstraints.HORIZONTAL;
 		 centre.add(btn2, e);
-         */
+         
          
          
          JPanel bouton3 = new JPanel();
          centre.add((JPanel) bouton3);
          ButtonJolie btn3 = new ButtonJolie("<Html><center>Regles du jeu<Html>");
+         
+         
+         btn3.addActionListener(new ActionListener() {
+ 			
+ 			@Override
+ 			public void actionPerformed(ActionEvent e) {
+ 				JFrame frame = new Regles();
+ 				frame.setTitle("Regle");
+ 				frame.setSize(900, 1100);
+ 				frame.setLocationRelativeTo(null);
+ 				frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+ 				frame.setVisible(true);
+
+ 			}
+ 		});
+         
          btn3.setPreferredSize(new Dimension(180, 100));
          bouton3.add(btn3);
          bouton3.setVisible(true);
