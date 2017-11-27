@@ -68,7 +68,6 @@ public class Camembert {
 		
 		boolean valeurDeRetour= false;
 		if (!this.Vide()) {
-			
 			listePart.remove(0);
 			System.out.println("part de camembert retirer");
 			valeurDeRetour = true;

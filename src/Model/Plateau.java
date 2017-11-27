@@ -70,10 +70,12 @@ public class Plateau {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		//listeCarteMystere.add(new MystereProchainCamembert());
+		listeCarteMystere.add(new MystereProchainCamembert());
+		listeCarteMystere.add(new MystereEnleverCamembert());
 		listeCarteMystere.add(new MysterePerteCamembert());
 		listeCarteMystere.add(new MystereRejouer());
 		listeCarteMystere.add(new MystereRetourCaseDepart());
+		listeCarteMystere.add(new MystereGainCamembert());
 		
 		this.nombreCasePlateau = 24;
 		InitListCase();
@@ -101,7 +103,8 @@ public class Plateau {
 		break;
 		}
 
-		index = (int) (Math.random() * (listeTEMP.size()-1)+1) ;
+		index = (int) (Math.random() * listeTEMP.size()) ;
+		System.out.println(index);
 		carteRetour = listeTEMP.get(index);
 		return carteRetour;
 	}

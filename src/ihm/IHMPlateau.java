@@ -306,6 +306,7 @@ public class IHMPlateau extends JFrame implements MouseListener, MouseMotionList
 		plateauPanel.add(panelButonLancer,BorderLayout.SOUTH);
 		trivialBoard.add(plateauPanel,BorderLayout.CENTER);
 		this.pack();
+		
 	}
 	private void creationPanelCamembert(ArrayList<Joueur> listeDesJoueur)
 	{
@@ -425,13 +426,6 @@ public class IHMPlateau extends JFrame implements MouseListener, MouseMotionList
 
 	private void creationplateau() {
 
-		Color bleuColor = new Color(29, 174, 255);
-		Color rougeColor = new Color(206, 43, 46);
-		Color orangecolor = new Color(254, 169, 38);
-		Color vertColor = new Color(115, 201, 114);
-
-
-		
 		/*
 		 * LE PLATEAU EST UN BORDER LAYOUT (NORD,SUD,EST,OUEST,CENTRE)
 		 * 
@@ -446,6 +440,11 @@ public class IHMPlateau extends JFrame implements MouseListener, MouseMotionList
 		 * HAUT => DROITE => BAS => GAUCHE
 		 */
 
+		
+		Color bleuColor = new Color(29, 174, 255);
+		Color rougeColor = new Color(206, 43, 46);
+		Color orangecolor = new Color(254, 169, 38);
+		Color vertColor = new Color(115, 201, 114);
 		///////////////////////////////////////////
 		//   			 HAUT   	            //
 		//////////////////////////////////////////
@@ -527,7 +526,7 @@ public class IHMPlateau extends JFrame implements MouseListener, MouseMotionList
 		bas.add(basun);
 
 		// CREATION DES CASES "NORMALE"
-		Color serieCouleurBas[] = { orangecolor,vertColor,Color.BLACK,rougeColor,bleuColor};
+		Color serieCouleurBas[] = { orangecolor,vertColor,Color.BLACK,rougeColor,bleuColor };
 		for (Color couleur : serieCouleurBas) {
 			JPanel square = new JPanel(  );
 			square.setBackground(couleur);
@@ -597,7 +596,7 @@ public class IHMPlateau extends JFrame implements MouseListener, MouseMotionList
 			imageTypeQuestion = new JLabel( new ImageIcon("images/innovation.png"));
 			break;
 		case BLEU:
-			//questionPanel.setBackground(Color.blue);
+			//questionPanel.setBackground(Color.BLUE);
 			imageTypeQuestion = new JLabel(new ImageIcon("images/lesaviezvous.png"));
 			break;
 		case VERT:
@@ -671,7 +670,7 @@ public class IHMPlateau extends JFrame implements MouseListener, MouseMotionList
 		this.plateauPanel.add(questionPanel, BorderLayout.CENTER);		
 	}
 
-	private void creationPanelDes(String lancede, boolean isQuestion) 
+	private void creationPanelDes(String lancede, boolean isQuestion, Joueur joueurCourant) 
 	{
 		///////////////////////////////////////////
 		//   			 LANCER LES DES	         //
@@ -688,7 +687,7 @@ public class IHMPlateau extends JFrame implements MouseListener, MouseMotionList
 			});
 		}
 		
-		JLabel categorie = new JLabel();
+		JPanel categorie = new JPanel();
 		categorie.setLayout(new GridLayout(6,2));
 
 		categorie.add(new JLabel(new ImageIcon("images/noir.png")));
@@ -709,8 +708,17 @@ public class IHMPlateau extends JFrame implements MouseListener, MouseMotionList
 		categorie.add(new JLabel(new ImageIcon("images/super.png")));
 		categorie.add(new JLabel("Super Camembert"));
 
+		
+		JLabel decriptionJoueurCourant = new JLabel("C'est au tour de "+joueurCourant.getNom());
+		
+		String nomImgJoueur = joueurCourant.getPion().getCouleurPion().toString().toLowerCase();
+		JLabel ImgJoueur = new JLabel(new ImageIcon("images/"+nomImgJoueur+".png"));
+		
+		
 		desPanel.add(btnLancerLesDes);
 		desPanel.add(categorie);
+		desPanel.add(decriptionJoueurCourant);
+		desPanel.add(ImgJoueur);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -755,10 +763,10 @@ public class IHMPlateau extends JFrame implements MouseListener, MouseMotionList
 			//  affiche le lancer de d� + QUESTION   //
 			////////////////////////////////////////// 
 			if (((ArrayList<String>) info).size() >3) {
-				if ( ((ArrayList<Object>) info).size() >4 && ((ArrayList<Object>) info).get(4) != null) {// si ya une question
-					this.creationPanelDes(( (ArrayList<String>) info).get(3), true) ;
+				if ( ((ArrayList<Object>) info).size() >4 && ((ArrayList<Object>) info).get(4) != null ) {// si ya une question
+					this.creationPanelDes(( (ArrayList<String>) info).get(3), true, ((ArrayList<Joueur>) info).get(5));
 				}else{
-					this.creationPanelDes(( (ArrayList<String>) info).get(3), false) ;
+					this.creationPanelDes(( (ArrayList<String>) info).get(3), false,((ArrayList<Joueur>) info).get(5));
 				}
 			}
 
@@ -781,9 +789,26 @@ public class IHMPlateau extends JFrame implements MouseListener, MouseMotionList
 			//////////////////////////////////////////
 			if ( ((ArrayList<Object>) info).size() >4 && ((ArrayList<Object>) info).get(4) != null) { // si on a une question
 				creationPanelQuestion( (Question) ((ArrayList<Object>) info).get(4));
-			}else{ // si on est sur une case myst�re 
+			}else{ // si on est sur une case mystère 
 				JLabel message = new JLabel( (String) ( (ArrayList<Object>) info).get(2) );
-				this.plateauPanel.add(message, BorderLayout.CENTER);
+				
+				if ((Boolean) ( (ArrayList<Object>) info).get(6)) {
+					JPanel panelMessage = new JPanel(new GridLayout(2, 0));
+					panelMessage.add(message);
+					
+					JButton actionCase = new JButton("Ok");
+					actionCase.addActionListener(new ActionListener() {
+						
+						@Override
+						public void actionPerformed(ActionEvent e) {
+							trivialControler.actionCasePourCarteMystere();							
+						}
+					});
+					panelMessage.add(actionCase);
+					this.plateauPanel.add(panelMessage, BorderLayout.CENTER);
+				}else {
+					this.plateauPanel.add(message, BorderLayout.CENTER);
+				}
 			}
 
 			///////////////////////////////////////////

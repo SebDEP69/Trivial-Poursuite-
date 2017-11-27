@@ -22,25 +22,20 @@ public class Jeu {
 	
 	//Methode classe Jeu
 	public int LanceDeDes(){
+		//return 4;
 		return (int) ((Math.random() * 6)+1);
 		
 	}
 	
 	public void AvancerJoueur(int lancerdes){
 		
-		
 		int indiceCaseCourante = this.joueurCourant.getCaseCourant().getNumero();
 		int resultatDes = indiceCaseCourante+lancerdes;
-
-		
 		if(resultatDes > 23){
 			resultatDes = resultatDes - 24;
 		}
-			Case newCase = this.plateau.getCasePosition(resultatDes);
-			this.joueurCourant.setCaseCourante(newCase);
-
-		
-		
+		Case newCase = this.plateau.getCasePosition(resultatDes);
+		this.joueurCourant.setCaseCourante(newCase);
 	}
 	
 	public void TourJoueur(){
