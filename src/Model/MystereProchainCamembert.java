@@ -27,7 +27,7 @@ public class MystereProchainCamembert extends Mystere{
 			}
 			i++;
 		}
-		return "Vous vous dirigez vers la prochaine case Supper camembert";
+		return "Vous vous dirigez vers la prochaine case Super camembert";
 	}
 
 }

@@ -59,7 +59,8 @@ public class TrivialPursuite extends Observable {
 				this.jeu.ChangementJoueur();
 			}
 			messageMystere = "<html> Vous etes tombe sur une case mystere <br> " +messageMystere+"</html>";
-		}
+		}		
+		
 		String lancer = ((Integer) lancerDes).toString();
 		this.envoiInfo(messageMystere,lancer,question,actionMystere);
 	}
@@ -101,7 +102,7 @@ public class TrivialPursuite extends Observable {
 				message= message+", vous pouvez rejouer";
 			}
 		}
-		this.envoiInfo(message,"",null,false);
+		this.envoiInfo(message,"0",null,false);
 	}
 	
 	
