@@ -96,7 +96,7 @@ public class TrivialPursuitGUI extends javax.swing.JFrame implements MouseListen
 	     centre.add((JPanel) texte1);
 	     JLabel txt1 = new JLabel("Bienvenue sur l'application TRIVIAL PURSUIT, pour lancer une partie cliquez sur : Debut de la partie");
 	     txt1.setHorizontalTextPosition(JLabel.CENTER); 
-	     txt1.setFont(new Font("Times New Roman",Font.PLAIN,32));
+	     txt1.setFont(new Font("Calibri",Font.PLAIN,32));
 	     texte1.add(txt1);
 	     texte1.setVisible(true);
 	     GridBagConstraints a = new GridBagConstraints();    
@@ -126,7 +126,7 @@ public class TrivialPursuitGUI extends javax.swing.JFrame implements MouseListen
          sud.add((JPanel) square3);
          JLabel text = new JLabel();
          text.setText(text.getText()+"Realise par Depasse, De Paoli, Begni, Dumas");
-         text.setFont(new Font("Apple Chancery",Font.ITALIC,15));
+         text.setFont(new Font("Calibri",Font.ITALIC,15));
          square3.add(text);
          square3.setVisible(true);
          
@@ -189,8 +189,8 @@ public class TrivialPursuitGUI extends javax.swing.JFrame implements MouseListen
  			@Override
  			public void actionPerformed(ActionEvent e) {
  				JFrame frame = new Regles();
- 				frame.setTitle("Regle");
- 				frame.setSize(900, 1100);
+ 				frame.setTitle("Regles");
+ 				frame.setSize(1150, 680);
  				frame.setLocationRelativeTo(null);
  				frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
  				frame.setVisible(true);

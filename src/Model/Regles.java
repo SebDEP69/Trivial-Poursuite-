@@ -27,9 +27,6 @@ public class Regles extends JFrame {
 		JPanel regle = new JPanel();
 		JLabel parchemin_Regle = new JLabel();
 		Icon parchemin = new ImageIcon("images/Parchemin_Regle_Remplie.png");
-		Icon test = new ImageIcon("images/merkel.png");
-		regle.setBackground(Color.BLACK);
-		parchemin_Regle.setIcon(test);
 		parchemin_Regle.setIcon(parchemin);
 		
 		setContentPane(regle);
