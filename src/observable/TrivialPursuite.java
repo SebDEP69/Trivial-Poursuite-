@@ -28,7 +28,7 @@ public class TrivialPursuite extends Observable {
 		this.envoiInfo(joueurCommence,"",null,false);
 	}
 	
-	// s'occupe de faire toute les �tapes d'un tour
+	// s'occupe de faire toute les etapes d'un tour
 	public void lancerLesDes() {
 		
 		int lancerDes = this.jeu.LanceDeDes();
@@ -49,7 +49,7 @@ public class TrivialPursuite extends Observable {
 		Boolean actionMystere = false;
 		if (this.jeu.getJoueurCourant().getCaseCourant().isQuestion()) { // si c'est une question on pose la question
 			question = this.jeu.ActionCaseQuestion();
-		}else {// si c'est une case myst�re
+		}else {// si c'est une case mystere
 			messageMystere = this.jeu.ActionCaseMystere();
 			System.out.println(messageMystere);
 			if (messageMystere.equals("Vous vous dirigez vers la prochaine case Supper camembert"))
@@ -70,32 +70,30 @@ public class TrivialPursuite extends Observable {
 		
 		String message="";
 		boolean rejoue=false;
-		// si le joueur � r�pondu la bonne r�ponse
+		// si le joueur a repondu la bonne reponse
 		if (question.isBonneReponse(reponse)) {
 			rejoue=true;
 			// si le joueur est sur une case super camembert
-			//if (this.jeu.getJoueurCourant().getCaseCourant().isSuperCamembert()) {
-				// si la part a bien �t� ajouter
+			if (this.jeu.getJoueurCourant().getCaseCourant().isSuperCamembert()) {
+				// si la part a bien ete ajouter
 				if (this.jeu.getJoueurCourant().getCamembert().AjoutPartCamembert(question.getCouleur())) { 
 					message = "Bravo vous avez gagne une part de camembert";
-				}else { // si on a d�j� la part de camembert
+				}else { // si on a deja la part de camembert
 					message = "Vous avez repondu juste, mais vous possedez deja une part de camembert "+question.getCouleur();
 				}
 			//si c'est pas une super camembert
-		/*	}else {
+		}else {
 				message = "Bravo vous avez repondu juste";
-			}*/
-			//si on a pas r�pondu juste
+			}
+			//si on a pas repondu juste
 		}else {
 			message = "Mauvaise réponse";
 		}	
-		
-		
 		message = "<html>"+ message +"<br>La réponse est :"+question.getReponse()+"<br>" +question.getDescription() +"</html>";
 		if (isEnd()) {
 			message = " Bravo "+this.jeu.getJoueurCourant().getNom()+" a gagne la partie";
 		}else {
-			if (!rejoue) { // si le joueur a pas r�pondu juste il ne rejoue pas
+			if (!rejoue) { // si le joueur a pas repondu juste il ne rejoue pas
 				this.jeu.ChangementJoueur();
 				message= message+", C'est au tour de "+this.jeu.getJoueurCourant().getNom();
 			}else{

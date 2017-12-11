@@ -68,7 +68,9 @@ public class TrivialPursuitGUI extends javax.swing.JFrame implements MouseListen
 		panelGeneral.setBounds(0, 0, boardSize.width, boardSize.height);
 		layeredPane.add(panelGeneral, JLayeredPane.DEFAULT_LAYER);
 			  
-			  
+		sud = new JPanel();
+		panelGeneral.add(sud, BorderLayout.SOUTH);
+		
 		est = new JPanel();
 		panelGeneral.add(est, BorderLayout.EAST);
 		//est.setBackground(Color.ORANGE);
@@ -80,20 +82,21 @@ public class TrivialPursuitGUI extends javax.swing.JFrame implements MouseListen
 		nord = new JPanel();
 		panelGeneral.add(nord, BorderLayout.NORTH);
 
-		sud = new JPanel();
-		panelGeneral.add(sud, BorderLayout.SOUTH);
+		
+		//sud.setBackground(Color.ORANGE);
 		
 		centre = new JPanel();
 		centre.setLayout(new GridBagLayout());
 		panelGeneral.add(centre, BorderLayout.CENTER);
+		//centre.setBackground(Color.ORANGE);
 		
 		// CENTRE HAUT // 
 	     JPanel texte1 = new JPanel();
 	     texte1.setPreferredSize(new Dimension(10,90));
 	     centre.add((JPanel) texte1);
-	     JLabel txt1 = new JLabel("Bienvenue sur le jeu Trivial Pursuit, pour lancer une partie cliquez sur : Debut de la partie");
+	     JLabel txt1 = new JLabel("Bienvenue sur l'application TRIVIAL PURSUIT, pour lancer une partie cliquez sur : Debut de la partie");
 	     txt1.setHorizontalTextPosition(JLabel.CENTER); 
-	     txt1.setFont(new Font("Calibri",Font.PLAIN,25));
+	     txt1.setFont(new Font("Times New Roman",Font.PLAIN,32));
 	     texte1.add(txt1);
 	     texte1.setVisible(true);
 	     GridBagConstraints a = new GridBagConstraints();    
@@ -105,8 +108,6 @@ public class TrivialPursuitGUI extends javax.swing.JFrame implements MouseListen
          texte1.add(txt1);
 		 centre.add(texte1, a);
 		 
-	     
-	
 		
 		
 	     // NORD MILIEU
@@ -247,9 +248,6 @@ public class TrivialPursuitGUI extends javax.swing.JFrame implements MouseListen
 		 i.insets = new Insets(-20,100,-30,100);
 		 i.fill = GridBagConstraints.HORIZONTAL;
 		 centre.add(btn6, i);
-         
-	        
-	
 	}
 
 	@Override

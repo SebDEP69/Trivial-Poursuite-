@@ -592,7 +592,7 @@ public class IHMPlateau extends JFrame implements MouseListener, MouseMotionList
 		JLabel imageTypeQuestion = new JLabel();
 		switch (couleur) {
 		case ROUGE:
-			//questionPanel.setBackground(Color.red);
+			questionPanel.setBackground(Color.red);
 			imageTypeQuestion = new JLabel( new ImageIcon("images/innovation.png"));
 			break;
 		case BLEU:
@@ -621,28 +621,28 @@ public class IHMPlateau extends JFrame implements MouseListener, MouseMotionList
 		ButtonGroup groupButton = new ButtonGroup();
 		JPanel reponsePanel = new JPanel(new GridLayout(5,0));
 
-		// R�ponse 1
+		// Reponse 1
 		JRadioButton rep1 = new JRadioButton(reponses[0]);
 		//rep1.setBackground(questionPanel.getBackground());
 		rep1.setActionCommand(rep1.getText());
 		groupButton.add(rep1);
 		reponsePanel.add(rep1);
 
-		//R�ponse 2
+		//Reponse 2
 		JRadioButton rep2 = new JRadioButton(reponses[1]);
 		rep2.setBackground(questionPanel.getBackground());
 		rep2.setActionCommand(rep2.getText());
 		groupButton.add(rep2);
 		reponsePanel.add(rep2);
 
-		//R�ponse 3
+		//Reponse 3
 		JRadioButton rep3 = new JRadioButton(reponses[2]);
 		rep3.setBackground(questionPanel.getBackground());
 		rep3.setActionCommand(rep3.getText());
 		groupButton.add(rep3);
 		reponsePanel.add(rep3);
 
-		//R�ponse 4
+		//Reponse 4
 		JRadioButton rep4 = new JRadioButton(reponses[3]);
 		rep4.setBackground(questionPanel.getBackground());
 		rep4.setActionCommand(rep4.getText());
