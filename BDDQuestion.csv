@@ -1,20 +1,34 @@
-COULEUR	QUESTION	REPONSE 1	REPONSE 2	REPONSE 3	REPONSE 4	NUMERO REPONSE JUSTE	DESCRIPTION
-ROUGE	Quand a ? cr?le t?phone	1871	1873	1876	1878	3	Invent?ar le c?bre Alexander Graham Bell le 14 f?ier 1876
-ROUGE	Pour quel invention Thomas Edison n'a-t-il pas obtenut le brevet 	Le microphone	La centrale eletrcique ?ourant continu	Le phonographe	Le n?	4	Cr?en 1910 par George Claude, physicien travaillant sur les gaz rares
-ROUGE	Qui est le nom du premier microprocesseur	Core	Intel 4004	Pentium	Intel Core	2	Intel 4004 invent?n 1971 par Marcian Hoff et Gilbert Hyatt. Il poss?it 2 300 transistors, cela parait vraiment peu face au dernier Intel Core qui lui en poss? plus de 1 million
-ROUGE	Quel invention majeur a eu lieu dans les ann? 80	La carte ?uce	Le GPS	Le World Wide Web	Le CD	3	Invent?ar le chercheur anglais Tim Berners-Lee du Cern ?en?. La carte ?uce a ? cr? en 1974, le GPS et le CD en 1978
-BLEU	Savez-vous quel ?it la couleur au p? noel ?a cr?ion	bleau	rouge	vert	noir	3	Vert
-BLEU	Savez-vous ce qu'un crocodile est le seul ?e pas pouvoir faire 	loucher	bailler	tirer la langue	sauter	3	Tirer la langue
-BLEU	Savez-vous jusqu'?ombien de temps un escagot peut dormir	3 minutes	3 heures	3 mois	3 ans	4	3 ans
-BLEU	Savez-vous ce qui pour la plupart des gens fais plus peur que la mort	manger un il de barracuda	vivre avec des araign?	oublier l'anniversaire de sa compagne	vivre une invasion de zombie	2	Vivre avec des araign?
-VERT	Quand CPE a ? cr?1990	1992	1994	1996	3	L'?le a ? cr?en 1994 par la fusion de deux ?les : linstitut de chimie physique industrielle (ICPI), fond?n 1919, et l?le sup?eure de chimie industrielle de Lyon (ESCIL), fond?en 1883	
-VERT	D'apr?le groupe L'Etudiant, quel est la position de CPE parmit les ?les d'ingenieur post-bac	10?/70	15?/70	4?/ 70	8?/70	3	4?/70
-VERT	Quel prix nobel a ? d?rn? un ?ve en 2005	Electronique	Chimie	Physique	Informatique	2	Prix Nobel de Chimie 2005, membre de l'Acad?e des Sciences, sp?aliste de chimie organique
-VERT	En quel ann?un ?ve de CPE ?-il ? m?ill?u JO	1996 ?tlanta	2000 ?ydney	2004 ?th?s	2008 ?ekin	2	En 2000 ?ydney, m?ille d'or aux Jeux Olympiques d'aviron
-ORANGE	Quel poisson n'a jamais d'aniversaire ?	Poisson rouge	L'espadon	Poisson pann?lobfish	3		
-ORANGE	Quel est le fruit que les poissons naiment pas ?	Banane	P?e	Fraise	Abricot	2	
-ORANGE	Quel est le plat pr?r?es opticiens ?	Tartiflette	Steak / Frites	Raclette	Lentilles	4	
-ORANGE	Je commence par un e, je finis aussi par un e, mais je ne contient quune seule lettre. Que suis je ?	Enveloppe	Ete	Ep?Epie	1		
-ORANGE	Quel est le fruit pr?r?u dragueur ?	L'ananas	La poire	La pomme	Le citron	1	
-ORANGE	Combien y a-t-il de fois la lettre F dans ce texte ?  FINISHED FILES ARE THE RE-  SULT OF YEARS OF SCIENTIF-  IC STUDY COMBINED WITH  THE  XPERIENCE OF YEARS.	3	5	6	2	3	
-ORANGE	Quel est le point commun entre un Juif et des chaussures?	Ca coute ch?	Apr?45 on en trouve moins	Il se resemble	Il vont toujours par deux	2	
+﻿"COULEUR QUESTION REPONSE 1 REPONSE 2 REPONSE 3	REPONSE 4 NUMERO REPONSE JUSTE DESCRIPTION"
+
+"ROUGE Quand a ete cree le telephone ? 1871 1873 1876 1878 3 Invente par le celebre Alexander Graham Bell le 14 fevrier 1876"
+"ROUGE Pour quel invention Thomas Edison n'a-t-il pas obtenut le brevet  ? Le microphone La centrale eletrcique a courant continu Le phonographe Le neon 4 Cree en 1910 par George Claude, physicien travaillant sur les gaz rares"
+"ROUGE Quel est le nom du premier microprocesseur ? Core Intel 4004 Pentium Intel Core 2 Intel 4004 invente en 1971 par Marcian Hoff et Gilbert Hyatt. Il possedait 2 300 transistors, cela parait vraiment peu face au dernier Intel Core qui lui en possede plus de 1 million"
+"ROUGE Quel invention majeur a eu lieu dans les annee 80 ? La carte a puce Le GPS Le World Wide Web Le CD 3 Invente par le chercheur anglais Tim Berners-Lee du Cern. La carte a puce a ete cree en 1974, le GPS et le CD en 1978"
+"ROUGE Quand a ete mis sur le marche la premiere machine Nespresso ? 1982 1984 1986 1988 3 La marque a revolutionne le marche en 1986"
+"ROUGE Quel fournisseur a offert en premier un acces illimite a internet ? Orange Free SFR Bouygues Telecom 2 C'est en 2002 que Free a lance son premier boitier !"
+"ROUGE En 2007, a combien de million d'exmplaires c'est ecoule l'iPhone ? 1,7 2 2,5 3 1 Le stock de 1,7 million c'est ecoule en 3 jours seulement"
+"ROUGE Quel console a sortit Nintendo en 2006 ? La Nintendo DS La Wii La Swicht  La Nintendo 3DS XL 2 Plus de 71 million de Wii on ete vendu et meme en maison de retraite !"
+"BLEU Savez-vous quel etait la couleur du pere noel a sa creation ? Bleu Rouge Vert Noir 3 Vert"
+"BLEU Savez-vous ce qu'un crocodile est le seul a ne pas pouvoir faire ?  Loucher Bailler	Tirer la langue Sauter	3 Tirer la langue"
+"BLEU Savez-vous jusqu'a combien de temps un escagot peut dormir ? 3 minutes 3 heures 3 mois 3 ans 4 3 ans"
+"BLEU Savez-vous ce qui pour la plupart des gens fais plus peur que la mort ? Manger un oeil de barracuda Vivre avec des araignees	Oublier l'anniversaire de sa compagne	Vivre une invasion de zombie 2 Vivre avec des araignee"
+"BLEU Savez-vous quel est le pays ou l'on se douche le plus ? Colombie France Bresil Italie 3 En moyenne 12 fois par semaines"
+"BELU Savez-vous ce que possède uniquement le Sri Lanka ? Un culte de la chevre Des animaux spéciaux Un ministre de la noix de coco Des arenes de combat 3 C'est l'un des plus grands producteurs de noix de coco au monde, il faut bien quelqu'un pour gerer le stock"
+"BLEU Savez-vous d'ou provient la femme la plus maigre du monde ? Russie Letonie Lituanie Suede 1 Vzleria Levitin est originaire de Russie et pese que 25 kilos"
+"BELU Savez-vous d'ou viens la citrouille d'Halloween ? D'un fruit D'un legume D'une blague D'un dessin 2 C'est par un navet qu'est nee Halloween"
+"VERT Quand CPE a ete cree ? 1990 1992 1994 1996 3 L'ecole a ete cree en 1994 par la fusion de deux ecoles : linstitut de chimie physique industrielle (ICPI), fonde en 1919, et l'ecole superieure de chimie industrielle de Lyon (ESCIL), fonde en 1883	"
+"VERT D'apres le groupe l'Etudiant, quel est la position de CPE parmit les ecoles d'ingenieur post-bac ? 10eme/70	15eme/70	4eme/ 70 8eme/70 3	4eme/70"
+"VERT Quel prix nobel a ete decerne a un eleve en 2005 ?	Electronique Chimie Physique Informatique 2 Prix Nobel de Chimie 2005, membre de l'Academie des Sciences, specialiste de chimie organique"
+"VERT En quel annee un eleve de CPE a-t-il ete medaille au JO ? 1996 a Atlanta 2000 a Sydney 2004 a Athene 2008 a Pekin 2 En 2000 a Sydney, medaille d'or aux Jeux Olympiques d'aviron"
+"VERT Quelle est le mot préféré de Taghrid Asfour ? Routing and Switching Keep Alive Broadcast Data 2 Keep Alive "
+"VERT Quelle matiere semble la moins pertinente en IRC ? Le Droit La Gestion Financiere La Programmation Systeme L'IoT : 3 On se demande a quoi sa sert..."
+"VERT Qui attendons-nous toujours au HH ? Sebastien Sadish Aubin la Buche 2 C'est toujours le meme"
+"VERT A cote de quel ecole CPE se trouve t-il ? l'INSA Polytech Itech l'Ecole de commerce 1 A quelque moinute seulement"
+"ORANGE Quel poisson n'a jamais d'aniversaire ? Poisson rouge L'espadon Poisson panne Lobfish 3"
+"ORANGE Quel est le fruit que les poissons naiment pas ? Banane Peche Fraise Abricot 2"
+"ORANGE Quel est le plat prefere des opticiens ? Tartiflette Steak / Frites Raclette Lentilles 4"
+"ORANGE Je commence par un e, je finis aussi par un e, mais je ne contient qu'une seule lettre. Que suis je ? Enveloppe Ete Epee Epie 1"
+"ORANGE Quel est le fruit prefere d'un dragueur ? L'ananas La poire	La pomme	Le citron 1"
+"ORANGE Combien y a-t-il de fois la lettre F dans ce texte ? FINISHED FILES ARE THE RESULT OF YEARS OF SCIENTIFIC STUDY COMBINED WITH THE EXPERIENCE OF YEARS. 3 5	6	2	3"
+"ORANGE Quel est le point commun entre un Juif et des chaussures? Ca coute cher Apres 45 on en trouve moins Il se resemble Il vont toujours par deux 2"
+"ORANGE  Qui est me frère de Albert Einstein ? David William Franck Paul 2"
