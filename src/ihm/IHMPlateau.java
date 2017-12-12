@@ -594,7 +594,7 @@ public class IHMPlateau extends JFrame implements MouseListener, MouseMotionList
 		JLabel imageTypeQuestion = new JLabel();
 		switch (couleur) {
 		case ROUGE:
-			questionPanel.setBackground(Color.red);
+			//questionPanel.setBackground(Color.red);
 			imageTypeQuestion = new JLabel( new ImageIcon("images/innovation.png"));
 			break;
 		case BLEU:

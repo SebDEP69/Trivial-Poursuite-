@@ -4,12 +4,10 @@ import ihm.IHMPlateau;
 import observable.TrivialPursuite;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.GridLayout;
 import java.awt.Insets;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
@@ -22,14 +20,12 @@ import java.util.Observer;
 
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 
 import Controler.TrivialControler;
-import Model.BackgroundPanel;
 import Model.ButtonJolie;
 import Model.Regles; 
 
@@ -164,7 +160,7 @@ public class TrivialPursuitGUI extends javax.swing.JFrame implements MouseListen
          
          
          
-         JPanel bouton2 = new JPanel();
+         //JPanel bouton2 = new JPanel();
         /* centre.add((JPanel) bouton2);
          ButtonJolie btn2 = new ButtonJolie("<Html><center>Rejouer une partie<Html>");
          btn2.setPreferredSize(new Dimension(180, 100));

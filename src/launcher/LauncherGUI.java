@@ -1,14 +1,12 @@
 package launcher;
-import java.awt.Color;
-
-import javax.swing.JFrame;
 
 import vue.Accueil;
-import vue.TrivialPursuitGUI;
+
 
 public class LauncherGUI {
 
 	public LauncherGUI(){		
+		@SuppressWarnings("unused")
 		Accueil acc = new Accueil("Accueil");
 	}
 	

@@ -25,7 +25,7 @@ public class TrivialPursuite extends Observable {
 		//System.out.println("je creer les joueurs ");
 		this.jeu.CreationJoueur(nomjoueurun,nomJoueurdeux,couleurJoueurun,couleurJoueurdeux);
 		String joueurCommence = this.jeu.OrdreJoueurDebut();
-		this.envoiInfo(joueurCommence,"",null,false);
+		this.envoiInfo(joueurCommence,"0",null,false);
 	}
 	
 	// s'occupe de faire toute les etapes d'un tour
