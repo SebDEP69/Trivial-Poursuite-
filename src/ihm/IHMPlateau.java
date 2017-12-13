@@ -45,7 +45,7 @@ public class IHMPlateau extends JFrame implements MouseListener, MouseMotionList
 		trivialBoard.setLayout( new BorderLayout() );
 		trivialBoard.setBounds(0, 0, boardSize.width, boardSize.height);
 		layeredPane.add(trivialBoard, JLayeredPane.DEFAULT_LAYER);
-		trivialBoard.setBorder(BorderFactory.createEmptyBorder(50,30,75,30));
+		trivialBoard.setBorder(BorderFactory.createEmptyBorder(50,30,95,30));
 
 		//HAUT
 		/*this.titlePanel = new JPanel();
@@ -110,7 +110,7 @@ public class IHMPlateau extends JFrame implements MouseListener, MouseMotionList
 
 		//nom joueur
 		JPanel panelNomJoueurUn = new JPanel(new GridLayout(0,2));		
-		JLabel labelNomJUn = new JLabel("Nom de joueur :");
+		JLabel labelNomJUn = new JLabel("Nom du joueur 1 :");
 		labelNomJUn.setFont(new Font("Calibri",Font.PLAIN,25));
 		JTextField nomJoueurUn = new JTextField();
 		panelNomJoueurUn.add(labelNomJUn);
@@ -121,7 +121,7 @@ public class IHMPlateau extends JFrame implements MouseListener, MouseMotionList
 		panelJoueurun.add(imgPersoUn, BorderLayout.CENTER);
 
 		// partie select perso
-		selectPersoUn = new JPanel(new GridLayout(0, 4));
+		selectPersoUn = new JPanel(new GridLayout(2, 2));
 		/*JButton btnMacron = new ButtonJolie(new ImageIcon("images/macron.png"));
 		JButton btnMerkel= new JButton(new ImageIcon("images/merkel.png"));
 		JButton btnPoutine = new JButton(new ImageIcon("images/poutine.png"));
@@ -176,7 +176,7 @@ public class IHMPlateau extends JFrame implements MouseListener, MouseMotionList
 		JPanel panelJoueurdeux = new JPanel(new BorderLayout());
 		//nom joueur
 		JPanel panelNomJoueurDeux = new JPanel(new GridLayout(0,2));		
-		JLabel labelNomJDeux = new JLabel("Nom de joueur");
+		JLabel labelNomJDeux = new JLabel("Nom du joueur 2 :");
 		labelNomJDeux.setFont(new Font("Calibri",Font.PLAIN,25));
 		JTextField nomJoueurDeux = new JTextField();
 		panelNomJoueurDeux.add(labelNomJDeux);
@@ -186,8 +186,8 @@ public class IHMPlateau extends JFrame implements MouseListener, MouseMotionList
 		// image principale
 		panelJoueurdeux.add(imgPersoDeux, BorderLayout.CENTER);		
 		// partie select perso
-		selectPersoDeux = new JPanel(new GridLayout(0, 4));
-
+		selectPersoDeux = new JPanel(new GridLayout(2, 2));
+		
 		/*JButton btnMacrondeux = new JButton(new ImageIcon("images/macron.png"));
 		JButton btnMerkeldeux= new JButton(new ImageIcon("images/merkel.png"));
 		JButton btnPoutinedeux = new JButton(new ImageIcon("images/poutine.png"));
@@ -196,6 +196,8 @@ public class IHMPlateau extends JFrame implements MouseListener, MouseMotionList
 		JButton btnMerkeldeux= new ButtonJolie("Merkel");
 		JButton btnPoutinedeux = new ButtonJolie("Poutine");
 		JButton btnTrumpdeux = new ButtonJolie("Trump");
+		
+		
 
 		btnMacrondeux.addActionListener(new ActionListener() {
 			@Override
@@ -236,8 +238,12 @@ public class IHMPlateau extends JFrame implements MouseListener, MouseMotionList
 		selectPersoDeux.setPreferredSize(new Dimension(0, 100));
 		panelJoueurdeux.add(selectPersoDeux, BorderLayout.SOUTH);	
 
-		panelJoueurun.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 5, Color.DARK_GRAY));
-		panelJoueurdeux.setBorder(BorderFactory.createMatteBorder(0, 5, 0, 0, Color.DARK_GRAY));
+		panelJoueurun.setBorder(BorderFactory.createEmptyBorder(0,30,0,65));
+		panelJoueurdeux.setBorder(BorderFactory.createEmptyBorder(0,65,0,30));
+		
+		
+		//panelJoueurun.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 5, Color.DARK_GRAY));
+		//panelJoueurdeux.setBorder(BorderFactory.createMatteBorder(0, 5, 0, 0, Color.DARK_GRAY));
 
 		tekkenVue.add(panelJoueurun);
 		tekkenVue.add(panelJoueurdeux);		
