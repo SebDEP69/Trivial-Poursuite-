@@ -750,7 +750,7 @@ public class IHMPlateau extends JFrame implements MouseListener, MouseMotionList
 			JPanel fin = new JPanel(new BorderLayout());
 			fin.add(message, BorderLayout.CENTER);
 
-			JButton rejouer = new ButtonJolie("Retour �cran d'acceuil");
+			JButton rejouer = new ButtonJolie("Retour l'ecran d'acceuil");
 			rejouer.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent arg0) {
