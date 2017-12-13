@@ -4,12 +4,10 @@ import ihm.IHMPlateau;
 import observable.TrivialPursuite;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.GridLayout;
 import java.awt.Insets;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
@@ -22,14 +20,12 @@ import java.util.Observer;
 
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 
 import Controler.TrivialControler;
-import Model.BackgroundPanel;
 import Model.ButtonJolie;
 import Model.Regles; 
 
@@ -96,7 +92,7 @@ public class TrivialPursuitGUI extends javax.swing.JFrame implements MouseListen
 	     centre.add((JPanel) texte1);
 	     JLabel txt1 = new JLabel("Bienvenue sur l'application TRIVIAL PURSUIT, pour lancer une partie cliquez sur : Debut de la partie");
 	     txt1.setHorizontalTextPosition(JLabel.CENTER); 
-	     txt1.setFont(new Font("Times New Roman",Font.PLAIN,32));
+	     txt1.setFont(new Font("Calibri",Font.PLAIN,32));
 	     texte1.add(txt1);
 	     texte1.setVisible(true);
 	     GridBagConstraints a = new GridBagConstraints();    
@@ -126,7 +122,7 @@ public class TrivialPursuitGUI extends javax.swing.JFrame implements MouseListen
          sud.add((JPanel) square3);
          JLabel text = new JLabel();
          text.setText(text.getText()+"Realise par Depasse, De Paoli, Begni, Dumas");
-         text.setFont(new Font("Apple Chancery",Font.ITALIC,15));
+         text.setFont(new Font("Calibri",Font.ITALIC,15));
          square3.add(text);
          square3.setVisible(true);
          
@@ -164,7 +160,7 @@ public class TrivialPursuitGUI extends javax.swing.JFrame implements MouseListen
          
          
          
-         JPanel bouton2 = new JPanel();
+         //JPanel bouton2 = new JPanel();
         /* centre.add((JPanel) bouton2);
          ButtonJolie btn2 = new ButtonJolie("<Html><center>Rejouer une partie<Html>");
          btn2.setPreferredSize(new Dimension(180, 100));
@@ -189,8 +185,8 @@ public class TrivialPursuitGUI extends javax.swing.JFrame implements MouseListen
  			@Override
  			public void actionPerformed(ActionEvent e) {
  				JFrame frame = new Regles();
- 				frame.setTitle("Regle");
- 				frame.setSize(900, 1100);
+ 				frame.setTitle("Regles");
+ 				frame.setSize(1150, 680);
  				frame.setLocationRelativeTo(null);
  				frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
  				frame.setVisible(true);

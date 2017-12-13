@@ -1,15 +1,15 @@
 package launcher;
-import javax.swing.JFrame;
-import vue.TrivialPursuitGUI;
+
+import vue.Accueil;
+
 
 public class LauncherGUI {
 
 	public LauncherGUI(){		
-		JFrame frame = new TrivialPursuitGUI("Trivial Pursuit");
-		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		frame.pack();
-		frame.setVisible(true);
+		@SuppressWarnings("unused")
+		Accueil acc = new Accueil("Accueil");
 	}
+	
 	public static void main(String[] args) {
 
 		@SuppressWarnings("unused")

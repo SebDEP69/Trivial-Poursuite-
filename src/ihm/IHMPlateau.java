@@ -108,7 +108,8 @@ public class IHMPlateau extends JFrame implements MouseListener, MouseMotionList
 
 		//nom joueur
 		JPanel panelNomJoueurUn = new JPanel(new GridLayout(0,2));		
-		JLabel labelNomJUn = new JLabel("Nom de joueur");
+		JLabel labelNomJUn = new JLabel("Nom de joueur :");
+		labelNomJUn.setFont(new Font("Calibri",Font.PLAIN,25));
 		JTextField nomJoueurUn = new JTextField();
 		panelNomJoueurUn.add(labelNomJUn);
 		panelNomJoueurUn.add(nomJoueurUn);
@@ -174,11 +175,12 @@ public class IHMPlateau extends JFrame implements MouseListener, MouseMotionList
 		//nom joueur
 		JPanel panelNomJoueurDeux = new JPanel(new GridLayout(0,2));		
 		JLabel labelNomJDeux = new JLabel("Nom de joueur");
+		labelNomJDeux.setFont(new Font("Calibri",Font.PLAIN,25));
 		JTextField nomJoueurDeux = new JTextField();
 		panelNomJoueurDeux.add(labelNomJDeux);
 		panelNomJoueurDeux.add(nomJoueurDeux);
 		panelJoueurdeux.add(panelNomJoueurDeux, BorderLayout.NORTH);
-
+		panelJoueurdeux.setBorder(BorderFactory.createEmptyBorder( 50,  0,  0,  0));
 		// image principale
 		panelJoueurdeux.add(imgPersoDeux, BorderLayout.CENTER);		
 		// partie select perso
@@ -592,7 +594,7 @@ public class IHMPlateau extends JFrame implements MouseListener, MouseMotionList
 		JLabel imageTypeQuestion = new JLabel();
 		switch (couleur) {
 		case ROUGE:
-			questionPanel.setBackground(Color.red);
+			//questionPanel.setBackground(Color.red);
 			imageTypeQuestion = new JLabel( new ImageIcon("images/innovation.png"));
 			break;
 		case BLEU:
