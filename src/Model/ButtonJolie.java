@@ -1,6 +1,7 @@
 package Model;
 
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.Font;
 
 import javax.swing.Action;
@@ -52,6 +53,7 @@ public class ButtonJolie extends JButton {
 		setBackground(c);
 		setForeground(Color.WHITE);
 		setUI(new StyledButtonUI());
+		setCursor(new Cursor(Cursor.HAND_CURSOR));
 	}
 	
 }
