@@ -74,7 +74,7 @@ public class TrivialPursuite extends Observable {
 		if (question.isBonneReponse(reponse)) {
 			rejoue=true;
 			// si le joueur est sur une case super camembert
-			if (this.jeu.getJoueurCourant().getCaseCourant().isSuperCamembert()) {
+			//if (this.jeu.getJoueurCourant().getCaseCourant().isSuperCamembert()) {
 				// si la part a bien ete ajouter
 				if (this.jeu.getJoueurCourant().getCamembert().AjoutPartCamembert(question.getCouleur())) { 
 					message = "Bravo vous avez gagne une part de camembert";
@@ -82,14 +82,14 @@ public class TrivialPursuite extends Observable {
 					message = "Vous avez repondu juste, mais vous possedez deja une part de camembert "+question.getCouleur();
 				}
 			//si c'est pas une super camembert
-		}else {
-				message = "Bravo vous avez repondu juste";
-			}
+		//}else {
+				//message = "Bravo vous avez repondu juste";
+			//}
 			//si on a pas repondu juste
 		}else {
-			message = "Mauvaise réponse";
+			message = "Mauvaise reponse";
 		}	
-		message = "<html>"+ message +"<br>La réponse est :"+question.getReponse()+"<br>" +question.getDescription() +"</html>";
+		message = "<html>"+ message +"<br>La reponse est :"+question.getReponse()+"<br>" +question.getDescription() +"</html>";
 		if (isEnd()) {
 			message = " Bravo "+this.jeu.getJoueurCourant().getNom()+" a gagne la partie";
 		}else {

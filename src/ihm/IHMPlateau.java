@@ -45,6 +45,7 @@ public class IHMPlateau extends JFrame implements MouseListener, MouseMotionList
 		trivialBoard.setLayout( new BorderLayout() );
 		trivialBoard.setBounds(0, 0, boardSize.width, boardSize.height);
 		layeredPane.add(trivialBoard, JLayeredPane.DEFAULT_LAYER);
+		trivialBoard.setBorder(BorderFactory.createEmptyBorder(50,30,75,30));
 
 		//HAUT
 		/*this.titlePanel = new JPanel();
@@ -105,6 +106,7 @@ public class IHMPlateau extends JFrame implements MouseListener, MouseMotionList
 		//###### JOUEUR 1
 		//JPanel panelJoueurun = new JPanel(new GridLayout(2, 0));
 		JPanel panelJoueurun = new JPanel(new BorderLayout());
+		
 
 		//nom joueur
 		JPanel panelNomJoueurUn = new JPanel(new GridLayout(0,2));		
@@ -271,7 +273,13 @@ public class IHMPlateau extends JFrame implements MouseListener, MouseMotionList
 		// Bouton cr�ation des joueurs
 		JPanel panelButonLancer = new JPanel();
 		panelButonLancer.setPreferredSize(new Dimension(0, 100));
+		panelButonLancer.setBorder(BorderFactory.createEmptyBorder(20,0,0,0));
+		
 		ButtonJolie btnlancer = new ButtonJolie("Lancer");
+		btnlancer.setFont(new Font("Calibri", Font.BOLD,35));
+		Color c = Color.decode("#387ebe");
+		btnlancer.setBackground(c);
+		
 
 		btnlancer.addActionListener(new ActionListener() {
 			@Override

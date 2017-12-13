@@ -1,20 +1,20 @@
 COULEUR;QUESTION;REPONSE 1;REPONSE 2;REPONSE 3;REPONSE 4;NUMERO REPONSE JUSTE;DESCRIPTION
-ROUGE;Quand a été créé le téléphone;1871;1873;1876;1878;3;3 : Inventé par le célèbre Alexander Graham Bell le 14 février 1876
-ROUGE;Pour quel invention Thomas Edison n'a-t-il pas obtenut le brevet ;Le microphone;La centrale eletrcique à courant continu;Le phonographe;Le néon;4;4 : Crée en 1910 par George Claude, physicien travaillant sur les gaz rares
-ROUGE;Qui est le nom du premier microprocesseur;Core;Intel 4004;Pentium;Intel Core;2;2 : Intel 4004 inventé en 1971 par Marcian Hoff et Gilbert Hyatt. Il possédait 2 300 transistors, cela parait vraiment peu face au dernier Intel Core qui lui en possède plus de 1 million
-ROUGE;Quel invention majeur a eu lieu dans les années 80;La carte à puce;Le GPS;Le World Wide Web;Le CD;3;3 : Inventé par le chercheur anglais Tim Berners-Lee du Cern à Genève. La carte à puce a été créée en 1974, le GPS et le CD en 1978
-BLEU;Savez-vous quel était la couleur au père noel à sa création;bleau;rouge;vert;noir;3;3: vert
+ROUGE;Quand a ete cree le telephone;1871;1873;1876;1878;3;3 : Invente par le celebre Alexander Graham Bell le 14 fevrier 1876
+ROUGE;Pour quel invention Thomas Edison n'a-t-il pas obtenut le brevet ;Le microphone;La centrale eletrcique à courant continu;Le phonographe;Le neon;4;4 : Cree en 1910 par George Claude, physicien travaillant sur les gaz rares
+ROUGE;Qui est le nom du premier microprocesseur;Core;Intel 4004;Pentium;Intel Core;2;2 : Intel 4004 invente en 1971 par Marcian Hoff et Gilbert Hyatt. Il possedait 2 300 transistors, cela parait vraiment peu face au dernier Intel Core qui lui en possede plus de 1 million
+ROUGE;Quel invention majeur a eu lieu dans les annees 80;La carte à puce;Le GPS;Le World Wide Web;Le CD;3;3 : Invente par le chercheur anglais Tim Berners-Lee du Cern à Geneve. La carte à puce a ete creee en 1974, le GPS et le CD en 1978
+BLEU;Savez-vous quel etait la couleur au pere noel à sa creation;bleau;rouge;vert;noir;3;3: vert
 BLEU;Savez-vous ce qu'un crocodile est le seul à ne pas pouvoir faire ;loucher;bailler;tirer la langue;sauter;3;3 : tirer la langue
 BLEU;Savez-vous jusqu'à combien de temps un escagot peut dormir;3 minutes;3 heures;3 mois;3 ans;4;4 : 3 ans
-BLEU;Savez-vous ce qui pour la plupart des gens fais plus peur que la mort;manger un œil de barracuda;vivre avec des araignées;oublier l'anniversaire de sa compagne;vivre une invasion de zombie;2;2 : vivre avec des araignées
-VERT;Quand CPE a été créé;1990;1992;1994;1996;3;3 : l'école a été créé en 1994 par la fusion de deux écoles : l’institut de chimie physique industrielle (ICPI), fondé en 1919, et l’école supérieure de chimie industrielle de Lyon (ESCIL), fondée en 1883
-VERT;D'après le groupe L'Etudiant, quel est la position de CPE parmit les écoles d'ingenieur post-bac;10ème/70;15ème/70;4ème/ 70;8ème/70;3;3 : 4ème/70
-VERT;Quel prix nobel a été décerné à un élève en 2005;Electronique;Chimie;Physique;Informatique;2;2 : Prix Nobel de Chimie 2005, membre de l'Académie des Sciences, spécialiste de chimie organique
-VERT;En quel année un élève de CPE à t-il été médaillé au JO;1996 à Atlanta;2000 à Sydney;2004 à Athènes;2008 à Pekin;2;2 : En 2000 à Sydney, médaille d'or aux Jeux Olympiques d'aviron
-ORANGE;Quel poisson n'a jamais d'aniversaire ?;Poisson rouge;L'espadon;Poisson panné;Blobfish;3;
+BLEU;Savez-vous ce qui pour la plupart des gens fais plus peur que la mort;manger un œil de barracuda;vivre avec des araignees;oublier l'anniversaire de sa compagne;vivre une invasion de zombie;2;2 : vivre avec des araignees
+VERT;Quand CPE a ete cree;1990;1992;1994;1996;3;3 : l'ecole a ete cree en 1994 par la fusion de deux ecoles : l’institut de chimie physique industrielle (ICPI), fonde en 1919, et l’ecole superieure de chimie industrielle de Lyon (ESCIL), fondee en 1883
+VERT;D'apres le groupe L'Etudiant, quel est la position de CPE parmit les ecoles d'ingenieur post-bac;10eme/70;15eme/70;4eme/ 70;8eme/70;3;3 : 4eme/70
+VERT;Quel prix nobel a ete decerne à un eleve en 2005;Electronique;Chimie;Physique;Informatique;2;2 : Prix Nobel de Chimie 2005, membre de l'Academie des Sciences, specialiste de chimie organique
+VERT;En quel annee un eleve de CPE à t-il ete medaille au JO;1996 à Atlanta;2000 à Sydney;2004 à Athenes;2008 à Pekin;2;2 : En 2000 à Sydney, medaille d'or aux Jeux Olympiques d'aviron
+ORANGE;Quel poisson n'a jamais d'aniversaire ?;Poisson rouge;L'espadon;Poisson panne;Blobfish;3;
 ORANGE;Quel est le fruit que les poissons n’aiment pas ?;Banane;Pêche;Fraise;Abricot;2;
-ORANGE;Quel est le plat préféré des opticiens ?;Tartiflette;Steak / Frites;Raclette;Lentilles;4;
-ORANGE;Je commence par un e, je finis aussi par un e, mais je ne contient qu’une seule lettre. Que suis je ?;Enveloppe;Ete;Epée;Epie;1;
-ORANGE;Quel est le fruit préféré du dragueur ?;L'ananas;La poire;La pomme;Le citron;1;
+ORANGE;Quel est le plat prefere des opticiens ?;Tartiflette;Steak / Frites;Raclette;Lentilles;4;
+ORANGE;Je commence par un e, je finis aussi par un e, mais je ne contient qu’une seule lettre. Que suis je ?;Enveloppe;Ete;Epee;Epie;1;
+ORANGE;Quel est le fruit prefere du dragueur ?;L'ananas;La poire;La pomme;Le citron;1;
 ORANGE;Combien y a-t-il de fois la lettre F dans ce texte ?  FINISHED FILES ARE THE RE-  SULT OF YEARS OF SCIENTIF-  IC STUDY COMBINED WITH  THE  XPERIENCE OF YEARS.;3;5;6;2;3;
-ORANGE;Quel est le point commun entre un Juif et des chaussures?;Ca coute chère;Après 45 on en trouve moins;Il se resemble;Il vont toujours par deux;2;
+ORANGE;Quel est le point commun entre un Juif et des chaussures?;Ca coute chere;Apres 45 on en trouve moins;Il se resemble;Il vont toujours par deux;2;
