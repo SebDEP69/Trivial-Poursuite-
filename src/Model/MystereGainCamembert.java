@@ -1,7 +1,5 @@
 package Model;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Scanner;
 
 public class MystereGainCamembert extends Mystere{
 
@@ -17,44 +15,22 @@ public class MystereGainCamembert extends Mystere{
 
 		Camembert camembertjoueur = joueurcourant.getCamembert();
 		Couleur serie[] = {Couleur.VERT, Couleur.ORANGE,Couleur.BLEU, Couleur.ROUGE};
-		
-		int indice = 1;
-		HashMap<Integer, Couleur> proposition = new HashMap<Integer, Couleur>();
-		
-		System.out.println("quelle couleur voulez vous avoir? \n ");
-		for (Couleur couleur : serie) {
+		Boolean ajout = false;
+		int i = 0;
+		String message="";
+		Couleur couleur = null;
+		while(!ajout && i < serie.length) {
+			couleur = serie[i];
 			if (!camembertjoueur.ContientPart(couleur)) {
-				
-				proposition.put(indice, couleur);
-				System.out.println(indice+" : "+couleur+"\n");
-				indice++;
-			}
-			
+				if (camembertjoueur.AjoutPartCamembert(couleur)) {
+					ajout = true;
+					message = "Vous avez gagnez un camembert "+couleur.toString();
+				}else {
+					message = "Erreur quand le gain de camembert";
+				}
+			}	
 		}
-					
-		Scanner sc = new Scanner(System.in);
-		int choix = sc.nextInt();
-		
-		switch (choix) {
-		case 1:
-			camembertjoueur.AjoutPartCamembert(proposition.get(1));
-			break;
-		case 2:
-			camembertjoueur.AjoutPartCamembert(proposition.get(2));
-			break;
-		case 3:
-			camembertjoueur.AjoutPartCamembert(proposition.get(3));
-			break;
-		case 4:
-			camembertjoueur.AjoutPartCamembert(proposition.get(4));
-			break;
-		default:
-			camembertjoueur.AjoutPartCamembert(Couleur.ROUGE);
-			break;
-		}
-
-		sc.close();
-		return "";
+		return message;
 	}
 
 }

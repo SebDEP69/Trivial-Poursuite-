@@ -8,7 +8,6 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.GridLayout;
 import java.awt.Insets;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
@@ -21,13 +20,14 @@ import java.util.Observer;
 
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 
-import Controler.TrivialControler; 
+import Controler.TrivialControler;
+import Model.ButtonJolie;
+import Model.Regles; 
 
 
 
@@ -39,48 +39,60 @@ public class TrivialPursuitGUI extends javax.swing.JFrame implements MouseListen
 	private JPanel nord;
 	private JPanel sud;
 	private JPanel centre;
+	private JPanel est;
+	private JPanel ouest;
 	
-	public TrivialPursuitGUI(String name, Dimension dim) {
+	public TrivialPursuitGUI(String name) {
 
 		super(name);
 
-		  Toolkit leKit = this.getToolkit();
-		  Dimension tailleFenetre = leKit.getScreenSize();
-		  Dimension boardSize = tailleFenetre;
-		  this.setTitle(name);
-		  //  Use a Layered Pane for this this application
-		  layeredPane = new JLayeredPane();
-		  getContentPane().add(layeredPane);
-		  layeredPane.setPreferredSize(boardSize);
-		  layeredPane.addMouseListener(this);
-		  layeredPane.addMouseMotionListener(this);
-		  
-		  JPanel panelGeneral = new JPanel();
-			  panelGeneral.setLayout( new BorderLayout() );
-			  panelGeneral.setPreferredSize( boardSize );
-			  panelGeneral.setBounds(0, 0, boardSize.width, boardSize.height);
-			  layeredPane.add(panelGeneral, JLayeredPane.DEFAULT_LAYER);
+		Toolkit leKit = this.getToolkit();
+		Dimension boardSize = leKit.getScreenSize();
+		this.setTitle(name);
+		//  Use a Layered Pane for this this application
+		layeredPane = new JLayeredPane();
+		getContentPane().add(layeredPane);
+		layeredPane.setPreferredSize(boardSize);
+		layeredPane.addMouseListener(this);
+		layeredPane.addMouseMotionListener(this);
 
-	
-	
-		nord = new JPanel();
-		nord.setLayout(new GridLayout(1,3));
-		panelGeneral.add(nord, BorderLayout.NORTH);
 
+
+		JPanel panelGeneral = new JPanel();
+		panelGeneral.setLayout( new BorderLayout() );
+		panelGeneral.setPreferredSize( boardSize );
+		panelGeneral.setBounds(0, 0, boardSize.width, boardSize.height);
+		layeredPane.add(panelGeneral, JLayeredPane.DEFAULT_LAYER);
+			  
 		sud = new JPanel();
 		panelGeneral.add(sud, BorderLayout.SOUTH);
+		
+		est = new JPanel();
+		panelGeneral.add(est, BorderLayout.EAST);
+		//est.setBackground(Color.ORANGE);
+				
+		ouest = new JPanel();
+		panelGeneral.add(ouest, BorderLayout.WEST);
+		//ouest.setBackground(Color.BLUE);
+		
+		nord = new JPanel();
+		panelGeneral.add(nord, BorderLayout.NORTH);
+
+		
+		//sud.setBackground(Color.ORANGE);
 		
 		centre = new JPanel();
 		centre.setLayout(new GridBagLayout());
 		panelGeneral.add(centre, BorderLayout.CENTER);
+		//centre.setBackground(Color.ORANGE);
 		
 		// CENTRE HAUT // 
 	     JPanel texte1 = new JPanel();
 	     texte1.setPreferredSize(new Dimension(10,90));
 	     centre.add((JPanel) texte1);
-	     JLabel txt1 = new JLabel("Bienvenue sur le jeu Trivial Pursuit, pour lancer une partie cliquez sur : Debut de la partie");
+	     JLabel txt1 = new JLabel("Bienvenue sur l'application TRIVIAL PURSUIT, pour lancer une partie cliquez sur : Debut de la partie");
 	     txt1.setHorizontalTextPosition(JLabel.CENTER); 
-	     txt1.setFont(new Font("Freestyle Script",Font.PLAIN,25));
+	     txt1.setFont(new Font("Calibri",Font.PLAIN,32));
 	     texte1.add(txt1);
 	     texte1.setVisible(true);
 	     GridBagConstraints a = new GridBagConstraints();    
@@ -89,36 +101,20 @@ public class TrivialPursuitGUI extends javax.swing.JFrame implements MouseListen
 		 a.gridwidth = 5;
 		 a.fill = GridBagConstraints.HORIZONTAL;
 		 a.insets = new Insets(-100,-150,50,-150);
+         texte1.add(txt1);
 		 centre.add(texte1, a);
-	     
-	
+		 
 		
-		// NORD GAUCHE
-		 JPanel square = new JPanel();
-		 nord.add((JPanel) square);
-	     Icon joueur1 = new ImageIcon("images/j1.png");
-	     JLabel player1 = new JLabel();
-	     player1.setIcon(joueur1);
-	     square.add(player1);
-	     square.setVisible(true);
-	     
+		
 	     // NORD MILIEU
 	     JPanel square1 = new JPanel();
 	     nord.add((JPanel) square1);
-         Icon titre = new ImageIcon("images/title.png");
+         Icon titre = new ImageIcon("images/title2.png");
          JLabel title = new JLabel();
          title.setIcon(titre);
          square1.add(title);
          square1.setVisible(true); 
-	      
-	     // NORD DROIT
-         JPanel square2 = new JPanel();
-         nord.add((JPanel) square2);
-         Icon joueur2 = new ImageIcon("images/j2.png");
-         JLabel player2 = new JLabel();
-         player2.setIcon(joueur2);
-         square2.add(player2);
-         square2.setVisible(true); 
+	   
          
          
          //SUD
@@ -126,37 +122,28 @@ public class TrivialPursuitGUI extends javax.swing.JFrame implements MouseListen
          sud.add((JPanel) square3);
          JLabel text = new JLabel();
          text.setText(text.getText()+"Realise par Depasse, De Paoli, Begni, Dumas");
-         text.setFont(new Font("Apple Chancery",Font.ITALIC,15));
+         text.setFont(new Font("Calibri",Font.ITALIC,15));
          square3.add(text);
          square3.setVisible(true);
          
          //CENTRE2
          JPanel bouton1 = new JPanel();
          centre.add((JPanel) bouton1);
-         JButton btn1 = new JButton("<Html><center>Debut de la partie<Html>");
-         btn1.setBackground(javax.swing.UIManager.getDefaults().getColor("Button.light"));
-         btn1.setFocusable(false);
-         btn1.setFont(new Font("Calibri", Font.BOLD, 20));
+         ButtonJolie btn1 = new ButtonJolie("<Html><center>Debut de la partie<Html>");
+         //JButton btn1 = new JButton("<Html><center>Debut de la partie<Html>");
+      
          btn1.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				JFrame frame;	
-				Dimension dim;
-				
-				dim = new Dimension(800, 800);
-				
 				TrivialPursuite trivialPursuite = new TrivialPursuite();
 				TrivialControler trivialControler = new TrivialControler(trivialPursuite);
-				
-				
-				frame = new IHMPlateau("Trivial Pursuit",trivialControler,  dim);
-				
+				JFrame frame = new IHMPlateau("Trivial Pursuit",trivialControler);
 				trivialPursuite.addObserver((Observer) frame);
-				frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-				frame.pack();
+				setVisible(false);
+				dispose();
+				frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 				frame.setVisible(true);
-				
 			}
 		});
          
@@ -173,13 +160,10 @@ public class TrivialPursuitGUI extends javax.swing.JFrame implements MouseListen
          
          
          
-         JPanel bouton2 = new JPanel();
-         centre.add((JPanel) bouton2);
-         JButton btn2 = new JButton("<Html><center>Rejouer une partie<Html>");
+         //JPanel bouton2 = new JPanel();
+        /* centre.add((JPanel) bouton2);
+         ButtonJolie btn2 = new ButtonJolie("<Html><center>Rejouer une partie<Html>");
          btn2.setPreferredSize(new Dimension(180, 100));
-         btn2.setBackground(javax.swing.UIManager.getDefaults().getColor("Button.light"));
-         btn2.setFocusable(false);
-         btn2.setFont(new Font("Calibri", Font.BOLD, 20));
          bouton2.add(btn2);
          bouton2.setVisible(true);
          GridBagConstraints e = new GridBagConstraints();    
@@ -187,17 +171,30 @@ public class TrivialPursuitGUI extends javax.swing.JFrame implements MouseListen
 		 e.gridy = 2;     
 		 e.insets = new Insets(-20,100,-30,100);
 		 e.fill = GridBagConstraints.HORIZONTAL;
-		 centre.add(btn2, e);
+		 centre.add(btn2, e);*/
          
          
          
          JPanel bouton3 = new JPanel();
          centre.add((JPanel) bouton3);
-         JButton btn3 = new JButton("<Html><center>Regles du jeu<Html>");
+         ButtonJolie btn3 = new ButtonJolie("<Html><center>Regles du jeu<Html>");
+         
+         
+         btn3.addActionListener(new ActionListener() {
+ 			
+ 			@Override
+ 			public void actionPerformed(ActionEvent e) {
+ 				JFrame frame = new Regles();
+ 				frame.setTitle("Regles");
+ 				frame.setSize(1150, 680);
+ 				frame.setLocationRelativeTo(null);
+ 				frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+ 				frame.setVisible(true);
+
+ 			}
+ 		});
+         
          btn3.setPreferredSize(new Dimension(180, 100));
-         btn3.setBackground(javax.swing.UIManager.getDefaults().getColor("Button.light"));
-         btn3.setFocusable(false);
-         btn3.setFont(new Font("Calibri", Font.BOLD, 20));
          bouton3.add(btn3);
          bouton3.setVisible(true);
          GridBagConstraints f = new GridBagConstraints();   
@@ -210,11 +207,8 @@ public class TrivialPursuitGUI extends javax.swing.JFrame implements MouseListen
          
          JPanel bouton4 = new JPanel();
          centre.add((JPanel) bouton4);
-         JButton btn4 = new JButton("<Html><center>Score de la partie<Html>");
+         ButtonJolie btn4 = new ButtonJolie("<Html><center>Score de la partie<Html>");
          btn4.setPreferredSize(new Dimension(180, 100));
-         btn4.setBackground(javax.swing.UIManager.getDefaults().getColor("Button.light"));
-         btn4.setFocusable(false);
-         btn4.setFont(new Font("Calibri", Font.BOLD, 20));
          bouton4.add(btn4);
          bouton4.setVisible(true);
          GridBagConstraints g = new GridBagConstraints();   
@@ -227,11 +221,8 @@ public class TrivialPursuitGUI extends javax.swing.JFrame implements MouseListen
          
          JPanel bouton5 = new JPanel();
          centre.add((JPanel) bouton5);
-         JButton btn5 = new JButton("<Html><center>Personnalisation<Html>");
+         ButtonJolie btn5 = new ButtonJolie("<Html><center>Personnalisation<Html>");
          btn5.setPreferredSize(new Dimension(180, 100));
-         btn5.setBackground(javax.swing.UIManager.getDefaults().getColor("Button.light"));
-         btn5.setFocusable(false);
-         btn5.setFont(new Font("Calibri", Font.BOLD, 20));
          bouton5.add(btn5);
          bouton5.setVisible(true);
          GridBagConstraints h = new GridBagConstraints();   
@@ -243,11 +234,8 @@ public class TrivialPursuitGUI extends javax.swing.JFrame implements MouseListen
          
          JPanel bouton6 = new JPanel();
          centre.add((JPanel) bouton6);
-         JButton btn6 = new JButton("<Html><center>Historique des parties<Html>");
-         btn6.setBackground(javax.swing.UIManager.getDefaults().getColor("Button.light"));
-         btn6.setFocusable(false);
+         ButtonJolie btn6 = new ButtonJolie("<Html><center>Historique des parties<Html>");
          btn6.setPreferredSize(new Dimension(200, 250));
-         btn6.setFont(new Font("Calibri", Font.BOLD, 20));
          bouton6.add(btn6);
          bouton6.setVisible(true);
          GridBagConstraints i = new GridBagConstraints();   
@@ -256,9 +244,6 @@ public class TrivialPursuitGUI extends javax.swing.JFrame implements MouseListen
 		 i.insets = new Insets(-20,100,-30,100);
 		 i.fill = GridBagConstraints.HORIZONTAL;
 		 centre.add(btn6, i);
-         
-	        
-	
 	}
 
 	@Override

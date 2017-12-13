@@ -21,14 +21,13 @@ public class MystereProchainCamembert extends Mystere{
 			if(listecase.get(i).isSuperCamembert()){
 				joueurcourant.setCaseCourante(listecase.get(i));
 				trouveCaseCamembert = true;
-				
 			}
 			else{
 				trouveCaseCamembert = false;
 			}
 			i++;
 		}
-		return "";
+		return "Vous vous dirigez vers la prochaine case Super camembert";
 	}
 
 }

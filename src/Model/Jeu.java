@@ -12,9 +12,6 @@ public class Jeu {
 		this.plateau = new Plateau();
 		
 	}
-	
-	
-	
 	public ArrayList<Joueur> getListeJoueur(){
 		
 		return this.listeJoueur;
@@ -22,36 +19,31 @@ public class Jeu {
 	
 	//Methode classe Jeu
 	public int LanceDeDes(){
+		//return 4;
 		return (int) ((Math.random() * 6)+1);
 		
 	}
-	
+	/**
+	 * Fonction qui permet d'avancer les joueurs 
+	 * @param lancerdes
+	 */
 	public void AvancerJoueur(int lancerdes){
-		
-		
 		int indiceCaseCourante = this.joueurCourant.getCaseCourant().getNumero();
 		int resultatDes = indiceCaseCourante+lancerdes;
-
-		
 		if(resultatDes > 23){
 			resultatDes = resultatDes - 24;
 		}
-			Case newCase = this.plateau.getCasePosition(resultatDes);
-			this.joueurCourant.setCaseCourante(newCase);
-
-		
-		
+		Case newCase = this.plateau.getCasePosition(resultatDes);
+		this.joueurCourant.setCaseCourante(newCase);
 	}
 	
-	public void TourJoueur(){
-		
-	}
 	
 	public Carte TirerUneCarte(){
 		return null;
-		
 	}
-	
+	/**
+	 * Fonction qui change le joueur courant 
+	 */
 	public void ChangementJoueur(){
 		
 		if (this.joueurCourant == this.listeJoueur.get(0)) {
@@ -61,12 +53,18 @@ public class Jeu {
 		}
 		
 	}
-	
+	/**
+	 * boolean isCamembertPlein 
+	 * Joueur j 
+	 * int Indice J 
+	 * @return isCamembertPlein
+	 * 
+	 * Fonction qui détermine la fin de la partie 
+	 */
 	public boolean FinDuJeu(){
 		boolean isCamenbertPlein = false;
 		Joueur j ;
 		int indiceJ=0;
-		System.out.println(listeJoueur.size());
 		while (!isCamenbertPlein && (indiceJ < listeJoueur.size()))
 		{
 			j = listeJoueur.get(indiceJ);
@@ -113,11 +111,13 @@ public class Jeu {
 		
 		Couleur couleurquestion = this.joueurCourant.getCaseCourant().getCouleur();
 		Carte carte = this.plateau.TirerCarte(couleurquestion);
-	
 		return (Question) carte;
 	}
 	
-		
+	/**
+	 * Focntion qui retourne le message affiché par la carte mystère 
+	 * @return message 
+	 */
 	public String ActionCaseMystere(){
 		
 		Carte carte = this.plateau.TirerCarte(Couleur.NOIR);
@@ -130,7 +130,14 @@ public class Jeu {
 	}
 	
 	
-	
+	/**
+	 * Fonction de création des joueurs 
+	 * 
+	 * @param nomjoueurun
+	 * @param nomJoueurdeux
+	 * @param couleurJoueurun
+	 * @param couleurJoueurdeux
+	 */
 	public void CreationJoueur(String nomjoueurun, String nomJoueurdeux, CouleurPion couleurJoueurun, CouleurPion couleurJoueurdeux) {
 		
 		
@@ -140,10 +147,6 @@ public class Jeu {
 		this.listeJoueur.add(new Joueur(couleurJoueurdeux, nomJoueurdeux,caseDepart));
 		
 	}
-	
-	
-	
-	
 	
 	public static void main(String[] args) {
 				

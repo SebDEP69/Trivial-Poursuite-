@@ -2,8 +2,8 @@ package Model;
 
 public enum CouleurPion {
 	
-	ORANGE,
-	ROUGE,
-	BLEU,
-	VERT;	
+	MACRON,
+	MERKEL,
+	POUTINE,
+	TRUMP;	
 }

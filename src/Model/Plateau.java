@@ -1,4 +1,5 @@
 package Model;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class Plateau {
@@ -25,8 +26,6 @@ public class Plateau {
 		InitListCase();
 		
 	}
-	
-	
 	public Plateau () {
 		
 		this.listeCarteRouge = new ArrayList<Carte>();
@@ -36,7 +35,7 @@ public class Plateau {
 		this.listeCarteMystere = new ArrayList<Carte>();
 		this.listeCase = new ArrayList<Case>();
 		
-		String[] choixRougeun = {"repRed1","repRed2","repRed3","repRed4"};
+		/*String[] choixRougeun = {"repRed1","repRed2","repRed3","repRed4"};
 		String[] choixRougedeux = {"repRed5","repRed6","repRed7","repRed8"};
 		listeCarteRouge.add(new Question("question rouge1", 1,choixRougeun ,Couleur.ROUGE));
 		listeCarteRouge.add(new Question("question rouge2", 1, choixRougedeux ,Couleur.ROUGE));
@@ -58,9 +57,25 @@ public class Plateau {
 		String[] choixVertdeux = {"repert5","repert6","repert7","repert8"};
 		listeCarteVert.add(new Question("question vert1", 1, choixVertun ,Couleur.VERT));
 		listeCarteVert.add(new Question("question vert2", 1, choixVertdeux ,Couleur.VERT));
-		
+		*/
+		BaseQuestionCSV BDD ;
+		try {
+			BDD = new BaseQuestionCSV("BDDQuestion.csv");
+			BDD.EnregistrementQuestion();
+			this.listeCarteRouge = BDD.getQuestionROUGE();
+			this.listeCarteOrange = BDD.getQuestionORANGE();
+			this.listeCarteBleu = BDD.getQuestionBLEU();
+			this.listeCarteVert = BDD.getQuestionVERT();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		listeCarteMystere.add(new MystereProchainCamembert());
+		listeCarteMystere.add(new MystereEnleverCamembert());
 		listeCarteMystere.add(new MysterePerteCamembert());
-		
+		listeCarteMystere.add(new MystereRejouer());
+		listeCarteMystere.add(new MystereRetourCaseDepart());
+		listeCarteMystere.add(new MystereGainCamembert());
 		
 		this.nombreCasePlateau = 24;
 		InitListCase();
@@ -71,27 +86,26 @@ public class Plateau {
 	// renvoie une carte de la couleur demander
 	public Carte TirerCarte(Couleur couleur) {
 		
-		Carte carteRetour = null;
-				
+		Carte carteRetour = null;		
 		int index =0;
 		ArrayList<Carte> listeTEMP= new ArrayList<Carte>();
-		
-		  switch (couleur) {
-	          case ROUGE : listeTEMP = listeCarteRouge;
-	                   break;
-	          case BLEU:    listeTEMP = listeCarteBleu;
-	                   break;
-	          case VERT: listeTEMP = listeCarteVert;
-	                   break;
-	          case ORANGE:  listeTEMP = listeCarteOrange;
-	                   break;
-	          case NOIR:  listeTEMP = listeCarteMystere;
-	                   break;
-		  }
-		  
-		  index = (int) (Math.random() * listeTEMP.size()) ;
-    	  carteRetour = listeTEMP.get(index);
-		
+
+		switch (couleur) {
+		case ROUGE : listeTEMP = listeCarteRouge;
+		break;
+		case BLEU:    listeTEMP = listeCarteBleu;
+		break;
+		case VERT: listeTEMP = listeCarteVert;
+		break;
+		case ORANGE:  listeTEMP = listeCarteOrange;
+		break;
+		case NOIR:  listeTEMP = listeCarteMystere;
+		break;
+		}
+
+		index = (int) (Math.random() * listeTEMP.size()) ;
+		System.out.println(index);
+		carteRetour = listeTEMP.get(index);
 		return carteRetour;
 	}
 	
@@ -100,7 +114,6 @@ public class Plateau {
 	private void InitListCase() {
 		
 		Couleur serie[] = {Couleur.VERT, Couleur.ORANGE,Couleur.BLEU, Couleur.ROUGE,Couleur.NOIR};
-		
 		int indexSerie=0;
 		for (int numCase = 0; numCase < getNombreCasePlateau(); numCase++) {
 			
@@ -127,10 +140,8 @@ public class Plateau {
 	
 	
 	
-	public ArrayList<Case> getListeCase(){
-		
+	public ArrayList<Case> getListeCase(){	
 		return listeCase;
-			
 	}
 
 	
