@@ -79,6 +79,9 @@ public class Camembert {
 	}
 
 
+	public int getNbPart() {		
+		return this.listePart.size();	
+	}
 
 	@Override
 	public String toString() {

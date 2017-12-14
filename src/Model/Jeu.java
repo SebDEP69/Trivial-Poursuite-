@@ -13,14 +13,13 @@ public class Jeu {
 		
 	}
 	public ArrayList<Joueur> getListeJoueur(){
-		
 		return this.listeJoueur;
 	}
 	
 	//Methode classe Jeu
 	public int LanceDeDes(){
-		//return 4;
-		return (int) ((Math.random() * 6)+1);
+		return 4;
+		//return (int) ((Math.random() * 6)+1);
 		
 	}
 	/**
@@ -37,10 +36,6 @@ public class Jeu {
 		this.joueurCourant.setCaseCourante(newCase);
 	}
 	
-	
-	public Carte TirerUneCarte(){
-		return null;
-	}
 	/**
 	 * Fonction qui change le joueur courant 
 	 */
@@ -51,7 +46,6 @@ public class Jeu {
 		}else {
 			this.joueurCourant = this.listeJoueur.get(0);
 		}
-		
 	}
 	/**
 	 * boolean isCamembertPlein 
@@ -68,7 +62,7 @@ public class Jeu {
 		while (!isCamenbertPlein && (indiceJ < listeJoueur.size()))
 		{
 			j = listeJoueur.get(indiceJ);
-			isCamenbertPlein = j.getCamembert().Plein();
+			isCamenbertPlein = j.camPlein();
 			indiceJ++;
 		}
 		return isCamenbertPlein;
@@ -76,20 +70,6 @@ public class Jeu {
 	
 	public Joueur getJoueurCourant(){
 		return this.joueurCourant;
-	}
-	
-	public boolean GainCamembert(){
-		return false;
-		
-	}
-	
-	public boolean PoserUneQuestion(Carte carte){
-		return false;
-		
-	}
-	
-	public void DebutDuJeu(ArrayList<Carte> listeCarteRouge, ArrayList<Carte> listeCarteOrange, ArrayList<Carte> listeCarteVerte, ArrayList<Carte> listeCarteBleue, ArrayList<Carte> listeCarteMystere ){
-		
 	}
 	
 	public String OrdreJoueurDebut(){

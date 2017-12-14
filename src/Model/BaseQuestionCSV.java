@@ -35,7 +35,7 @@ public class BaseQuestionCSV {
 
 		BufferedReader reader = new BufferedReader (ficher);
 		String ligne="";
-		reader.readLine(); // ne lit pas la premiere ligen du fichier
+		reader.readLine(); // ne lit pas la premiere ligne du fichier
 		while ( (ligne = reader.readLine())!=null ) {
 
 			Question question = CreerQuestion(ligne,";",1);

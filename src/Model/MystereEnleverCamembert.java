@@ -21,12 +21,12 @@ public class MystereEnleverCamembert extends Mystere {
 			System.out.println("fuck");
 		}
 		
-		Camembert camembertJoueurAdverse = joueurAdverse.getCamembert();		
+		//Camembert camembertJoueurAdverse = joueurAdverse.getCamembert();		
 		String message="";
-		if (camembertJoueurAdverse.RetirerPartCamemebert()) {
+		if (joueurAdverse.RetirerPartCamemebert()) {
 			message = "Vous avez retirer une part de camembert a "+joueurAdverse.getNom();
 		}else {
-			message = joueurAdverse.getNom()+" ne possède pas de part de camembert à retirer";
+			message = joueurAdverse.getNom()+" ne possï¿½de pas de part de camembert ï¿½ retirer";
 		}
 		return message;
 	}
