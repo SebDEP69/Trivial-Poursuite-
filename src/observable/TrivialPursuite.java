@@ -27,9 +27,9 @@ public class TrivialPursuite extends Observable {
 		//System.out.println("je creer les joueurs ");
 		this.jeu.CreationJoueur(nomjoueurun,nomJoueurdeux,couleurJoueurun,couleurJoueurdeux);
 		String joueurCommence = this.jeu.OrdreJoueurDebut();
-		this.jeu.getJoueurCourant().AjoutPartCamembert(Couleur.BLEU);
-		this.jeu.getJoueurCourant().AjoutPartCamembert(Couleur.ROUGE);
-		this.jeu.getJoueurCourant().AjoutPartCamembert(Couleur.VERT);
+		//this.jeu.getJoueurCourant().AjoutPartCamembert(Couleur.BLEU);
+		//this.jeu.getJoueurCourant().AjoutPartCamembert(Couleur.ROUGE);
+		//this.jeu.getJoueurCourant().AjoutPartCamembert(Couleur.VERT);
 		this.envoiInfo(joueurCommence,"0",null,false);
 	}
 	
@@ -76,14 +76,14 @@ public class TrivialPursuite extends Observable {
 	private String actionDeFinGame(String message) {
 		
 		Joueur jcourant = this.jeu.getJoueurCourant();
-		jcourant.getScore().estGagnant();
+		jcourant.estGagnant();
 		for (Joueur joueur : this.jeu.getListeJoueur()) {
 			if (!(joueur.equals(jcourant))) {
-				joueur.getScore().estPerdant();
+				joueur.estPerdant();
 			}
 		}
 		String messageretour = message+" <br> Bravo "+jcourant.getNom()+" a gagne la partie ";
-		
+		this.jeu.enregistrementDesScore();
 		return messageretour;
 	}
 	

@@ -792,6 +792,10 @@ public class IHMPlateau extends JFrame implements MouseListener, MouseMotionList
 			this.plateauPanel.removeAll();
 			this.questionPanel.removeAll();
 			this.camembertPanel.removeAll();
+		
+			
+			((JButton) this.desPanel.getComponent(0)).setEnabled(false);;
+						
 			ArrayList<Joueur> listeDesJoueur = ((ArrayList<Joueur>) ((ArrayList<Object>) info).get(1));
 			this.creationPanelCamembert(listeDesJoueur);
 
@@ -800,6 +804,7 @@ public class IHMPlateau extends JFrame implements MouseListener, MouseMotionList
 			this.placementJoueur(listeDesJoueur);
 			
 			this.affcheEcranFin((String) ( (ArrayList<Object>) info).get(2));
+			
 		}else { // SI CEST PAS LA FIN DU GAME
 			this.camembertPanel.removeAll();
 			this.desPanel.removeAll();

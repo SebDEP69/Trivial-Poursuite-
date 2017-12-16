@@ -18,8 +18,8 @@ public class Jeu {
 	
 	//Methode classe Jeu
 	public int LanceDeDes(){
-		return 4;
-		//return (int) ((Math.random() * 6)+1);
+		//return 4;
+		return (int) ((Math.random() * 6)+1);
 		
 	}
 	/**
@@ -125,6 +125,13 @@ public class Jeu {
 		
 		this.listeJoueur.add(new Joueur(couleurJoueurun, nomjoueurun,caseDepart));
 		this.listeJoueur.add(new Joueur(couleurJoueurdeux, nomJoueurdeux,caseDepart));
+		
+	}
+	
+	public void enregistrementDesScore() {
+		
+		BaseScroreCSV BDD = new BaseScroreCSV();
+		BDD.EnregistrementDesScoreDeLaPartie(listeJoueur);
 		
 	}
 	

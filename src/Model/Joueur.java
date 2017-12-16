@@ -23,19 +23,34 @@ public class Joueur {
 		return this.pion;
 	}
 	
-	public Score getScore() {
-		return score;
-	}
 
+	
+	
+	// Score
+	public void estGagnant() {
+		this.score.estGagnant();
+	}
+	
+	public void estPerdant() {
+		this.score.estPerdant();
+	}
+	
+	public int getNbPartgagner() {
+		return this.score.getNbPartCamembert();
+	}
+	
+	public String getGagnant() {
+		return this.score.getGagnant();
+	}
+	
 	public String getNom() {
 		return nom;
 	}
 
-	private Camembert getCamembert(){
-		return this.camembert;
-	}
+		
 	
 	
+	//camembert
 	public boolean camVide(){
 		return this.camembert.Vide();
 	}
@@ -64,7 +79,14 @@ public class Joueur {
 		return this.camembert.getNbPart();
 	}
 	
+	public boolean CheckPartCamembert(Couleur couleur){
+		
+		return this.camembert.ContientPart(couleur);
+		
+	}
 	
+	
+	// Autres
 	public Case getCaseCourant(){
 		return this.caseCourante;
 	}
@@ -74,18 +96,14 @@ public class Joueur {
 		this.caseCourante = newCase;
 	}
 
-	public boolean CheckPartCamembert(Couleur couleur){
-		
-		return this.getCamembert().ContientPart(couleur);
-		
-	}
+	
 
 	@Override
 	public String toString() {
 		
 		String returnvalue ="" ;
 		returnvalue = this.getNom() +":\n";
-		returnvalue = returnvalue + this.getCamembert().toString();
+		returnvalue = returnvalue + this.camembert.toString();
 		return returnvalue;
 	}
 	
