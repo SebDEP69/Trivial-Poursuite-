@@ -45,7 +45,7 @@ public class IHMPlateau extends JFrame implements MouseListener, MouseMotionList
 		trivialBoard.setLayout( new BorderLayout() );
 		trivialBoard.setBounds(0, 0, boardSize.width, boardSize.height);
 		layeredPane.add(trivialBoard, JLayeredPane.DEFAULT_LAYER);
-		trivialBoard.setBorder(BorderFactory.createEmptyBorder(50,30,75,30));
+		trivialBoard.setBorder(BorderFactory.createEmptyBorder(50,30,95,30));
 
 		//HAUT
 		/*this.titlePanel = new JPanel();
@@ -106,11 +106,11 @@ public class IHMPlateau extends JFrame implements MouseListener, MouseMotionList
 		//###### JOUEUR 1
 		//JPanel panelJoueurun = new JPanel(new GridLayout(2, 0));
 		JPanel panelJoueurun = new JPanel(new BorderLayout());
-		
+
 
 		//nom joueur
 		JPanel panelNomJoueurUn = new JPanel(new GridLayout(0,2));		
-		JLabel labelNomJUn = new JLabel("Nom de joueur :");
+		JLabel labelNomJUn = new JLabel("Nom du joueur 1 :");
 		labelNomJUn.setFont(new Font("Calibri",Font.PLAIN,25));
 		JTextField nomJoueurUn = new JTextField();
 		panelNomJoueurUn.add(labelNomJUn);
@@ -121,7 +121,7 @@ public class IHMPlateau extends JFrame implements MouseListener, MouseMotionList
 		panelJoueurun.add(imgPersoUn, BorderLayout.CENTER);
 
 		// partie select perso
-		selectPersoUn = new JPanel(new GridLayout(0, 4));
+		selectPersoUn = new JPanel(new GridLayout(2, 2));
 		/*JButton btnMacron = new ButtonJolie(new ImageIcon("images/macron.png"));
 		JButton btnMerkel= new JButton(new ImageIcon("images/merkel.png"));
 		JButton btnPoutine = new JButton(new ImageIcon("images/poutine.png"));
@@ -176,7 +176,7 @@ public class IHMPlateau extends JFrame implements MouseListener, MouseMotionList
 		JPanel panelJoueurdeux = new JPanel(new BorderLayout());
 		//nom joueur
 		JPanel panelNomJoueurDeux = new JPanel(new GridLayout(0,2));		
-		JLabel labelNomJDeux = new JLabel("Nom de joueur");
+		JLabel labelNomJDeux = new JLabel("Nom du joueur 2 :");
 		labelNomJDeux.setFont(new Font("Calibri",Font.PLAIN,25));
 		JTextField nomJoueurDeux = new JTextField();
 		panelNomJoueurDeux.add(labelNomJDeux);
@@ -186,7 +186,7 @@ public class IHMPlateau extends JFrame implements MouseListener, MouseMotionList
 		// image principale
 		panelJoueurdeux.add(imgPersoDeux, BorderLayout.CENTER);		
 		// partie select perso
-		selectPersoDeux = new JPanel(new GridLayout(0, 4));
+		selectPersoDeux = new JPanel(new GridLayout(2, 2));
 
 		/*JButton btnMacrondeux = new JButton(new ImageIcon("images/macron.png"));
 		JButton btnMerkeldeux= new JButton(new ImageIcon("images/merkel.png"));
@@ -196,6 +196,8 @@ public class IHMPlateau extends JFrame implements MouseListener, MouseMotionList
 		JButton btnMerkeldeux= new ButtonJolie("Merkel");
 		JButton btnPoutinedeux = new ButtonJolie("Poutine");
 		JButton btnTrumpdeux = new ButtonJolie("Trump");
+
+
 
 		btnMacrondeux.addActionListener(new ActionListener() {
 			@Override
@@ -236,8 +238,12 @@ public class IHMPlateau extends JFrame implements MouseListener, MouseMotionList
 		selectPersoDeux.setPreferredSize(new Dimension(0, 100));
 		panelJoueurdeux.add(selectPersoDeux, BorderLayout.SOUTH);	
 
-		panelJoueurun.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 5, Color.DARK_GRAY));
-		panelJoueurdeux.setBorder(BorderFactory.createMatteBorder(0, 5, 0, 0, Color.DARK_GRAY));
+		panelJoueurun.setBorder(BorderFactory.createEmptyBorder(0,30,0,65));
+		panelJoueurdeux.setBorder(BorderFactory.createEmptyBorder(0,65,0,30));
+
+
+		//panelJoueurun.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 5, Color.DARK_GRAY));
+		//panelJoueurdeux.setBorder(BorderFactory.createMatteBorder(0, 5, 0, 0, Color.DARK_GRAY));
 
 		tekkenVue.add(panelJoueurun);
 		tekkenVue.add(panelJoueurdeux);		
@@ -274,12 +280,12 @@ public class IHMPlateau extends JFrame implements MouseListener, MouseMotionList
 		JPanel panelButonLancer = new JPanel();
 		panelButonLancer.setPreferredSize(new Dimension(0, 100));
 		panelButonLancer.setBorder(BorderFactory.createEmptyBorder(20,0,0,0));
-		
+
 		ButtonJolie btnlancer = new ButtonJolie("Lancer");
 		btnlancer.setFont(new Font("Calibri", Font.BOLD,35));
 		Color c = Color.decode("#387ebe");
 		btnlancer.setBackground(c);
-		
+
 
 		btnlancer.addActionListener(new ActionListener() {
 			@Override
@@ -316,7 +322,7 @@ public class IHMPlateau extends JFrame implements MouseListener, MouseMotionList
 		plateauPanel.add(panelButonLancer,BorderLayout.SOUTH);
 		trivialBoard.add(plateauPanel,BorderLayout.CENTER);
 		this.pack();
-		
+
 	}
 	private void creationPanelCamembert(ArrayList<Joueur> listeDesJoueur)
 	{
@@ -372,7 +378,7 @@ public class IHMPlateau extends JFrame implements MouseListener, MouseMotionList
 		// CHECK POUR CHAQUE COULEUR DE PART SI LE JOUEUR CONTIENT LA PART OU PAS
 		// SI IL POSSEDE LA PART ALORS ON AJOUTE LE CHEMIN DE L IMAGE DE LA PART
 		for (Couleur couleur : listeCouleur) {
-			if (joueur.getCamembert().ContientPart(couleur)) {
+			if (joueur.ContientPart(couleur)) {
 				listeImage[indice] = "images/"+perso+"_"+couleur+".png";
 			}else {
 				listeImage[indice] = null;
@@ -450,7 +456,7 @@ public class IHMPlateau extends JFrame implements MouseListener, MouseMotionList
 		 * HAUT => DROITE => BAS => GAUCHE
 		 */
 
-		
+
 		Color bleuColor = new Color(29, 174, 255);
 		Color rougeColor = new Color(206, 43, 46);
 		Color orangecolor = new Color(254, 169, 38);
@@ -696,7 +702,7 @@ public class IHMPlateau extends JFrame implements MouseListener, MouseMotionList
 				}
 			});
 		}
-		
+
 		JPanel categorie = new JPanel();
 		categorie.setLayout(new GridLayout(6,2));
 
@@ -718,19 +724,64 @@ public class IHMPlateau extends JFrame implements MouseListener, MouseMotionList
 		categorie.add(new JLabel(new ImageIcon("images/super.png")));
 		categorie.add(new JLabel("Super Camembert"));
 
-		
+
 		JLabel decriptionJoueurCourant = new JLabel("C'est au tour de "+joueurCourant.getNom());
-		
+
 		String nomImgJoueur = joueurCourant.getPion().getCouleurPion().toString().toLowerCase();
 		JLabel ImgJoueur = new JLabel(new ImageIcon("images/"+nomImgJoueur+".png"));
-		
-		
+
+
 		desPanel.add(btnLancerLesDes);
 		desPanel.add(categorie);
 		desPanel.add(decriptionJoueurCourant);
 		desPanel.add(ImgJoueur);
 	}
 
+	private void placementJoueur(ArrayList<Joueur> listeDesJoueur) {
+
+		int numJoueur=1;
+		for (Joueur joueur : listeDesJoueur) {
+			int casejUn = joueur.getCaseCourant().getNumero();
+
+			int[] coord = numcaseToindicePanel.get(casejUn);
+			JPanel border = ((JPanel) plateauPanel.getComponent(coord[0]));
+			JPanel componentBorder = ((JPanel) border.getComponent(coord[1]));
+
+			String[] listeImage = listeImageCamembert(joueur,numJoueur);				
+			try {
+				Image cam = imageCamembertWithPart("images/joueur"+numJoueur+".png",listeImage[0],listeImage[1],listeImage[2],listeImage[3]);
+				JLabel camemebertJoueur1 = new JLabel((new ImageIcon(cam.getScaledInstance(75, 75, Image.SCALE_DEFAULT))));
+				componentBorder.add(camemebertJoueur1);			
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			numJoueur++;
+		}
+
+	}
+
+	
+	private void affcheEcranFin(String message) {
+		
+		
+		JLabel Jlabelmessage = new JLabel(message);
+		JPanel fin = new JPanel(new BorderLayout());
+		fin.add(Jlabelmessage, BorderLayout.CENTER);
+
+		JButton rejouer = new ButtonJolie("Retour l'ecran d'acceuil");
+		rejouer.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				dispose();
+				setVisible(false);
+				@SuppressWarnings("unused")
+				LauncherGUI newgame = new LauncherGUI();
+			}
+		});
+		fin.add(rejouer, BorderLayout.SOUTH);
+		this.plateauPanel.add(fin, BorderLayout.CENTER);
+		
+	}
 	@SuppressWarnings("unchecked")
 	@Override
 	public void update(Observable arg0, Object info) {
@@ -741,28 +792,19 @@ public class IHMPlateau extends JFrame implements MouseListener, MouseMotionList
 			this.plateauPanel.removeAll();
 			this.questionPanel.removeAll();
 			this.camembertPanel.removeAll();
+		
+			
+			((JButton) this.desPanel.getComponent(0)).setEnabled(false);;
+						
 			ArrayList<Joueur> listeDesJoueur = ((ArrayList<Joueur>) ((ArrayList<Object>) info).get(1));
 			this.creationPanelCamembert(listeDesJoueur);
 
 			this.creationplateau();
-			JLabel message = new JLabel( (String) ( (ArrayList<Object>) info).get(2) );
-
-			JPanel fin = new JPanel(new BorderLayout());
-			fin.add(message, BorderLayout.CENTER);
-
-			JButton rejouer = new ButtonJolie("Retour l'ecran d'acceuil");
-			rejouer.addActionListener(new ActionListener() {
-				@Override
-				public void actionPerformed(ActionEvent arg0) {
-					dispose();
-					setVisible(false);
-					@SuppressWarnings("unused")
-					LauncherGUI newgame = new LauncherGUI();
-				}
-			});
-			fin.add(rejouer, BorderLayout.SOUTH);
-			this.plateauPanel.add(fin, BorderLayout.CENTER);
-
+			
+			this.placementJoueur(listeDesJoueur);
+			
+			this.affcheEcranFin((String) ( (ArrayList<Object>) info).get(2));
+			
 		}else { // SI CEST PAS LA FIN DU GAME
 			this.camembertPanel.removeAll();
 			this.desPanel.removeAll();
@@ -801,14 +843,14 @@ public class IHMPlateau extends JFrame implements MouseListener, MouseMotionList
 				creationPanelQuestion( (Question) ((ArrayList<Object>) info).get(4));
 			}else{ // si on est sur une case mystère 
 				JLabel message = new JLabel( (String) ( (ArrayList<Object>) info).get(2) );
-				
+
 				if ((Boolean) ( (ArrayList<Object>) info).get(6)) {
 					JPanel panelMessage = new JPanel(new GridLayout(2, 0));
 					panelMessage.add(message);
-					
+
 					JButton actionCase = new JButton("Ok");
 					actionCase.addActionListener(new ActionListener() {
-						
+
 						@Override
 						public void actionPerformed(ActionEvent e) {
 							trivialControler.actionCasePourCarteMystere();							
@@ -825,43 +867,14 @@ public class IHMPlateau extends JFrame implements MouseListener, MouseMotionList
 			//   			 PLACEMENT PION	        //
 			//////////////////////////////////////////
 
-			/*
-			 * JOUEUR 1
-			 */
-			int casejUn = listeDesJoueur.get(0).getCaseCourant().getNumero();
+			this.placementJoueur(listeDesJoueur);
 
-			int[] coord = numcaseToindicePanel.get(casejUn);
-			JPanel border = ((JPanel) plateauPanel.getComponent(coord[0]));
-			JPanel componentBorder = ((JPanel) border.getComponent(coord[1]));
-
-			String[] listeImage = listeImageCamembert(listeDesJoueur.get(0),1);				
-			try {
-				Image cam = imageCamembertWithPart("images/joueur1.png",listeImage[0],listeImage[1],listeImage[2],listeImage[3]);
-				JLabel camemebertJoueur1 = new JLabel((new ImageIcon(cam.getScaledInstance(75, 75, Image.SCALE_DEFAULT))));
-				componentBorder.add(camemebertJoueur1);			
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-
-			/*
-			 * JOUEUR 2
-			 */
-			int casejdeux = listeDesJoueur.get(1).getCaseCourant().getNumero();
-			int[] coordj2 = numcaseToindicePanel.get(casejdeux);
-			border = ((JPanel) plateauPanel.getComponent(coordj2[0]));
-			componentBorder = ((JPanel) border.getComponent(coordj2[1]));
-			listeImage = listeImageCamembert(listeDesJoueur.get(1),2);	
-			try {
-				Image cam = imageCamembertWithPart("images/joueur2.png",listeImage[0],listeImage[1],listeImage[2],listeImage[3]);
-
-				JLabel camemebertJoueur2 = new JLabel((new ImageIcon(cam.getScaledInstance(75, 75, Image.SCALE_DEFAULT))));
-				componentBorder.add(camemebertJoueur2);
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
 		}
 		this.revalidate();
 	}
+
+
+
 
 	public static void main(String[] args) {
 		TrivialPursuite trivialPursuite = new TrivialPursuite();

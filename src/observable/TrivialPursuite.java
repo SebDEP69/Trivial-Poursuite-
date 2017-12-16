@@ -4,8 +4,10 @@ import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 
+import Model.Couleur;
 import Model.CouleurPion;
 import Model.Jeu;
+import Model.Joueur;
 import Model.Question;
 
 public class TrivialPursuite extends Observable {
@@ -25,6 +27,9 @@ public class TrivialPursuite extends Observable {
 		//System.out.println("je creer les joueurs ");
 		this.jeu.CreationJoueur(nomjoueurun,nomJoueurdeux,couleurJoueurun,couleurJoueurdeux);
 		String joueurCommence = this.jeu.OrdreJoueurDebut();
+		//this.jeu.getJoueurCourant().AjoutPartCamembert(Couleur.BLEU);
+		//this.jeu.getJoueurCourant().AjoutPartCamembert(Couleur.ROUGE);
+		//this.jeu.getJoueurCourant().AjoutPartCamembert(Couleur.VERT);
 		this.envoiInfo(joueurCommence,"0",null,false);
 	}
 	
@@ -55,16 +60,32 @@ public class TrivialPursuite extends Observable {
 			if (messageMystere.equals("Vous vous dirigez vers la prochaine case Supper camembert"))
 			{
 				actionMystere = true;
-			}else if (!messageMystere.equals("Vous pouvez rejouer"))  {
+			}else if (!messageMystere.equals("Vous pouvez rejouer") && !isEnd())  {
 				this.jeu.ChangementJoueur();
 			}
-			messageMystere = "<html> Vous etes tombe sur une case mystere <br> " +messageMystere+"</html>";
-		}		
-		
+			messageMystere = "Vous etes tombe sur une case mystere <br> " +messageMystere;
+			
+			if (isEnd()) {
+				messageMystere = actionDeFinGame(messageMystere);
+			}
+		}
 		String lancer = ((Integer) lancerDes).toString();
 		this.envoiInfo(messageMystere,lancer,question,actionMystere);
 	}
 	
+	private String actionDeFinGame(String message) {
+		
+		Joueur jcourant = this.jeu.getJoueurCourant();
+		jcourant.estGagnant();
+		for (Joueur joueur : this.jeu.getListeJoueur()) {
+			if (!(joueur.equals(jcourant))) {
+				joueur.estPerdant();
+			}
+		}
+		String messageretour = message+" <br> Bravo "+jcourant.getNom()+" a gagne la partie ";
+		this.jeu.enregistrementDesScore();
+		return messageretour;
+	}
 	
 	public void validerReponse(Question question, String reponse) {
 		
@@ -76,7 +97,7 @@ public class TrivialPursuite extends Observable {
 			// si le joueur est sur une case super camembert
 			//if (this.jeu.getJoueurCourant().getCaseCourant().isSuperCamembert()) {
 				// si la part a bien ete ajouter
-				if (this.jeu.getJoueurCourant().getCamembert().AjoutPartCamembert(question.getCouleur())) { 
+				if (this.jeu.getJoueurCourant().AjoutPartCamembert(question.getCouleur())) { 
 					message = "Bravo vous avez gagne une part de camembert";
 				}else { // si on a deja la part de camembert
 					message = "Vous avez repondu juste, mais vous possedez deja une part de camembert "+question.getCouleur();
@@ -89,9 +110,11 @@ public class TrivialPursuite extends Observable {
 		}else {
 			message = "Mauvaise reponse";
 		}	
-		message = "<html>"+ message +"<br>La reponse est :"+question.getReponse()+"<br>" +question.getDescription() +"</html>";
+		message =  message +"<br>La reponse est :"+question.getReponse()+"<br>" +question.getDescription();
 		if (isEnd()) {
-			message = " Bravo "+this.jeu.getJoueurCourant().getNom()+" a gagne la partie";
+			
+			message = actionDeFinGame("");
+			
 		}else {
 			if (!rejoue) { // si le joueur a pas repondu juste il ne rejoue pas
 				this.jeu.ChangementJoueur();
@@ -102,7 +125,6 @@ public class TrivialPursuite extends Observable {
 		}
 		this.envoiInfo(message,"0",null,false);
 	}
-	
 	
 	private void envoiInfo(String message, String lancerDes,Question question,Boolean prochainCam) {
 		
@@ -119,7 +141,7 @@ public class TrivialPursuite extends Observable {
 		 */
 		infoForIHM.add(isEnd());//0
 		infoForIHM.add(this.jeu.getListeJoueur());//1
-		infoForIHM.add(message);//2
+		infoForIHM.add("<html>"+message+"</html>");//2
 		infoForIHM.add(lancerDes);//3
 		infoForIHM.add(question); //4	
 		infoForIHM.add(this.jeu.getJoueurCourant()); //5

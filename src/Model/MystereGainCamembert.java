@@ -13,7 +13,7 @@ public class MystereGainCamembert extends Mystere{
 	@Override
 	String Action(Joueur joueurcourant, ArrayList<Case> listecase, ArrayList<Joueur> listejoueur) {
 
-		Camembert camembertjoueur = joueurcourant.getCamembert();
+		//Camembert camembertjoueur = joueurcourant.getCamembert();
 		Couleur serie[] = {Couleur.VERT, Couleur.ORANGE,Couleur.BLEU, Couleur.ROUGE};
 		Boolean ajout = false;
 		int i = 0;
@@ -21,14 +21,15 @@ public class MystereGainCamembert extends Mystere{
 		Couleur couleur = null;
 		while(!ajout && i < serie.length) {
 			couleur = serie[i];
-			if (!camembertjoueur.ContientPart(couleur)) {
-				if (camembertjoueur.AjoutPartCamembert(couleur)) {
+			if (!joueurcourant.ContientPart(couleur)) {
+				if (joueurcourant.AjoutPartCamembert(couleur)) {
 					ajout = true;
-					message = "Vous avez gagnez un camembert "+couleur.toString();
+					message = "Vous avez gagnez une part de camembert "+couleur.toString();
 				}else {
 					message = "Erreur quand le gain de camembert";
 				}
 			}	
+			i++;
 		}
 		return message;
 	}

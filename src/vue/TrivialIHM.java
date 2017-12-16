@@ -8,13 +8,11 @@ import java.awt.GridLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.awt.event.MouseMotionListener;
 import javax.swing.BorderFactory;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
@@ -22,8 +20,7 @@ import observable.TrivialPursuite;
 
 
 
-public class TrivialIHM extends javax.swing.JFrame implements MouseListener,
-		MouseMotionListener {
+public class TrivialIHM extends JFrame {
 
 	private static final long serialVersionUID = 5131673871376781349L;
 
@@ -50,8 +47,6 @@ public class TrivialIHM extends javax.swing.JFrame implements MouseListener,
 		layeredPane = new JLayeredPane();
 		getContentPane().add(layeredPane);
 		layeredPane.setPreferredSize(boardSize);
-		layeredPane.addMouseListener(this);
-		layeredPane.addMouseMotionListener(this);
 
 
 		// Add a chess board to the Layered Pane
@@ -196,53 +191,6 @@ public class TrivialIHM extends javax.swing.JFrame implements MouseListener,
 		this.getContentPane().add(new JPanel (), BorderLayout.WEST);
 		this.getContentPane().add(new JPanel (), BorderLayout.EAST);
 	    this.setVisible(true);
-        
-	    
-        
-
-	}
-
-
-	@Override
-	public void mouseDragged(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mouseMoved(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mouseClicked(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mousePressed(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mouseReleased(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mouseEntered(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mouseExited(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
 	}
 
 }

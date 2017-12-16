@@ -12,10 +12,6 @@ import java.awt.Insets;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.awt.event.MouseMotionListener;
-import java.util.Observable;
 import java.util.Observer;
 
 import javax.swing.Icon;
@@ -26,14 +22,12 @@ import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 
 import Controler.TrivialControler;
-import Model.ButtonJolie;
-import Model.Regles; 
+import Model.ButtonJolie; 
 
 
 
 @SuppressWarnings("serial")
-public class TrivialPursuitGUI extends javax.swing.JFrame implements MouseListener,
-		MouseMotionListener, Observer {
+public class TrivialPursuitGUI extends JFrame  {
 
 	private JLayeredPane layeredPane;
 	private JPanel nord;
@@ -53,8 +47,7 @@ public class TrivialPursuitGUI extends javax.swing.JFrame implements MouseListen
 		layeredPane = new JLayeredPane();
 		getContentPane().add(layeredPane);
 		layeredPane.setPreferredSize(boardSize);
-		layeredPane.addMouseListener(this);
-		layeredPane.addMouseMotionListener(this);
+		
 
 
 
@@ -244,54 +237,6 @@ public class TrivialPursuitGUI extends javax.swing.JFrame implements MouseListen
 		 i.insets = new Insets(-20,100,-30,100);
 		 i.fill = GridBagConstraints.HORIZONTAL;
 		 centre.add(btn6, i);
-	}
-
-	@Override
-	public void update(Observable o, Object arg) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mouseDragged(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mouseMoved(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mouseClicked(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mousePressed(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mouseReleased(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mouseEntered(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mouseExited(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
 	}
 
 }

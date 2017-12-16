@@ -106,6 +106,7 @@ public class Plateau {
 		index = (int) (Math.random() * listeTEMP.size()) ;
 		System.out.println(index);
 		carteRetour = listeTEMP.get(index);
+		System.out.println(carteRetour.getClass());
 		return carteRetour;
 	}
 	
