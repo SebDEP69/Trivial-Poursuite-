@@ -119,7 +119,7 @@ public class BaseScroreCSV {
 
 	}
 	
-	public ArrayList<String> getInfoLastGame() throws IOException{
+	public Partie getInfoLastGame() throws IOException{
 		
 		FileReader ficher = new FileReader(this.nomFichier);
 
@@ -137,24 +137,22 @@ public class BaseScroreCSV {
 				i++;
 			}
 		}
+		
+		String [] joueur1= {decoupe(tempLigne[0], 3),decoupe(tempLigne[0], 4),decoupe(tempLigne[0], 5)};
+		String [] joueur2= {decoupe(tempLigne[1], 3),decoupe(tempLigne[1], 4),decoupe(tempLigne[1], 5)};
+		String date = decoupe(tempLigne[0], 2);
+		
+		
+		
+		Partie partie = new Partie(date, joueur1, joueur2);
 		System.out.println("ligne"+tempLigne[0]);
 		System.out.println("ligne"+tempLigne[1]);
-		
-		/*
-		 * [0] : date
-		 * [1] : joueur 1
-		 * 			[0] : nom
-		 * 			[1] : nb part
-		 * 			[3] : 
-		 * [2] : joueur 2
-		 */
+	
 		
 		reader.close();
 		
-		return null;
+		return partie;
 	}
-	
-	
 	
 	
 
@@ -163,9 +161,12 @@ public class BaseScroreCSV {
 
 		BaseScroreCSV BDD = new BaseScroreCSV();
 
-		BDD.getInfoLastGame();
+		Partie partie = BDD.getInfoLastGame();
 
-
+		
+		System.out.println("date ="+partie.getDate());
+		System.out.println("j1 ="+partie.getJoueur1()[0]);
+		System.out.println("j2 ="+partie.getJoueur2()[0]);
 	}
 
 }

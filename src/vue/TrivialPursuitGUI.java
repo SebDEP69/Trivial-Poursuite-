@@ -202,6 +202,23 @@ public class TrivialPursuitGUI extends JFrame  {
          centre.add((JPanel) bouton4);
          ButtonJolie btn4 = new ButtonJolie("<Html><center>Score de la partie<Html>");
          btn4.setPreferredSize(new Dimension(180, 100));
+         
+         btn4.addActionListener(new ActionListener() {
+  			@Override
+  			public void actionPerformed(ActionEvent e) {
+  				JFrame frame = new ScorePartie();
+  				frame.setTitle("ScorePartie");
+  				frame.setSize(1150, 680);
+  				frame.setLocationRelativeTo(null);
+  				frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+  				frame.setVisible(true);
+
+  			}
+  		});
+         
+         
+         
+         
          bouton4.add(btn4);
          bouton4.setVisible(true);
          GridBagConstraints g = new GridBagConstraints();   
