@@ -18,6 +18,10 @@ public class Score {
 		return gagnant;
 	}
 	
+	public Boolean isGagnant() {
+		return this.gagnant.equals("OUI");
+	}
+	
 	public void ajoutPart() {
 		this.nbPartCamembert++;
 	}

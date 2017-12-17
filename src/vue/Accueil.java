@@ -17,6 +17,8 @@ import javax.swing.BorderFactory;
 import javax.swing.JFrame;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
+
+import Controler.ControleurAccueil;
 import Model.ButtonJolie;
 
 
@@ -60,10 +62,8 @@ public class Accueil extends JFrame  {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				JFrame frame = new TrivialPursuitGUI("Trivial Pursuit");
-				frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-				frame.pack();
-				frame.setVisible(true);
+				ControleurAccueil controleurAccueil = new ControleurAccueil();
+				controleurAccueil.creerMenu();
 				dispose();
 			}
 		});

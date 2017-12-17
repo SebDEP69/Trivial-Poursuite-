@@ -27,6 +27,10 @@ public class Joueur {
 	
 	
 	// Score
+	
+	public Boolean isGagnant() {
+		return this.score.isGagnant();
+	}
 	public void estGagnant() {
 		this.score.estGagnant();
 	}

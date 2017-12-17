@@ -1,10 +1,11 @@
-package ihm;
+package vue;
 
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.util.*;
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -20,7 +21,7 @@ import observable.TrivialPursuite;
 
 
 @SuppressWarnings("serial")
-public class IHMPlateau extends JFrame implements MouseListener, MouseMotionListener, Observer {
+public class IHMPlateau extends JFrame implements  Observer {
 	JLayeredPane layeredPane;
 	JPanel trivialBoard, desPanel, plateauPanel,camembertPanel, titlePanel, questionPanel,selectPersoUn,selectPersoDeux;
 	ArrayList<int[]> numcaseToindicePanel;
@@ -760,13 +761,54 @@ public class IHMPlateau extends JFrame implements MouseListener, MouseMotionList
 
 	}
 
-	
-	private void affcheEcranFin(String message) {
+
+	private void affcheEcranFin(ArrayList<Joueur> listeJoueur) {
+
+
+
+		JPanel finGeneral = new JPanel(new BorderLayout());
+		this.plateauPanel.add(finGeneral, BorderLayout.CENTER);
+		JPanel coteJoueur = new JPanel(new GridLayout(0, 2));
+		finGeneral.add(coteJoueur,BorderLayout.CENTER);
+		System.out.println(finGeneral.getParent().getSize());
+
+		for (Joueur joueur : listeJoueur) {
+			JPanel panelJoueur = new JPanel(new GridLayout(4,0));
+			coteJoueur.add(panelJoueur);
+			System.out.println(panelJoueur.getParent().getSize());
+			panelJoueur.setPreferredSize(panelJoueur.getParent().getSize());
+			JLabel gagnant = new JLabel("");
+			if (joueur.isGagnant()) {
+				gagnant.setText("<html> <center>WINNER </html>");
+				panelJoueur.setBackground(Color.GREEN);
+			}else {
+				gagnant.setText("LOSER");
+				panelJoueur.setBackground(Color.RED);
+			}
+			JLabel nom = new JLabel(joueur.getNom());
+			String nomImgJoueur = joueur.getPion().getCouleurPion().toString().toLowerCase();
+			JLabel imgJoueur = new JLabel(new ImageIcon("images/"+nomImgJoueur+".png"));
+			imgJoueur.setPreferredSize(new Dimension(100, 100));
+			int scrorePart = joueur.getNbPart();
+			JLabel nbPart = new JLabel( ((Integer)scrorePart).toString());
+
+			
+			
+			
+			
+			
+			panelJoueur.add(gagnant,SwingConstants.CENTER);
+			panelJoueur.add(nom);
+			panelJoueur.add(imgJoueur);
+			panelJoueur.add(nbPart);
 		
-		
-		JLabel Jlabelmessage = new JLabel(message);
-		JPanel fin = new JPanel(new BorderLayout());
-		fin.add(Jlabelmessage, BorderLayout.CENTER);
+			
+		}
+
+
+
+
+
 
 		JButton rejouer = new ButtonJolie("Retour l'ecran d'acceuil");
 		rejouer.addActionListener(new ActionListener() {
@@ -778,13 +820,25 @@ public class IHMPlateau extends JFrame implements MouseListener, MouseMotionList
 				LauncherGUI newgame = new LauncherGUI();
 			}
 		});
-		fin.add(rejouer, BorderLayout.SOUTH);
-		this.plateauPanel.add(fin, BorderLayout.CENTER);
+		finGeneral.add(rejouer, BorderLayout.SOUTH);
 		
+
 	}
 	@SuppressWarnings("unchecked")
 	@Override
 	public void update(Observable arg0, Object info) {
+
+
+		/*
+		 * 0 : is end game
+		 * 1 : liste des joueurs
+		 * 2 : Message a afficher � l'utilisateur
+		 * 3 : Nombre lancerDes / ou chaine vide si pas de lancer a renvoyer
+		 * 4 : Object Question
+		 * 5 : joueur courant
+		 * 6 : faire action de la case (MystèreProchainCamembert)
+		 */
+
 
 		//FIN DU GAME
 		if ( (Boolean) ((ArrayList<Object>)info).get(0))  { 
@@ -792,19 +846,19 @@ public class IHMPlateau extends JFrame implements MouseListener, MouseMotionList
 			this.plateauPanel.removeAll();
 			this.questionPanel.removeAll();
 			this.camembertPanel.removeAll();
-		
-			
-			((JButton) this.desPanel.getComponent(0)).setEnabled(false);;
-						
+
+			// désactivation du bouton pour ne pas continuer a jouer
+			((JButton) this.desPanel.getComponent(0)).setEnabled(false);
+
 			ArrayList<Joueur> listeDesJoueur = ((ArrayList<Joueur>) ((ArrayList<Object>) info).get(1));
 			this.creationPanelCamembert(listeDesJoueur);
 
 			this.creationplateau();
-			
+
 			this.placementJoueur(listeDesJoueur);
-			
-			this.affcheEcranFin((String) ( (ArrayList<Object>) info).get(2));
-			
+
+			this.affcheEcranFin((ArrayList<Joueur>) ( (ArrayList<Object>) info).get(1));
+
 		}else { // SI CEST PAS LA FIN DU GAME
 			this.camembertPanel.removeAll();
 			this.desPanel.removeAll();
@@ -884,14 +938,6 @@ public class IHMPlateau extends JFrame implements MouseListener, MouseMotionList
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.setVisible(true);
 	}
-	public void mouseClicked(MouseEvent e) {}
-	public void mouseMoved(MouseEvent e) {}
-	public void mouseEntered(MouseEvent e){}
-	public void mouseExited(MouseEvent e) {}
-	@Override
-	public void mouseDragged(MouseEvent arg0) {}
-	@Override
-	public void mousePressed(MouseEvent e) {}
-	@Override
-	public void mouseReleased(MouseEvent e) {}
+
+
 }

@@ -9,6 +9,12 @@ public class Partie {
 	
 	public Partie(String date, String[] joueur1, String[] joueur2) {
 		this.date = date;
+		/*
+		 * joueur1 et joueur2:
+		 * 0 : nom
+		 * 1 : nb camembert 
+		 * 2 : Gagnant OUI/NON 
+		 */
 		this.joueur1 = joueur1;
 		this.joueur2 = joueur2;
 	}

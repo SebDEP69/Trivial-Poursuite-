@@ -1,8 +1,10 @@
 package Model;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -10,16 +12,17 @@ public class BaseQuestionCSV {
 
 
 	private String nomFichier;
+	private String separateur;
 	private ArrayList<Carte> questionROUGE;
 	private ArrayList<Carte> questionBLEU;
 	private ArrayList<Carte> questionVERT;
 	private ArrayList<Carte> questionORANGE;
 
 
-	public BaseQuestionCSV(String fichier) throws FileNotFoundException {
+	public BaseQuestionCSV() {
 
-		this.nomFichier = fichier;
-
+		this.nomFichier = "BDDQuestion.csv";
+		this.separateur=";";
 		this.questionROUGE = new ArrayList<Carte>();
 		this.questionBLEU = new ArrayList<Carte>();
 		this.questionVERT = new ArrayList<Carte>();
@@ -38,7 +41,7 @@ public class BaseQuestionCSV {
 		reader.readLine(); // ne lit pas la premiere ligne du fichier
 		while ( (ligne = reader.readLine())!=null ) {
 
-			Question question = CreerQuestion(ligne,";",1);
+			Question question = CreerQuestion(ligne,1);
 			if (question !=null) {
 				Couleur couleur = question.getCouleur();
 				switch (couleur) {
@@ -69,9 +72,9 @@ public class BaseQuestionCSV {
 
 	}
 
-	private Question CreerQuestion (String ligne, String separateur, int indice ) {
+	private Question CreerQuestion (String ligne, int indice ) {
 
-		String[] temp = ligne.split(separateur);
+		String[] temp = ligne.split(this.separateur);
 		Question question = null;
 
 		if (temp.length >=7) {
@@ -112,6 +115,28 @@ public class BaseQuestionCSV {
 	}
 
 
+	
+	public void ajouterQuestion(Couleur typeQuestion,String question,String[] reponses,String numReponseJuste,String descritption) throws IOException {
+		
+		FileWriter ficher = new FileWriter(this.nomFichier,true);
+		BufferedWriter writer = new BufferedWriter(ficher);
+		
+		
+		String ligne = typeQuestion+separateur+question+separateur+reponses[0]+separateur+reponses[1]+
+				separateur+reponses[2]+separateur+reponses[3]+separateur+numReponseJuste+separateur+descritption;
+		
+		writer.write(ligne);
+		
+		writer.close();
+	}
+	
+	
+	
+	
+	
+	
+	
+	
 	public ArrayList<Carte> getQuestionROUGE() {
 		return questionROUGE;
 	}
@@ -135,7 +160,7 @@ public class BaseQuestionCSV {
 
 	public static void main(String[] args) throws IOException {
 
-		BaseQuestionCSV BDD = new BaseQuestionCSV("BDDQuestion.csv");
+		BaseQuestionCSV BDD = new BaseQuestionCSV();
 		BDD.EnregistrementQuestion();
 	}
 

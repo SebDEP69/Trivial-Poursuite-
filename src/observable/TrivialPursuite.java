@@ -20,16 +20,16 @@ public class TrivialPursuite extends Observable {
 	}
 	
 	
-	public boolean isEnd() { return this.jeu.FinDuJeu(); }
+	private boolean isEnd() { return this.jeu.FinDuJeu(); }
 	
 	public void creationJoueur(String nomjoueurun, String nomJoueurdeux, CouleurPion couleurJoueurun, CouleurPion couleurJoueurdeux) {
 		
 		//System.out.println("je creer les joueurs ");
 		this.jeu.CreationJoueur(nomjoueurun,nomJoueurdeux,couleurJoueurun,couleurJoueurdeux);
 		String joueurCommence = this.jeu.OrdreJoueurDebut();
-		//this.jeu.getJoueurCourant().AjoutPartCamembert(Couleur.BLEU);
-		//this.jeu.getJoueurCourant().AjoutPartCamembert(Couleur.ROUGE);
-		//this.jeu.getJoueurCourant().AjoutPartCamembert(Couleur.VERT);
+		this.jeu.getJoueurCourant().AjoutPartCamembert(Couleur.BLEU);
+		this.jeu.getJoueurCourant().AjoutPartCamembert(Couleur.ROUGE);
+		this.jeu.getJoueurCourant().AjoutPartCamembert(Couleur.VERT);
 		this.envoiInfo(joueurCommence,"0",null,false);
 	}
 	

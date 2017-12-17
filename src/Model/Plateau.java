@@ -60,7 +60,7 @@ public class Plateau {
 		*/
 		BaseQuestionCSV BDD ;
 		try {
-			BDD = new BaseQuestionCSV("BDDQuestion.csv");
+			BDD = new BaseQuestionCSV();
 			BDD.EnregistrementQuestion();
 			this.listeCarteRouge = BDD.getQuestionROUGE();
 			this.listeCarteOrange = BDD.getQuestionORANGE();
@@ -70,11 +70,11 @@ public class Plateau {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		listeCarteMystere.add(new MystereProchainCamembert());
+		/*listeCarteMystere.add(new MystereProchainCamembert());
 		listeCarteMystere.add(new MystereEnleverCamembert());
 		listeCarteMystere.add(new MysterePerteCamembert());
 		listeCarteMystere.add(new MystereRejouer());
-		listeCarteMystere.add(new MystereRetourCaseDepart());
+		listeCarteMystere.add(new MystereRetourCaseDepart());*/
 		listeCarteMystere.add(new MystereGainCamembert());
 		
 		this.nombreCasePlateau = 24;
