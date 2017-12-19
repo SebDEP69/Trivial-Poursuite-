@@ -9,7 +9,9 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 import Model.BaseQuestionCSV;
+import Model.BaseScroreCSV;
 import Model.Couleur;
+import Model.Partie;
 import observable.TrivialPursuite;
 import vue.Regles;
 import vue.ScorePartie;
@@ -69,9 +71,6 @@ public class ControleurAccueil  extends Observable{
 	
 	public void afficherPersonalisation() {
 		
-		
-		
-		
 		ArrayList<Object> info = new ArrayList<Object>();
 		info.add(1);
 		this.notifyObservers(info);
@@ -121,6 +120,28 @@ public class ControleurAccueil  extends Observable{
 		jop1 = new JOptionPane();
 		jop1.showMessageDialog(null, "Votre question a bien été ajoutée", "Ajout de la question", JOptionPane.INFORMATION_MESSAGE);
 	}
+	
+	
+	public void afficherHistoriqueDesScores() {
+		
+		BaseScroreCSV BDD = new BaseScroreCSV();
+		ArrayList<Partie> listePartie= new ArrayList<Partie>();
+		ArrayList<Object> info = new ArrayList<Object>();
+		info.add(2);
+		try {
+			listePartie = BDD.getInfoAllGame();
+			System.out.println(listePartie.getClass());
+			info.add(listePartie);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		
+		
+		this.notifyObservers(info);
+		
+	}
+	
 	
 	
 	

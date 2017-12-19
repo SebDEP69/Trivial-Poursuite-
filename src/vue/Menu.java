@@ -31,7 +31,8 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import Controler.ControleurAccueil;
-import Model.ButtonJolie; 
+import Model.ButtonJolie;
+import Model.Partie; 
 
 
 
@@ -229,6 +230,14 @@ public class Menu extends JFrame implements  Observer {
 		centre.add((JPanel) bouton6);
 		ButtonJolie btn6 = new ButtonJolie("<Html><center>Historique des parties<Html>");
 		btn6.setPreferredSize(new Dimension(200, 250));
+		btn6.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+
+				controleurAccueil.afficherHistoriqueDesScores();
+
+			}
+		});
 		bouton6.add(btn6);
 		bouton6.setVisible(true);
 		GridBagConstraints i = new GridBagConstraints();   
@@ -242,10 +251,8 @@ public class Menu extends JFrame implements  Observer {
 
 	private void personalisation() {
 
-
-
-
-		JButton btnRetourMenu = new JButton("Retour");
+		panelGeneral.setLayout(new BorderLayout());
+		ButtonJolie btnRetourMenu = new ButtonJolie("Retour");
 		btnRetourMenu.addActionListener(new ActionListener() {
 
 			@Override
@@ -256,7 +263,7 @@ public class Menu extends JFrame implements  Observer {
 		});
 		panelGeneral.add(btnRetourMenu,BorderLayout.NORTH);
 
-		
+
 		JPanel all = new JPanel(new GridLayout(3,0));
 		panelGeneral.add(all,BorderLayout.CENTER);
 
@@ -270,20 +277,10 @@ public class Menu extends JFrame implements  Observer {
 		JLabel labelQuestion = new JLabel("Question");
 		//L'objet servant à positionner les composants
 
-
-
 		panelQuestion.add(typeQuestion);
-
-
 		panelQuestion.add(labelQuestion);
-
-
 		question.setPreferredSize(new Dimension(300, 50));
 		panelQuestion.add(question);
-
-
-
-
 
 		// Panel reponse
 		JPanel panelreponse = new JPanel(new GridBagLayout());
@@ -305,11 +302,11 @@ public class Menu extends JFrame implements  Observer {
 		listerep.add(reponse4);
 		int i=1;
 		for (JTextField reponse : listerep) {
-			
+
 			reponse.setPreferredSize(new Dimension(300, 50));
 
 			JRadioButton btnreponse = new JRadioButton("reponse"+i); 
-		
+
 			btnreponse.setActionCommand(""+i);
 			if (i==1) {
 				btnreponse.setSelected(true);
@@ -322,10 +319,7 @@ public class Menu extends JFrame implements  Observer {
 			panelreponse.add(reponse,gbc);
 			i++;
 		}
-		
-		
-		
-		
+
 
 
 		// panel descritpion
@@ -339,14 +333,10 @@ public class Menu extends JFrame implements  Observer {
 		all.add(panelreponse);
 		all.add(panelDescription);
 
-		
-		
-		
-		
-		JButton btnvalider = new JButton("Valider");
+		ButtonJolie btnvalider = new ButtonJolie("Valider");
 		btnvalider.addActionListener(new ActionListener() {
 
-						
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				String Rtype= typeQuestion.getSelectedItem().toString();
@@ -354,7 +344,7 @@ public class Menu extends JFrame implements  Observer {
 				String[] listeReponses = {reponse1.getText(),reponse2.getText(),reponse3.getText(),reponse4.getText()};
 				String numReponseJuste = group.getSelection().getActionCommand();
 				String descript = descritption.getText();
-			
+
 				controleurAccueil.enregisterQuestion(Rtype,Rquestion,listeReponses,numReponseJuste,descript);
 
 			}
@@ -362,6 +352,68 @@ public class Menu extends JFrame implements  Observer {
 		btnvalider.setPreferredSize(new Dimension(100, 100));
 		panelGeneral.add(btnvalider,BorderLayout.SOUTH);
 	}
+
+
+
+
+	private void affichierHistorique(ArrayList<Partie> listePartie) {
+
+
+		int nbPartie = listePartie.size();
+
+		panelGeneral.setLayout(new GridLayout((nbPartie+2),0)); // +1 pour le bouton retour et +1 pour l'intituler des colonnes
+
+		ButtonJolie btnRetourMenu = new ButtonJolie("Retour");
+		btnRetourMenu.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				controleurAccueil.afficherMenu();
+
+			}
+		});
+		panelGeneral.add(btnRetourMenu);
+		
+		
+		JPanel panelPartie = new JPanel(new GridLayout(0, 6));
+		JLabel date = new JLabel("DATE");
+		JLabel joueur1 = new JLabel("Nom Joueur1");
+		JLabel scroreJ1 = new JLabel("Score Joueur1");
+		JLabel joueur2 = new JLabel("Nom Joueur 2");
+		JLabel scroreJ2 = new JLabel("Scrore Joueur 2");
+		panelPartie.add(date);
+		panelPartie.add(joueur1);
+		panelPartie.add(scroreJ1);
+		panelPartie.add(scroreJ2);
+		panelPartie.add(joueur2);
+		panelGeneral.add(panelPartie);
+
+
+
+
+
+		for (Partie partie : listePartie) {
+			panelPartie = new JPanel(new GridLayout(0, 6));
+			date = new JLabel(partie.getDate());
+			joueur1 = new JLabel(partie.getNomJ1());
+			scroreJ1 = new JLabel(partie.getNBcamJ1());
+			joueur2 = new JLabel(partie.getNomJ2());
+			scroreJ2 = new JLabel(partie.getNBcamJ2());
+
+			ButtonJolie btnVoir = new ButtonJolie("Voir plus");
+			panelPartie.add(date);
+			panelPartie.add(joueur1);
+			panelPartie.add(scroreJ1);
+			panelPartie.add(scroreJ2);
+			panelPartie.add(joueur2);
+			panelPartie.add(btnVoir);
+			panelGeneral.add(panelPartie);
+		}
+
+
+	}
+
+
 
 	@SuppressWarnings("unchecked")
 	@Override
@@ -382,6 +434,11 @@ public class Menu extends JFrame implements  Observer {
 		case 1:
 
 			this.personalisation();
+			break;
+		case 2:
+			System.out.println(((ArrayList<Object>)info).get(1).getClass());
+			ArrayList<Partie> listePartie = (ArrayList<Partie>) ((ArrayList<Object>)info).get(1);
+			this.affichierHistorique( listePartie);
 			break;
 
 		default:

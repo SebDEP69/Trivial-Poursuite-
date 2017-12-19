@@ -19,7 +19,30 @@ public class Partie {
 		this.joueur2 = joueur2;
 	}
 
-
+	public String getNomJ1() {
+		return joueur1[0];
+	}
+	
+	public String getNBcamJ1() {
+		return joueur1[1];
+	}
+	
+	public String getGagnantJ1() {
+		return joueur1[2];
+	}
+	
+	public String getNomJ2() {
+		return joueur2[0];
+	}
+	
+	public String getNBcamJ2() {
+		return joueur2[1];
+	}
+	
+	public String getGagnantJ2() {
+		return joueur2[2];
+	}
+	
 	public String getDate() {
 		return date;
 	}
