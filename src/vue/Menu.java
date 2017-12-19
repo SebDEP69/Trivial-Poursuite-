@@ -356,7 +356,7 @@ public class Menu extends JFrame implements  Observer {
 
 
 
-	private void affichierHistorique(ArrayList<Partie> listePartie) {
+	private void afficherHistorique(ArrayList<Partie> listePartie) {
 
 
 		int nbPartie = listePartie.size();
@@ -438,7 +438,7 @@ public class Menu extends JFrame implements  Observer {
 		case 2:
 			System.out.println(((ArrayList<Object>)info).get(1).getClass());
 			ArrayList<Partie> listePartie = (ArrayList<Partie>) ((ArrayList<Object>)info).get(1);
-			this.affichierHistorique( listePartie);
+			this.afficherHistorique( listePartie);
 			break;
 
 		default:
