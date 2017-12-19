@@ -762,7 +762,7 @@ public class IHMPlateau extends JFrame implements  Observer {
 	}
 
 
-	private void affcheEcranFin(ArrayList<Joueur> listeJoueur) {
+	private void afficheEcranFin(ArrayList<Joueur> listeJoueur) {
 
 
 
@@ -857,7 +857,7 @@ public class IHMPlateau extends JFrame implements  Observer {
 
 			this.placementJoueur(listeDesJoueur);
 
-			this.affcheEcranFin((ArrayList<Joueur>) ( (ArrayList<Object>) info).get(1));
+			this.afficheEcranFin((ArrayList<Joueur>) ( (ArrayList<Object>) info).get(1));
 
 		}else { // SI CEST PAS LA FIN DU GAME
 			this.camembertPanel.removeAll();
