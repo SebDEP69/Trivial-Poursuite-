@@ -10,6 +10,7 @@ import java.util.*;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
+import Controler.ControleurAccueil;
 import Controler.TrivialControler;
 import Model.ButtonJolie;
 import Model.Couleur;
@@ -807,17 +808,13 @@ public class IHMPlateau extends JFrame implements  Observer {
 
 
 
-
-
-
 		JButton rejouer = new ButtonJolie("Retour l'ecran d'acceuil");
 		rejouer.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
+				ControleurAccueil controleurAccueil = new ControleurAccueil();
+				controleurAccueil.creerMenu();
 				dispose();
-				setVisible(false);
-				@SuppressWarnings("unused")
-				LauncherGUI newgame = new LauncherGUI();
 			}
 		});
 		finGeneral.add(rejouer, BorderLayout.SOUTH);
