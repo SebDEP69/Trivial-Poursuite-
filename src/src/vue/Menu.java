@@ -3,7 +3,6 @@ package vue;
 
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
@@ -17,12 +16,11 @@ import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 
-import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
-
+import javax.swing.ButtonModel;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
-
+import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -32,17 +30,8 @@ import javax.swing.JRadioButton;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-import org.jfree.chart.ChartFactory;
-import org.jfree.chart.ChartPanel;
-import org.jfree.chart.JFreeChart;
-import org.jfree.chart.plot.PiePlot;
-import org.jfree.chart.plot.PiePlot3D;
-import org.jfree.data.general.DefaultPieDataset;
-import org.jfree.data.general.PieDataset;
-
 import Controler.ControleurAccueil;
 import Model.ButtonJolie;
-import Model.Couleur;
 import Model.Partie; 
 
 
@@ -384,8 +373,8 @@ public class Menu extends JFrame implements  Observer {
 			}
 		});
 		panelGeneral.add(btnRetourMenu);
-
-
+		
+		
 		JPanel panelPartie = new JPanel(new GridLayout(0, 6));
 		JLabel date = new JLabel("DATE");
 		JLabel joueur1 = new JLabel("Nom Joueur1");
@@ -402,6 +391,7 @@ public class Menu extends JFrame implements  Observer {
 
 
 
+
 		for (Partie partie : listePartie) {
 			panelPartie = new JPanel(new GridLayout(0, 6));
 			date = new JLabel(partie.getDate());
@@ -411,13 +401,6 @@ public class Menu extends JFrame implements  Observer {
 			scroreJ2 = new JLabel(partie.getNBcamJ2());
 
 			ButtonJolie btnVoir = new ButtonJolie("Voir plus");
-			btnVoir.addActionListener(new ActionListener() {
-
-				@Override
-				public void actionPerformed(ActionEvent e) {
-					controleurAccueil.AfficherdetailPartie(partie);
-				}
-			});
 			panelPartie.add(date);
 			panelPartie.add(joueur1);
 			panelPartie.add(scroreJ1);
@@ -430,127 +413,7 @@ public class Menu extends JFrame implements  Observer {
 
 	}
 
-	private void afficheDetailPartie(Partie partie){
 
-
-
-		panelGeneral.setLayout(new BorderLayout());
-		ButtonJolie btnRetourMenu = new ButtonJolie("Retour");
-		btnRetourMenu.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				controleurAccueil.afficherHistoriqueDesScores();
-
-			}
-		});
-		panelGeneral.add(btnRetourMenu,BorderLayout.NORTH);
-
-
-		JPanel centre = new JPanel(new GridLayout(0, 2));
-
-		panelGeneral.add(centre,BorderLayout.CENTER);
-
-		Couleur couleurs[] = {Couleur.BLEU,Couleur.ROUGE,Couleur.VERT,Couleur.ORANGE};
-
-		for (int indiceJoueur = 1; indiceJoueur< 3; indiceJoueur++) {
-			JPanel joueurs= new JPanel(new GridLayout(2, 0));
-			joueurs.setBorder(BorderFactory.createLineBorder(Color.black));
-			JPanel panelInfoJoueur = new JPanel(new GridLayout(2, 0));
-			String nomJoueur = partie.getNomJoueur(indiceJoueur);
-			JLabel labelNomJoueur = new JLabel(" NOM JOUEUR : "+nomJoueur);
-			String Score = partie.getNBCamJoueur(indiceJoueur);
-			JLabel labelscore = new JLabel("SCORE : "+Score); 
-			panelInfoJoueur.add(labelNomJoueur);
-			panelInfoJoueur.add(labelscore);
-
-			joueurs.add(panelInfoJoueur);
-			JPanel panelGraph = new JPanel(new GridLayout(2, 2));
-			
-			
-			for (Couleur couleur : couleurs) {
-				String categorie = convertCouleurTocategorie(couleur);
-				System.out.println("Couleur :"+couleur+" indice "+indiceJoueur+" total :"+partie.getTotalAll(couleur, indiceJoueur));
-				System.out.println("Couleur :"+couleur+" indice "+indiceJoueur+" rep :"+partie.getReponseAll(couleur,indiceJoueur));
-				int total = Integer.parseInt(partie.getTotalAll(couleur, indiceJoueur));
-				int repJuste = Integer.parseInt(partie.getReponseAll(couleur,indiceJoueur));
-				if (total==0) {
-					JLabel noQuestion = new JLabel("CE JOUEUR N'A PAS AFFRONTE DE QUESTION "+categorie);
-					noQuestion.setBorder(BorderFactory.createLineBorder(Color.black));
-					panelGraph.add(noQuestion);
-				}else{
-
-					DefaultPieDataset dataset = new DefaultPieDataset();
-					ArrayList<Double> values = new ArrayList<Double>();
-					int repfausse = total -repJuste;
-					values.add(new Double(repfausse));
-					values.add(new Double(repJuste));
-					ArrayList<String> legendes = new ArrayList<String>();
-					legendes.add("Reponse Fausses");
-					legendes.add("Reponse Juste");
-					for (int i = 0; i < values.size(); i++) {
-						dataset.setValue(legendes.get(i), values.get(i));
-					}
-					JFreeChart  chart =createChart(dataset,"Question "+categorie);
-					ChartPanel graph = new ChartPanel(chart);
-					panelGraph.add(graph);
-				}
-			}
-			
-			joueurs.add(panelGraph);
-			
-			centre.add(joueurs);
-		}
-
-	}
-	private String convertCouleurTocategorie(Couleur couleur){
-		String categorie = "";
-		
-		switch (couleur) {
-		case BLEU:
-			categorie="Le Saviez-Vous?";
-			break;
-		case ROUGE:
-			categorie= "Innovation";
-			
-			break;
-		case VERT:
-			categorie = "CPE";
-		 
-			break;
-		case ORANGE:
-			categorie="Blagues";
-			break;
-		default:
-			break;
-		}
-		
-		return categorie;
-	}
-	
-	
-	
-	
-	private static JFreeChart createChart(PieDataset dataset, String titre) {
-
-		JFreeChart chart = ChartFactory.createPieChart3D(
-				titre,  // chart title
-				dataset,             // data
-				true,               // include legend
-				true,
-				false
-				);
-
-		PiePlot3D plot = (PiePlot3D) chart.getPlot();
-		plot.setLabelFont(new Font("SansSerif", Font.PLAIN, 12));
-		plot.setNoDataMessage("No data available");
-		plot.setCircular(false);
-		plot.setLabelGap(0.02);
-		plot.setSectionPaint(1, Color.GREEN);
-		plot.setSectionPaint(2, Color.RED);
-		return chart;
-
-	}
 
 	@SuppressWarnings("unchecked")
 	@Override
@@ -559,12 +422,9 @@ public class Menu extends JFrame implements  Observer {
 		/*
 		 * info : 0 => afficherMenuPrincipal
 		 * info : 1 => afficherPersonalisation
-		 * info : 2 => afficherHistorique
-		 * info : 3 => afficheDetailPartie
+		 * 
 		 */
 		panelGeneral.removeAll();
-
-
 		int choix = (int)((ArrayList<Object>)info).get(0);
 		switch (choix) {
 		case 0:
@@ -580,11 +440,7 @@ public class Menu extends JFrame implements  Observer {
 			ArrayList<Partie> listePartie = (ArrayList<Partie>) ((ArrayList<Object>)info).get(1);
 			this.afficherHistorique( listePartie);
 			break;
-		case 3:
-			System.out.println(((ArrayList<Object>)info).get(1).getClass());
-			Partie partie = (Partie) ((ArrayList<Object>)info).get(1);
-			this.afficheDetailPartie( partie);
-			break;
+
 		default:
 			break;
 		}

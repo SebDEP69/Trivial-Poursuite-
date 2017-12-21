@@ -1,6 +1,6 @@
 package vue;
 
-import ihm.IHMPlateau;
+import vue.IHMPlateau;
 import observable.TrivialPursuite;
 
 import java.awt.BorderLayout;

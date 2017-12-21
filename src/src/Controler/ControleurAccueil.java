@@ -35,16 +35,16 @@ public class ControleurAccueil  extends Observable{
 		frame.setVisible(true);
 
 	}
-
+	
 	public void afficherScorePartie() {
 		ScorePartie frame = new ScorePartie();
-		frame.setTitle("ScorePartie");
-		frame.setSize(1150, 680);
-		frame.setLocationRelativeTo(null);
-		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		frame.setVisible(true);
+			frame.setTitle("ScorePartie");
+			frame.setSize(1150, 680);
+			frame.setLocationRelativeTo(null);
+			frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+			frame.setVisible(true);
 	}
-
+	
 	public void lancerPartie() {
 		TrivialPursuite trivialPursuite = new TrivialPursuite();
 		TrivialControler trivialControler = new TrivialControler(trivialPursuite);
@@ -55,39 +55,31 @@ public class ControleurAccueil  extends Observable{
 	}
 
 	public void creerMenu() {
-
 		Menu menu = new Menu("Trivial Pursuit",this);
 		menu.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		menu.repaint();
 		menu.pack();
 		menu.setVisible(true);
 		this.addObserver((Observer) menu);
 		this.afficherMenu();
-
+		
 	}
 	public void afficherMenu() {
 		ArrayList<Object> info = new ArrayList<Object>();
 		info.add(0);
 		this.notifyObservers(info);
 	}
-
+	
 	public void afficherPersonalisation() {
-
+		
 		ArrayList<Object> info = new ArrayList<Object>();
 		info.add(1);
 		this.notifyObservers(info);
 	}
-
-
-
-
-
-
-
-
+	
+	
 	@SuppressWarnings("static-access")
 	public void enregisterQuestion(String typeQuestion,String question,String[] reponses,String numReponseJuste,String descritption) {
-
+		
 		System.out.println(typeQuestion);
 		System.out.println(question);
 		System.out.println(reponses[0]);
@@ -97,7 +89,7 @@ public class ControleurAccueil  extends Observable{
 		System.out.println(numReponseJuste);
 		System.out.println(descritption);
 		BaseQuestionCSV BDD = new BaseQuestionCSV();
-
+		
 		Couleur color= Couleur.ORANGE;
 		switch (typeQuestion) {
 		case "CPE":
@@ -116,22 +108,22 @@ public class ControleurAccueil  extends Observable{
 			color= Couleur.ORANGE;
 			break;
 		}
-
+		
 		try {
 			BDD.ajouterQuestion(color, question, reponses, numReponseJuste, descritption);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
+		
 		JOptionPane jop1;
 		//Boîte du message d'information
 		jop1 = new JOptionPane();
 		jop1.showMessageDialog(null, "Votre question a bien été ajoutée", "Ajout de la question", JOptionPane.INFORMATION_MESSAGE);
 	}
-
-
+	
+	
 	public void afficherHistoriqueDesScores() {
-
+		
 		BaseScroreCSV BDD = new BaseScroreCSV();
 		ArrayList<Partie> listePartie= new ArrayList<Partie>();
 		ArrayList<Object> info = new ArrayList<Object>();
@@ -144,23 +136,15 @@ public class ControleurAccueil  extends Observable{
 			e.printStackTrace();
 		}
 		
-
+		
+		
 		this.notifyObservers(info);
-
+		
 	}
-
-
-	public void AfficherdetailPartie(Partie partie){
-
 	
-		ArrayList<Object> info = new ArrayList<Object>();
-		info.add(3);
-		info.add(partie);
-		this.notifyObservers(info);
-	}	
-
-
-
+	
+	
+	
 	/* (non-Javadoc)
 	 * @see java.util.Observable#notifyObservers(java.lang.Object)
 	 */
@@ -176,19 +160,19 @@ public class ControleurAccueil  extends Observable{
 	@Override
 	public void addObserver(Observer o){
 		super.addObserver(o);
-
+		
 	}
-
-
-
-
-
-
-
-
-
-
-
-
-
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

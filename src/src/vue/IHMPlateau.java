@@ -5,6 +5,7 @@ import java.awt.event.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.util.*;
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -16,6 +17,7 @@ import Model.Couleur;
 import Model.CouleurPion;
 import Model.Joueur;
 import Model.Question;
+import launcher.LauncherGUI;
 import observable.TrivialPursuite;
 
 

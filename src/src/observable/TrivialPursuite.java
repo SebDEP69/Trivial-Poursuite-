@@ -44,8 +44,6 @@ public class TrivialPursuite extends Observable {
 		System.out.println("Case COURANTE numero :"+this.jeu.getJoueurCourant().getCaseCourant().getNumero() + " couleur : "
 						+this.jeu.getJoueurCourant().getCaseCourant().getCouleur());
 		
-		
-		
 		actionCase(lancerDes);
 	}
 	
@@ -96,7 +94,6 @@ public class TrivialPursuite extends Observable {
 		// si le joueur a repondu la bonne reponse
 		if (question.isBonneReponse(reponse)) {
 			rejoue=true;
-			this.jeu.getJoueurCourant().augmenteReponseJuste(question.getCouleur());
 			// si le joueur est sur une case super camembert
 			//if (this.jeu.getJoueurCourant().getCaseCourant().isSuperCamembert()) {
 				// si la part a bien ete ajouter
@@ -126,8 +123,6 @@ public class TrivialPursuite extends Observable {
 				message= message+", vous pouvez rejouer";
 			}
 		}
-		
-		//System.out.println(this.jeu.getJoueurCourant().toString());
 		this.envoiInfo(message,"0",null,false);
 	}
 	
