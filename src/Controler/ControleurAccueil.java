@@ -57,12 +57,11 @@ public class ControleurAccueil  extends Observable{
 	public void creerMenu() {
 
 		Menu menu = new Menu("Trivial Pursuit",this);
-		menu.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		menu.repaint();
-		menu.pack();
-		menu.setVisible(true);
+		
 		this.addObserver((Observer) menu);
 		this.afficherMenu();
+		menu.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		menu.setVisible(true);
 
 	}
 	public void afficherMenu() {

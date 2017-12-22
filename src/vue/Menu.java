@@ -5,6 +5,7 @@ package vue;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -35,7 +36,6 @@ import javax.swing.JTextField;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
-import org.jfree.chart.plot.PiePlot;
 import org.jfree.chart.plot.PiePlot3D;
 import org.jfree.data.general.DefaultPieDataset;
 import org.jfree.data.general.PieDataset;
@@ -257,23 +257,40 @@ public class Menu extends JFrame implements  Observer {
 		i.insets = new Insets(-20,100,-30,100);
 		i.fill = GridBagConstraints.HORIZONTAL;
 		centre.add(btn6, i);
+		this.pack();
 	}
 
-
-	private void personalisation() {
-
-		panelGeneral.setLayout(new BorderLayout());
+	private void afficheBoutonRetour(String choix){
+		
 		ButtonJolie btnRetourMenu = new ButtonJolie("Retour");
 		btnRetourMenu.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				controleurAccueil.afficherMenu();
+				switch (choix) {
+				case "Menu":
+					controleurAccueil.afficherMenu();
+					break;
+				case "Historique":
+					controleurAccueil.afficherHistoriqueDesScores();
+					break;
+				default:
+					break;
+				}
+				
 
 			}
 		});
-		panelGeneral.add(btnRetourMenu,BorderLayout.NORTH);
+		btnRetourMenu.setPreferredSize(new Dimension(150, 50));
+		JPanel panelBtn = new JPanel(new FlowLayout(FlowLayout.LEFT));
+		panelBtn.add(btnRetourMenu);
+		panelGeneral.add(panelBtn,BorderLayout.NORTH);
+	}
+	private void personalisation() {
 
+		panelGeneral.setLayout(new BorderLayout());
+		
+		this.afficheBoutonRetour("Menu");
 
 		JPanel all = new JPanel(new GridLayout(3,0));
 		panelGeneral.add(all,BorderLayout.CENTER);
@@ -371,19 +388,11 @@ public class Menu extends JFrame implements  Observer {
 
 
 		int nbPartie = listePartie.size();
-
-		panelGeneral.setLayout(new GridLayout((nbPartie+2),0)); // +1 pour le bouton retour et +1 pour l'intituler des colonnes
-
-		ButtonJolie btnRetourMenu = new ButtonJolie("Retour");
-		btnRetourMenu.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				controleurAccueil.afficherMenu();
-
-			}
-		});
-		panelGeneral.add(btnRetourMenu);
+		panelGeneral.setLayout(new BorderLayout()); 
+		JPanel vue = new JPanel(new GridLayout((nbPartie+2),0));// +1 pour le bouton retour et +1 pour l'intituler des colonnes
+		panelGeneral.add(vue,BorderLayout.CENTER);
+		
+		afficheBoutonRetour("Menu");
 
 
 		JPanel panelPartie = new JPanel(new GridLayout(0, 6));
@@ -397,7 +406,7 @@ public class Menu extends JFrame implements  Observer {
 		panelPartie.add(scroreJ1);
 		panelPartie.add(scroreJ2);
 		panelPartie.add(joueur2);
-		panelGeneral.add(panelPartie);
+		vue.add(panelPartie);
 
 
 
@@ -424,7 +433,7 @@ public class Menu extends JFrame implements  Observer {
 			panelPartie.add(scroreJ2);
 			panelPartie.add(joueur2);
 			panelPartie.add(btnVoir);
-			panelGeneral.add(panelPartie);
+			vue.add(panelPartie);
 		}
 
 
@@ -435,16 +444,7 @@ public class Menu extends JFrame implements  Observer {
 
 
 		panelGeneral.setLayout(new BorderLayout());
-		ButtonJolie btnRetourMenu = new ButtonJolie("Retour");
-		btnRetourMenu.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				controleurAccueil.afficherHistoriqueDesScores();
-
-			}
-		});
-		panelGeneral.add(btnRetourMenu,BorderLayout.NORTH);
+		afficheBoutonRetour("Historique");
 
 
 		JPanel centre = new JPanel(new GridLayout(0, 2));
@@ -531,6 +531,7 @@ public class Menu extends JFrame implements  Observer {
 	
 	
 	
+	@SuppressWarnings("deprecation")
 	private static JFreeChart createChart(PieDataset dataset, String titre) {
 
 		JFreeChart chart = ChartFactory.createPieChart3D(

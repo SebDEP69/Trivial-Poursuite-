@@ -45,7 +45,7 @@ public class IHMPlateau extends JFrame implements  Observer {
 		trivialBoard.setLayout( new BorderLayout() );
 		trivialBoard.setBounds(0, 0, boardSize.width, boardSize.height);
 		layeredPane.add(trivialBoard, JLayeredPane.DEFAULT_LAYER);
-		trivialBoard.setBorder(BorderFactory.createEmptyBorder(50,30,95,30));
+		//trivialBoard.setBorder(BorderFactory.createEmptyBorder(50,30,95,30));
 
 		//HAUT
 		/*this.titlePanel = new JPanel();
@@ -78,6 +78,7 @@ public class IHMPlateau extends JFrame implements  Observer {
 		imgPersoDeux= new JLabel(new ImageIcon("images/macron.png"));
 		imgPersoDeux.setName("macron");
 		formulaireCreationJoueur();
+		this.pack();
 
 	}
 
@@ -97,17 +98,35 @@ public class IHMPlateau extends JFrame implements  Observer {
 		///////////////////////////////////////////
 		//   	 FORMULAIRE CREATION JOUEUR	      //
 		//////////////////////////////////////////
-		// CENTRE
+
 		plateauPanel = new JPanel(new BorderLayout());
+
+
+		ButtonJolie btnRetourMenu = new ButtonJolie("Retour au menu pricipal");
+		btnRetourMenu.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {	
+				ControleurAccueil controleurAccueil = new ControleurAccueil();
+				controleurAccueil.creerMenu();
+				dispose();
+			}
+		});
+		btnRetourMenu.setPreferredSize(new Dimension(250, 50));
+		JPanel panelBtn = new JPanel(new FlowLayout(FlowLayout.LEFT));
+		panelBtn.add(btnRetourMenu);
+		trivialBoard.add(panelBtn,BorderLayout.NORTH);
+
 
 		JPanel tekkenVue = new JPanel(new GridLayout(0, 2));
 
 
-		//###### JOUEUR 1
+		/* ################################################
+		 * JOUEUR 1
+		 * ################################################
+		 */
+
 		//JPanel panelJoueurun = new JPanel(new GridLayout(2, 0));
 		JPanel panelJoueurun = new JPanel(new BorderLayout());
-
-
 		//nom joueur
 		JPanel panelNomJoueurUn = new JPanel(new GridLayout(0,2));		
 		JLabel labelNomJUn = new JLabel("Nom du joueur 1 :");
@@ -122,57 +141,32 @@ public class IHMPlateau extends JFrame implements  Observer {
 
 		// partie select perso
 		selectPersoUn = new JPanel(new GridLayout(2, 2));
-		/*JButton btnMacron = new ButtonJolie(new ImageIcon("images/macron.png"));
-		JButton btnMerkel= new JButton(new ImageIcon("images/merkel.png"));
-		JButton btnPoutine = new JButton(new ImageIcon("images/poutine.png"));
-		JButton btnTrump = new JButton(new ImageIcon("images/trump.png"));*/
-		JButton btnMacron = new ButtonJolie("Macron");
-		JButton btnMerkel= new ButtonJolie("Merkel");
-		JButton btnPoutine = new ButtonJolie("Poutine");
-		JButton btnTrump = new ButtonJolie("Trump");
-
-		btnMacron.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				imgPersoUn = new JLabel(new ImageIcon("images/macron.png"));
-				imgPersoUn.setName("macron");
-				changePerso(panelJoueurun,imgPersoUn);				
-			}
-		});
-		btnMerkel.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				imgPersoUn = new JLabel(new ImageIcon("images/merkel.png"));
-				imgPersoUn.setName("merkel");
-				changePerso(panelJoueurun,imgPersoUn);					
-			}
-		});
-		btnPoutine.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				imgPersoUn = new JLabel(new ImageIcon("images/poutine.png"));
-				imgPersoUn.setName("poutine");
-				changePerso(panelJoueurun,imgPersoUn);					
-			}
-		});
-		btnTrump.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				imgPersoUn = new JLabel(new ImageIcon("images/trump.png"));
-				imgPersoUn.setName("trump");
-				changePerso(panelJoueurun,imgPersoUn);					
-			}
-		});
-		selectPersoUn.add(btnMacron);
-		selectPersoUn.add(btnMerkel);
-		selectPersoUn.add(btnPoutine);
-		selectPersoUn.add(btnTrump);
 		selectPersoUn.setPreferredSize(new Dimension(0, 100));
 		panelJoueurun.add(selectPersoUn, BorderLayout.SOUTH);
+		String listePerso[]= {"Macron","Merkel","Poutine","Trump"};
+
+		// Création des boutons de selection
+		for (String perso : listePerso) {
+			JButton btn = new ButtonJolie(perso);
+			btn.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					imgPersoUn = new JLabel(new ImageIcon("images/"+perso+".png"));
+					imgPersoUn.setName(perso);
+					changePerso(panelJoueurun,imgPersoUn);
+				}
+			});
+			selectPersoUn.add(btn);
+		}
 
 
 
-		//###### JOUEUR 2
+
+		/* ################################################
+		 * JOUEUR 2
+		 * ################################################
+		 */
+
 		JPanel panelJoueurdeux = new JPanel(new BorderLayout());
 		//nom joueur
 		JPanel panelNomJoueurDeux = new JPanel(new GridLayout(0,2));		
@@ -187,56 +181,23 @@ public class IHMPlateau extends JFrame implements  Observer {
 		panelJoueurdeux.add(imgPersoDeux, BorderLayout.CENTER);		
 		// partie select perso
 		selectPersoDeux = new JPanel(new GridLayout(2, 2));
-
-		/*JButton btnMacrondeux = new JButton(new ImageIcon("images/macron.png"));
-		JButton btnMerkeldeux= new JButton(new ImageIcon("images/merkel.png"));
-		JButton btnPoutinedeux = new JButton(new ImageIcon("images/poutine.png"));
-		JButton btnTrumpdeux = new JButton(new ImageIcon("images/trump.png"));*/
-		JButton btnMacrondeux = new ButtonJolie("Macron");
-		JButton btnMerkeldeux= new ButtonJolie("Merkel");
-		JButton btnPoutinedeux = new ButtonJolie("Poutine");
-		JButton btnTrumpdeux = new ButtonJolie("Trump");
-
-
-
-		btnMacrondeux.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				imgPersoDeux = new JLabel(new ImageIcon("images/macron.png"));
-				imgPersoDeux.setName("macron");
-				changePerso(panelJoueurdeux,imgPersoDeux);				
-			}
-		});
-		btnMerkeldeux.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				imgPersoDeux = new JLabel(new ImageIcon("images/merkel.png"));
-				imgPersoDeux.setName("merkel");
-				changePerso(panelJoueurdeux,imgPersoDeux);					
-			}
-		});
-		btnPoutinedeux.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				imgPersoDeux = new JLabel(new ImageIcon("images/poutine.png"));
-				imgPersoDeux.setName("poutine");
-				changePerso(panelJoueurdeux,imgPersoDeux);					
-			}
-		});
-		btnTrumpdeux.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				imgPersoDeux = new JLabel(new ImageIcon("images/trump.png"));
-				imgPersoDeux.setName("trump");
-				changePerso(panelJoueurdeux,imgPersoDeux);					
-			}
-		});
-		selectPersoDeux.add(btnMacrondeux);
-		selectPersoDeux.add(btnMerkeldeux);
-		selectPersoDeux.add(btnPoutinedeux);
-		selectPersoDeux.add(btnTrumpdeux);
 		selectPersoDeux.setPreferredSize(new Dimension(0, 100));
 		panelJoueurdeux.add(selectPersoDeux, BorderLayout.SOUTH);	
+
+		// Création des boutons de selection
+		for (String perso : listePerso) {
+			JButton btn = new ButtonJolie(perso);
+			btn.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					imgPersoDeux = new JLabel(new ImageIcon("images/"+perso+".png"));
+					imgPersoDeux.setName(perso);
+					changePerso(panelJoueurdeux,imgPersoDeux);				
+				}
+			});
+			selectPersoDeux.add(btn);
+		}
+
 
 		panelJoueurun.setBorder(BorderFactory.createEmptyBorder(0,30,0,65));
 		panelJoueurdeux.setBorder(BorderFactory.createEmptyBorder(0,65,0,30));
@@ -247,34 +208,7 @@ public class IHMPlateau extends JFrame implements  Observer {
 
 		tekkenVue.add(panelJoueurun);
 		tekkenVue.add(panelJoueurdeux);		
-		/*Dimension dimensionJTF = new Dimension(100,30);
-		CouleurPion CouleurduPion[] = {CouleurPion.MACRON, CouleurPion.MERKEL,CouleurPion.POUTINE, CouleurPion.TRUMP};
-		//###### JOUEUR 1
-		JLabel labelnomjoueurun = new JLabel("Nom joueur 1 :");
-		//JLabel labelcouleurjoueurun = new JLabel("Couleur joueur 1 :");
-		JTextField textNomJoueurun = new JTextField();
-		textNomJoueurun.setPreferredSize(dimensionJTF);
-		JComboBox<CouleurPion> couleurPionJoueurun = new JComboBox<CouleurPion>(CouleurduPion);
 
-		//###### JOUEUR 2
-		JLabel labelnomjoueurdeux = new JLabel("Nom joueur 2 :");
-		//JLabel labelcouleurjoueurdeux = new JLabel("Couleur joueur 2 :");
-		JTextField textNomJoueurdeux = new JTextField();
-		textNomJoueurdeux.setPreferredSize(dimensionJTF);
-		JComboBox<CouleurPion> couleurPionJoueurdeux = new JComboBox<CouleurPion>(CouleurduPion);
-
-		// nom des joueurs
-		plateauPanel.add(labelnomjoueurun);
-		//plateauPanel.add(textNomJoueurun);
-		plateauPanel.add(labelnomjoueurdeux);
-		//plateauPanel.add(textNomJoueurdeux);
-		 */
-		// couleur des joueurs
-		/*plateauPanel.add(labelcouleurjoueurun);
-		plateauPanel.add(couleurPionJoueurun);
-		plateauPanel.add(labelcouleurjoueurdeux);
-		plateauPanel.add(couleurPionJoueurdeux);
-		 */
 
 		// Bouton crï¿½ation des joueurs
 		JPanel panelButonLancer = new JPanel();
@@ -297,22 +231,23 @@ public class IHMPlateau extends JFrame implements  Observer {
 
 				for (int indice = 0; indice < liString.length; indice++) {
 					switch (liString[indice]) {
-					case "macron":
+					case "Macron":
 						couleurjoueur[indice] = CouleurPion.MACRON;
 						break;
-					case "merkel":
+					case "Merkel":
 						couleurjoueur[indice] = CouleurPion.MERKEL;
 						break;
-					case "poutine":
+					case "Poutine":
 						couleurjoueur[indice] = CouleurPion.POUTINE;
 						break;
-					case "trump":
+					case "Trump":
 						couleurjoueur[indice] = CouleurPion.TRUMP;
 						break;
 					default:
 						break;
 					}
 				}
+
 				trivialControler.creationJoueur(nomjoueurun,nomjoueurdeux,couleurjoueur[0],couleurjoueur[1]);
 				//trivialControler.creationJoueur("toto","titi",CouleurPion.MACRON,CouleurPion.MACRON);
 			}
@@ -729,8 +664,6 @@ public class IHMPlateau extends JFrame implements  Observer {
 
 		String nomImgJoueur = joueurCourant.getPion().getCouleurPion().toString().toLowerCase();
 		JLabel ImgJoueur = new JLabel(new ImageIcon("images/"+nomImgJoueur+".png"));
-
-
 		desPanel.add(btnLancerLesDes);
 		desPanel.add(categorie);
 		desPanel.add(decriptionJoueurCourant);
@@ -791,17 +724,17 @@ public class IHMPlateau extends JFrame implements  Observer {
 			int scrorePart = joueur.getNbPart();
 			JLabel nbPart = new JLabel( ((Integer)scrorePart).toString());
 
-			
-			
-			
-			
-			
+
+
+
+
+
 			panelJoueur.add(gagnant,SwingConstants.CENTER);
 			panelJoueur.add(nom);
 			panelJoueur.add(imgJoueur);
 			panelJoueur.add(nbPart);
-		
-			
+
+
 		}
 
 
@@ -816,7 +749,7 @@ public class IHMPlateau extends JFrame implements  Observer {
 			}
 		});
 		finGeneral.add(rejouer, BorderLayout.SOUTH);
-		
+
 
 	}
 	@SuppressWarnings("unchecked")
