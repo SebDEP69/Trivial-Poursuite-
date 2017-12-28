@@ -107,9 +107,9 @@ public class Menu extends JFrame implements  Observer {
 		JPanel texte1 = new JPanel();
 		texte1.setPreferredSize(new Dimension(10,90));
 		centre.add((JPanel) texte1);
-		JLabel txt1 = new JLabel("Bienvenue sur l'application TRIVIAL PURSUIT, pour lancer une partie cliquez sur : Debut de la partie");
+		JLabel txt1 = new JLabel("Bienvenue sur le jeu TRIVIAL PURSUIT, amsuez-vous bien !");
 		txt1.setHorizontalTextPosition(JLabel.CENTER); 
-		txt1.setFont(new Font("Calibri",Font.PLAIN,32));
+		txt1.setFont(new Font("Calibri",Font.PLAIN,27));
 		texte1.add(txt1);
 		texte1.setVisible(true);
 		GridBagConstraints a = new GridBagConstraints();    
@@ -145,7 +145,7 @@ public class Menu extends JFrame implements  Observer {
 		//CENTRE2
 		JPanel bouton1 = new JPanel();
 		centre.add((JPanel) bouton1);
-		ButtonJolie btn1 = new ButtonJolie("<Html><center>Debut de la partie<Html>");
+		ButtonJolie btn1 = new ButtonJolie("<Html><center>Nouvelle partie<Html>");
 		//JButton btn1 = new JButton("<Html><center>Debut de la partie<Html>");
 
 		btn1.addActionListener(new ActionListener() {
@@ -192,7 +192,7 @@ public class Menu extends JFrame implements  Observer {
 		centre.add(btn3, f);
 
 
-		JPanel bouton4 = new JPanel();
+		/*JPanel bouton4 = new JPanel();
 		centre.add((JPanel) bouton4);
 		ButtonJolie btn4 = new ButtonJolie("<Html><center>Score de la partie<Html>");
 		btn4.setPreferredSize(new Dimension(180, 100));
@@ -213,13 +213,13 @@ public class Menu extends JFrame implements  Observer {
 		g.gridy = 1;      
 		g.insets = new Insets(-20,100,-30,100);
 		g.fill = GridBagConstraints.HORIZONTAL;
-		centre.add(btn4, g);
+		centre.add(btn4, g);*/
 
 
 		JPanel bouton5 = new JPanel();
 		centre.add((JPanel) bouton5);
-		ButtonJolie btn5 = new ButtonJolie("<Html><center>Personnalisation<Html>");
-		btn5.setPreferredSize(new Dimension(180, 100));
+		ButtonJolie btn5 = new ButtonJolie("<Html><center>Personnalisation des questions <Html>");
+		btn5.setPreferredSize(new Dimension(250, 100));
 		btn5.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -232,7 +232,7 @@ public class Menu extends JFrame implements  Observer {
 		bouton5.setVisible(true);
 		GridBagConstraints h = new GridBagConstraints();   
 		h.gridx = 2;                                       
-		h.gridy = 3;
+		h.gridy = 2;
 		h.insets = new Insets(-20,100,-30,100);     
 		h.fill = GridBagConstraints.HORIZONTAL;
 		centre.add(btn5, h);

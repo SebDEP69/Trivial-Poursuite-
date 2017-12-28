@@ -83,7 +83,7 @@ public class TrivialPursuitGUI extends JFrame  {
 	     JPanel texte1 = new JPanel();
 	     texte1.setPreferredSize(new Dimension(10,90));
 	     centre.add((JPanel) texte1);
-	     JLabel txt1 = new JLabel("Bienvenue sur l'application TRIVIAL PURSUIT, pour lancer une partie cliquez sur : Debut de la partie");
+	     JLabel txt1 = new JLabel("Bienvenue sur le jeu TRIVIAL PURSUIT, le jeu alliant le chance et la cutulure !");
 	     txt1.setHorizontalTextPosition(JLabel.CENTER); 
 	     txt1.setFont(new Font("Calibri",Font.PLAIN,32));
 	     texte1.add(txt1);
@@ -122,7 +122,7 @@ public class TrivialPursuitGUI extends JFrame  {
          //CENTRE2
          JPanel bouton1 = new JPanel();
          centre.add((JPanel) bouton1);
-         ButtonJolie btn1 = new ButtonJolie("<Html><center>Debut de la partie<Html>");
+         ButtonJolie btn1 = new ButtonJolie("<Html><center>Lancer une partie<Html>");
          //JButton btn1 = new JButton("<Html><center>Debut de la partie<Html>");
       
          btn1.addActionListener(new ActionListener() {

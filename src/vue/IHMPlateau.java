@@ -102,7 +102,7 @@ public class IHMPlateau extends JFrame implements  Observer {
 		plateauPanel = new JPanel(new BorderLayout());
 
 
-		ButtonJolie btnRetourMenu = new ButtonJolie("Retour au menu pricipal");
+		ButtonJolie btnRetourMenu = new ButtonJolie("Retour au menu principal");
 		btnRetourMenu.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {	
@@ -111,7 +111,7 @@ public class IHMPlateau extends JFrame implements  Observer {
 				dispose();
 			}
 		});
-		btnRetourMenu.setPreferredSize(new Dimension(250, 50));
+		btnRetourMenu.setPreferredSize(new Dimension(400, 50));
 		JPanel panelBtn = new JPanel(new FlowLayout(FlowLayout.LEFT));
 		panelBtn.add(btnRetourMenu);
 		trivialBoard.add(panelBtn,BorderLayout.NORTH);
@@ -145,7 +145,7 @@ public class IHMPlateau extends JFrame implements  Observer {
 		panelJoueurun.add(selectPersoUn, BorderLayout.SOUTH);
 		String listePerso[]= {"Macron","Merkel","Poutine","Trump"};
 
-		// Création des boutons de selection
+		// Creation des boutons de selection
 		for (String perso : listePerso) {
 			JButton btn = new ButtonJolie(perso);
 			btn.addActionListener(new ActionListener() {
@@ -184,7 +184,7 @@ public class IHMPlateau extends JFrame implements  Observer {
 		selectPersoDeux.setPreferredSize(new Dimension(0, 100));
 		panelJoueurdeux.add(selectPersoDeux, BorderLayout.SOUTH);	
 
-		// Création des boutons de selection
+		// Creation des boutons de selection
 		for (String perso : listePerso) {
 			JButton btn = new ButtonJolie(perso);
 			btn.addActionListener(new ActionListener() {
@@ -210,7 +210,7 @@ public class IHMPlateau extends JFrame implements  Observer {
 		tekkenVue.add(panelJoueurdeux);		
 
 
-		// Bouton crï¿½ation des joueurs
+		// Bouton creation des joueurs
 		JPanel panelButonLancer = new JPanel();
 		panelButonLancer.setPreferredSize(new Dimension(0, 100));
 		panelButonLancer.setBorder(BorderFactory.createEmptyBorder(20,0,0,0));
@@ -610,7 +610,7 @@ public class IHMPlateau extends JFrame implements  Observer {
 					String reponse =groupButton.getSelection().getActionCommand();
 					trivialControler.validerReponse(question, reponse);
 				}else{
-					System.out.println("selectioner une reponse");
+					System.out.println("Selectioner une reponse");
 				}
 
 
@@ -693,7 +693,7 @@ public class IHMPlateau extends JFrame implements  Observer {
 
 	}
 
-
+// Ecran fin du jeu 
 	private void afficheEcranFin(ArrayList<Joueur> listeJoueur) {
 
 
@@ -760,7 +760,7 @@ public class IHMPlateau extends JFrame implements  Observer {
 		/*
 		 * 0 : is end game
 		 * 1 : liste des joueurs
-		 * 2 : Message a afficher ï¿½ l'utilisateur
+		 * 2 : Message a afficher a l'utilisateur
 		 * 3 : Nombre lancerDes / ou chaine vide si pas de lancer a renvoyer
 		 * 4 : Object Question
 		 * 5 : joueur courant
@@ -794,7 +794,7 @@ public class IHMPlateau extends JFrame implements  Observer {
 			this.questionPanel.removeAll();
 
 			///////////////////////////////////////////
-			//  affiche le lancer de dï¿½ + QUESTION   //
+			//  affiche le lancer de de + QUESTION   //
 			////////////////////////////////////////// 
 			if (((ArrayList<String>) info).size() >3) {
 				if ( ((ArrayList<Object>) info).size() >4 && ((ArrayList<Object>) info).get(4) != null ) {// si ya une question
