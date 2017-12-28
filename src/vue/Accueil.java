@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.GraphicsEnvironment;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
@@ -31,11 +32,15 @@ public class Accueil extends JFrame  {
 	public Accueil(String name) {
 
 		super(name);
-
+		this.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		Toolkit leKit = this.getToolkit();
 		Dimension boardSize = leKit.getScreenSize();
 		this.setTitle(name);
 
+		
+		
+		
+		
 
 		layeredPane = new JLayeredPane();
 		getContentPane().add(layeredPane);
@@ -46,10 +51,15 @@ public class Accueil extends JFrame  {
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}
+		
+		
 		JPanel panel = this.setBackgroundImage();
+		
 		panel.setPreferredSize( boardSize );
+		
+		System.out.println("beforeeeee : "+this.getWidth()+" "+this.getHeight());
 		panel.setBounds(0, 0, boardSize.width, boardSize.height);
-
+		System.out.println("test");
 		ButtonJolie btn1 = new ButtonJolie("Lancer le jeu");
 		btn1.setFont(new Font("Calibri", Font.BOLD, 40));
 		Color c = Color.decode("#c932ac");
@@ -67,25 +77,32 @@ public class Accueil extends JFrame  {
 				dispose();
 			}
 		});
-		this.pack();
-		this.setVisible(true);
-		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		//get local graphics environment
+		GraphicsEnvironment graphicsEnvironment=GraphicsEnvironment.getLocalGraphicsEnvironment();
+
+		
+		System.out.println(graphicsEnvironment.getMaximumWindowBounds());
 	}
 
 	private  JPanel setBackgroundImage()
 	{
 		JPanel panel = new JPanel()
 		{
+			
 			private static final long serialVersionUID = 1;
-
 			@Override
 			protected void paintComponent(Graphics g)
 			{
+				System.out.println("teste");
 				super.paintComponent(g);
+				
 				g.drawImage(im,0,0,getWidth(),getHeight(),this);
+				System.out.println("after !"+this.getWidth()+" "+this.getHeight());
+				
 				
 			}
 		};
+		//System.out.println("before : "+getWidth()+" "+getHeight());
 		setContentPane(panel);
 		return panel;
 	}

@@ -11,12 +11,12 @@ import javax.swing.*;
 
 import Controler.ControleurAccueil;
 import Controler.TrivialControler;
+import Controler.TrivialPursuiteObservable;
 import Model.ButtonJolie;
 import Model.Couleur;
 import Model.CouleurPion;
 import Model.Joueur;
 import Model.Question;
-import observable.TrivialPursuite;
 
 
 @SuppressWarnings("serial")
@@ -145,7 +145,7 @@ public class IHMPlateau extends JFrame implements  Observer {
 		panelJoueurun.add(selectPersoUn, BorderLayout.SOUTH);
 		String listePerso[]= {"Macron","Merkel","Poutine","Trump"};
 
-		// Creation des boutons de selection
+		// Création des boutons de selection
 		for (String perso : listePerso) {
 			JButton btn = new ButtonJolie(perso);
 			btn.addActionListener(new ActionListener() {
@@ -184,7 +184,7 @@ public class IHMPlateau extends JFrame implements  Observer {
 		selectPersoDeux.setPreferredSize(new Dimension(0, 100));
 		panelJoueurdeux.add(selectPersoDeux, BorderLayout.SOUTH);	
 
-		// Creation des boutons de selection
+		// Création des boutons de selection
 		for (String perso : listePerso) {
 			JButton btn = new ButtonJolie(perso);
 			btn.addActionListener(new ActionListener() {
@@ -210,7 +210,7 @@ public class IHMPlateau extends JFrame implements  Observer {
 		tekkenVue.add(panelJoueurdeux);		
 
 
-		// Bouton creation des joueurs
+		// Bouton cr�ation des joueurs
 		JPanel panelButonLancer = new JPanel();
 		panelButonLancer.setPreferredSize(new Dimension(0, 100));
 		panelButonLancer.setBorder(BorderFactory.createEmptyBorder(20,0,0,0));
@@ -693,7 +693,7 @@ public class IHMPlateau extends JFrame implements  Observer {
 
 	}
 
-// Ecran fin du jeu 
+	// Ecran fin du jeu 
 	private void afficheEcranFin(ArrayList<Joueur> listeJoueur) {
 
 
@@ -760,7 +760,7 @@ public class IHMPlateau extends JFrame implements  Observer {
 		/*
 		 * 0 : is end game
 		 * 1 : liste des joueurs
-		 * 2 : Message a afficher a l'utilisateur
+		 * 2 : Message a afficher à l'utilisateur
 		 * 3 : Nombre lancerDes / ou chaine vide si pas de lancer a renvoyer
 		 * 4 : Object Question
 		 * 5 : joueur courant
@@ -794,7 +794,7 @@ public class IHMPlateau extends JFrame implements  Observer {
 			this.questionPanel.removeAll();
 
 			///////////////////////////////////////////
-			//  affiche le lancer de de + QUESTION   //
+			//  affiche le lancer de dé + QUESTION   //
 			////////////////////////////////////////// 
 			if (((ArrayList<String>) info).size() >3) {
 				if ( ((ArrayList<Object>) info).size() >4 && ((ArrayList<Object>) info).get(4) != null ) {// si ya une question
@@ -859,7 +859,7 @@ public class IHMPlateau extends JFrame implements  Observer {
 
 
 	public static void main(String[] args) {
-		TrivialPursuite trivialPursuite = new TrivialPursuite();
+		TrivialPursuiteObservable trivialPursuite = new TrivialPursuiteObservable();
 		TrivialControler trivialControler = new TrivialControler(trivialPursuite);
 		JFrame frame = new IHMPlateau("TrivialPursuite",trivialControler);
 		trivialPursuite.addObserver((Observer) frame);

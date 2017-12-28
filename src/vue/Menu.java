@@ -591,7 +591,7 @@ public class Menu extends JFrame implements  Observer {
 		}
 
 		this.pack();
-		this.repaint();
+		//this.repaint();
 
 	}
 

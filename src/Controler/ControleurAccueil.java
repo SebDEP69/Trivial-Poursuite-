@@ -12,7 +12,6 @@ import Model.BaseQuestionCSV;
 import Model.BaseScroreCSV;
 import Model.Couleur;
 import Model.Partie;
-import observable.TrivialPursuite;
 import vue.Regles;
 import vue.ScorePartie;
 import vue.IHMPlateau;
@@ -46,7 +45,7 @@ public class ControleurAccueil  extends Observable{
 	}
 
 	public void lancerPartie() {
-		TrivialPursuite trivialPursuite = new TrivialPursuite();
+		TrivialPursuiteObservable trivialPursuite = new TrivialPursuiteObservable();
 		TrivialControler trivialControler = new TrivialControler(trivialPursuite);
 		IHMPlateau frame = new IHMPlateau("Trivial Pursuit",trivialControler);
 		trivialPursuite.addObserver((Observer) frame);
@@ -58,10 +57,12 @@ public class ControleurAccueil  extends Observable{
 
 		Menu menu = new Menu("Trivial Pursuit",this);
 		
-		this.addObserver((Observer) menu);
-		this.afficherMenu();
 		menu.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		menu.setVisible(true);
+		menu.setExtendedState(JFrame.MAXIMIZED_BOTH);
+		this.addObserver((Observer) menu);
+		this.afficherMenu();
+		
 
 	}
 	public void afficherMenu() {

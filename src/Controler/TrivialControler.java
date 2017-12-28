@@ -2,13 +2,12 @@ package Controler;
 
 import Model.CouleurPion;
 import Model.Question;
-import observable.TrivialPursuite;
 
 public class TrivialControler {
 	
-	private TrivialPursuite trivialPursuite;
+	private TrivialPursuiteObservable trivialPursuite;
 
-	public TrivialControler(TrivialPursuite trivialPursuite) {
+	public TrivialControler(TrivialPursuiteObservable trivialPursuite) {
 		this.trivialPursuite = trivialPursuite;
 	}
 	

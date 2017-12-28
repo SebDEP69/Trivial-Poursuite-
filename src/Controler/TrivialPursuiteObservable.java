@@ -1,20 +1,19 @@
-package observable;
+package Controler;
 
 import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 
-import Model.Couleur;
 import Model.CouleurPion;
 import Model.Jeu;
 import Model.Joueur;
 import Model.Question;
 
-public class TrivialPursuite extends Observable {
+public class TrivialPursuiteObservable extends Observable {
 
 	private Jeu jeu;
 
-	public TrivialPursuite() {
+	public TrivialPursuiteObservable() {
 		super();
 		this.jeu = new Jeu();
 	}
@@ -27,9 +26,9 @@ public class TrivialPursuite extends Observable {
 		//System.out.println("je creer les joueurs ");
 		this.jeu.CreationJoueur(nomjoueurun,nomJoueurdeux,couleurJoueurun,couleurJoueurdeux);
 		String joueurCommence = this.jeu.OrdreJoueurDebut();
-		this.jeu.getJoueurCourant().AjoutPartCamembert(Couleur.BLEU);
-		this.jeu.getJoueurCourant().AjoutPartCamembert(Couleur.ROUGE);
-		this.jeu.getJoueurCourant().AjoutPartCamembert(Couleur.VERT);
+		//this.jeu.getJoueurCourant().AjoutPartCamembert(Couleur.BLEU);
+		//this.jeu.getJoueurCourant().AjoutPartCamembert(Couleur.ROUGE);
+		//this.jeu.getJoueurCourant().AjoutPartCamembert(Couleur.VERT);
 		this.envoiInfo(joueurCommence,"0",null,false);
 	}
 	
