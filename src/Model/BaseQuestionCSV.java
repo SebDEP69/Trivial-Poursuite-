@@ -123,7 +123,7 @@ public class BaseQuestionCSV {
 		
 		String ligne = typeQuestion+separateur+question+separateur+reponses[0]+separateur+reponses[1]+
 				separateur+reponses[2]+separateur+reponses[3]+separateur+numReponseJuste+separateur+descritption;
-		
+		writer.newLine();
 		writer.write(ligne);
 		
 		writer.close();
