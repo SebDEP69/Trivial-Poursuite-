@@ -218,8 +218,8 @@ public class Menu extends JFrame implements  Observer {
 
 		JPanel bouton5 = new JPanel();
 		centre.add((JPanel) bouton5);
-		ButtonJolie btn5 = new ButtonJolie("<Html><center>Personnalisation des questions <Html>");
-		btn5.setPreferredSize(new Dimension(250, 100));
+		ButtonJolie btn5 = new ButtonJolie("<Html><center>Ajouter des questions <Html>");
+		btn5.setPreferredSize(new Dimension(180, 100));
 		btn5.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
