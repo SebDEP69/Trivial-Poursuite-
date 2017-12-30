@@ -22,30 +22,32 @@ import Model.Question;
 @SuppressWarnings("serial")
 public class IHMPlateau extends JFrame implements  Observer {
 	JLayeredPane layeredPane;
-	JPanel trivialBoard, desPanel, plateauPanel,camembertPanel, titlePanel, questionPanel,selectPersoUn,selectPersoDeux;
+	JPanel trivialBoard, desPanel, plateauPanel,camembertPanel, titlePanel, questionPanel,selectPersoUn,selectPersoDeux,panelSelectionPerso;
 	ArrayList<int[]> numcaseToindicePanel;
-	Dimension boardSize;
+	
 	private  TrivialControler trivialControler;
 	JLabel imgPersoUn,imgPersoDeux;
 	public IHMPlateau( String nom_jeu, TrivialControler trivialControler){
-
+		super(nom_jeu);
 		numcaseToindicePanel = new ArrayList<int[]>();
 		this.trivialControler = trivialControler;
-		int width = (int) (this.getToolkit().getScreenSize().getWidth() );
-		int height = (int) (this.getToolkit().getScreenSize().getHeight());
-		boardSize = new Dimension(width, height) ;
-		this.setTitle(nom_jeu);
-		this.setSize(boardSize);
-		layeredPane = new JLayeredPane();
-		getContentPane().add(layeredPane);
-		layeredPane.setPreferredSize(boardSize);
-
-
-		trivialBoard = new JPanel();
-		trivialBoard.setLayout( new BorderLayout() );
-		trivialBoard.setBounds(0, 0, boardSize.width, boardSize.height);
-		layeredPane.add(trivialBoard, JLayeredPane.DEFAULT_LAYER);
-		//trivialBoard.setBorder(BorderFactory.createEmptyBorder(50,30,95,30));
+		this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+		Dimension boardSize = this.getToolkit().getScreenSize();
+		setSize(boardSize.width , boardSize.height-50);
+		layeredPane = this.getLayeredPane();
+		
+		
+		trivialBoard = new JPanel(new BorderLayout());
+		trivialBoard.setBounds(0, 0, getWidth(), getHeight());
+		
+		panelSelectionPerso = new JPanel(new BorderLayout());
+		panelSelectionPerso.setBounds(0, 0, getWidth(), getHeight());
+		
+		//trivialBoard.setPreferredSize(boardSize);
+		
+		layeredPane.add(trivialBoard, new Integer(0));
+		layeredPane.add(panelSelectionPerso, new Integer(1));
+		
 
 		//HAUT
 		/*this.titlePanel = new JPanel();
@@ -64,11 +66,12 @@ public class IHMPlateau extends JFrame implements  Observer {
 		//DROITE
 		camembertPanel = new JPanel();
 		camembertPanel.setLayout(new GridLayout(3,0));
-
 		trivialBoard.add(camembertPanel, BorderLayout.EAST);
 
 
 		// CENTRE
+		plateauPanel = new JPanel(new BorderLayout());
+		trivialBoard.add(plateauPanel, BorderLayout.CENTER);
 		questionPanel = new JPanel();
 		questionPanel.setLayout(new GridLayout(2,0));		
 
@@ -77,8 +80,9 @@ public class IHMPlateau extends JFrame implements  Observer {
 		imgPersoUn.setName("macron");
 		imgPersoDeux= new JLabel(new ImageIcon("images/macron.png"));
 		imgPersoDeux.setName("macron");
+		
 		formulaireCreationJoueur();
-		this.pack();
+		
 
 	}
 
@@ -90,8 +94,10 @@ public class IHMPlateau extends JFrame implements  Observer {
 		panelJoueur.add(panelName,BorderLayout.NORTH);
 		panelJoueur.add(imgPerso, BorderLayout.CENTER);
 		panelJoueur.add(panelBouton, BorderLayout.SOUTH);
-		panelJoueur.repaint();
-		pack();
+		//panelJoueur.repaint();
+		
+		panelJoueur.revalidate();
+		
 	}
 
 	private void formulaireCreationJoueur() {
@@ -99,7 +105,10 @@ public class IHMPlateau extends JFrame implements  Observer {
 		//   	 FORMULAIRE CREATION JOUEUR	      //
 		//////////////////////////////////////////
 
-		plateauPanel = new JPanel(new BorderLayout());
+		panelSelectionPerso.setVisible(true);
+		trivialBoard.setVisible(false);
+		
+		JPanel PanelcentreJoueur = new JPanel(new BorderLayout());
 
 
 		ButtonJolie btnRetourMenu = new ButtonJolie("Retour au menu principal");
@@ -114,7 +123,7 @@ public class IHMPlateau extends JFrame implements  Observer {
 		btnRetourMenu.setPreferredSize(new Dimension(400, 50));
 		JPanel panelBtn = new JPanel(new FlowLayout(FlowLayout.LEFT));
 		panelBtn.add(btnRetourMenu);
-		trivialBoard.add(panelBtn,BorderLayout.NORTH);
+		panelSelectionPerso.add(panelBtn,BorderLayout.NORTH);
 
 
 		JPanel tekkenVue = new JPanel(new GridLayout(0, 2));
@@ -253,10 +262,10 @@ public class IHMPlateau extends JFrame implements  Observer {
 			}
 		});
 		panelButonLancer.add(btnlancer);		
-		plateauPanel.add(tekkenVue,BorderLayout.CENTER);
-		plateauPanel.add(panelButonLancer,BorderLayout.SOUTH);
-		trivialBoard.add(plateauPanel,BorderLayout.CENTER);
-		this.pack();
+		PanelcentreJoueur.add(tekkenVue,BorderLayout.CENTER);
+		PanelcentreJoueur.add(panelButonLancer,BorderLayout.SOUTH);
+		panelSelectionPerso.add(PanelcentreJoueur,BorderLayout.CENTER);
+		
 
 	}
 	private void creationPanelCamembert(ArrayList<Joueur> listeDesJoueur)
@@ -788,6 +797,8 @@ public class IHMPlateau extends JFrame implements  Observer {
 			this.afficheEcranFin((ArrayList<Joueur>) ( (ArrayList<Object>) info).get(1));
 
 		}else { // SI CEST PAS LA FIN DU GAME
+			panelSelectionPerso.setVisible(false);
+			trivialBoard.setVisible(true);
 			this.camembertPanel.removeAll();
 			this.desPanel.removeAll();
 			this.plateauPanel.removeAll();
@@ -810,7 +821,7 @@ public class IHMPlateau extends JFrame implements  Observer {
 
 			ArrayList<Joueur> listeDesJoueur = ((ArrayList<Joueur>) ((ArrayList<Object>) info).get(1));
 			this.creationPanelCamembert(listeDesJoueur);
-			this.pack();
+			this.revalidate();
 			///////////////////////////////////////////
 			//   			 PLATEAU   			      //
 			//////////////////////////////////////////
@@ -865,6 +876,7 @@ public class IHMPlateau extends JFrame implements  Observer {
 		trivialPursuite.addObserver((Observer) frame);
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.setVisible(true);
+		frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
 	}
 
 

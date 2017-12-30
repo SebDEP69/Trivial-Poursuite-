@@ -1,48 +1,30 @@
 package vue;
 
 
-import java.awt.Graphics;
-import java.awt.Image;
-import java.io.File;
-import java.io.IOException;
 
-import javax.imageio.ImageIO;
+import java.awt.Color;
+import java.awt.FlowLayout;
+
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 @SuppressWarnings("serial")
 public class Regles extends JFrame {
-	
-	Image img;
-	
-	public Regles(){
-			
-		JPanel regle = this.setBackgroundImage();
-
-		try {
-			img = ImageIO.read(new File("images/Parchemin_Regle_Remplie.png"));
-		} catch (IOException e1) {
-			e1.printStackTrace();
-		}
-		this.setContentPane(regle);
-	}
-
-	private  JPanel setBackgroundImage()
-	{
-		JPanel panel = new JPanel()
-		{
-			private static final long serialVersionUID = 1;
-
-			@Override
-			protected void paintComponent(Graphics g)
-			{
-				super.paintComponent(g);
-				g.drawImage(img,0,0,getWidth(),getHeight(),this);
-				
-			}
-		};
 		
-		return panel;
+	public Regles(){
+		
+		JPanel regle = new JPanel(new FlowLayout());
+		JLabel parchemin_Regle = new JLabel();
+		ImageIcon parchemin = new ImageIcon("images/Parchemin_Regle_Remplie.png");
+		parchemin_Regle.setIcon(parchemin);
+		
+		//regle.setBackground(Color.red);
+		parchemin_Regle.setBounds(0, 0, getWidth(), getHeight());
+		regle.add(parchemin_Regle);		
+		this.add(regle);
+		
 	}
 
 	

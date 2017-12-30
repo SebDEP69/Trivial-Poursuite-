@@ -50,29 +50,50 @@ import Model.Partie;
 @SuppressWarnings("serial")
 public class Menu extends JFrame implements  Observer {
 
-	private JLayeredPane layeredPane;
-
-	private JPanel panelGeneral;
+	private JPanel panelMenu,panelGeneral,panelPersonalisation,panelHistorique,panelDetailPartie;
 	private ControleurAccueil controleurAccueil;
-	private Dimension boardSize;
-
+	private JLayeredPane layeredPane;
 	public Menu(String name, ControleurAccueil controleur) {
-
 		super(name);
-		this.controleurAccueil = controleur;
 
+		this.controleurAccueil = controleur;
+		//this.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		Toolkit leKit = this.getToolkit();
-		boardSize = leKit.getScreenSize();
-		this.setTitle(name);
-		//  Use a Layered Pane for this this application
-		layeredPane = new JLayeredPane();
-		getContentPane().add(layeredPane);
-		layeredPane.setPreferredSize(boardSize);
-		panelGeneral = new JPanel();
-		panelGeneral.setLayout( new BorderLayout() );
-		panelGeneral.setPreferredSize( boardSize );
-		panelGeneral.setBounds(0, 0, boardSize.width, boardSize.height);
-		layeredPane.add(panelGeneral, JLayeredPane.DEFAULT_LAYER);
+		Dimension boardSize = leKit.getScreenSize();
+		setSize(boardSize.width , boardSize.height-50);
+	
+		layeredPane = this.getLayeredPane();
+		//layeredPane.setSize(boardSize.width , boardSize.height-150);
+
+		panelGeneral = new JPanel(new BorderLayout());
+		panelGeneral.setBounds(0, 0, getWidth(), getHeight());
+		//panelGeneral.setBackground(Color.red);
+		
+		/*Toolkit tk = Toolkit.getDefaultToolkit();
+		 Insets insets = tk.getScreenInsets(getGraphicsConfiguration());
+
+		System.out.println(insets.left +" "+insets.right +" "+insets.top +" "+insets.bottom);*/
+		panelMenu = new JPanel(new BorderLayout());
+		panelMenu.setBounds(0, 0, getWidth(), getHeight());
+
+		int decalage = 60;
+		panelPersonalisation = new JPanel(new BorderLayout());
+		panelPersonalisation.setBounds(0, decalage, getWidth(), getHeight()-decalage);
+		panelPersonalisation.setVisible(false);
+
+		panelHistorique = new JPanel(new BorderLayout());
+		panelHistorique.setBounds(0, decalage, getWidth(), getHeight()-decalage);
+		panelHistorique.setVisible(false);
+
+		panelDetailPartie = new JPanel(new BorderLayout());
+		panelDetailPartie.setBounds(0, decalage, getWidth(), getHeight()-decalage);
+		panelDetailPartie.setVisible(false);
+
+		layeredPane.add(panelGeneral, new Integer(0));
+		layeredPane.add(panelMenu, new Integer(1));
+		layeredPane.add(panelPersonalisation,new Integer(2));
+		layeredPane.add(panelHistorique,new Integer(3));
+		layeredPane.add(panelDetailPartie,new Integer(4));
 
 	}
 
@@ -80,27 +101,18 @@ public class Menu extends JFrame implements  Observer {
 
 	private void afficherMenuPrincipal() {
 
-		panelGeneral.setLayout( new BorderLayout() );
+		panelMenu.setLayout( new BorderLayout() );
 		JPanel sud = new JPanel();
-		panelGeneral.add(sud, BorderLayout.SOUTH);
-
-		JPanel est = new JPanel();
-		panelGeneral.add(est, BorderLayout.EAST);
-		//est.setBackground(Color.ORANGE);
-
-		JPanel ouest = new JPanel();
-		panelGeneral.add(ouest, BorderLayout.WEST);
-		//ouest.setBackground(Color.BLUE);
+		sud.setPreferredSize(new Dimension(0, 100));
+		panelMenu.add(sud, BorderLayout.SOUTH);
 
 		JPanel nord = new JPanel();
-		panelGeneral.add(nord, BorderLayout.NORTH);
-
-
-		//sud.setBackground(Color.ORANGE);
+		panelMenu.add(nord, BorderLayout.NORTH);
+		
 
 		JPanel centre = new JPanel();
 		centre.setLayout(new GridBagLayout());
-		panelGeneral.add(centre, BorderLayout.CENTER);
+		panelMenu.add(centre, BorderLayout.CENTER);
 		//centre.setBackground(Color.ORANGE);
 
 		// CENTRE HAUT // 
@@ -215,7 +227,6 @@ public class Menu extends JFrame implements  Observer {
 		g.fill = GridBagConstraints.HORIZONTAL;
 		centre.add(btn4, g);*/
 
-
 		JPanel bouton5 = new JPanel();
 		centre.add((JPanel) bouton5);
 		ButtonJolie btn5 = new ButtonJolie("<Html><center>Ajouter des questions <Html>");
@@ -223,9 +234,7 @@ public class Menu extends JFrame implements  Observer {
 		btn5.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-
 				controleurAccueil.afficherPersonalisation();
-
 			}
 		});
 		bouton5.add(btn5);
@@ -257,11 +266,14 @@ public class Menu extends JFrame implements  Observer {
 		i.insets = new Insets(-20,100,-30,100);
 		i.fill = GridBagConstraints.HORIZONTAL;
 		centre.add(btn6, i);
-		this.pack();
+		System.out.println("after !"+this.getWidth()+" "+this.getHeight());
+		//this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+
 	}
 
 	private void afficheBoutonRetour(String choix){
-		
+
+		panelGeneral.removeAll();
 		ButtonJolie btnRetourMenu = new ButtonJolie("Retour");
 		btnRetourMenu.addActionListener(new ActionListener() {
 
@@ -270,14 +282,19 @@ public class Menu extends JFrame implements  Observer {
 				switch (choix) {
 				case "Menu":
 					controleurAccueil.afficherMenu();
+					panelMenu.setVisible(true);
+					panelHistorique.setVisible(false);
+					panelPersonalisation.setVisible(false);
 					break;
 				case "Historique":
 					controleurAccueil.afficherHistoriqueDesScores();
+					panelHistorique.setVisible(true);
+					panelDetailPartie.setVisible(false);
 					break;
 				default:
 					break;
 				}
-				
+
 
 			}
 		});
@@ -288,12 +305,14 @@ public class Menu extends JFrame implements  Observer {
 	}
 	private void personalisation() {
 
-		panelGeneral.setLayout(new BorderLayout());
 		
+		
+		panelPersonalisation.setLayout(new BorderLayout());
+
 		this.afficheBoutonRetour("Menu");
 
 		JPanel all = new JPanel(new GridLayout(3,0));
-		panelGeneral.add(all,BorderLayout.CENTER);
+		panelPersonalisation.add(all,BorderLayout.CENTER);
 
 
 		// Panel question
@@ -331,7 +350,7 @@ public class Menu extends JFrame implements  Observer {
 		int i=1;
 		for (JTextField reponse : listerep) {
 
-			reponse.setPreferredSize(new Dimension(300, 50));
+			reponse.setPreferredSize(new Dimension(300, 40));
 
 			JRadioButton btnreponse = new JRadioButton("reponse"+i); 
 
@@ -361,6 +380,7 @@ public class Menu extends JFrame implements  Observer {
 		all.add(panelreponse);
 		all.add(panelDescription);
 
+		JPanel bot = new JPanel(new FlowLayout());
 		ButtonJolie btnvalider = new ButtonJolie("Valider");
 		btnvalider.addActionListener(new ActionListener() {
 
@@ -377,8 +397,9 @@ public class Menu extends JFrame implements  Observer {
 
 			}
 		});
-		btnvalider.setPreferredSize(new Dimension(100, 100));
-		panelGeneral.add(btnvalider,BorderLayout.SOUTH);
+		bot.setPreferredSize(new Dimension(0, 100));
+		bot.add(btnvalider, CENTER_ALIGNMENT);
+		panelPersonalisation.add(bot,BorderLayout.SOUTH);
 	}
 
 
@@ -388,10 +409,10 @@ public class Menu extends JFrame implements  Observer {
 
 
 		int nbPartie = listePartie.size();
-		panelGeneral.setLayout(new BorderLayout()); 
+		panelHistorique.setLayout(new BorderLayout()); 
 		JPanel vue = new JPanel(new GridLayout((nbPartie+2),0));// +1 pour le bouton retour et +1 pour l'intituler des colonnes
-		panelGeneral.add(vue,BorderLayout.CENTER);
-		
+		panelHistorique.add(vue,BorderLayout.CENTER);
+
 		afficheBoutonRetour("Menu");
 
 
@@ -443,13 +464,13 @@ public class Menu extends JFrame implements  Observer {
 
 
 
-		panelGeneral.setLayout(new BorderLayout());
+		panelDetailPartie.setLayout(new BorderLayout());
 		afficheBoutonRetour("Historique");
 
 
 		JPanel centre = new JPanel(new GridLayout(0, 2));
 
-		panelGeneral.add(centre,BorderLayout.CENTER);
+		panelDetailPartie.add(centre,BorderLayout.CENTER);
 
 		Couleur couleurs[] = {Couleur.BLEU,Couleur.ROUGE,Couleur.VERT,Couleur.ORANGE};
 
@@ -466,8 +487,8 @@ public class Menu extends JFrame implements  Observer {
 
 			joueurs.add(panelInfoJoueur);
 			JPanel panelGraph = new JPanel(new GridLayout(2, 2));
-			
-			
+
+
 			for (Couleur couleur : couleurs) {
 				String categorie = convertCouleurTocategorie(couleur);
 				System.out.println("Couleur :"+couleur+" indice "+indiceJoueur+" total :"+partie.getTotalAll(couleur, indiceJoueur));
@@ -496,27 +517,27 @@ public class Menu extends JFrame implements  Observer {
 					panelGraph.add(graph);
 				}
 			}
-			
+
 			joueurs.add(panelGraph);
-			
+
 			centre.add(joueurs);
 		}
 
 	}
 	private String convertCouleurTocategorie(Couleur couleur){
 		String categorie = "";
-		
+
 		switch (couleur) {
 		case BLEU:
 			categorie="Le Saviez-Vous?";
 			break;
 		case ROUGE:
 			categorie= "Innovation";
-			
+
 			break;
 		case VERT:
 			categorie = "CPE";
-		 
+
 			break;
 		case ORANGE:
 			categorie="Blagues";
@@ -524,13 +545,13 @@ public class Menu extends JFrame implements  Observer {
 		default:
 			break;
 		}
-		
+
 		return categorie;
 	}
-	
-	
-	
-	
+
+
+
+
 	@SuppressWarnings("deprecation")
 	private static JFreeChart createChart(PieDataset dataset, String titre) {
 
@@ -563,34 +584,48 @@ public class Menu extends JFrame implements  Observer {
 		 * info : 2 => afficherHistorique
 		 * info : 3 => afficheDetailPartie
 		 */
-		panelGeneral.removeAll();
+
+		
 
 
 		int choix = (int)((ArrayList<Object>)info).get(0);
 		switch (choix) {
 		case 0:
-
+			
 			this.afficherMenuPrincipal();
+			panelMenu.setVisible(true);
 			break;
 		case 1:
-
+			
+			panelPersonalisation.removeAll();
 			this.personalisation();
+			panelPersonalisation.setVisible(true);
+			panelMenu.setVisible(false);
 			break;
 		case 2:
+			
 			System.out.println(((ArrayList<Object>)info).get(1).getClass());
 			ArrayList<Partie> listePartie = (ArrayList<Partie>) ((ArrayList<Object>)info).get(1);
+			panelHistorique.removeAll();
 			this.afficherHistorique( listePartie);
+			panelHistorique.setVisible(true);
+			panelMenu.setVisible(false);
 			break;
 		case 3:
+			
+			
 			System.out.println(((ArrayList<Object>)info).get(1).getClass());
 			Partie partie = (Partie) ((ArrayList<Object>)info).get(1);
+			panelDetailPartie.removeAll();
 			this.afficheDetailPartie( partie);
+			panelDetailPartie.setVisible(true);
+			panelMenu.setVisible(false);
 			break;
 		default:
 			break;
 		}
 
-		this.pack();
+		//this.pack();
 		//this.repaint();
 
 	}

@@ -13,7 +13,6 @@ import Model.BaseScroreCSV;
 import Model.Couleur;
 import Model.Partie;
 import vue.Regles;
-import vue.ScorePartie;
 import vue.IHMPlateau;
 import vue.Menu;
 
@@ -35,14 +34,14 @@ public class ControleurAccueil  extends Observable{
 
 	}
 
-	public void afficherScorePartie() {
+	/*public void afficherScorePartie() {
 		ScorePartie frame = new ScorePartie();
 		frame.setTitle("ScorePartie");
 		frame.setSize(1150, 680);
 		frame.setLocationRelativeTo(null);
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.setVisible(true);
-	}
+	}*/
 
 	public void lancerPartie() {
 		TrivialPursuiteObservable trivialPursuite = new TrivialPursuiteObservable();
@@ -51,6 +50,7 @@ public class ControleurAccueil  extends Observable{
 		trivialPursuite.addObserver((Observer) frame);
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.setVisible(true);
+		frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
 	}
 
 	public void creerMenu() {
@@ -59,7 +59,7 @@ public class ControleurAccueil  extends Observable{
 
 		menu.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		menu.setVisible(true);
-		menu.setExtendedState(JFrame.MAXIMIZED_BOTH);
+		//menu.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		this.addObserver((Observer) menu);
 		this.afficherMenu();
 
@@ -77,12 +77,6 @@ public class ControleurAccueil  extends Observable{
 		info.add(1);
 		this.notifyObservers(info);
 	}
-
-
-
-
-
-
 
 
 	@SuppressWarnings("static-access")
