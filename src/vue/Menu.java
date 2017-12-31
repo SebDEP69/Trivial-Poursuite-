@@ -14,6 +14,8 @@ import java.awt.Insets;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
@@ -61,14 +63,14 @@ public class Menu extends JFrame implements  Observer {
 		Toolkit leKit = this.getToolkit();
 		Dimension boardSize = leKit.getScreenSize();
 		setSize(boardSize.width , boardSize.height-50);
-	
+
 		layeredPane = this.getLayeredPane();
 		//layeredPane.setSize(boardSize.width , boardSize.height-150);
 
 		panelGeneral = new JPanel(new BorderLayout());
 		panelGeneral.setBounds(0, 0, getWidth(), getHeight());
 		//panelGeneral.setBackground(Color.red);
-		
+
 		/*Toolkit tk = Toolkit.getDefaultToolkit();
 		 Insets insets = tk.getScreenInsets(getGraphicsConfiguration());
 
@@ -108,7 +110,7 @@ public class Menu extends JFrame implements  Observer {
 
 		JPanel nord = new JPanel();
 		panelMenu.add(nord, BorderLayout.NORTH);
-		
+
 
 		JPanel centre = new JPanel();
 		centre.setLayout(new GridBagLayout());
@@ -305,35 +307,94 @@ public class Menu extends JFrame implements  Observer {
 	}
 	private void personalisation() {
 
-		
-		
+
+
 		panelPersonalisation.setLayout(new BorderLayout());
 
 		this.afficheBoutonRetour("Menu");
 
-		JPanel all = new JPanel(new GridLayout(3,0));
+		JPanel all = new JPanel(new GridLayout(4,0));
 		panelPersonalisation.add(all,BorderLayout.CENTER);
 
-
-		// Panel question
+		// Type question
+		//JPanel panelTypeQuestion = new JPanel(new GridLayout(3, 3));
+		JPanel panelTypeQuestion = new JPanel(new GridBagLayout());
 		JPanel panelQuestion = new JPanel(new GridBagLayout());
-
+		JPanel panelreponse = new JPanel(new GridBagLayout());
+		JPanel panelDescription = new JPanel(new GridLayout(0, 2));
+		JPanel panelValider = new JPanel(new FlowLayout());
+		
 		String[] elements = new String[]{"Blague", "CPE", "Innovation", "Le saviez-vous?"};
 		JComboBox<String> typeQuestion = new JComboBox<String>(elements);
+		JLabel selectype = new JLabel("Veuillez selectionnez votre type de question");
+
+		typeQuestion.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+
+				panelQuestion.setVisible(true);
+
+			}
+		});
+		GridBagConstraints c = new GridBagConstraints();
+		//c.fill = GridBagConstraints.CENTER;
+		c.gridx = 0;
+		c.gridy = 0;
+		
+		panelTypeQuestion.add(selectype,c);
+		c.gridy = 1;
+		panelTypeQuestion.add(typeQuestion,c);
+
+		// Panel question
+
+		//panelQuestion.setBackground(Color.blue);
+
 		JTextField question = new JTextField();
-		JLabel labelQuestion = new JLabel("Question");
+		JLabel labelQuestion = new JLabel("Entrez une question et terminer par un \"?\"");
+
+		question.addKeyListener(new KeyListener() {
+
+			@Override
+			public void keyTyped(KeyEvent e) {
+
+			}
+
+			@Override
+			public void keyReleased(KeyEvent e) {
+				JTextField textField = (JTextField) e.getSource();
+				String text = textField.getText();
+				String lastCaract =text.substring((text.length() - 1));
+				if (lastCaract.equals("?")) {
+					panelreponse.setVisible(true);
+				}else{
+					panelDescription.setVisible(false);
+					panelreponse.setVisible(false);
+				}
+			}
+
+			@Override
+			public void keyPressed(KeyEvent e) {
+				// TODO Auto-generated method stub
+
+			}
+		});
 		//L'objet servant à positionner les composants
 
-		panelQuestion.add(typeQuestion);
-		panelQuestion.add(labelQuestion);
+		c.gridx = 0;
+		c.gridy = 0;
+		panelQuestion.add(labelQuestion,c);
 		question.setPreferredSize(new Dimension(300, 50));
-		panelQuestion.add(question);
+		c.gridy = 1;
+		panelQuestion.add(question,c);
 
 		// Panel reponse
-		JPanel panelreponse = new JPanel(new GridBagLayout());
 
-		JLabel indicationReponse = new JLabel("Selectionnez la bonne reponse");
-		panelreponse.add(indicationReponse);
+
+		JLabel indicationReponse = new JLabel("Entrez les réponsses et cochez la bonne réponse");
+		c.gridx = 0;
+		c.gridy = 0;
+		panelreponse.add(indicationReponse,c);
 		//Group the radio buttons.
 		ButtonGroup group = new ButtonGroup();
 
@@ -347,7 +408,47 @@ public class Menu extends JFrame implements  Observer {
 		listerep.add(reponse2);
 		listerep.add(reponse3);
 		listerep.add(reponse4);
+		
+		
+		
+		
+		
+		KeyListener keyListenRep = new KeyListener() {
+
+			@Override
+			public void keyTyped(KeyEvent e) {
+
+			}
+
+			@Override
+			public void keyReleased(KeyEvent e) {
+				//JTextField textField = (JTextField) e.getSource();
+				//String text = textField.getText();
+				String text1 = reponse1.getText();
+				String text2 = reponse2.getText();
+				String text3 = reponse3.getText();
+				String text4 = reponse4.getText();
+				if (!text1.equals("") &&!text2.equals("") &&!text3.equals("") &&!text4.equals("")) {
+					panelDescription.setVisible(true);
+				}else{
+					panelDescription.setVisible(false);
+				}
+				
+			}
+
+			@Override
+			public void keyPressed(KeyEvent e) {
+				// TODO Auto-generated method stub
+
+			}
+		
+		};
+		reponse1.addKeyListener(keyListenRep);
+		reponse2.addKeyListener(keyListenRep);
+		reponse3.addKeyListener(keyListenRep);
+		reponse4.addKeyListener(keyListenRep);
 		int i=1;
+		JPanel panelBtnReponse = new JPanel(new GridBagLayout());
 		for (JTextField reponse : listerep) {
 
 			reponse.setPreferredSize(new Dimension(300, 40));
@@ -361,26 +462,53 @@ public class Menu extends JFrame implements  Observer {
 			group.add(btnreponse);
 			gbc.gridy = i+1;
 			gbc.gridx = 0;
-			panelreponse.add(btnreponse,gbc);
+			panelBtnReponse.add(btnreponse,gbc);
 			gbc.gridx = 1;
-			panelreponse.add(reponse,gbc);
+			panelBtnReponse.add(reponse,gbc);
 			i++;
 		}
 
-
+		c.gridy = 1;
+		panelreponse.add(panelBtnReponse,c);
 
 		// panel descritpion
-		JPanel panelDescription = new JPanel(new GridLayout(0, 2));
+		
 		JLabel labelDescript = new JLabel("Description");
 		JTextArea descritption = new JTextArea();
+		
+		descritption.addKeyListener(new KeyListener() {
+			
+			@Override
+			public void keyTyped(KeyEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void keyReleased(KeyEvent e) {
+				panelValider.setVisible(true);
+			}
+			
+			@Override
+			public void keyPressed(KeyEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
 		panelDescription.add(labelDescript);
 		panelDescription.add(descritption);
 
+		panelQuestion.setVisible(false);
+		panelreponse.setVisible(false);
+		panelDescription.setVisible(false);
+
+		all.add(panelTypeQuestion);
 		all.add(panelQuestion);
 		all.add(panelreponse);
 		all.add(panelDescription);
 
-		JPanel bot = new JPanel(new FlowLayout());
+		
+		
 		ButtonJolie btnvalider = new ButtonJolie("Valider");
 		btnvalider.addActionListener(new ActionListener() {
 
@@ -397,9 +525,10 @@ public class Menu extends JFrame implements  Observer {
 
 			}
 		});
-		bot.setPreferredSize(new Dimension(0, 100));
-		bot.add(btnvalider, CENTER_ALIGNMENT);
-		panelPersonalisation.add(bot,BorderLayout.SOUTH);
+		panelValider.setPreferredSize(new Dimension(0, 100));
+		panelValider.add(btnvalider, CENTER_ALIGNMENT);
+		panelPersonalisation.add(panelValider,BorderLayout.SOUTH);
+		panelValider.setVisible(false);
 	}
 
 
@@ -585,25 +714,25 @@ public class Menu extends JFrame implements  Observer {
 		 * info : 3 => afficheDetailPartie
 		 */
 
-		
+
 
 
 		int choix = (int)((ArrayList<Object>)info).get(0);
 		switch (choix) {
 		case 0:
-			
+
 			this.afficherMenuPrincipal();
 			panelMenu.setVisible(true);
 			break;
 		case 1:
-			
+
 			panelPersonalisation.removeAll();
 			this.personalisation();
 			panelPersonalisation.setVisible(true);
 			panelMenu.setVisible(false);
 			break;
 		case 2:
-			
+
 			System.out.println(((ArrayList<Object>)info).get(1).getClass());
 			ArrayList<Partie> listePartie = (ArrayList<Partie>) ((ArrayList<Object>)info).get(1);
 			panelHistorique.removeAll();
@@ -612,8 +741,8 @@ public class Menu extends JFrame implements  Observer {
 			panelMenu.setVisible(false);
 			break;
 		case 3:
-			
-			
+
+
 			System.out.println(((ArrayList<Object>)info).get(1).getClass());
 			Partie partie = (Partie) ((ArrayList<Object>)info).get(1);
 			panelDetailPartie.removeAll();
