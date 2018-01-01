@@ -24,9 +24,10 @@ public class MystereEnleverCamembert extends Mystere {
 		//Camembert camembertJoueurAdverse = joueurAdverse.getCamembert();		
 		String message="";
 		if (joueurAdverse.RetirerPartCamemebert()) {
-			message = "Vous avez retirer une part de camembert a "+joueurAdverse.getNom();
+			message = "Vous avez retirer une part de camembert à "+joueurAdverse.getNom()+".";
 		}else {
-			message = joueurAdverse.getNom()+" ne poss�de pas de part de camembert � retirer";
+			//message = "Vous etez tomber sur une carte mystère perte de part de camembert, cependant vous ne possédez pas de part. Vous ne perdez pas de part.";
+			message = joueurAdverse.getNom()+" ne possède pas de part de camembert à retirer.";
 		}
 		return message;
 	}

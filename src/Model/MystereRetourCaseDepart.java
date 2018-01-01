@@ -21,7 +21,7 @@ public class MystereRetourCaseDepart extends Mystere {
 			else{
 				joueurcourant.setCaseCourante(listecase.get(0));
 			}
-			return "Retour a la case depart";
+			return "Vous retournez à la case depart!!!";
 	}
 
 }

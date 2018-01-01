@@ -14,9 +14,9 @@ public class MysterePerteCamembert extends Mystere{
 	String Action(Joueur joueurcourant, ArrayList<Case> listecase, ArrayList<Joueur> listejoueur) {
 		String message ="";
 		if (joueurcourant.RetirerPartCamemebert()) {
-			message = "un camembert a ete retirer";
+			message = "Vous perdez une part de camembert.";
 		}else {
-			message = "impossible de retirer un camembert du joueur car il ne possede pas de camembert";
+			message = "Vous etez tomber sur une carte mystère perte de part de camembert, cependant vous ne possédez pas de part. Vous ne perdez pas de part.";
 		}
 		return message;
 	}

@@ -560,7 +560,6 @@ public class Menu extends JFrame implements  Observer {
 
 
 
-
 		for (Partie partie : listePartie) {
 			panelPartie = new JPanel(new GridLayout(0, 6));
 			date = new JLabel(partie.getDate());

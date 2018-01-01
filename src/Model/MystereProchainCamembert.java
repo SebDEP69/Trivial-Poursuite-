@@ -27,7 +27,7 @@ public class MystereProchainCamembert extends Mystere{
 			}
 			i++;
 		}
-		return "Vous vous dirigez vers la prochaine case Super camembert";
+		return "Vous vous dirigez vers la prochaine case Super camembert. Cliquez sur le bouton ci-dessous pour répondre à la question";
 	}
 
 }

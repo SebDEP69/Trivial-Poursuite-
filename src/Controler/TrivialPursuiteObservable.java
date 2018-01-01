@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 
+import Model.Couleur;
 import Model.CouleurPion;
 import Model.Jeu;
 import Model.Joueur;
@@ -29,7 +30,7 @@ public class TrivialPursuiteObservable extends Observable {
 		//this.jeu.getJoueurCourant().AjoutPartCamembert(Couleur.BLEU);
 		//this.jeu.getJoueurCourant().AjoutPartCamembert(Couleur.ROUGE);
 		//this.jeu.getJoueurCourant().AjoutPartCamembert(Couleur.VERT);
-		this.envoiInfo(joueurCommence,"0",null,false);
+		this.envoiInfo(joueurCommence,"0",null,false,0,false,null,"");
 	}
 	
 	// s'occupe de faire toute les etapes d'un tour
@@ -53,25 +54,29 @@ public class TrivialPursuiteObservable extends Observable {
 		Question question = null;
 		String messageMystere= "";
 		Boolean actionMystere = false;
+		int isquestion;
 		if (this.jeu.getJoueurCourant().getCaseCourant().isQuestion()) { // si c'est une question on pose la question
 			question = this.jeu.ActionCaseQuestion();
+			isquestion =1;
 		}else {// si c'est une case mystere
+			isquestion =2;
 			messageMystere = this.jeu.ActionCaseMystere();
 			System.out.println(messageMystere);
-			if (messageMystere.equals("Vous vous dirigez vers la prochaine case Supper camembert"))
+			if (messageMystere.equals("Vous vous dirigez vers la prochaine case Super camembert. Cliquez sur le bouton ci-dessous pour répondre à la question"))
 			{
+				System.out.println("je rentre ici");
 				actionMystere = true;
 			}else if (!messageMystere.equals("Vous pouvez rejouer") && !isEnd())  {
 				this.jeu.ChangementJoueur();
 			}
-			messageMystere = "Vous etes tombe sur une case mystere <br> " +messageMystere;
+			//messageMystere = "Vous etes tombe sur une case mystere <br> " +messageMystere;
 			
 			if (isEnd()) {
 				messageMystere = actionDeFinGame(messageMystere);
 			}
 		}
 		String lancer = ((Integer) lancerDes).toString();
-		this.envoiInfo(messageMystere,lancer,question,actionMystere);
+		this.envoiInfo(messageMystere,lancer,question,actionMystere,isquestion,false,null,"");
 	}
 	
 	private String actionDeFinGame(String message) {
@@ -92,15 +97,21 @@ public class TrivialPursuiteObservable extends Observable {
 		
 		String message="";
 		boolean rejoue=false;
+		Boolean isbonneRep= false;
+		Couleur couleurWin= null;
+		String rep = question.getReponse();
+		isbonneRep =question.isBonneReponse(reponse);
 		// si le joueur a repondu la bonne reponse
-		if (question.isBonneReponse(reponse)) {
+		if (isbonneRep) {
 			rejoue=true;
+			
 			this.jeu.getJoueurCourant().augmenteReponseJuste(question.getCouleur());
+			couleurWin = question.getCouleur();
 			// si le joueur est sur une case super camembert
 			//if (this.jeu.getJoueurCourant().getCaseCourant().isSuperCamembert()) {
 				// si la part a bien ete ajouter
 				if (this.jeu.getJoueurCourant().AjoutPartCamembert(question.getCouleur())) { 
-					message = "Bravo vous avez gagne une part de camembert";
+					//message = "Bravo vous avez gagne une part de camembert";
 				}else { // si on a deja la part de camembert
 					message = "Vous avez repondu juste, mais vous possedez deja une part de camembert "+question.getCouleur();
 				}
@@ -112,7 +123,8 @@ public class TrivialPursuiteObservable extends Observable {
 		}else {
 			message = "Mauvaise reponse";
 		}	
-		message =  message +"<br>La reponse est :"+question.getReponse()+"<br>" +question.getDescription();
+		//message =  message +"<br>La reponse est :"+question.getReponse()+"<br>" +question.getDescription();
+		message = question.getDescription();
 		if (isEnd()) {
 			
 			message = actionDeFinGame("");
@@ -120,17 +132,18 @@ public class TrivialPursuiteObservable extends Observable {
 		}else {
 			if (!rejoue) { // si le joueur a pas repondu juste il ne rejoue pas
 				this.jeu.ChangementJoueur();
-				message= message+", C'est au tour de "+this.jeu.getJoueurCourant().getNom();
+				//message= message+", C'est au tour de "+this.jeu.getJoueurCourant().getNom();
 			}else{
-				message= message+", vous pouvez rejouer";
+				//message= message+", vous pouvez rejouer";
 			}
 		}
 		
 		//System.out.println(this.jeu.getJoueurCourant().toString());
-		this.envoiInfo(message,"0",null,false);
+		this.envoiInfo(message,"0",null,false,3,isbonneRep,couleurWin,rep);
 	}
 	
-	private void envoiInfo(String message, String lancerDes,Question question,Boolean prochainCam) {
+	private void envoiInfo(String message, String lancerDes,Question question,Boolean prochainCam,int isQuestion,
+			boolean isrepJuste, Couleur couleurwin,String reponse) {
 		
 		ArrayList<Object> infoForIHM = new ArrayList<Object>();
 		
@@ -141,15 +154,23 @@ public class TrivialPursuiteObservable extends Observable {
 		 * 3 : Nombre lancerDes / ou chaine vide si pas de lancer a renvoyer
 		 * 4 : Object Question
 		 * 5 : joueur courant
-		 * 6 : faire action de la case (Myst�reProchainCamembert)
+		 * 6 : 0 rien 1 question 2 mystère 3 description reponse
+		 * 7 : faire action de la case (Myst�reProchainCamembert)
+		 * 8 : reponse juste a la question (boolean)
+		 * 9 : couleur de la part de camembet gagner
+		 * 10 : reponse
 		 */
 		infoForIHM.add(isEnd());//0
 		infoForIHM.add(this.jeu.getListeJoueur());//1
-		infoForIHM.add("<html>"+message+"</html>");//2
+		infoForIHM.add(message);//2
 		infoForIHM.add(lancerDes);//3
-		infoForIHM.add(question); //4	
+		infoForIHM.add(question); //4
 		infoForIHM.add(this.jeu.getJoueurCourant()); //5
-		infoForIHM.add(prochainCam); //6
+		infoForIHM.add(isQuestion); //6
+		infoForIHM.add(prochainCam); //7
+		infoForIHM.add(isrepJuste); //8
+		infoForIHM.add(couleurwin); //9
+		infoForIHM.add(reponse);
 		this.notifyObservers(infoForIHM);
 		
 	}
