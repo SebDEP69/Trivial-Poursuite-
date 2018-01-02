@@ -616,12 +616,15 @@ public class IHMPlateau extends JFrame implements  Observer {
 			valider.setFont(new Font(policeEcriture, Font.BOLD,27));
 			valider.addActionListener(new ActionListener() {
 
+				@SuppressWarnings("static-access")
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					if (groupButton.getSelection() !=null) {
 						String reponse =groupButton.getSelection().getActionCommand();
 						trivialControler.validerReponse(question, reponse);
 					}else{
+						JOptionPane jop1 = new JOptionPane();
+						jop1.showMessageDialog(null, "Selectionez une réponse", "Selectionez une réponse", JOptionPane.INFORMATION_MESSAGE);
 						System.out.println("Selectioner une reponse");
 					}
 
