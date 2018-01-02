@@ -74,7 +74,7 @@ public class Accueil extends JFrame  {
 			protected void paintComponent(Graphics g)
 			{
 				super.paintComponent(g);
-				g.drawImage(im,0,0,getWidth(),getHeight(),this);
+				g.drawImage(im,0,0,this);
 				//System.out.println("after !"+this.getWidth()+" "+this.getHeight());
 			}
 		};	
