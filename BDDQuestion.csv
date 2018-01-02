@@ -1,20 +1,21 @@
-COULEUR;QUESTION;REPONSE 1;REPONSE 2;REPONSE 3;REPONSE 4;NUMERO REPONSE JUSTE;DESCRIPTION;;;;;;
-ROUGE;Quand a ete cree le telephone;1871;1873;1876;1878;3;3 : Invente par le celebre Alexander Graham Bell le 14 fevrier 1876;;;;;;
-ROUGE;Pour quel invention Thomas Edison n'a-t-il pas obtenut le brevet ;Le microphone;La centrale eletrcique ? courant continu;Le phonographe;Le neon;4;4 : Cree en 1910 par George Claude, physicien travaillant sur les gaz rares;;;;;;
-ROUGE;Qui est le nom du premier microprocesseur;Core;Intel 4004;Pentium;Intel Core;2;2 : Intel 4004 invente en 1971 par Marcian Hoff et Gilbert Hyatt. Il possedait 2 300 transistors, cela parait vraiment peu face au dernier Intel Core qui lui en possede plus de 1 million;;;;;;
-ROUGE;Quel invention majeur a eu lieu dans les annees 80;La carte ? puce;Le GPS;Le World Wide Web;Le CD;3;3 : Invente par le chercheur anglais Tim Berners-Lee du Cern ? Geneve. La carte ? puce a ete creee en 1974, le GPS et le CD en 1978;;;;;;
-BLEU;Savez-vous quel etait la couleur au pere noel ? sa creation;bleau;rouge;vert;noir;3;3: vert;;;;;;
-BLEU;Savez-vous ce qu'un crocodile est le seul ? ne pas pouvoir faire ;loucher;bailler;tirer la langue;sauter;3;3 : tirer la langue;;;;;;
-BLEU;Savez-vous jusqu'? combien de temps un escagot peut dormir;3 minutes;3 heures;3 mois;3 ans;4;4 : 3 ans;;;;;;
-BLEU;Savez-vous ce qui pour la plupart des gens fais plus peur que la mort;manger un ?il de barracuda;vivre avec des araignees;oublier l'anniversaire de sa compagne;vivre une invasion de zombie;2;2 : vivre avec des araignees;;;;;;
-VERT;Quand CPE a ete cree;1990;1992;1994;1996;3;3 : l'ecole a ete cree en 1994 par la fusion de deux ecoles : l?institut de chimie physique industrielle (ICPI), fonde en 1919, et l?ecole superieure de chimie industrielle de Lyon (ESCIL), fondee en 1883;;;;;;
-VERT;D'apres le groupe L'Etudiant, quel est la position de CPE parmit les ecoles d'ingenieur post-bac;10eme/70;15eme/70;4eme/ 70;8eme/70;3;3 : 4eme/70;;;;;;
-VERT;Quel prix nobel a ete decerne ? un eleve en 2005;Electronique;Chimie;Physique;Informatique;2;2 : Prix Nobel de Chimie 2005, membre de l'Academie des Sciences, specialiste de chimie organique;;;;;;
-VERT;En quel annee un eleve de CPE ? t-il ete medaille au JO;1996 ? Atlanta;2000 ? Sydney;2004 ? Athenes;2008 ? Pekin;2;2 : En 2000 ? Sydney, medaille d'or aux Jeux Olympiques d'aviron;;;;;;
-ORANGE;Quel poisson n'a jamais d'aniversaire ?;Poisson rouge;L'espadon;Poisson panne;Blobfish;3;;;;;;;
-ORANGE;Quel est le fruit que les poissons n?aiment pas ?;Banane;P?che;Fraise;Abricot;2;;;;;;;
-ORANGE;Quel est le plat prefere des opticiens ?;Tartiflette;Steak / Frites;Raclette;Lentilles;4;;;;;;;
-ORANGE;Je commence par un e, je finis aussi par un e, mais je ne contient qu?une seule lettre. Que suis je ?;Enveloppe;Ete;Epee;Epie;1;;;;;;;
-ORANGE;Quel est le fruit prefere du dragueur ?;L'ananas;La poire;La pomme;Le citron;1;;;;;;;
-ORANGE;Combien y a-t-il de fois la lettre F dans ce texte ?  FINISHED FILES ARE THE RE-  SULT OF YEARS OF SCIENTIF-  IC STUDY COMBINED WITH  THE  XPERIENCE OF YEARS.;3;5;6;2;3;;;;;;;
-ORANGE;Pourquoi faut-il toujours enlever ses lunettes lors d'un alcootest ? ;Parce que sinon on y voit rien ;Pour nous rendre plus credible ;Car ca fait toujours deux verres en moins ;Car nous n'avons pas de lunettes ;3;
+COULEUR;QUESTION;REPONSE 1;REPONSE 2;REPONSE 3;REPONSE 4;NUMERO REPONSE JUSTE;DESCRIPTION
+ROUGE;Quand a ete cree le premier telephone ? ;1871;1873;1876;1878;3;3 : Invente par le celebre Alexander Graham Bell le 14 fevrier 1876
+ROUGE;Pour quel invention Thomas Edison n a-t-il pas obtenut le brevet ?;Le microphone;La centrale eletrcique ? courant continu;Le phonographe;Le neon;4;4 : Cree en 1910 par George Claude, physicien travaillant sur les gaz rares
+ROUGE;Qui est le nom du premier microprocesseur ? ;Core;Intel 4004;Pentium;Intel Core;2;2 : Intel 4004 invente en 1971 par Marcian Hoff et Gilbert Hyatt. Il possedait 2 300 transistors, cela parait vraiment peu face au dernier Intel Core qui lui en possede plus de 1 million
+ROUGE;Quel invention majeur a eu lieu dans les annees 80 ?;La carte a puce;Le GPS;Le World Wide Web;Le CD;3;3 : Invente par le chercheur anglais Tim Berners-Lee du Cern a Geneve. La carte a puce a ete creee en 1974, le GPS et le CD en 1978
+BLEU;Savez-vous quel etait la couleur au pere noel a sa creation ?;Bleu;Rouge;Vert;Noir;3;3: Le pere noel etait a l origine vert selon les traditions Allemandes. C est la firme Coca-Cola qui l a fait devenir rouge pour ressembler a ce que l on s imagine du pere noel aujourd hui. 
+BLEU;Savez-vous ce qu'un crocodile est le seul a ne pas pouvoir faire ? ;Loucher;Bailler;Tirer la langue;Sauter;3;3 : Le crocodile ne peut pas tirer la langue a cause de sa trop grande machoire. 
+BLEU;Savez-vous jusqu a combien de temps un escagot peut dormir ?;3 minutes;3 heures;3 mois;3 ans;4;4 : L escargot est un grand dormeur, il peut en effet dormir jusqu a 3 ans.  
+BLEU;Savez-vous ce qui pour la plupart des gens fais plus peur que la mort ? ;Manger un fil de barracuda;Vivre avec des araignees;Oublier l anniversaire de sa compagne;Vivre une invasion de zombie;2;2 : Vivre avec des araignees, c'est la plus grande angoisse de millions de personnes selon plusieurs revues specialisees. 
+VERT;Quand l'ecole CPE a t-elle ete cree ? ;1990;1992;1994;1996;3;3 : L ecole a ete cree en 1994 par la fusion de deux ecoles : l institut de chimie physique industrielle (ICPI), fonde en 1919, et l ecole superieure de chimie industrielle de Lyon (ESCIL), fondee en 1883
+VERT;D apres le groupe L'Etudiant, quel est la position de CPE parmit les ecoles d'ingenieur post-bac ? ;10eme/70;15eme/70;4eme/ 70;8eme/70;3;3 : 4eme/70
+VERT;Quel prix nobel a ete decerne a un eleve en 2005 ? ;Electronique;Chimie;Physique;Informatique;2;2 : Prix Nobel de Chimie 2005, membre de l'Academie des Sciences, specialiste de chimie organique
+VERT;En quel annee un eleve de CPE a t-il ete medaille au JO ? ;1996 a Atlanta;2000 a Sydney;2004 a Athenes;2008 a Pekin;2;2 : En 2000 a Sydney, medaille d'or aux Jeux Olympiques d'aviron
+ORANGE;Quel poisson n a jamais d'aniversaire ?;Poisson rouge;L espadon;Poisson panne;Blobfish;3;
+ORANGE;Quel est le fruit que les poissons n aiment pas ?;Banane;Peche;Fraise;Abricot;2;
+ORANGE;Quel est le plat prefere des opticiens ?;Tartiflette;Steak / Frites;Raclette;Lentilles;4;
+ORANGE;Je commence par un e, je finis aussi par un e, mais je ne contient qu une seule lettre. Que suis je ?;Enveloppe;Ete;Epee;Epie;1;
+ORANGE;Quel est le fruit prefere du dragueur ?;L ananas;La poire;La pomme;Le citron;1;
+ORANGE;Combien y a-t-il de fois la lettre F dans ce texte ?  FINISHED FILES ARE THE RE-  SULT OF YEARS OF SCIENTIF-  IC STUDY COMBINED WITH  THE  XPERIENCE OF YEARS.;3;5;6;2;3;
+ORANGE;Pourquoi faut-il toujours enlever ses lunettes lors d un alcootest ? ;Parce que sinon on y voit rien ;Pour nous rendre plus credible ;Car ca fait toujours deux verres en moins ;Car nous n avons pas de lunettes ;3;
+BLEU;A quel age Louis 14 est-il monte sur le trone de France ?;30 ans ;14 ans ;1 an ;4 ans ;4;Louis 14 a ete oblige de monter sur le trone a la mort de son predecesseur Louis 13
