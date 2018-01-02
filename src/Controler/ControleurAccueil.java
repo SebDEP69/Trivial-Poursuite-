@@ -93,6 +93,11 @@ public class ControleurAccueil  extends Observable{
 			error= true;
 			textPbl =textPbl+"<br>- Veuillez entrer une question";
 		}
+		if (numReponseJuste.equals("")) {
+			error= true;
+			textPbl =textPbl+"<br>- Veuillez cocher la bonne réponse";
+		}
+		
 		if (reponses[0].equals("")) {
 			error= true;
 			textPbl =textPbl+"<br>- Veuillez entrez la réponse 1";
@@ -155,8 +160,8 @@ public class ControleurAccueil  extends Observable{
 			}
 
 
-
-			jop1.showMessageDialog(null, "<html>Votre question a bien été ajoutée <br> coucou</html>", "Ajout de la question", JOptionPane.INFORMATION_MESSAGE);
+			
+			jop1.showMessageDialog(null, "<html>Votre question a bien été ajoutée</html>", "Ajout de la question", JOptionPane.INFORMATION_MESSAGE);
 		}
 	}
 

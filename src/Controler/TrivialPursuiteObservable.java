@@ -18,12 +18,12 @@ public class TrivialPursuiteObservable extends Observable {
 		super();
 		this.jeu = new Jeu();
 	}
-	
-	
+
+
 	private boolean isEnd() { return this.jeu.FinDuJeu(); }
-	
+
 	public void creationJoueur(String nomjoueurun, String nomJoueurdeux, CouleurPion couleurJoueurun, CouleurPion couleurJoueurdeux) {
-		
+
 		//System.out.println("je creer les joueurs ");
 		this.jeu.CreationJoueur(nomjoueurun,nomJoueurdeux,couleurJoueurun,couleurJoueurdeux);
 		String joueurCommence = this.jeu.OrdreJoueurDebut();
@@ -32,24 +32,24 @@ public class TrivialPursuiteObservable extends Observable {
 		//this.jeu.getJoueurCourant().AjoutPartCamembert(Couleur.VERT);
 		this.envoiInfo(joueurCommence,"0",null,false,0,false,null,"");
 	}
-	
+
 	// s'occupe de faire toute les etapes d'un tour
 	public void lancerLesDes() {
-		
+
 		int lancerDes = this.jeu.LanceDeDes();
 		System.out.println("###################");
 		System.out.println("JOUEUR : "+this.jeu.getJoueurCourant().getNom());
 		System.out.println("lancer : "+ lancerDes);
 		this.jeu.AvancerJoueur(lancerDes);
 		System.out.println("Case COURANTE numero :"+this.jeu.getJoueurCourant().getCaseCourant().getNumero() + " couleur : "
-						+this.jeu.getJoueurCourant().getCaseCourant().getCouleur());
-		
-		
-		
+				+this.jeu.getJoueurCourant().getCaseCourant().getCouleur());
+
+
+
 		actionCase(lancerDes);
 	}
-	
-	
+
+
 	public void actionCase(int lancerDes) {
 		Question question = null;
 		String messageMystere= "";
@@ -70,7 +70,7 @@ public class TrivialPursuiteObservable extends Observable {
 				this.jeu.ChangementJoueur();
 			}
 			//messageMystere = "Vous etes tombe sur une case mystere <br> " +messageMystere;
-			
+
 			if (isEnd()) {
 				messageMystere = actionDeFinGame(messageMystere);
 			}
@@ -78,9 +78,9 @@ public class TrivialPursuiteObservable extends Observable {
 		String lancer = ((Integer) lancerDes).toString();
 		this.envoiInfo(messageMystere,lancer,question,actionMystere,isquestion,false,null,"");
 	}
-	
+
 	private String actionDeFinGame(String message) {
-		
+
 		Joueur jcourant = this.jeu.getJoueurCourant();
 		jcourant.estGagnant();
 		for (Joueur joueur : this.jeu.getListeJoueur()) {
@@ -92,9 +92,9 @@ public class TrivialPursuiteObservable extends Observable {
 		this.jeu.enregistrementDesScore();
 		return messageretour;
 	}
-	
+
 	public void validerReponse(Question question, String reponse) {
-		
+
 		String message="";
 		boolean rejoue=false;
 		Boolean isbonneRep= false;
@@ -104,21 +104,22 @@ public class TrivialPursuiteObservable extends Observable {
 		// si le joueur a repondu la bonne reponse
 		if (isbonneRep) {
 			rejoue=true;
-			
+
 			this.jeu.getJoueurCourant().augmenteReponseJuste(question.getCouleur());
-			couleurWin = question.getCouleur();
+
 			// si le joueur est sur une case super camembert
 			//if (this.jeu.getJoueurCourant().getCaseCourant().isSuperCamembert()) {
 				// si la part a bien ete ajouter
 				if (this.jeu.getJoueurCourant().AjoutPartCamembert(question.getCouleur())) { 
 					//message = "Bravo vous avez gagne une part de camembert";
+					couleurWin = question.getCouleur();
 				}else { // si on a deja la part de camembert
 					message = "Vous avez repondu juste, mais vous possedez deja une part de camembert "+question.getCouleur();
 				}
-			//si c'est pas une super camembert
-		//}else {
-				//message = "Bravo vous avez repondu juste";
-			//}
+				//si c'est pas une super camembert
+			/*}else {
+				message = "Bravo vous avez repondu juste";
+			}*/
 			//si on a pas repondu juste
 		}else {
 			message = "Mauvaise reponse";
@@ -126,9 +127,9 @@ public class TrivialPursuiteObservable extends Observable {
 		//message =  message +"<br>La reponse est :"+question.getReponse()+"<br>" +question.getDescription();
 		message = question.getDescription();
 		if (isEnd()) {
-			
+
 			message = actionDeFinGame("");
-			
+
 		}else {
 			if (!rejoue) { // si le joueur a pas repondu juste il ne rejoue pas
 				this.jeu.ChangementJoueur();
@@ -137,16 +138,16 @@ public class TrivialPursuiteObservable extends Observable {
 				//message= message+", vous pouvez rejouer";
 			}
 		}
-		
+
 		//System.out.println(this.jeu.getJoueurCourant().toString());
 		this.envoiInfo(message,"0",null,false,3,isbonneRep,couleurWin,rep);
 	}
-	
-	private void envoiInfo(String message, String lancerDes,Question question,Boolean prochainCam,int isQuestion,
+
+	private void envoiInfo(String message, String lancerDes,Question question,Boolean prochainCam,int typeAffiche,
 			boolean isrepJuste, Couleur couleurwin,String reponse) {
-		
+
 		ArrayList<Object> infoForIHM = new ArrayList<Object>();
-		
+
 		/*
 		 * 0 : is end game
 		 * 1 : liste des joueurs
@@ -166,15 +167,15 @@ public class TrivialPursuiteObservable extends Observable {
 		infoForIHM.add(lancerDes);//3
 		infoForIHM.add(question); //4
 		infoForIHM.add(this.jeu.getJoueurCourant()); //5
-		infoForIHM.add(isQuestion); //6
+		infoForIHM.add(typeAffiche); //6
 		infoForIHM.add(prochainCam); //7
 		infoForIHM.add(isrepJuste); //8
 		infoForIHM.add(couleurwin); //9
 		infoForIHM.add(reponse);
 		this.notifyObservers(infoForIHM);
-		
+
 	}
-	
+
 	/* (non-Javadoc)
 	 * @see java.util.Observable#notifyObservers(java.lang.Object)
 	 */
@@ -190,7 +191,7 @@ public class TrivialPursuiteObservable extends Observable {
 	@Override
 	public void addObserver(Observer o){
 		super.addObserver(o);
-		
+
 	}
-	
+
 }

@@ -55,6 +55,7 @@ public class Menu extends JFrame implements  Observer {
 	private JPanel panelMenu,panelGeneral,panelPersonalisation,panelHistorique,panelDetailPartie;
 	private ControleurAccueil controleurAccueil;
 	private JLayeredPane layeredPane;
+	private String policeEcriture = "Calibri";
 	public Menu(String name, ControleurAccueil controleur) {
 		super(name);
 
@@ -323,10 +324,14 @@ public class Menu extends JFrame implements  Observer {
 		JPanel panelreponse = new JPanel(new GridBagLayout());
 		JPanel panelDescription = new JPanel(new GridLayout(0, 2));
 		JPanel panelValider = new JPanel(new FlowLayout());
-		
+		ButtonJolie btnvalider = new ButtonJolie("Valider");
+		btnvalider.setFont(new Font(policeEcriture,Font.BOLD,27));
+
 		String[] elements = new String[]{"Blague", "CPE", "Innovation", "Le saviez-vous?"};
 		JComboBox<String> typeQuestion = new JComboBox<String>(elements);
 		JLabel selectype = new JLabel("Veuillez selectionnez votre type de question");
+		selectype.setFont(new Font(policeEcriture,Font.PLAIN,27));
+
 
 		typeQuestion.addActionListener(new ActionListener() {
 
@@ -341,7 +346,7 @@ public class Menu extends JFrame implements  Observer {
 		//c.fill = GridBagConstraints.CENTER;
 		c.gridx = 0;
 		c.gridy = 0;
-		
+
 		panelTypeQuestion.add(selectype,c);
 		c.gridy = 1;
 		panelTypeQuestion.add(typeQuestion,c);
@@ -352,7 +357,7 @@ public class Menu extends JFrame implements  Observer {
 
 		JTextField question = new JTextField();
 		JLabel labelQuestion = new JLabel("Entrez une question et terminer par un \"?\"");
-
+		labelQuestion.setFont(new Font(policeEcriture,Font.PLAIN,27));
 		question.addKeyListener(new KeyListener() {
 
 			@Override
@@ -364,13 +369,16 @@ public class Menu extends JFrame implements  Observer {
 			public void keyReleased(KeyEvent e) {
 				JTextField textField = (JTextField) e.getSource();
 				String text = textField.getText();
-				String lastCaract =text.substring((text.length() - 1));
-				if (lastCaract.equals("?")) {
-					panelreponse.setVisible(true);
-				}else{
-					panelDescription.setVisible(false);
-					panelreponse.setVisible(false);
+				if (text.length()>0) {
+					String lastCaract =text.substring((text.length() - 1));
+					if (lastCaract.equals("?")) {
+						panelreponse.setVisible(true);
+					}else{
+						panelDescription.setVisible(false);
+						panelreponse.setVisible(false);
+					}
 				}
+				
 			}
 
 			@Override
@@ -392,6 +400,7 @@ public class Menu extends JFrame implements  Observer {
 
 
 		JLabel indicationReponse = new JLabel("Entrez les réponsses et cochez la bonne réponse");
+		indicationReponse.setFont(new Font(policeEcriture,Font.PLAIN,27));
 		c.gridx = 0;
 		c.gridy = 0;
 		panelreponse.add(indicationReponse,c);
@@ -408,11 +417,11 @@ public class Menu extends JFrame implements  Observer {
 		listerep.add(reponse2);
 		listerep.add(reponse3);
 		listerep.add(reponse4);
-		
-		
-		
-		
-		
+
+
+
+
+
 		KeyListener keyListenRep = new KeyListener() {
 
 			@Override
@@ -433,7 +442,7 @@ public class Menu extends JFrame implements  Observer {
 				}else{
 					panelDescription.setVisible(false);
 				}
-				
+
 			}
 
 			@Override
@@ -441,7 +450,7 @@ public class Menu extends JFrame implements  Observer {
 				// TODO Auto-generated method stub
 
 			}
-		
+
 		};
 		reponse1.addKeyListener(keyListenRep);
 		reponse2.addKeyListener(keyListenRep);
@@ -454,10 +463,10 @@ public class Menu extends JFrame implements  Observer {
 			reponse.setPreferredSize(new Dimension(300, 40));
 
 			JRadioButton btnreponse = new JRadioButton("reponse"+i); 
-
+			btnreponse.setFont(new Font(policeEcriture,Font.PLAIN,27));
 			btnreponse.setActionCommand(""+i);
 			if (i==1) {
-				btnreponse.setSelected(true);
+				//btnreponse.setSelected(true);
 			}
 			group.add(btnreponse);
 			gbc.gridy = i+1;
@@ -472,27 +481,28 @@ public class Menu extends JFrame implements  Observer {
 		panelreponse.add(panelBtnReponse,c);
 
 		// panel descritpion
-		
+
 		JLabel labelDescript = new JLabel("Description");
+		labelDescript.setFont(new Font(policeEcriture,Font.PLAIN,27));
 		JTextArea descritption = new JTextArea();
-		
+
 		descritption.addKeyListener(new KeyListener() {
-			
+
 			@Override
 			public void keyTyped(KeyEvent e) {
 				// TODO Auto-generated method stub
-				
+
 			}
-			
+
 			@Override
 			public void keyReleased(KeyEvent e) {
-				panelValider.setVisible(true);
+				btnvalider.setVisible(true);
 			}
-			
+
 			@Override
 			public void keyPressed(KeyEvent e) {
 				// TODO Auto-generated method stub
-				
+
 			}
 		});
 		panelDescription.add(labelDescript);
@@ -507,9 +517,9 @@ public class Menu extends JFrame implements  Observer {
 		all.add(panelreponse);
 		all.add(panelDescription);
 
-		
-		
-		ButtonJolie btnvalider = new ButtonJolie("Valider");
+
+
+
 		btnvalider.addActionListener(new ActionListener() {
 
 
@@ -518,17 +528,47 @@ public class Menu extends JFrame implements  Observer {
 				String Rtype= typeQuestion.getSelectedItem().toString();
 				String Rquestion = question.getText();
 				String[] listeReponses = {reponse1.getText(),reponse2.getText(),reponse3.getText(),reponse4.getText()};
-				String numReponseJuste = group.getSelection().getActionCommand();
+				String numReponseJuste ="";
 				String descript = descritption.getText();
-
+				if (group.getSelection() !=null) {
+					 numReponseJuste = group.getSelection().getActionCommand();
+				}
 				controleurAccueil.enregisterQuestion(Rtype,Rquestion,listeReponses,numReponseJuste,descript);
 
 			}
 		});
+		btnvalider.setVisible(false);
+
+		ButtonJolie btnReset= new ButtonJolie("Remise à zéro");
+		btnReset.addActionListener(new ActionListener() {
+
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				question.setText("");
+				reponse1.setText("");
+				reponse2.setText("");
+				reponse3.setText("");
+				reponse4.setText("");
+				descritption.setText("");
+				typeQuestion.setSelectedIndex(0);
+				group.clearSelection();
+				panelDescription.setVisible(false);
+				panelQuestion.setVisible(false);
+				panelreponse.setVisible(false);
+				btnvalider.setVisible(false);
+				//String numReponseJuste = group.getSelection().getActionCommand();
+
+			}
+		});
+		btnReset.setFont(new Font(policeEcriture,Font.BOLD,27));
+
+
 		panelValider.setPreferredSize(new Dimension(0, 100));
 		panelValider.add(btnvalider, CENTER_ALIGNMENT);
+		panelValider.add(btnReset, CENTER_ALIGNMENT);
 		panelPersonalisation.add(panelValider,BorderLayout.SOUTH);
-		panelValider.setVisible(false);
+		panelValider.setVisible(true);
 	}
 
 

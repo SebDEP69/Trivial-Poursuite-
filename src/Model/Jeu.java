@@ -18,8 +18,8 @@ public class Jeu {
 	
 	//Methode classe Jeu
 	public int LanceDeDes(){
-		//return 4;
-		return (int) ((Math.random() * 6)+1);
+		return 5;
+		//return (int) ((Math.random() * 6)+1);
 		
 	}
 	/**
@@ -147,6 +147,11 @@ public class Jeu {
 		monJeu.AvancerJoueur(lancer);
 		 caseJoueur = monJeu.getJoueurCourant().getCaseCourant();
 		System.out.println(caseJoueur.getNumero() + " " + caseJoueur.getCouleur());
+	
+	
+	
+	
+	
 	}
 
 }

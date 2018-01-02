@@ -21,12 +21,13 @@ import Model.Question;
 
 @SuppressWarnings("serial")
 public class IHMPlateau extends JFrame implements  Observer {
-	JLayeredPane layeredPane;
-	JPanel trivialBoard, desPanel, plateauPanel,camembertPanel, titlePanel, questionPanel,selectPersoUn,selectPersoDeux,panelSelectionPerso;
-	ArrayList<int[]> numcaseToindicePanel;
+	private JLayeredPane layeredPane;
+	private JPanel trivialBoard, desPanel, plateauPanel,camembertPanel, titlePanel, questionPanel,selectPersoUn,selectPersoDeux,panelSelectionPerso;
+	private ArrayList<int[]> numcaseToindicePanel;
 
 	private  TrivialControler trivialControler;
-	JLabel imgPersoUn,imgPersoDeux;
+	private JLabel imgPersoUn,imgPersoDeux;
+	private String policeEcriture = "Calibri";
 	public IHMPlateau( String nom_jeu, TrivialControler trivialControler){
 		super(nom_jeu);
 		numcaseToindicePanel = new ArrayList<int[]>();
@@ -139,7 +140,7 @@ public class IHMPlateau extends JFrame implements  Observer {
 		//nom joueur
 		JPanel panelNomJoueurUn = new JPanel(new GridLayout(0,2));		
 		JLabel labelNomJUn = new JLabel("Nom du joueur 1 :");
-		labelNomJUn.setFont(new Font("Calibri",Font.PLAIN,25));
+		labelNomJUn.setFont(new Font(policeEcriture,Font.PLAIN,25));
 		JTextField nomJoueurUn = new JTextField();
 		panelNomJoueurUn.add(labelNomJUn);
 		panelNomJoueurUn.add(nomJoueurUn);
@@ -180,7 +181,7 @@ public class IHMPlateau extends JFrame implements  Observer {
 		//nom joueur
 		JPanel panelNomJoueurDeux = new JPanel(new GridLayout(0,2));		
 		JLabel labelNomJDeux = new JLabel("Nom du joueur 2 :");
-		labelNomJDeux.setFont(new Font("Calibri",Font.PLAIN,25));
+		labelNomJDeux.setFont(new Font(policeEcriture,Font.PLAIN,25));
 		JTextField nomJoueurDeux = new JTextField();
 		panelNomJoueurDeux.add(labelNomJDeux);
 		panelNomJoueurDeux.add(nomJoueurDeux);
@@ -225,7 +226,7 @@ public class IHMPlateau extends JFrame implements  Observer {
 		panelButonLancer.setBorder(BorderFactory.createEmptyBorder(20,0,0,0));
 
 		ButtonJolie btnlancer = new ButtonJolie("Lancer");
-		btnlancer.setFont(new Font("Calibri", Font.BOLD,35));
+		btnlancer.setFont(new Font(policeEcriture, Font.BOLD,35));
 		Color c = Color.decode("#387ebe");
 		btnlancer.setBackground(c);
 
@@ -547,74 +548,96 @@ public class IHMPlateau extends JFrame implements  Observer {
 		//////////////////////////////////////////
 
 		// AFFICHAGE DE L IMAGE DU TYPE DE LA QUESTION ET CHANGEMENT DE LA COULEUR DE FOND
-		questionPanel = new JPanel(new GridLayout(3,0));
-		Couleur couleur = question.getCouleur();
-		JLabel imageTypeQuestion = new JLabel();
-		switch (couleur) {
-		case ROUGE:
-			//questionPanel.setBackground(Color.red);
-			imageTypeQuestion = new JLabel( new ImageIcon("images/innovation.png"));
-			break;
-		case BLEU:
-			//questionPanel.setBackground(Color.BLUE);
-			imageTypeQuestion = new JLabel(new ImageIcon("images/lesaviezvous.png"));
-			break;
-		case VERT:
-			//questionPanel.setBackground(Color.green);
-			imageTypeQuestion = new JLabel( new ImageIcon("images/cpe.png"));
-			break;
-		case ORANGE:
-			//questionPanel.setBackground(Color.orange);
-			imageTypeQuestion = new JLabel(new ImageIcon("images/blague.png") );
-			break;
-		default:
-			break;
-		}		
-		this.questionPanel.add(imageTypeQuestion);
+		questionPanel = new JPanel();
+		questionPanel.setLayout(new BoxLayout(questionPanel, BoxLayout.Y_AXIS));
+		if (question ==null) {
+			JLabel messageNoQuestion = new JLabel("Il n'y a plus de question de cette catégorie");
+			messageNoQuestion.setFont(new Font(policeEcriture,Font.PLAIN,27));
+			questionPanel.add(messageNoQuestion);
+		}else{
+			Couleur couleur = question.getCouleur();
+			JLabel imageTypeQuestion = new JLabel();
+			switch (couleur) {
+			case ROUGE:
+				//questionPanel.setBackground(Color.red);
+				imageTypeQuestion = new JLabel( new ImageIcon("images/innovation.png"));
+				break;
+			case BLEU:
+				//questionPanel.setBackground(Color.BLUE);
+				imageTypeQuestion = new JLabel(new ImageIcon("images/lesaviezvous.png"));
+				break;
+			case VERT:
+				//questionPanel.setBackground(Color.green);
+				imageTypeQuestion = new JLabel( new ImageIcon("images/cpe.png"));
+				break;
+			case ORANGE:
+				//questionPanel.setBackground(Color.orange);
+				imageTypeQuestion = new JLabel(new ImageIcon("images/blague.png") );
+				break;
+			default:
+				break;
+			}		
 
-		//QUESTION 
-		JPanel panellabelQuestion = new JPanel( new GridBagLayout());
-		JLabel questionLabel = new JLabel( question.getQuestion() );
-		questionLabel.setFont(new Font("Calibri",Font.PLAIN,27));
-		panellabelQuestion.add(questionLabel);
-		this.questionPanel.add(panellabelQuestion);
+			JPanel panelimage = new JPanel(new GridBagLayout());
+			panelimage.add(imageTypeQuestion);
 
-		// REPONSES
-		String[] reponses = question.getChoix();
-		ButtonGroup groupButton = new ButtonGroup();
-		JPanel reponsePanel = new JPanel(new GridLayout(5,0));
+			this.questionPanel.add(panelimage);
+			//QUESTION 
+			String quest = question.getQuestion();
 
 
-		for (int i = 0; i < reponses.length; i++) {
-			// Reponse 1
-			JRadioButton rep = new JRadioButton(reponses[i]);
-			//rep1.setBackground(questionPanel.getBackground());
-			rep.setActionCommand(rep.getText());
-			rep.setFont(new Font("Calibri",Font.PLAIN,20));
-			groupButton.add(rep);
-			reponsePanel.add(rep);
+			JTextArea questionLabel = new JTextArea( quest );
+			questionLabel.setEditable(false);
+			questionLabel.setBackground(questionPanel.getBackground());
+			questionLabel.setLineWrap(true);
+			questionLabel.setWrapStyleWord(true);
+			questionLabel.setFont(new Font(policeEcriture,Font.PLAIN,27));
 
-		}
+			this.questionPanel.add(questionLabel);
 
-		// bouton valider reponse
-		JButton valider= new ButtonJolie("Valider la reponse");
-		valider.addActionListener(new ActionListener() {
 
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				if (groupButton.getSelection() !=null) {
-					String reponse =groupButton.getSelection().getActionCommand();
-					trivialControler.validerReponse(question, reponse);
-				}else{
-					System.out.println("Selectioner une reponse");
-				}
-
+			// REPONSES
+			String[] reponses = question.getChoix();
+			ButtonGroup groupButton = new ButtonGroup();
+			JPanel reponsePanel = new JPanel(new GridLayout(4, 0));
+			for (int i = 0; i < reponses.length; i++) {
+				// Reponse 1
+				JRadioButton rep = new JRadioButton(reponses[i]);
+				//rep1.setBackground(questionPanel.getBackground());
+				rep.setActionCommand(rep.getText());
+				rep.setFont(new Font(policeEcriture,Font.PLAIN,25));
+				groupButton.add(rep);
+				reponsePanel.add(rep);
 
 			}
-		});
-		reponsePanel.add(valider);
-		this.questionPanel.add(reponsePanel);
-		this.plateauPanel.add(questionPanel, BorderLayout.CENTER);		
+
+			// bouton valider reponse
+			JButton valider= new ButtonJolie("Valider la reponse");
+			valider.setFont(new Font(policeEcriture, Font.BOLD,27));
+			valider.addActionListener(new ActionListener() {
+
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					if (groupButton.getSelection() !=null) {
+						String reponse =groupButton.getSelection().getActionCommand();
+						trivialControler.validerReponse(question, reponse);
+					}else{
+						System.out.println("Selectioner une reponse");
+					}
+
+
+				}
+			});
+			JPanel panebtnvalider = new JPanel(new FlowLayout());
+			panebtnvalider.add(valider);
+			//reponsePanel.add(valider);
+			this.questionPanel.add(reponsePanel);
+			this.questionPanel.add(panebtnvalider);
+				
+			
+		}
+		this.plateauPanel.add(questionPanel, BorderLayout.CENTER);	
+		this.revalidate();
 	}
 
 	private void creationPanelDes(String lancede, boolean isQuestion, Joueur joueurCourant) 
@@ -622,7 +645,7 @@ public class IHMPlateau extends JFrame implements  Observer {
 		///////////////////////////////////////////
 		//   			 LANCER LES DES	         //
 		//////////////////////////////////////////
-
+		desPanel.setLayout(new GridLayout(5,0));
 		desPanel.setPreferredSize( new Dimension(250,0));
 		JButton btnLancerLesDes = new JButton(new ImageIcon("images/de"+lancede+".png"));  
 		if (!isQuestion) {
@@ -656,17 +679,27 @@ public class IHMPlateau extends JFrame implements  Observer {
 		categorie.add(new JLabel("Super Camembert"));
 
 
-		JLabel decriptionJoueurCourant = new JLabel("C'est au tour de "+joueurCourant.getNom());
+		JTextArea decriptionJoueurCourant = new JTextArea("C'est au tour de "+joueurCourant.getNom());
+		decriptionJoueurCourant.setFont(new Font(policeEcriture,Font.PLAIN,27));
 
+
+		decriptionJoueurCourant.setEditable(false);
+		decriptionJoueurCourant.setBackground(desPanel.getBackground());
+		decriptionJoueurCourant.setLineWrap(true);
+		decriptionJoueurCourant.setWrapStyleWord(true);
 		String nomImgJoueur = joueurCourant.getPion().getCouleurPion().toString().toLowerCase();
-		JLabel ImgJoueur = new JLabel(new ImageIcon("images/"+nomImgJoueur+".png"));
+
+		ImageIcon icon = new ImageIcon(new ImageIcon("images/"+nomImgJoueur+".png").getImage().getScaledInstance(230, 210, Image.SCALE_DEFAULT));
+		JLabel ImgJoueur = new JLabel(icon);
+
+
 		desPanel.add(btnLancerLesDes);
 		desPanel.add(categorie);
 		desPanel.add(decriptionJoueurCourant);
 		desPanel.add(ImgJoueur);
 	}
 
-	private void placementJoueur(ArrayList<Joueur> listeDesJoueur) {
+	private void placementJoueur(ArrayList<Joueur> listeDesJoueur, Joueur joueurCourant) {
 
 		int numJoueur=1;
 		for (Joueur joueur : listeDesJoueur) {
@@ -678,7 +711,13 @@ public class IHMPlateau extends JFrame implements  Observer {
 
 			String[] listeImage = listeImageCamembert(joueur,numJoueur);				
 			try {
-				Image cam = imageCamembertWithPart("images/joueur"+numJoueur+".png",listeImage[0],listeImage[1],listeImage[2],listeImage[3]);
+				Image cam;
+				if (joueur.equals(joueurCourant)) {
+					cam = imageCamembertWithPart("images/joueurCourant.png",listeImage[0],listeImage[1],listeImage[2],listeImage[3]);
+
+				}else{
+					cam = imageCamembertWithPart("images/joueur"+numJoueur+".png",listeImage[0],listeImage[1],listeImage[2],listeImage[3]);
+				}
 				JLabel camemebertJoueur1 = new JLabel((new ImageIcon(cam.getScaledInstance(75, 75, Image.SCALE_DEFAULT))));
 				componentBorder.add(camemebertJoueur1);			
 			} catch (IOException e) {
@@ -700,7 +739,7 @@ public class IHMPlateau extends JFrame implements  Observer {
 
 		JPanel panelgagnant = new JPanel(new FlowLayout(FlowLayout.CENTER));
 		JLabel labelGagnant = new JLabel("Le gagnant est ");
-		labelGagnant.setFont(new Font("Calibri",Font.PLAIN,40));
+		labelGagnant.setFont(new Font(policeEcriture,Font.PLAIN,40));
 		panelgagnant.add(labelGagnant);
 		finGeneral.add(panelgagnant,BorderLayout.NORTH);
 
@@ -742,18 +781,18 @@ public class IHMPlateau extends JFrame implements  Observer {
 
 			JPanel panewinlose = new JPanel(new FlowLayout(FlowLayout.CENTER));
 			panewinlose.setOpaque(false);
-			gagnant.setFont(new Font("Calibri",Font.PLAIN,40));
+			gagnant.setFont(new Font(policeEcriture,Font.PLAIN,40));
 			panewinlose.add(gagnant);
 
 
 			JPanel paneNb= new JPanel(new FlowLayout(FlowLayout.CENTER));
 			paneNb.setOpaque(false);
-			nbPart.setFont(new Font("Calibri",Font.PLAIN,40));
+			nbPart.setFont(new Font(policeEcriture,Font.PLAIN,40));
 			paneNb.add(nbPart);
 
 			JPanel paneNom= new JPanel(new FlowLayout(FlowLayout.CENTER));
 			paneNom.setOpaque(false);
-			nom.setFont(new Font("Calibri",Font.PLAIN,40));
+			nom.setFont(new Font(policeEcriture,Font.PLAIN,40));
 			paneNom.add(nom);
 
 			panelJoueur.add(panewinlose);
@@ -788,43 +827,47 @@ public class IHMPlateau extends JFrame implements  Observer {
 
 		JPanel panelMessage = new JPanel();
 		panelMessage.setLayout(new BoxLayout(panelMessage, BoxLayout.Y_AXIS));
-		JPanel panmsg = new JPanel( new FlowLayout(FlowLayout.LEFT));
-		JTextArea message = new JTextArea( msg );
 
-		panmsg.add(message);
+		JTextArea message = new JTextArea( msg );
 		message.setEditable(false);
-		message.setBackground(panmsg.getBackground());
+		message.setBackground(panelMessage.getBackground());
 		// Pour un retour à ligne automatique
 		message.setLineWrap(true);
 
 		// Pour que les mots ne soient pas coupés
 		message.setWrapStyleWord(true);
-		message.setFont(new Font("Calibri",Font.PLAIN,27));
+		message.setFont(new Font(policeEcriture,Font.PLAIN,27));
 
-		JPanel panelimage = new JPanel(new GridBagLayout());
-		JLabel imageMystère = new JLabel( new ImageIcon("images/innovation.png"));
-		panelimage.add(imageMystère);
-		panelMessage.add(panelimage);
+		JPanel panelMystere = new JPanel(new GridBagLayout());
+		JLabel imageMystère = new JLabel( new ImageIcon("images/caseMystere.png"));
+		JLabel labelMystere = new JLabel("Vous êtes tombé sur une case mystère.");
+		labelMystere.setFont(new Font(policeEcriture,Font.PLAIN,27));
+		GridBagConstraints contrainte = new GridBagConstraints();    
+		contrainte.gridx = 0;                                        
+		contrainte.gridy = 0;
+		panelMystere.add(imageMystère,contrainte);
+		contrainte.gridy = 1;
+		panelMystere.add(labelMystere,contrainte);
+		panelMessage.add(panelMystere);
 		panelMessage.add(message);
+
 		if (ismystèreprochaincam) {
-
+			((JButton )desPanel.getComponent(0)).setEnabled(false);;
 			JPanel panebtn = new JPanel(new GridBagLayout());
-
 			ButtonJolie actionCase = new ButtonJolie("Répondre à la question");
 			actionCase.addActionListener(new ActionListener() {
-
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					trivialControler.actionCasePourCarteMystere();							
 				}
 			});
-
 			panebtn.add(actionCase);
 			panelMessage.add(panebtn);
 		}
+
 		this.plateauPanel.add(panelMessage, BorderLayout.CENTER);
 	}
-	private void afficheDescription(String msg,Boolean iswin, Couleur couleurwin, String reponse){
+	private void afficheDescription(String msg,Boolean iswin, Couleur couleurwin, String reponse, Joueur joueurcourant){
 
 		Color rougeColor = new Color(206, 43, 46);
 		Color vertColor = new Color(115, 201, 114);
@@ -842,14 +885,17 @@ public class IHMPlateau extends JFrame implements  Observer {
 
 		// Pour que les mots ne soient pas coupés
 		description.setWrapStyleWord(true);
-		messageWin.setFont(new Font("Calibri",Font.PLAIN,27));
-		description.setFont(new Font("Calibri",Font.PLAIN,27));
+		messageWin.setFont(new Font(policeEcriture,Font.PLAIN,27));
+		description.setFont(new Font(policeEcriture,Font.PLAIN,27));
 		paneldescription.setBorder(BorderFactory.createMatteBorder(10, 10, 10, 10, Color.DARK_GRAY));
 		if (iswin) {
-
+			if (couleurwin != null) {
+				messageWin.setText("Bonne réponse!!! Bravo vous avez gagnez une part de couleur "+couleurwin);
+			}else{
+				messageWin.setText("Bonne réponse!!!");
+			}
 			paneldescription.setBackground(vertColor);
 			image = new JLabel( new ImageIcon("images/reponse-Juste.png"));
-			messageWin.setText("Bravo vous avez gagnez une part de couleur "+couleurwin);
 		}else{
 			paneldescription.setBackground(rougeColor);
 			image = new JLabel( new ImageIcon("images/reponse-fausse.png"));
@@ -867,16 +913,24 @@ public class IHMPlateau extends JFrame implements  Observer {
 		panelwin.setOpaque(false);
 		description.setOpaque(false);
 
-		contrainte.gridx = 0;                                        
-		contrainte.gridy = 0;   
 		paneldescription.add(panelwin);
-
-		contrainte.gridy = 1;
-		//contrainte.gridheight = 3;
-		contrainte.fill = GridBagConstraints.LAST_LINE_START;
 		paneldescription.add(description);
-
-
+		JPanel paneRejouer = new JPanel(new GridBagLayout());
+		JLabel labelRejouer = new JLabel();
+		
+		paneRejouer.setOpaque(false);
+		if (iswin) {
+			labelRejouer = new JLabel("Vous pouvez rejouer!!!");
+		}else{
+			labelRejouer = new JLabel("C'est au tour de "+joueurcourant.getNom());
+		}
+		labelRejouer.setFont(new Font(policeEcriture,Font.PLAIN,27));
+		paneRejouer.add(labelRejouer);
+		paneldescription.add(paneRejouer);
+		
+		
+		
+		
 		this.plateauPanel.add(paneldescription, BorderLayout.CENTER);
 	}
 	@SuppressWarnings("unchecked")
@@ -898,9 +952,21 @@ public class IHMPlateau extends JFrame implements  Observer {
 		 * 10 : reponse
 		 */
 
+		boolean isEnd = (Boolean) ((ArrayList<Object>)info).get(0);
+		ArrayList<Joueur> listeDesJoueur = ((ArrayList<Joueur>) ((ArrayList<Object>) info).get(1));
+		String  message = (String) ( (ArrayList<Object>) info).get(2) ;
+		String lancerDe = ( (ArrayList<String>) info).get(3);
+		Question question = (Question) ((ArrayList<Object>) info).get(4);
+		Joueur joueurcourant = ((Joueur) ((ArrayList<Object>) info).get(5));
+		int typeAffichage = ((int) ((ArrayList<Object>) info).get(6));
+		Boolean isMystereProchainCam = (Boolean) ( (ArrayList<Object>) info).get(7);
+		Boolean iswin = (Boolean) ( (ArrayList<Object>) info).get(8) ;
+		Couleur couleurwin = (Couleur) ( (ArrayList<Object>) info).get(9);			
+		String  reponse = (String) ( (ArrayList<Object>) info).get(10) ;
+
 
 		//FIN DU GAME
-		if ( (Boolean) ((ArrayList<Object>)info).get(0))  { 
+		if (isEnd )  { 
 
 			this.plateauPanel.removeAll();
 			this.questionPanel.removeAll();
@@ -909,14 +975,14 @@ public class IHMPlateau extends JFrame implements  Observer {
 			// désactivation du bouton pour ne pas continuer a jouer
 			((JButton) this.desPanel.getComponent(0)).setEnabled(false);
 
-			ArrayList<Joueur> listeDesJoueur = ((ArrayList<Joueur>) ((ArrayList<Object>) info).get(1));
+
 			this.creationPanelCamembert(listeDesJoueur);
 
 			this.creationplateau();
 
-			this.placementJoueur(listeDesJoueur);
+			this.placementJoueur(listeDesJoueur,joueurcourant);
 
-			this.afficheEcranFin((ArrayList<Joueur>) ( (ArrayList<Object>) info).get(1));
+			this.afficheEcranFin(listeDesJoueur);
 
 		}else { // SI CEST PAS LA FIN DU GAME
 			panelSelectionPerso.setVisible(false);
@@ -929,19 +995,18 @@ public class IHMPlateau extends JFrame implements  Observer {
 			///////////////////////////////////////////
 			//  affiche le lancer de dé + QUESTION   //
 			////////////////////////////////////////// 
-			if (((ArrayList<String>) info).size() >3) {
-				if ( ((ArrayList<Object>) info).size() >4 && ((ArrayList<Object>) info).get(4) != null ) {// si ya une question
-					this.creationPanelDes(( (ArrayList<String>) info).get(3), true, ((ArrayList<Joueur>) info).get(5));
-				}else{
-					this.creationPanelDes(( (ArrayList<String>) info).get(3), false,((ArrayList<Joueur>) info).get(5));
-				}
+
+			if ( typeAffichage ==1 || (typeAffichage ==1 && question ==null) ) {// si ya une question
+				this.creationPanelDes(lancerDe, true, joueurcourant);
+			}else{
+				this.creationPanelDes(lancerDe, false,joueurcourant);
 			}
+
 
 			///////////////////////////////////////////
 			//   			 CAMEMBERT 			      //
 			//////////////////////////////////////////
 
-			ArrayList<Joueur> listeDesJoueur = ((ArrayList<Joueur>) ((ArrayList<Object>) info).get(1));
 			this.creationPanelCamembert(listeDesJoueur);
 			this.revalidate();
 			///////////////////////////////////////////
@@ -954,32 +1019,26 @@ public class IHMPlateau extends JFrame implements  Observer {
 			///////////////////////////////////////////
 			//   			 MESSAGE     		      //
 			//////////////////////////////////////////
-			if ( (int) ((ArrayList<Object>) info).get(6) == 1){ // si on a une question
-				creationPanelQuestion( (Question) ((ArrayList<Object>) info).get(4));
-			}else if ((int) ((ArrayList<Object>) info).get(6) == 2) { // si on est sur une case mystère 
-				afficheMessageMystère((String) ( (ArrayList<Object>) info).get(2),(Boolean) ( (ArrayList<Object>) info).get(7));
-			}else if ((int) ((ArrayList<Object>) info).get(6) == 3) { // si c'est une desription
-
-				String  message = (String) ( (ArrayList<Object>) info).get(2) ;
-				Boolean iswin = (Boolean) ( (ArrayList<Object>) info).get(8) ;
-				Couleur couleurwin = (Couleur) ( (ArrayList<Object>) info).get(9);			
-				String  reponse = (String) ( (ArrayList<Object>) info).get(10) ;
-				afficheDescription(message, iswin, couleurwin,reponse);
+			if ( typeAffichage == 1){ // si on a une question
+				creationPanelQuestion(question);
+			}else if (typeAffichage == 2) { // si on est sur une case mystère 
+				afficheMessageMystère(message,isMystereProchainCam);
+			}else if (typeAffichage == 3) { // si c'est une desription
+				afficheDescription(message, iswin, couleurwin,reponse,joueurcourant);
 			}else{
-				JLabel message = new JLabel( (String) ( (ArrayList<Object>) info).get(2) );
-				message.setFont(new Font("Calibri",Font.PLAIN,27));
+				JLabel labelMessage = new JLabel( message );
+				labelMessage.setFont(new Font(policeEcriture,Font.PLAIN,27));
 				JPanel panelmsg = new JPanel(new GridBagLayout());
 				GridBagConstraints contrainte = new GridBagConstraints();    
 				contrainte.fill = GridBagConstraints.CENTER; 
-				panelmsg.add(message,contrainte);
+				panelmsg.add(labelMessage,contrainte);
 				this.plateauPanel.add(panelmsg, BorderLayout.CENTER);
 			}
 
 			///////////////////////////////////////////
 			//   			 PLACEMENT PION	        //
 			//////////////////////////////////////////
-
-			this.placementJoueur(listeDesJoueur);
+			this.placementJoueur(listeDesJoueur,joueurcourant);
 
 		}
 		this.revalidate();
