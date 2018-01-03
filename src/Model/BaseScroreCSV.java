@@ -36,9 +36,7 @@ public class BaseScroreCSV {
 		try {
 			String dateDuJour = getDate();	
 			String IDgame;
-
 			IDgame = (( Integer )this.getIDgame()).toString();
-
 
 			FileWriter ficher = new FileWriter(this.nomFichier,true);
 			BufferedWriter writer = new BufferedWriter(ficher);
@@ -202,7 +200,7 @@ public class BaseScroreCSV {
 
 
 		}
-		// ajout de la dernière partie
+		// ajout de la derniï¿½re partie
 	
 		Partie partie = new Partie(date, joueurs.get(0), joueurs.get(1),reponseJoueurs.get(0),reponseJoueurs.get(1));
 		listePartie.add(partie);

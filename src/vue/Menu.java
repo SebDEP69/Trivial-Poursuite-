@@ -3,6 +3,7 @@ package vue;
 
 
 import java.awt.BorderLayout;
+import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -34,6 +35,8 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+import javax.swing.border.Border;
 
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
@@ -56,6 +59,7 @@ public class Menu extends JFrame implements  Observer {
 	private ControleurAccueil controleurAccueil;
 	private JLayeredPane layeredPane;
 	private String policeEcriture = "Calibri";
+	private int numeroDePage;
 	public Menu(String name, ControleurAccueil controleur) {
 		super(name);
 
@@ -85,11 +89,11 @@ public class Menu extends JFrame implements  Observer {
 		panelPersonalisation.setVisible(false);
 
 		panelHistorique = new JPanel(new BorderLayout());
-		panelHistorique.setBounds(0, decalage, getWidth(), getHeight()-decalage);
+		panelHistorique.setBounds(0, decalage, getWidth(), getHeight()-decalage-60);
 		panelHistorique.setVisible(false);
 
 		panelDetailPartie = new JPanel(new BorderLayout());
-		panelDetailPartie.setBounds(0, decalage, getWidth(), getHeight()-decalage);
+		panelDetailPartie.setBounds(0, decalage, getWidth(), getHeight()-decalage-60);
 		panelDetailPartie.setVisible(false);
 
 		layeredPane.add(panelGeneral, new Integer(0));
@@ -324,6 +328,7 @@ public class Menu extends JFrame implements  Observer {
 		JPanel panelreponse = new JPanel(new GridBagLayout());
 		JPanel panelDescription = new JPanel(new GridLayout(0, 2));
 		JPanel panelValider = new JPanel(new FlowLayout());
+		ButtonJolie btnReset= new ButtonJolie("Remise à zéro");
 		ButtonJolie btnvalider = new ButtonJolie("Valider");
 		btnvalider.setFont(new Font(policeEcriture,Font.BOLD,27));
 
@@ -339,7 +344,7 @@ public class Menu extends JFrame implements  Observer {
 			public void actionPerformed(ActionEvent e) {
 
 				panelQuestion.setVisible(true);
-
+				btnReset.setVisible(true);
 			}
 		});
 		GridBagConstraints c = new GridBagConstraints();
@@ -378,13 +383,11 @@ public class Menu extends JFrame implements  Observer {
 						panelreponse.setVisible(false);
 					}
 				}
-				
+
 			}
 
 			@Override
 			public void keyPressed(KeyEvent e) {
-				// TODO Auto-generated method stub
-
 			}
 		});
 		//L'objet servant à positionner les composants
@@ -447,8 +450,6 @@ public class Menu extends JFrame implements  Observer {
 
 			@Override
 			public void keyPressed(KeyEvent e) {
-				// TODO Auto-generated method stub
-
 			}
 
 		};
@@ -489,10 +490,7 @@ public class Menu extends JFrame implements  Observer {
 		descritption.addKeyListener(new KeyListener() {
 
 			@Override
-			public void keyTyped(KeyEvent e) {
-				// TODO Auto-generated method stub
-
-			}
+			public void keyTyped(KeyEvent e) {}
 
 			@Override
 			public void keyReleased(KeyEvent e) {
@@ -500,10 +498,7 @@ public class Menu extends JFrame implements  Observer {
 			}
 
 			@Override
-			public void keyPressed(KeyEvent e) {
-				// TODO Auto-generated method stub
-
-			}
+			public void keyPressed(KeyEvent e) {}
 		});
 		panelDescription.add(labelDescript);
 		panelDescription.add(descritption);
@@ -531,7 +526,7 @@ public class Menu extends JFrame implements  Observer {
 				String numReponseJuste ="";
 				String descript = descritption.getText();
 				if (group.getSelection() !=null) {
-					 numReponseJuste = group.getSelection().getActionCommand();
+					numReponseJuste = group.getSelection().getActionCommand();
 				}
 				controleurAccueil.enregisterQuestion(Rtype,Rquestion,listeReponses,numReponseJuste,descript);
 
@@ -539,7 +534,7 @@ public class Menu extends JFrame implements  Observer {
 		});
 		btnvalider.setVisible(false);
 
-		ButtonJolie btnReset= new ButtonJolie("Remise à zéro");
+
 		btnReset.addActionListener(new ActionListener() {
 
 
@@ -557,12 +552,13 @@ public class Menu extends JFrame implements  Observer {
 				panelQuestion.setVisible(false);
 				panelreponse.setVisible(false);
 				btnvalider.setVisible(false);
+				btnReset.setVisible(false);
 				//String numReponseJuste = group.getSelection().getActionCommand();
 
 			}
 		});
 		btnReset.setFont(new Font(policeEcriture,Font.BOLD,27));
-
+		btnReset.setVisible(false);
 
 		panelValider.setPreferredSize(new Dimension(0, 100));
 		panelValider.add(btnvalider, CENTER_ALIGNMENT);
@@ -572,60 +568,264 @@ public class Menu extends JFrame implements  Observer {
 	}
 
 
+	private String[] rechercheAllDate(ArrayList<Partie> listePartie){
+
+		ArrayList<String> listeDateTmp = new ArrayList<String>();
+		for (Partie partie : listePartie) {
+
+			String date = partie.getDate();
+			String tmpdate = date.substring(0, 8);		
+			if (!listeDateTmp.contains(tmpdate)) {
+				listeDateTmp.add(tmpdate);
+			}
+		}
+
+		String[] elements = new String[listeDateTmp.size()+1];
+		int i=1;
+		elements[0]="TOUT";
+		for (String date : listeDateTmp) {
+			elements[i]=date;
+			i++;
+		}
+		return elements;
+	}
 
 
-	private void afficherHistorique(ArrayList<Partie> listePartie) {
+	private void afficherHistorique(ArrayList<Partie> listePartie,ArrayList<Partie> listePartieRecherche) {
 
+		
+		Color bleuColor = new Color(29, 174, 255);
+		Color rougeColor = new Color(206, 43, 46);
+		Color orangecolor = new Color(254, 169, 38);
+		Color vertColor = new Color(115, 201, 114);
+		numeroDePage =1;
 
-		int nbPartie = listePartie.size();
-		panelHistorique.setLayout(new BorderLayout()); 
-		JPanel vue = new JPanel(new GridLayout((nbPartie+2),0));// +1 pour le bouton retour et +1 pour l'intituler des colonnes
-		panelHistorique.add(vue,BorderLayout.CENTER);
 
 		afficheBoutonRetour("Menu");
+		panelHistorique.setLayout(new BorderLayout()); 
+		CardLayout cardlayout = new CardLayout();
+		JPanel layeredPaneHisto= new JPanel(cardlayout);
+
+		//###################################
+		// affichage recherche
+		//###################################
+
+		// recherche de toute les date
+
+		JPanel panelRecherche = new JPanel();
+
+		String[] alldate = rechercheAllDate(listePartie);
+
+		JLabel labelDate = new JLabel("Date:");
+		JComboBox<String> choseDate = new JComboBox<String>(alldate);
+
+		JTextField pseudoAChercher = new JTextField();
+		JLabel labelPseudo = new JLabel("Nom Joueur:");
+		pseudoAChercher.setPreferredSize(new Dimension(300, 50));
 
 
-		JPanel panelPartie = new JPanel(new GridLayout(0, 6));
-		JLabel date = new JLabel("DATE");
-		JLabel joueur1 = new JLabel("Nom Joueur1");
-		JLabel scroreJ1 = new JLabel("Score Joueur1");
-		JLabel joueur2 = new JLabel("Nom Joueur 2");
-		JLabel scroreJ2 = new JLabel("Scrore Joueur 2");
-		panelPartie.add(date);
-		panelPartie.add(joueur1);
-		panelPartie.add(scroreJ1);
-		panelPartie.add(scroreJ2);
-		panelPartie.add(joueur2);
-		vue.add(panelPartie);
+
+		ButtonJolie btnRecherche = new ButtonJolie("Recherche");
+		btnRecherche.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				String date= choseDate.getSelectedItem().toString();
+				String pseudo = pseudoAChercher.getText();
+				//if (!date.equals("")&& !pseudo.equals("")) {
+				controleurAccueil.rechercheHistorique(listePartie,date,pseudo);
+				//}
+
+			}
+		});
 
 
+		panelRecherche.add(labelDate);
+		panelRecherche.add(choseDate);
+		panelRecherche.add(labelPseudo);
+		panelRecherche.add(pseudoAChercher);
+		panelRecherche.add(btnRecherche);
+		panelHistorique.add(panelRecherche, BorderLayout.NORTH);
 
-		for (Partie partie : listePartie) {
-			panelPartie = new JPanel(new GridLayout(0, 6));
-			date = new JLabel(partie.getDate());
-			joueur1 = new JLabel(partie.getNomJ1());
-			scroreJ1 = new JLabel(partie.getNBcamJ1());
-			joueur2 = new JLabel(partie.getNomJ2());
-			scroreJ2 = new JLabel(partie.getNBcamJ2());
+		//###################################
+		// partie affichage des Partie
+		//###################################
+		System.out.println(listePartieRecherche.size());
+		Double nbPartie = (double) listePartieRecherche.size();
+		if (nbPartie == 0) {
+			//System.out.println("test");
+			
+			
+			JLabel labelResultatRecherche = new JLabel("Aucun résultat trouver");
+			labelResultatRecherche.setHorizontalAlignment(SwingConstants.CENTER);
+			labelResultatRecherche.setVerticalAlignment(SwingConstants.CENTER);
+			labelResultatRecherche.setFont(new Font(policeEcriture,Font.BOLD,50));
+			labelResultatRecherche.setForeground(Color.RED);
+			panelHistorique.add(labelResultatRecherche, BorderLayout.CENTER);
+			panelHistorique.revalidate();
+		}else{
 
-			ButtonJolie btnVoir = new ButtonJolie("Voir plus");
-			btnVoir.addActionListener(new ActionListener() {
+
+			panelHistorique.add(layeredPaneHisto, BorderLayout.CENTER);
+
+			int nbVue = (int) Math.ceil(nbPartie/15.0);
+			int indicePartie = 0;
+			for (int i = 0; i < nbVue; i++) {
+
+				JPanel vue = new JPanel(new GridLayout(16,0));//  15 partie +1 pour l'intituler des colonnes			
+				vue.setBounds(0, 0, getWidth(), getHeight()-120-60);
+				layeredPaneHisto.add(vue);			
+
+				// En tete
+				JPanel panelPartie = new JPanel(new GridLayout(0, 6));
+				JLabel date = new JLabel("DATE");
+				JLabel joueur1 = new JLabel("Nom Joueur1");
+				JLabel scroreJ1 = new JLabel("Score Joueur1");
+				JLabel joueur2 = new JLabel("Nom Joueur 2");
+				JLabel scroreJ2 = new JLabel("Scrore Joueur 2");
+				Border borderligne= BorderFactory.createMatteBorder(0,2,2,2, Color.DARK_GRAY);
+				Border bordercolonne= BorderFactory.createMatteBorder(0,0,0,2, Color.DARK_GRAY);
+				String policeEcriture = "Calibri";
+				int fontText = Font.BOLD;
+				int tailleText = 27;
+				panelPartie.add(date);
+				panelPartie.add(joueur1);
+				panelPartie.add(scroreJ1);
+				panelPartie.add(scroreJ2);
+				panelPartie.add(joueur2);
+				panelPartie.setBorder(BorderFactory.createMatteBorder(2,2,2,2, Color.DARK_GRAY));
+				vue.add(panelPartie);
+
+				// Bordure colonne
+				date.setBorder(bordercolonne);
+				joueur1.setBorder(bordercolonne);
+				scroreJ1.setBorder(bordercolonne);
+				joueur2.setBorder(bordercolonne);
+				scroreJ2.setBorder(bordercolonne);
+
+				//Style du texte
+				date.setFont(new Font(policeEcriture,fontText,tailleText));
+				joueur1.setFont(new Font(policeEcriture,fontText,tailleText));
+				scroreJ1.setFont(new Font(policeEcriture,fontText,tailleText));
+				joueur2.setFont(new Font(policeEcriture,fontText,tailleText));
+				scroreJ2.setFont(new Font(policeEcriture,fontText,tailleText));
+
+				int indiceCouleurLigne=0;
+				// Element du tableau
+				int j = 0;
+				while (j<15 && ( (indicePartie+j)< listePartieRecherche.size() )) {
+
+					Partie partie = listePartieRecherche.get(indicePartie+j);
+					panelPartie = new JPanel(new GridLayout(0, 6));
+					panelPartie.setBorder(borderligne);
+					date = new JLabel(partie.getDate());
+					joueur1 = new JLabel(partie.getNomJ1());
+					scroreJ1 = new JLabel(partie.getNBcamJ1());
+					joueur2 = new JLabel(partie.getNomJ2());
+					scroreJ2 = new JLabel(partie.getNBcamJ2());
+
+					// Bordure colonne
+					date.setBorder(bordercolonne);
+					joueur1.setBorder(bordercolonne);
+					scroreJ1.setBorder(bordercolonne);
+					joueur2.setBorder(bordercolonne);
+					scroreJ2.setBorder(bordercolonne);
+
+					//Style du texte
+					date.setFont(new Font(policeEcriture,fontText,tailleText));
+					joueur1.setFont(new Font(policeEcriture,fontText,tailleText));
+					scroreJ1.setFont(new Font(policeEcriture,fontText,tailleText));
+					joueur2.setFont(new Font(policeEcriture,fontText,tailleText));
+					scroreJ2.setFont(new Font(policeEcriture,fontText,tailleText));
+
+					// changement de couleur a chaque ligne
+					if (indiceCouleurLigne==0) {
+						panelPartie.setBackground(bleuColor);
+						indiceCouleurLigne=1;
+					}else if (indiceCouleurLigne==1) {
+						panelPartie.setBackground(rougeColor);
+						indiceCouleurLigne=2;
+					}else if (indiceCouleurLigne==2) {
+						panelPartie.setBackground(orangecolor);
+						indiceCouleurLigne=3;
+					}else if (indiceCouleurLigne==3) {
+						panelPartie.setBackground(vertColor);
+						indiceCouleurLigne=0;
+					}
+					ButtonJolie btnVoir = new ButtonJolie("Voir plus");
+					btnVoir.addActionListener(new ActionListener() {
+
+						@Override
+						public void actionPerformed(ActionEvent e) {
+							controleurAccueil.AfficherdetailPartie(partie);
+						}
+					});
+					panelPartie.add(date);
+					panelPartie.add(joueur1);
+					panelPartie.add(scroreJ1);
+					panelPartie.add(scroreJ2);
+					panelPartie.add(joueur2);
+					panelPartie.add(btnVoir);
+					vue.add(panelPartie);
+					j++;
+				}
+				indicePartie=(indicePartie+j);
+
+			}
+
+
+			//###################################
+			// affichage bouton bottom
+			//###################################
+			JLabel numPage = new JLabel("Page "+numeroDePage);
+			numPage.setFont(new Font(policeEcriture,Font.BOLD,27));
+			ButtonJolie next = new ButtonJolie("Page suivante");
+			next.addActionListener(new ActionListener() {
 
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					controleurAccueil.AfficherdetailPartie(partie);
+					cardlayout.next(layeredPaneHisto);
+					numeroDePage = numeroDePage+1;
+					if (numeroDePage >nbVue) {
+						numeroDePage=1;
+					}
+					numPage.setText("Page "+numeroDePage);
+					numPage.revalidate();
 				}
 			});
-			panelPartie.add(date);
-			panelPartie.add(joueur1);
-			panelPartie.add(scroreJ1);
-			panelPartie.add(scroreJ2);
-			panelPartie.add(joueur2);
-			panelPartie.add(btnVoir);
-			vue.add(panelPartie);
+			ButtonJolie preview = new ButtonJolie("Page précédente");
+			preview.addActionListener(new ActionListener() {
+
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					cardlayout.previous(layeredPaneHisto);
+					numeroDePage = numeroDePage-1;
+					if (numeroDePage <1) {
+						numeroDePage=nbVue;
+					}
+					numPage.setText("Page "+numeroDePage);
+					numPage.revalidate();
+				}
+			});
+
+			
+			if (nbVue==1) {
+				next.setVisible(false);
+				preview.setVisible(false);
+			}
+			
+			
+			JPanel panelChangePage = new JPanel();
+			panelChangePage.add(preview);
+			panelChangePage.add(next);
+			JPanel bot = new JPanel(new GridLayout(2, 0));
+			JPanel paneNumPage = new JPanel(new FlowLayout(FlowLayout.CENTER));
+
+			paneNumPage.add(numPage);
+			bot.add(paneNumPage);
+			bot.add(panelChangePage);
+			panelHistorique.add(bot, BorderLayout.SOUTH);
 		}
-
-
 	}
 
 	private void afficheDetailPartie(Partie partie){
@@ -774,8 +974,9 @@ public class Menu extends JFrame implements  Observer {
 
 			System.out.println(((ArrayList<Object>)info).get(1).getClass());
 			ArrayList<Partie> listePartie = (ArrayList<Partie>) ((ArrayList<Object>)info).get(1);
+			ArrayList<Partie> listePartieRecherche = (ArrayList<Partie>) ((ArrayList<Object>)info).get(2);
 			panelHistorique.removeAll();
-			this.afficherHistorique( listePartie);
+			this.afficherHistorique( listePartie,listePartieRecherche);
 			panelHistorique.setVisible(true);
 			panelMenu.setVisible(false);
 			break;

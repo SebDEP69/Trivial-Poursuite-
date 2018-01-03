@@ -18,7 +18,7 @@ public class Jeu {
 	
 	//Methode classe Jeu
 	public int LanceDeDes(){
-		return 5;
+		return 4;
 		//return (int) ((Math.random() * 6)+1);
 		
 	}

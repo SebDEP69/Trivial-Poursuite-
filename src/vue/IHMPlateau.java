@@ -8,6 +8,8 @@ import java.io.IOException;
 import java.util.*;
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import javax.swing.border.Border;
+
 
 import Controler.ControleurAccueil;
 import Controler.TrivialControler;
@@ -22,7 +24,7 @@ import Model.Question;
 @SuppressWarnings("serial")
 public class IHMPlateau extends JFrame implements  Observer {
 	private JLayeredPane layeredPane;
-	private JPanel trivialBoard, desPanel, plateauPanel,camembertPanel, titlePanel, questionPanel,selectPersoUn,selectPersoDeux,panelSelectionPerso;
+	private JPanel trivialBoard, desPanel, plateauPanel,camembertPanel, questionPanel,selectPersoUn,selectPersoDeux,panelSelectionPerso;
 	private ArrayList<int[]> numcaseToindicePanel;
 
 	private  TrivialControler trivialControler;
@@ -50,14 +52,6 @@ public class IHMPlateau extends JFrame implements  Observer {
 		layeredPane.add(panelSelectionPerso, new Integer(1));
 
 
-		//HAUT
-		/*this.titlePanel = new JPanel();
-		ImageIcon imageTitle = new ImageIcon("images/title.png");
-		JLabel titleLabel = new JLabel(imageTitle);
-		titlePanel.setPreferredSize(new Dimension(0, imageTitle.getIconHeight()));
-		titlePanel.add(titleLabel);
-		titlePanel.setBackground(Color.white);
-		trivialBoard.add(titlePanel, BorderLayout.NORTH);*/
 
 		//GAUCHE
 		desPanel = new JPanel();
@@ -406,6 +400,7 @@ public class IHMPlateau extends JFrame implements  Observer {
 		Color rougeColor = new Color(206, 43, 46);
 		Color orangecolor = new Color(254, 169, 38);
 		Color vertColor = new Color(115, 201, 114);
+		Border bordercam = BorderFactory.createMatteBorder(7,7,7,7, Color.DARK_GRAY);
 		///////////////////////////////////////////
 		//   			 HAUT   	            //
 		//////////////////////////////////////////
@@ -418,7 +413,7 @@ public class IHMPlateau extends JFrame implements  Observer {
 		//PREMIER CASE SUPER CAMEMBERT DU HAUT
 		JPanel caseun = new JPanel( );
 		caseun.setBackground(rougeColor);
-		caseun.setBorder(BorderFactory.createMatteBorder(10, 10, 10, 10, Color.DARK_GRAY));
+		caseun.setBorder(bordercam);
 		haut.add(caseun);
 
 		// CREATION DES CASES "NORMALE"
@@ -433,7 +428,7 @@ public class IHMPlateau extends JFrame implements  Observer {
 		// DERNIERE CASE SUPER CAMEMBERT DU HAUT
 		JPanel lastCase = new JPanel( );
 		lastCase.setBackground(vertColor);
-		lastCase.setBorder(BorderFactory.createMatteBorder(10, 10, 10, 10, Color.DARK_GRAY));
+		lastCase.setBorder(bordercam);
 		haut.add(lastCase);
 		plateauPanel.add(haut, BorderLayout.NORTH);
 
@@ -483,7 +478,7 @@ public class IHMPlateau extends JFrame implements  Observer {
 		//PREMIER CASE SUPER CAMEMBERT DU BAS
 		JPanel basun = new JPanel(  );
 		basun.setBackground(bleuColor);
-		basun.setBorder(BorderFactory.createMatteBorder(10, 10, 10, 10, Color.DARK_GRAY));
+		basun.setBorder(bordercam);
 		bas.add(basun);
 
 		// CREATION DES CASES "NORMALE"
@@ -497,7 +492,7 @@ public class IHMPlateau extends JFrame implements  Observer {
 		//DERNIERE CASE SUPER CAMEMBERT DU BAS
 		JPanel lastBas = new JPanel( );
 		lastBas.setBackground(orangecolor);
-		lastBas.setBorder(BorderFactory.createMatteBorder(10, 10, 10, 10, Color.DARK_GRAY));
+		lastBas.setBorder(bordercam);
 		bas.add(lastBas);
 		plateauPanel.add(bas, BorderLayout.SOUTH);
 
@@ -825,7 +820,7 @@ public class IHMPlateau extends JFrame implements  Observer {
 
 
 
-	private void afficheMessageMystère(String msg, boolean ismystèreprochaincam){
+	private void afficheMessageMystere(String msg, boolean ismystereprochaincam){
 
 
 		JPanel panelMessage = new JPanel();
@@ -842,19 +837,19 @@ public class IHMPlateau extends JFrame implements  Observer {
 		message.setFont(new Font(policeEcriture,Font.PLAIN,27));
 
 		JPanel panelMystere = new JPanel(new GridBagLayout());
-		JLabel imageMystère = new JLabel( new ImageIcon("images/caseMystere.png"));
+		JLabel imageMystere = new JLabel( new ImageIcon("images/caseMystere.png"));
 		JLabel labelMystere = new JLabel("Vous êtes tombé sur une case mystère.");
 		labelMystere.setFont(new Font(policeEcriture,Font.PLAIN,27));
 		GridBagConstraints contrainte = new GridBagConstraints();    
 		contrainte.gridx = 0;                                        
 		contrainte.gridy = 0;
-		panelMystere.add(imageMystère,contrainte);
+		panelMystere.add(imageMystere,contrainte);
 		contrainte.gridy = 1;
 		panelMystere.add(labelMystere,contrainte);
 		panelMessage.add(panelMystere);
 		panelMessage.add(message);
 
-		if (ismystèreprochaincam) {
+		if (ismystereprochaincam) {
 			((JButton )desPanel.getComponent(0)).setEnabled(false);;
 			JPanel panebtn = new JPanel(new GridBagLayout());
 			ButtonJolie actionCase = new ButtonJolie("Répondre à la question");
@@ -1025,7 +1020,7 @@ public class IHMPlateau extends JFrame implements  Observer {
 			if ( typeAffichage == 1){ // si on a une question
 				creationPanelQuestion(question);
 			}else if (typeAffichage == 2) { // si on est sur une case mystère 
-				afficheMessageMystère(message,isMystereProchainCam);
+				afficheMessageMystere(message,isMystereProchainCam);
 			}else if (typeAffichage == 3) { // si c'est une desription
 				afficheDescription(message, iswin, couleurwin,reponse,joueurcourant);
 			}else{

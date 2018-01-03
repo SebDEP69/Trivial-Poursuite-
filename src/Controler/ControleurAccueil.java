@@ -78,6 +78,46 @@ public class ControleurAccueil  extends Observable{
 		this.notifyObservers(info);
 	}
 
+	public void rechercheHistorique(ArrayList<Partie> listePartie,String dateAChercher,String pseudoAChercher){
+
+		System.out.println("recherche de date"+dateAChercher);
+		System.out.println("recherche de pseudo"+pseudoAChercher);
+		ArrayList<Partie> listeRecherche = new ArrayList<Partie>();
+		ArrayList<Object> info = new ArrayList<Object>();
+		info.add(2);
+		if (!pseudoAChercher.equals("") || !dateAChercher.equals("TOUT")) {// si on fait une recherhe
+		
+			for (Partie partie : listePartie) {
+				
+				Boolean dateOk= false;
+				Boolean nomOK= false;
+				String date = partie.getDate();
+				String datetmp = date.substring(0, 8);
+				String nom1 = partie.getNomJ1();
+				String nom2 = partie.getNomJ2();
+				if (datetmp.equals(dateAChercher)) {dateOk=true;}
+				if (nom1.equals(pseudoAChercher) || nom2.equals(pseudoAChercher)) {	nomOK=true;	}
+				
+				if (!dateAChercher.equals("") && dateOk) {// si on cherche par date
+					listeRecherche.add(partie);
+					System.out.println("Date =:partie date add="+partie.getNomJ1());
+				}else if (!pseudoAChercher.equals("") && nomOK) { // si on cherche que par speudo
+					listeRecherche.add(partie);
+					System.out.println("Pseudo :partie date add="+partie.getDate());
+				}else if (!pseudoAChercher.equals("") && !dateAChercher.equals("") && dateOk && nomOK) { // si on cherche par date et pseudo
+					listeRecherche.add(partie);
+					System.out.println("BOTH :partie date add="+partie.getDate());
+				}
+			}// end for
+			info.add(listePartie);
+			info.add(listeRecherche);
+		}else{
+			info.add(listePartie);
+			info.add(listePartie);
+		}
+		this.notifyObservers(info);
+		
+	}
 
 	@SuppressWarnings("static-access")
 	public void enregisterQuestion(String typeQuestion,String question,String[] reponses,String numReponseJuste,String descritption) {
@@ -97,7 +137,7 @@ public class ControleurAccueil  extends Observable{
 			error= true;
 			textPbl =textPbl+"<br>- Veuillez cocher la bonne réponse";
 		}
-		
+
 		if (reponses[0].equals("")) {
 			error= true;
 			textPbl =textPbl+"<br>- Veuillez entrez la réponse 1";
@@ -160,7 +200,7 @@ public class ControleurAccueil  extends Observable{
 			}
 
 
-			
+
 			jop1.showMessageDialog(null, "<html>Votre question a bien été ajoutée</html>", "Ajout de la question", JOptionPane.INFORMATION_MESSAGE);
 		}
 	}
@@ -175,6 +215,7 @@ public class ControleurAccueil  extends Observable{
 		try {
 			listePartie = BDD.getInfoAllGame();
 			System.out.println(listePartie.getClass());
+			info.add(listePartie);
 			info.add(listePartie);
 		} catch (IOException e) {
 			e.printStackTrace();
