@@ -1,35 +1,35 @@
-COULEUR;QUESTION;REPONSE 1;REPONSE 2;REPONSE 3;REPONSE 4;NUMERO REPONSE JUSTE;DESCRIPTION
-ROUGE;Quand a ete cree le premier telephone ? ;1871;1873;1876;1878;3;Invente par le celebre Alexander Graham Bell le 14 fevrier 1876
-ROUGE;Pour quelle invention Thomas Edison n a-t-il pas obtenu le brevet ?;Le microphone;La centrale eletrcique ? courant continu;Le phonographe;Le neon;4;Cree en 1910 par George Claude, physicien travaillant sur les gaz rares
-ROUGE;Quel est le nom du premier microprocesseur ? ;Core;Intel 4004;Pentium;Intel Core;2;Intel 4004 invente en 1971 par Marcian Hoff et Gilbert Hyatt. Il possedait 2 300 transistors, cela parait vraiment peu face au dernier Intel Core qui lui en possede plus de 1 million
-ROUGE;Quelle invention majeure a eu lieu dans les annees 80 ?;La carte a puce;Le GPS;Le World Wide Web;Le CD;3;Invente par le chercheur anglais Tim Berners-Lee du Cern a Geneve. La carte a puce a ete creee en 1974, le GPS et le CD en 1978
-ROUGE;Quand a ete mis sur le marche la premiere machine Nespresso ?;1982;1984;1986;1988;3;La marque a revolutionne le marche en 1986
-ROUGE;Quel fournisseur a offert en premier un acces illimite a internet ?;Orange;Free;SFR;Bouygues Telecom;2;C'est en 2002 que Free a lance son premier boitier !
-ROUGE;En 2007, a combien de million d'exemplaires s'est ecoule l'iphone ?;1,7;2;2,5;3;1;Le stock de 1,7 million c'est ecoule en 3 jours seulement
-ROUGE;Quelle console a sorti Nintendo en 2006 ?;La Nintendo DS;La Wii;La Switch;La Nintendo 3DS XL;2;Plus de 71 million de Wii on fut vendu et meme en maison de retraite !
-BLEU;Savez-vous quelle etait la couleur du pere noel a sa creation ?;Bleu;Rouge;Vert;Noir;3;Le pere noel etait a l origine vert selon les traditions Allemandes. C est la firme Coca-Cola qui l a fait devenir rouge pour ressembler a ce que l on s imagine du pere noel aujourd hui. 
-BLEU;Savez-vous ce qu'un crocodile est le seul a ne pas pouvoir faire ? ;Loucher;Bailler;Tirer la langue;Sauter;3; Le crocodile ne peut pas tirer la langue a cause de sa trop grande machoire. 
-BLEU;A quel age Louis 14 est-il monte sur le trone de France ?;30 ans ;14 ans ;1 an ;4 ans ;4;Louis 14 a ete oblige de monter sur le trone a la mort de son predecesseur Louis 13
-BLEU;Savez-vous jusqu a combien de temps un escagot peut dormir ?;3 minutes;3 heures;3 mois;3 ans;4;L escargot est un grand dormeur, il peut en effet dormir jusqu a 3 ans.  
-BLEU;Savez-vous ce qui pour la plupart des gens fait plus peur que la mort ? ;Manger un oeil de barracuda;Vivre avec des araignees;Oublier l anniversaire de sa compagne;Vivre une invasion de zombie;2;Vivre avec des araignees, c'est la plus grande angoisse de millions de personnes selon plusieurs revues specialisees. 
-BLEU;Savez-vous quel est le pays ou l'on se douche le plus ?;Colombie;France;Bresil;Italie;3;En moyenne 12 fois par semaine
-BLEU;Savez-vous ce que possede uniquement le Sri Lanka ?;Un culte de la chevre;Des animaux speciaux;Un ministre de la noix de coco;Des arenes de combat;3;C'est l'un des plus grands producteurs de noix de coco au monde, il faut bien quelqu'un pour gerer le stock
-BLEU;Savez-vous d�ou provient la femme la plus maigre du monde ?;Russie;Letonie;Lituanie;Suede;1;Valeria Levitin est originaire de Russie et pese que 25 kilos
-BLEU;Savez-vous d�o� viens la citrouille d'Halloween ?;Un fruit;Un legume;Une blague;Un dessin;2;C'est par un navet qu'est nee Halloween
-VERT;Quand l'ecole CPE a t-elle ete cree ? ;1990;1992;1994;1996;3;L ecole a ete cree en 1994 par la fusion de deux ecoles : l institut de chimie physique industrielle (ICPI), fonde en 1919, et l ecole superieure de chimie industrielle de Lyon (ESCIL), fondee en 1883
-VERT;D apres le groupe L'Etudiant, quelle est la position de CPE parmi les ecoles d'ingenieur post-bac ? ;10eme/70;15eme/70;4eme/ 70;8eme/70;3; 4eme/70
-VERT;Quel prix nobel a ete decerne a un eleve en 2005 ? ;Electronique;Chimie;Physique;Informatique;2;Prix Nobel de Chimie 2005, membre de l'Academie des Sciences, specialiste de chimie organique
-VERT;En quelle annee un eleve de CPE a t-il ete medaille au JO ? ;1996 a Atlanta;2000 a Sydney;2004 a Athenes;2008 a Pekin;2; En 2000 a Sydney, medaille d'or aux Jeux Olympiques d'aviron
-VERT;Quel est le mot prefere de Taghrid Asfour ?;Routing and Switching;Keep Alive;Broadcast;Data;2;
-VERT;Quelle matiere semble la moins pertinente en IRC ?;Le Droit;La Gestion Financiere;La Programmation Syst�me;l'IOT;4;On se demande a quoi sa sert�
-VERT;Qui attendons-nous toujours au HH ?;Sebastien;Sadish;Aubin;la Buche;2;C'est toujours le meme
-VERT;A cote de quel ecole CPE se trouve t-il ?;INSA;Polytech;Itech;Isitech;1;A quelques minutes seulement
-ORANGE;Quel poisson n a jamais d'aniversaire ?;Poisson rouge;L espadon;Poisson panne;Blobfish;3;
-ORANGE;Quel est le fruit que les poissons n aiment pas ?;Banane;Peche;Fraise;Abricot;2;
-ORANGE;Quel est le plat prefere des opticiens ?;Tartiflette;Steak / Frites;Raclette;Lentilles;4;
-ORANGE;Je commence par un e, je finis aussi par un e, mais je ne contient qu une seule lettre. Que suis je ?;Enveloppe;Ete;Epee;Epie;1;
-ORANGE;Quel est le fruit prefere du dragueur ?;L ananas;La poire;La pomme;Le citron;1;
+﻿COULEUR;QUESTION;REPONSE 1;REPONSE 2;REPONSE 3;REPONSE 4;NUMERO REPONSE JUSTE;DESCRIPTION
+ROUGE;Quand a été créé le premier téléphone ? ;1871;1873;1876;1878;3;Inventé par le célèbre Alexander Graham Bell le 14 février 1876
+ROUGE;Pour quelle invention Thomas Edison n'a-t-il pas obtenu le brevet ?;Le microphone;La centrale élèctrique à courant continu;Le phonographe;Le neon;4;Cree en 1910 par George Claude, physicien travaillant sur les gaz rares
+ROUGE;Quel est le nom du premier microprocesseur ? ;Core;Intel 4004;Pentium;Intel Core;2;Intel 4004 inventé en 1971 par Marcian Hoff et Gilbert Hyatt. Il possédait 2 300 transistors, cela parait vraiment peu face au dernier Intel Core qui, lui, en possède plus de 1 million
+ROUGE;Quelle invention majeure a eue lieu dans les années 80 ?;La carte à puce;Le GPS;Le World Wide Web;Le CD;3;Inventée par le chercheur anglais Tim Berners-Lee du Cern à Genève. La carte à puce a été créée en 1974, le GPS et le CD en 1978
+ROUGE;Quand a été mis sur le marché la première machine Nespresso ?;1982;1984;1986;1988;3;La marque a révolutionné le marché en 1986
+ROUGE;Quel fournisseur a offert en premier un accès illimité à internet ?;Orange;Free;SFR;Bouygues Telecom;2;C'est en 2002 que Free a lancé son premier boitier !
+ROUGE;En 2007, à combien de million d'exemplaires s'est ecoulé l'iphone ?;1,7;2;2,5;3;1;Le stock de 1,7 million s'est écoulé en 3 jours seulement
+ROUGE;Quelle console a sorti Nintendo en 2006 ?;La Nintendo DS;La Wii;La Switch;La Nintendo 3DS XL;2;Plus de 71 million de Wii ont été vendues et même en maisons de retraite !
+BLEU;Savez-vous quelle était la couleur du père noël à sa création ?;Bleu;Rouge;Vert;Noir;3;Le père noël était à l'origine vert selon les traditions Allemandes. C'est la firme Coca-Cola qui l'a fait devenir rouge pour ressembler à ce que l'on s'imagine du père noël aujourd hui. 
+BLEU;Savez-vous ce qu'un crocodile est le seul à ne pas pouvoir faire ? ;Loucher;Bailler;Tirer la langue;Sauter;3; Le crocodile ne peut pas tirer la langue à cause de sa trop grande machoire. 
+BLEU;A quel âge Louis XIV est-il monté sur le trône de France ?;30 ans ;14 ans ;1 an ;4 ans ;4;Louis XIV a été obligé de monter sur le trône à la mort de son prédécesseur Louis XIII
+BLEU;Savez-vous jusqu'à combien de temps un escagot peut dormir ?;3 minutes;3 heures;3 mois;3 ans;4;L'escargot est un grand dormeur, il peut en effet dormir jusqu'à 3 ans en continu.  
+BLEU;Savez-vous ce qui pour la plupart des gens fait plus peur que la mort ? ;Manger un oeil de barracuda;Vivre avec des araignées;Oublier l'anniversaire de sa compagne;Vivre une invasion de zombie;2;Vivre avec des araignées est la plus grande angoisse de millions de personnes selon plusieurs revues specialisées. 
+BLEU;Savez-vous quel est le pays où l'on se douche le plus ?;Colombie;France;Bresil;Italie;3;En moyenne 12 fois par semaine
+BLEU;Savez-vous ce que possède uniquement le Sri Lanka ?;Un culte de la chèvre;Des animaux speciaux;Un ministre de la noix de coco;Des arènes de combat;3;C'est l'un des plus grands producteurs de noix de coco au monde, il faut bien quelqu'un pour gérer le stock
+BLEU;Savez-vous où est née la femme la plus maigre du monde ?;Russie;Letonie;Lituanie;Suede;1;Valeria Levitin est originaire de Russie et ne pèse que 25 kilos
+BLEU;Savez-vous d’où vient la citrouille d'Halloween ?;Un fruit;Un legume;Une blague;Un dessin;2;C'est d'un navet qu'est né Halloween
+VERT;Quand l'école CPE a t-elle été créée ? ;1990;1992;1994;1996;3;L'école a été créée en 1994 par la fusion de deux écoles : l'institut de chimie physique industrielle (ICPI), fondé en 1919, et l'école supérieure de chimie industrielle de Lyon (ESCIL), fondée en 1883
+VERT;D'après le groupe L'Etudiant, quelle est la position de CPE parmi les écoles d'ingénieur post-bac ? ;10ème/70;15ème/70;4ème/ 70;8ème/70;3; 4eme/70
+VERT;Quel prix nobel a été décerné à un élève en 2005 ? ;Electronique;Chimie;Physique;Informatique;2;Prix Nobel de Chimie 2005, membre de l'Académie des Sciences, spécialiste de chimie organique
+VERT;En quelle année un élève de CPE a t-il été médaillé aux JO ? ;1996 à Atlanta;2000 à Sydney;2004 à Athenes;2008 à Pekin;2; En 2000 à Sydney, médaille d'or aux Jeux Olympiques d'aviron
+VERT;Quel est le mot préféré de Taghrid Asfour ?;Routing and Switching;Keep Alive;Broadcast;Data;2;
+VERT;Quelle matière semble la moins pertinente en IRC ?;Le Droit;La Gestion Financiere;La Programmation Système;l'IOT;4;On se demande à quoi ça sert…
+VERT;Qui attendons-nous toujours au HH ?;Sebastien;Sadish;Aubin;la Buche;2;C'est toujours le même
+VERT;A côté de quelle école CPE se trouve t-elle ?;INSA;Polytech;Itech;Isitech;1;A quelques minutes seulement
+ORANGE;Quel poisson n'a jamais d'anniversaire ?;Poisson rouge;L'espadon;Poisson panne;Blobfish;3;
+ORANGE;Quel est le fruit que les poissons n'aiment pas ?;Banane;Pêche;Fraise;Abricot;2;
+ORANGE;Quel est le plat préféré des opticiens ?;Tartiflette;Steak / Frites;Raclette;Lentilles;4;
+ORANGE;Je commence par un e, je finis aussi par un e, mais je ne contiens qu'une seule lettre. Que suis je ?;Enveloppe;Ete;Epee;Epie;1;
+ORANGE;Quel est le fruit préféré du dragueur ?;L'ananas;La poire;La pomme;Le citron;1;
 ORANGE;Combien y a-t-il de fois la lettre F dans ce texte ?  FINISHED FILES ARE THE RE-  SULT OF YEARS OF SCIENTIF-  IC STUDY COMBINED WITH  THE  XPERIENCE OF YEARS.;3;5;6;2;3;
-ORANGE;Pourquoi faut-il toujours enlever ses lunettes lors d un alcootest ? ;Parce que sinon on y voit rien ;Pour nous rendre plus credible ;Car ca fait toujours deux verres en moins ;Car nous n avons pas de lunettes ;3;
+ORANGE;Pourquoi faut-il toujours enlever ses lunettes lors d'un alcootest ? ;Parce que sinon on y voit rien ;Pour nous rendre plus credible ;Car ca fait toujours deux verres en moins ;Car nous n'avons pas de lunettes ;3;
 ORANGE;Quel est le point commun entre un Juif et des chaussures ?;Ca coute cher;Ils se ressemblent;Apres 45 on en trouve plus;Ils vont toujours par deux;3;
-ORANGE;Qui est le frere de Albert Einstein ?;David;William;Franck;Paul;3;
+ORANGE;Qui est le frère de Albert Einstein ?;David;William;Franck;Paul;3;
