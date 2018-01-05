@@ -36,9 +36,7 @@ public class BaseScroreCSV {
 		try {
 			String dateDuJour = getDate();	
 			String IDgame;
-
 			IDgame = (( Integer )this.getIDgame()).toString();
-
 
 			FileWriter ficher = new FileWriter(this.nomFichier,true);
 			BufferedWriter writer = new BufferedWriter(ficher);
@@ -47,15 +45,25 @@ public class BaseScroreCSV {
 				String nomJ= joueur.getNom();
 				String Nbcam = (( Integer )joueur.getNbPart()).toString();
 				String vainceur = joueur.getGagnant();
+				int total[] = joueur.getTottalAll();
+				int repJuste[] = joueur.getReponseJusteAll();
+			
 				String ligne = IDgame+separateur+dateDuJour+separateur+nomJ+separateur+Nbcam+separateur+vainceur;
+				
+				for (int i = 0; i < repJuste.length; i++) {
+					ligne = ligne +separateur+total[i]+separateur+repJuste[i];
+				}
+				
+				
+				
 				
 				writer.newLine();
 				writer.write(ligne);
-				
+
 			}
 			writer.close();
 		} catch (IOException e) {
-		
+
 			e.printStackTrace();
 		}
 	}
@@ -81,9 +89,10 @@ public class BaseScroreCSV {
 		reader.close();
 		return ID;
 	}
-	
-	
-	
+
+
+
+	/*@SuppressWarnings("unused")
 	private String getLastIDgame() throws IOException {
 
 		FileReader ficher = new FileReader(this.nomFichier);
@@ -104,11 +113,11 @@ public class BaseScroreCSV {
 		}
 		reader.close();
 		return ID;
-	}
+	}*/
 
 	private  String decoupe(String ligne,int indice) {
 
-		
+
 		String[] temp = ligne.split(this.separateur);
 		if (temp.length!=0) {
 			return temp[indice-1];
@@ -118,53 +127,101 @@ public class BaseScroreCSV {
 
 
 	}
-	
-	public ArrayList<String> getInfoLastGame() throws IOException{
-		
+
+	/*public Partie getInfoLastGame() throws IOException{
+
 		FileReader ficher = new FileReader(this.nomFichier);
 
 		BufferedReader reader = new BufferedReader (ficher);
 		String ligne;
 		String lastIDGame = this.getLastIDgame();
-		
+
 		String [] tempLigne = {"","",""};
 		int i =0;
-		
+
 		while ( (ligne = reader.readLine())!=null ) {
-			
+
 			if ((decoupe(ligne, 1)).equals(lastIDGame)) {
 				tempLigne[i]=ligne;
 				i++;
 			}
 		}
+
+		String [] joueur1= {decoupe(tempLigne[0], 3),decoupe(tempLigne[0], 4),decoupe(tempLigne[0], 5)};
+		String [] joueur2= {decoupe(tempLigne[1], 3),decoupe(tempLigne[1], 4),decoupe(tempLigne[1], 5)};
+		String date = decoupe(tempLigne[0], 2);
+
+
+
+		Partie partie = new Partie(date, joueur1, joueur2);
 		System.out.println("ligne"+tempLigne[0]);
 		System.out.println("ligne"+tempLigne[1]);
-		
-		/*
-		 * [0] : date
-		 * [1] : joueur 1
-		 * 			[0] : nom
-		 * 			[1] : nb part
-		 * 			[3] : 
-		 * [2] : joueur 2
-		 */
-		
 		reader.close();
-		
-		return null;
-	}
-	
-	
-	
-	
 
+		return partie;
+	}*/
+
+
+	public  ArrayList<Partie> getInfoAllGame() throws IOException{
+
+		FileReader ficher = new FileReader(this.nomFichier);
+
+		BufferedReader reader = new BufferedReader (ficher);
+		String ligne;
+		String ID = "1";
+		ArrayList<String[]> joueurs = new ArrayList<String[]>();
+		ArrayList<String[]> reponseJoueurs = new ArrayList<String[]>();
+		String date ="";
+
+		ArrayList<Partie> listePartie = new ArrayList<Partie>();
+		reader.readLine();
+		while ( (ligne = reader.readLine())!=null ) {
+
+			if (!ligne.equals("")) {
+				
+				if (!(decoupe(ligne, 1)).equals(ID)) {
+					Partie partie = new Partie(date, joueurs.get(0), joueurs.get(1),reponseJoueurs.get(0),reponseJoueurs.get(1));
+					listePartie.add(partie);
+					joueurs.remove(0);
+					joueurs.remove(0);
+					reponseJoueurs.remove(0);
+					reponseJoueurs.remove(0);
+					ID = decoupe(ligne, 1);
+
+				}
+				String [] tmpjoueur= {decoupe(ligne, 3),decoupe(ligne, 4),decoupe(ligne, 5)};
+				joueurs.add(tmpjoueur);
+				String [] tmpRepjoueur= {decoupe(ligne, 6),decoupe(ligne, 7),decoupe(ligne, 8),
+						decoupe(ligne, 9),decoupe(ligne, 10),decoupe(ligne, 11),
+						decoupe(ligne,12),decoupe(ligne, 13)};
+				reponseJoueurs.add(tmpRepjoueur);
+				date = decoupe(ligne, 2);	
+			}
+
+
+		}
+		// ajout de la derni�re partie
+	
+		Partie partie = new Partie(date, joueurs.get(0), joueurs.get(1),reponseJoueurs.get(0),reponseJoueurs.get(1));
+		listePartie.add(partie);
+		reader.close();
+		return listePartie;
+	}
 
 	public static void main(String[] args) throws IOException {
 
 		BaseScroreCSV BDD = new BaseScroreCSV();
 
-		BDD.getInfoLastGame();
-
+		//Partie partie = BDD.getInfoLastGame();
+		ArrayList<Partie> listePartie = new ArrayList<>();
+		listePartie = BDD.getInfoAllGame();
+		System.out.println(listePartie.size());
+		for (Partie part : listePartie) {
+			System.out.println("############");
+			System.out.println("date ="+part.getDate());
+			System.out.println("j1 ="+part.getJoueur1()[0]);
+			System.out.println("j2 ="+part.getJoueur2()[0]);
+		}
 
 	}
 

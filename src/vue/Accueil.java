@@ -15,39 +15,37 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.JFrame;
-import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
+
+import Controler.ControleurAccueil;
 import Model.ButtonJolie;
 
 
 @SuppressWarnings("serial")
 public class Accueil extends JFrame  {
 
-	private JLayeredPane layeredPane;
+	//private JLayeredPane layeredPane;
 	static Image im;
 
 	public Accueil(String name) {
 
 		super(name);
-
+		this.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		Toolkit leKit = this.getToolkit();
 		Dimension boardSize = leKit.getScreenSize();
 		this.setTitle(name);
-
-
-		layeredPane = new JLayeredPane();
-		getContentPane().add(layeredPane);
-		layeredPane.setPreferredSize(boardSize);
-
+		setSize(boardSize.width , boardSize.height);
+		
 		try {
-			im = ImageIO.read(new File("images/wallpaper.png")).getScaledInstance(boardSize.width, boardSize.height, Image.SCALE_DEFAULT);
+			im = ImageIO.read(new File("images/wallpaper.png"));
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}
+		
 		JPanel panel = this.setBackgroundImage();
+		setContentPane(panel);
 		panel.setPreferredSize( boardSize );
-		panel.setBounds(0, 0, boardSize.width, boardSize.height);
-
+				
 		ButtonJolie btn1 = new ButtonJolie("Lancer le jeu");
 		btn1.setFont(new Font("Calibri", Font.BOLD, 40));
 		Color c = Color.decode("#c932ac");
@@ -57,19 +55,13 @@ public class Accueil extends JFrame  {
 		panel.add(btn1);
 
 		btn1.addActionListener(new ActionListener() {
-
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				JFrame frame = new TrivialPursuitGUI("Trivial Pursuit");
-				frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-				frame.pack();
-				frame.setVisible(true);
+				ControleurAccueil controleurAccueil = new ControleurAccueil();
+				controleurAccueil.creerMenu();
 				dispose();
 			}
 		});
-		this.pack();
-		this.setVisible(true);
-		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 	}
 
 	private  JPanel setBackgroundImage()
@@ -77,18 +69,15 @@ public class Accueil extends JFrame  {
 		JPanel panel = new JPanel()
 		{
 			private static final long serialVersionUID = 1;
-
 			@Override
 			protected void paintComponent(Graphics g)
 			{
 				super.paintComponent(g);
 				g.drawImage(im,0,0,getWidth(),getHeight(),this);
-				
+				setSize( getWidth(), getHeight());
+				System.out.println("acceuille !"+this.getWidth()+" "+this.getHeight());
 			}
-		};
-		setContentPane(panel);
+		};	
 		return panel;
 	}
-
-
 }
