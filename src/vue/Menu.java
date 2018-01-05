@@ -22,6 +22,7 @@ import java.util.Observable;
 import java.util.Observer;
 
 import javax.swing.BorderFactory;
+import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
 
 import javax.swing.Icon;
@@ -41,7 +42,10 @@ import javax.swing.border.Border;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
+import org.jfree.chart.LegendItemCollection;
+import org.jfree.chart.labels.StandardPieSectionLabelGenerator;
 import org.jfree.chart.plot.PiePlot3D;
+import org.jfree.chart.title.LegendTitle;
 import org.jfree.data.general.DefaultPieDataset;
 import org.jfree.data.general.PieDataset;
 
@@ -58,22 +62,32 @@ public class Menu extends JFrame implements  Observer {
 	private JPanel panelMenu,panelGeneral,panelPersonalisation,panelHistorique,panelDetailPartie;
 	private ControleurAccueil controleurAccueil;
 	private JLayeredPane layeredPane;
-	private String policeEcriture = "Calibri";
+	private static String policeEcriture = "Calibri";
 	private int numeroDePage;
+	private static Color bleuColor = new Color(29, 174, 255);
+	private static Color rougeColor = new Color(206, 43, 46);
+	private static Color orangecolor = new Color(254, 169, 38);
+	private static Color vertColor = new Color(115, 201, 114);
 	public Menu(String name, ControleurAccueil controleur) {
 		super(name);
 
 		this.controleurAccueil = controleur;
-		//this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+		this.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		Toolkit leKit = this.getToolkit();
 		Dimension boardSize = leKit.getScreenSize();
-		setSize(boardSize.width , boardSize.height-50);
+		setSize(boardSize.width , boardSize.height);
+		//this.revalidate();
 
-		layeredPane = this.getLayeredPane();
+		layeredPane = new JLayeredPane();
+		this.setContentPane(layeredPane);
+		layeredPane.setPreferredSize(boardSize);
+
+
 		//layeredPane.setSize(boardSize.width , boardSize.height-150);
 
 		panelGeneral = new JPanel(new BorderLayout());
 		panelGeneral.setBounds(0, 0, getWidth(), getHeight());
+
 		//panelGeneral.setBackground(Color.red);
 
 		/*Toolkit tk = Toolkit.getDefaultToolkit();
@@ -107,7 +121,6 @@ public class Menu extends JFrame implements  Observer {
 
 
 	private void afficherMenuPrincipal() {
-
 		panelMenu.setLayout( new BorderLayout() );
 		JPanel sud = new JPanel();
 		sud.setPreferredSize(new Dimension(0, 100));
@@ -126,7 +139,7 @@ public class Menu extends JFrame implements  Observer {
 		JPanel texte1 = new JPanel();
 		texte1.setPreferredSize(new Dimension(10,90));
 		centre.add((JPanel) texte1);
-		JLabel txt1 = new JLabel("Bienvenue sur le jeu TRIVIAL PURSUIT, amsuez-vous bien !");
+		JLabel txt1 = new JLabel("Bienvenue sur le jeu TRIVIAL PURSUIT, amusez-vous bien !");
 		txt1.setHorizontalTextPosition(JLabel.CENTER); 
 		txt1.setFont(new Font("Calibri",Font.PLAIN,27));
 		texte1.add(txt1);
@@ -273,7 +286,8 @@ public class Menu extends JFrame implements  Observer {
 		i.insets = new Insets(-20,100,-30,100);
 		i.fill = GridBagConstraints.HORIZONTAL;
 		centre.add(btn6, i);
-		System.out.println("after !"+this.getWidth()+" "+this.getHeight());
+
+
 		//this.setExtendedState(JFrame.MAXIMIZED_BOTH);
 
 	}
@@ -334,7 +348,7 @@ public class Menu extends JFrame implements  Observer {
 
 		String[] elements = new String[]{"Blague", "CPE", "Innovation", "Le saviez-vous?"};
 		JComboBox<String> typeQuestion = new JComboBox<String>(elements);
-		JLabel selectype = new JLabel("Veuillez selectionnez votre type de question");
+		JLabel selectype = new JLabel("Veuillez selectionner une catégorie de question");
 		selectype.setFont(new Font(policeEcriture,Font.PLAIN,27));
 
 
@@ -402,7 +416,7 @@ public class Menu extends JFrame implements  Observer {
 		// Panel reponse
 
 
-		JLabel indicationReponse = new JLabel("Entrez les réponsses et cochez la bonne réponse");
+		JLabel indicationReponse = new JLabel("Entrez les réponses et cochez la bonne réponse");
 		indicationReponse.setFont(new Font(policeEcriture,Font.PLAIN,27));
 		c.gridx = 0;
 		c.gridy = 0;
@@ -593,7 +607,7 @@ public class Menu extends JFrame implements  Observer {
 
 	private void afficherHistorique(ArrayList<Partie> listePartie,ArrayList<Partie> listePartieRecherche) {
 
-		
+
 		Color bleuColor = new Color(29, 174, 255);
 		Color rougeColor = new Color(206, 43, 46);
 		Color orangecolor = new Color(254, 169, 38);
@@ -632,9 +646,8 @@ public class Menu extends JFrame implements  Observer {
 			public void actionPerformed(ActionEvent e) {
 				String date= choseDate.getSelectedItem().toString();
 				String pseudo = pseudoAChercher.getText();
-				//if (!date.equals("")&& !pseudo.equals("")) {
 				controleurAccueil.rechercheHistorique(listePartie,date,pseudo);
-				//}
+
 
 			}
 		});
@@ -652,10 +665,27 @@ public class Menu extends JFrame implements  Observer {
 		//###################################
 		System.out.println(listePartieRecherche.size());
 		Double nbPartie = (double) listePartieRecherche.size();
+
+		KeyListener actionEntrer = new KeyListener() {
+			@Override
+			public void keyTyped(KeyEvent e) {}
+			@Override
+			public void keyPressed(KeyEvent e) {}
+			@Override
+			public void keyReleased(KeyEvent e) {
+				if (panelHistorique.isVisible() && e.getKeyCode()==KeyEvent.VK_ENTER) {
+					System.out.println("test");
+					btnRecherche.doClick();
+				}
+			}
+		};
+		pseudoAChercher.addKeyListener(actionEntrer);
+		choseDate.addKeyListener(actionEntrer);
+
 		if (nbPartie == 0) {
 			//System.out.println("test");
-			
-			
+
+
 			JLabel labelResultatRecherche = new JLabel("Aucun résultat trouver");
 			labelResultatRecherche.setHorizontalAlignment(SwingConstants.CENTER);
 			labelResultatRecherche.setVerticalAlignment(SwingConstants.CENTER);
@@ -679,10 +709,10 @@ public class Menu extends JFrame implements  Observer {
 				// En tete
 				JPanel panelPartie = new JPanel(new GridLayout(0, 6));
 				JLabel date = new JLabel("DATE");
-				JLabel joueur1 = new JLabel("Nom Joueur1");
-				JLabel scroreJ1 = new JLabel("Score Joueur1");
+				JLabel joueur1 = new JLabel("Nom Joueur 1");
+				JLabel scroreJ1 = new JLabel("Score Joueur 1");
 				JLabel joueur2 = new JLabel("Nom Joueur 2");
-				JLabel scroreJ2 = new JLabel("Scrore Joueur 2");
+				JLabel scroreJ2 = new JLabel("Score Joueur 2");
 				Border borderligne= BorderFactory.createMatteBorder(0,2,2,2, Color.DARK_GRAY);
 				Border bordercolonne= BorderFactory.createMatteBorder(0,0,0,2, Color.DARK_GRAY);
 				String policeEcriture = "Calibri";
@@ -752,7 +782,7 @@ public class Menu extends JFrame implements  Observer {
 						panelPartie.setBackground(vertColor);
 						indiceCouleurLigne=0;
 					}
-					ButtonJolie btnVoir = new ButtonJolie("Voir plus");
+					ButtonJolie btnVoir = new ButtonJolie("Détails");
 					btnVoir.addActionListener(new ActionListener() {
 
 						@Override
@@ -808,13 +838,6 @@ public class Menu extends JFrame implements  Observer {
 				}
 			});
 
-			
-			if (nbVue==1) {
-				next.setVisible(false);
-				preview.setVisible(false);
-			}
-			
-			
 			JPanel panelChangePage = new JPanel();
 			panelChangePage.add(preview);
 			panelChangePage.add(next);
@@ -823,7 +846,9 @@ public class Menu extends JFrame implements  Observer {
 
 			paneNumPage.add(numPage);
 			bot.add(paneNumPage);
-			bot.add(panelChangePage);
+			if (nbVue>1) {
+				bot.add(panelChangePage);
+			}
 			panelHistorique.add(bot, BorderLayout.SOUTH);
 		}
 	}
@@ -832,44 +857,68 @@ public class Menu extends JFrame implements  Observer {
 
 
 
-		panelDetailPartie.setLayout(new BorderLayout());
 		afficheBoutonRetour("Historique");
 
-
-		JPanel centre = new JPanel(new GridLayout(0, 2));
-
-		panelDetailPartie.add(centre,BorderLayout.CENTER);
+		panelDetailPartie.setLayout(new BoxLayout(panelDetailPartie, BoxLayout.X_AXIS));
+	
 
 		Couleur couleurs[] = {Couleur.BLEU,Couleur.ROUGE,Couleur.VERT,Couleur.ORANGE};
 
 		for (int indiceJoueur = 1; indiceJoueur< 3; indiceJoueur++) {
-			JPanel joueurs= new JPanel(new GridLayout(2, 0));
-			joueurs.setBorder(BorderFactory.createLineBorder(Color.black));
-			JPanel panelInfoJoueur = new JPanel(new GridLayout(2, 0));
+			JPanel joueurs=new JPanel();
+			joueurs.setLayout(new BoxLayout(joueurs, BoxLayout.Y_AXIS));
+			//joueurs.setBorder(BorderFactory.createLineBorder(Color.black));
+
+			//JLabel winOrLose = new JLabel(""); 
+			if (partie.isGagnant(indiceJoueur)) {
+				System.out.println("joueur "+indiceJoueur +" a gagner");
+				//winOrLose.setText("WINNER");
+				//joueurs.setBackground(Color.green);
+			}else{
+				//joueurs.setBackground(Color.red);
+			//	winOrLose.setText("LOSER");
+			}
+
+
+			JPanel panelInfoJoueur =new JPanel(new GridBagLayout());
+			//panelInfoJoueur.setLayout(new BoxLayout(panelInfoJoueur, BoxLayout.Y_AXIS));
+
 			String nomJoueur = partie.getNomJoueur(indiceJoueur);
-			JLabel labelNomJoueur = new JLabel(" NOM JOUEUR : "+nomJoueur);
+			JLabel labelNomJoueur = new JLabel(nomJoueur);
 			String Score = partie.getNBCamJoueur(indiceJoueur);
-			JLabel labelscore = new JLabel("SCORE : "+Score); 
-			panelInfoJoueur.add(labelNomJoueur);
-			panelInfoJoueur.add(labelscore);
+			JLabel labelscore = new JLabel(Score); 
+
+			//winOrLose.setFont(new Font(policeEcriture,Font.BOLD,60));
+			labelNomJoueur.setFont(new Font(policeEcriture,Font.BOLD,50));
+			labelscore.setFont(new Font(policeEcriture,Font.PLAIN,40));
+			GridBagConstraints contrainte = new GridBagConstraints();    
+			contrainte.gridx = 0;                                        
+			contrainte.gridy = 0; 
+			//panelInfoJoueur.add(winOrLose,contrainte);                                       
+			//contrainte.gridy = 1; 
+			panelInfoJoueur.add(labelNomJoueur,contrainte);
+			contrainte.gridy = 1; 
+			panelInfoJoueur.add(labelscore,contrainte);
+			panelInfoJoueur.setOpaque(false);
 
 			joueurs.add(panelInfoJoueur);
-			JPanel panelGraph = new JPanel(new GridLayout(2, 2));
+			//JPanel panelGraph = new JPanel(new GridBagLayout());
+			JPanel panelGraph = new JPanel(new GridLayout(2,2));
+			panelGraph.setBorder(BorderFactory.createEmptyBorder( 50,  0,  0,  0));
+			panelGraph.setOpaque(false);
 
-
+			contrainte.gridx = 0;                                        
+			contrainte.gridy = 0; 
+			contrainte.weightx = 1; 
+			contrainte.weighty = 1; 
 			for (Couleur couleur : couleurs) {
 				String categorie = convertCouleurTocategorie(couleur);
-				System.out.println("Couleur :"+couleur+" indice "+indiceJoueur+" total :"+partie.getTotalAll(couleur, indiceJoueur));
-				System.out.println("Couleur :"+couleur+" indice "+indiceJoueur+" rep :"+partie.getReponseAll(couleur,indiceJoueur));
+				//System.out.println("Couleur :"+couleur+" indice "+indiceJoueur+" total :"+partie.getTotalAll(couleur, indiceJoueur));
+				//System.out.println("Couleur :"+couleur+" indice "+indiceJoueur+" rep :"+partie.getReponseAll(couleur,indiceJoueur));
 				int total = Integer.parseInt(partie.getTotalAll(couleur, indiceJoueur));
 				int repJuste = Integer.parseInt(partie.getReponseAll(couleur,indiceJoueur));
-				if (total==0) {
-					JLabel noQuestion = new JLabel("CE JOUEUR N'A PAS AFFRONTE DE QUESTION "+categorie);
-					noQuestion.setBorder(BorderFactory.createLineBorder(Color.black));
-					panelGraph.add(noQuestion);
-				}else{
-
-					DefaultPieDataset dataset = new DefaultPieDataset();
+				DefaultPieDataset dataset = new DefaultPieDataset();
+				if (total>0) {					
 					ArrayList<Double> values = new ArrayList<Double>();
 					int repfausse = total -repJuste;
 					values.add(new Double(repfausse));
@@ -880,15 +929,36 @@ public class Menu extends JFrame implements  Observer {
 					for (int i = 0; i < values.size(); i++) {
 						dataset.setValue(legendes.get(i), values.get(i));
 					}
-					JFreeChart  chart =createChart(dataset,"Question "+categorie);
-					ChartPanel graph = new ChartPanel(chart);
-					panelGraph.add(graph);
+
 				}
+				JFreeChart  chart =createChart(dataset,"Catégorie "+categorie,couleur);
+				ChartPanel graph = new ChartPanel(chart);
+				switch (couleur) {
+				case BLEU:
+					chart.setBackgroundPaint(bleuColor);
+					graph.setBackground(bleuColor);
+					break;
+				case ROUGE:	chart.setBackgroundPaint(rougeColor);
+				break;
+				case VERT:chart.setBackgroundPaint(vertColor);
+				break;
+				case ORANGE:chart.setBackgroundPaint(orangecolor);
+				break;
+				default:
+					break;
+				}
+				panelGraph.add(graph);
 			}
-
 			joueurs.add(panelGraph);
-
-			centre.add(joueurs);
+			panelDetailPartie.add(joueurs);
+			if (indiceJoueur ==1) {
+				JPanel paneVS = new JPanel();
+				JLabel labelVS = new JLabel("VS");
+				labelVS.setFont(new Font(policeEcriture,Font.BOLD,50));
+				paneVS.add(labelVS);
+				panelDetailPartie.add(paneVS);
+			}
+			//centre.add(joueurs);
 		}
 
 	}
@@ -896,24 +966,17 @@ public class Menu extends JFrame implements  Observer {
 		String categorie = "";
 
 		switch (couleur) {
-		case BLEU:
-			categorie="Le Saviez-Vous?";
-			break;
-		case ROUGE:
-			categorie= "Innovation";
-
-			break;
-		case VERT:
-			categorie = "CPE";
-
-			break;
-		case ORANGE:
-			categorie="Blagues";
-			break;
+		case BLEU:categorie="Le Saviez-Vous?";
+		break;
+		case ROUGE:	categorie= "Innovation";
+		break;
+		case VERT:categorie = "CPE";
+		break;
+		case ORANGE:categorie="Blagues";
+		break;
 		default:
 			break;
 		}
-
 		return categorie;
 	}
 
@@ -921,7 +984,8 @@ public class Menu extends JFrame implements  Observer {
 
 
 	@SuppressWarnings("deprecation")
-	private static JFreeChart createChart(PieDataset dataset, String titre) {
+	private static JFreeChart createChart(PieDataset dataset, String titre, Couleur couleur) {
+
 
 		JFreeChart chart = ChartFactory.createPieChart3D(
 				titre,  // chart title
@@ -932,12 +996,31 @@ public class Menu extends JFrame implements  Observer {
 				);
 
 		PiePlot3D plot = (PiePlot3D) chart.getPlot();
-		plot.setLabelFont(new Font("SansSerif", Font.PLAIN, 12));
-		plot.setNoDataMessage("No data available");
+		
+		plot.setLabelFont(new Font(policeEcriture, Font.PLAIN, 12));
+		plot.setNoDataMessage("Ce joueur n'as pas rencontré cette catégorie de question");
+		plot.setNoDataMessageFont(new Font(policeEcriture,Font.PLAIN,30));
 		plot.setCircular(false);
 		plot.setLabelGap(0.02);
+		plot.setForegroundAlpha(0.7f);
+		plot.setLabelGenerator(new StandardPieSectionLabelGenerator("{0} ({2})"));
 		plot.setSectionPaint(1, Color.GREEN);
 		plot.setSectionPaint(2, Color.RED);
+
+		switch (couleur) {
+		case BLEU:plot.setBackgroundPaint(bleuColor);
+		break;
+		case ROUGE:	plot.setBackgroundPaint(rougeColor);
+		break;
+		case VERT:plot.setBackgroundPaint(vertColor);
+		break;
+		case ORANGE:plot.setBackgroundPaint(orangecolor);
+		break;
+		default:
+			break;
+		}
+
+
 		return chart;
 
 	}
@@ -954,7 +1037,10 @@ public class Menu extends JFrame implements  Observer {
 		 */
 
 
-
+		panelPersonalisation.removeAll();
+		panelHistorique.removeAll();
+		panelDetailPartie.removeAll();
+		panelMenu.removeAll();
 
 		int choix = (int)((ArrayList<Object>)info).get(0);
 		switch (choix) {
@@ -964,28 +1050,21 @@ public class Menu extends JFrame implements  Observer {
 			panelMenu.setVisible(true);
 			break;
 		case 1:
-
-			panelPersonalisation.removeAll();
 			this.personalisation();
 			panelPersonalisation.setVisible(true);
 			panelMenu.setVisible(false);
 			break;
 		case 2:
-
 			System.out.println(((ArrayList<Object>)info).get(1).getClass());
 			ArrayList<Partie> listePartie = (ArrayList<Partie>) ((ArrayList<Object>)info).get(1);
 			ArrayList<Partie> listePartieRecherche = (ArrayList<Partie>) ((ArrayList<Object>)info).get(2);
-			panelHistorique.removeAll();
 			this.afficherHistorique( listePartie,listePartieRecherche);
 			panelHistorique.setVisible(true);
 			panelMenu.setVisible(false);
 			break;
 		case 3:
-
-
 			System.out.println(((ArrayList<Object>)info).get(1).getClass());
 			Partie partie = (Partie) ((ArrayList<Object>)info).get(1);
-			panelDetailPartie.removeAll();
 			this.afficheDetailPartie( partie);
 			panelDetailPartie.setVisible(true);
 			panelMenu.setVisible(false);

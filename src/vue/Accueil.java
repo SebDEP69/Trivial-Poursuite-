@@ -34,19 +34,18 @@ public class Accueil extends JFrame  {
 		Toolkit leKit = this.getToolkit();
 		Dimension boardSize = leKit.getScreenSize();
 		this.setTitle(name);
-
-
+		setSize(boardSize.width , boardSize.height);
+		
 		try {
 			im = ImageIO.read(new File("images/wallpaper.png"));
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}
 		
-		
 		JPanel panel = this.setBackgroundImage();
 		setContentPane(panel);
 		panel.setPreferredSize( boardSize );
-		
+				
 		ButtonJolie btn1 = new ButtonJolie("Lancer le jeu");
 		btn1.setFont(new Font("Calibri", Font.BOLD, 40));
 		Color c = Color.decode("#c932ac");
@@ -75,11 +74,10 @@ public class Accueil extends JFrame  {
 			{
 				super.paintComponent(g);
 				g.drawImage(im,0,0,getWidth(),getHeight(),this);
-				//System.out.println("after !"+this.getWidth()+" "+this.getHeight());
+				setSize( getWidth(), getHeight());
+				System.out.println("acceuille !"+this.getWidth()+" "+this.getHeight());
 			}
 		};	
 		return panel;
 	}
-
-
 }

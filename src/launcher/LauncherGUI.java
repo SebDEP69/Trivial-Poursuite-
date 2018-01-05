@@ -9,7 +9,6 @@ public class LauncherGUI {
 
 	public LauncherGUI(){		
 		Accueil acc = new Accueil("Accueil");
-		acc.pack();
 		acc.setVisible(true);
 		acc.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		

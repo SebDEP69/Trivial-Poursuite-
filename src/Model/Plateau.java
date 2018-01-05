@@ -1,6 +1,8 @@
 package Model;
+
 import java.io.IOException;
 import java.util.ArrayList;
+
 
 public class Plateau {
 
@@ -70,19 +72,26 @@ public class Plateau {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		/*listeCarteMystere.add(new MystereProchainCamembert());
-		listeCarteMystere.add(new MystereEnleverCamembert());
+		
+		//listeCarteMystere.add(new MysterePerteCamembert());
+		//#################
+		// DEMO
+		//################
+		listeCarteMystere.add(new MystereGainCamembert()); // use for demo
+		listeCarteMystere.add(new MystereEnleverCamembert()); // use for demo
+		listeCarteMystere.add(new MystereProchainCamembert());
 		listeCarteMystere.add(new MysterePerteCamembert());
 		listeCarteMystere.add(new MystereRejouer());
-		listeCarteMystere.add(new MystereRetourCaseDepart());*/
-		listeCarteMystere.add(new MystereGainCamembert());
+		listeCarteMystere.add(new MystereRetourCaseDepart());
+		
 
 		this.nombreCasePlateau = 24;
 		InitListCase();
 	}
 
-
-
+	//##########################
+	//MODE AVEC PILLE
+	//##########################
 	// renvoie une carte de la couleur demander
 	public Carte TirerCarte(Couleur couleur) {
 
@@ -103,8 +112,65 @@ public class Plateau {
 		break;
 		}
 
+		index = 0 ;
+
+		if (listeTEMP.size()>=1) {
+			carteRetour = listeTEMP.get(index);
+
+			switch (couleur) {
+			case ROUGE : 
+				listeCarteRouge.remove(index);
+				listeCarteRouge.add(carteRetour);
+				break;
+			case BLEU: 
+				listeCarteBleu.remove(index);
+				listeCarteBleu.add(carteRetour);
+				break;
+			case VERT: 
+				listeCarteVert.remove(index);
+				listeCarteVert.add(carteRetour);
+				break;
+			case ORANGE: 
+				listeCarteOrange.remove(index);
+				listeCarteOrange.add(carteRetour);
+				break;
+			case NOIR: 
+				listeCarteMystere.remove(index);
+				listeCarteMystere.add(carteRetour);
+				break;
+			}
+		}else{
+			carteRetour = null;
+		}
+
+		return carteRetour;
+	}
+
+	//##########################
+	//MODE AVEC SUPPRESION DES CARTES
+	//##########################
+	// renvoie une carte de la couleur demander
+	/*public Carte TirerCarte(Couleur couleur) {
+
+		Carte carteRetour = null;		
+		int index =0;
+		ArrayList<Carte> listeTEMP= new ArrayList<Carte>();
+
+		switch (couleur) {
+		case ROUGE : listeTEMP = listeCarteRouge;
+		break;
+		case BLEU:    listeTEMP = listeCarteBleu;
+		break;
+		case VERT: listeTEMP = listeCarteVert;
+		break;
+		case ORANGE:  listeTEMP = listeCarteOrange;
+		break;
+		case NOIR:  listeTEMP = listeCarteMystere;
+		break;
+		}
+
 		index = (int) (Math.random() * listeTEMP.size()) ;
-		
+
 		if (listeTEMP.size()>=1) {
 			carteRetour = listeTEMP.get(index);
 
@@ -123,9 +189,9 @@ public class Plateau {
 		}else{
 			carteRetour = null;
 		}
-		
+
 		return carteRetour;
-	}
+	}*/
 
 
 	// initialise la liste des cases du plateau
@@ -167,4 +233,5 @@ public class Plateau {
 	private int getNombreCasePlateau() {
 		return nombreCasePlateau;
 	}
+	
 }

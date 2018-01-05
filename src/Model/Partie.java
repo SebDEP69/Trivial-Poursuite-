@@ -228,6 +228,17 @@ public class Partie {
 		return joueur1[2];
 	}
 
+	public Boolean isGagnant(int numJoueur){
+		Boolean val=false ;
+		if (numJoueur==1 && joueur1[2].equals("OUI")) {
+			val = true;
+		}else if (numJoueur==2 && joueur2[2].equals("OUI")) {
+			val = true;
+		}
+		
+		return val;
+		
+	}
 	public String getNomJ2() {
 		return joueur2[0];
 	}

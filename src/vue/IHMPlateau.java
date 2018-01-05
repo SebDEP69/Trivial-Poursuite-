@@ -7,6 +7,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.*;
 import javax.imageio.ImageIO;
+import javax.print.DocFlavor;
 import javax.swing.*;
 import javax.swing.border.Border;
 
@@ -36,9 +37,13 @@ public class IHMPlateau extends JFrame implements  Observer {
 		this.trivialControler = trivialControler;
 		this.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		Dimension boardSize = this.getToolkit().getScreenSize();
-		setSize(boardSize.width , boardSize.height-50);
-		layeredPane = this.getLayeredPane();
-
+		setSize(boardSize.width , boardSize.height);
+		
+		
+		
+		layeredPane = new JLayeredPane();
+		this.setContentPane(layeredPane);
+		layeredPane.setPreferredSize(boardSize);
 
 		trivialBoard = new JPanel(new BorderLayout());
 		trivialBoard.setBounds(0, 0, getWidth(), getHeight());
@@ -51,7 +56,12 @@ public class IHMPlateau extends JFrame implements  Observer {
 		layeredPane.add(trivialBoard, new Integer(0));
 		layeredPane.add(panelSelectionPerso, new Integer(1));
 
-
+		
+		
+		//BAS
+		JPanel bas = new JPanel();
+		bas.setBorder(BorderFactory.createEmptyBorder(0,0,10,0));
+		trivialBoard.add(bas,BorderLayout.SOUTH);
 
 		//GAUCHE
 		desPanel = new JPanel();
@@ -60,7 +70,7 @@ public class IHMPlateau extends JFrame implements  Observer {
 
 		//DROITE
 		camembertPanel = new JPanel();
-		camembertPanel.setLayout(new GridLayout(3,0));
+		camembertPanel.setLayout(new BoxLayout(camembertPanel, BoxLayout.Y_AXIS));
 		trivialBoard.add(camembertPanel, BorderLayout.EAST);
 
 
@@ -75,7 +85,6 @@ public class IHMPlateau extends JFrame implements  Observer {
 		imgPersoUn.setName("macron");
 		imgPersoDeux= new JLabel(new ImageIcon("images/macron.png"));
 		imgPersoDeux.setName("macron");
-
 		formulaireCreationJoueur();
 
 
@@ -256,6 +265,7 @@ public class IHMPlateau extends JFrame implements  Observer {
 				//trivialControler.creationJoueur("toto","titi",CouleurPion.MACRON,CouleurPion.MACRON);
 			}
 		});
+		panelButonLancer.setBorder(BorderFactory.createEmptyBorder(0,0,10,0));
 		panelButonLancer.add(btnlancer);		
 		PanelcentreJoueur.add(tekkenVue,BorderLayout.CENTER);
 		PanelcentreJoueur.add(panelButonLancer,BorderLayout.SOUTH);
@@ -276,7 +286,8 @@ public class IHMPlateau extends JFrame implements  Observer {
 		 * PARAM : LA LISTE DES JOUEURS
 		 * 
 		 */
-
+		
+		camembertPanel.setLayout(new BoxLayout(camembertPanel, BoxLayout.Y_AXIS));
 		camembertPanel.setPreferredSize( new Dimension(200,0));
 		Image cam;
 		try {
@@ -295,7 +306,22 @@ public class IHMPlateau extends JFrame implements  Observer {
 			}
 
 		} catch (IOException e) {e.printStackTrace();}	
-
+		
+		
+		/*ButtonJolie btnQuitterPartie = new ButtonJolie("Quitter la partie");
+		btnQuitterPartie.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {	
+				ControleurAccueil controleurAccueil = new ControleurAccueil();
+				controleurAccueil.creerMenu();
+				dispose();
+			}
+		});
+		JPanel panebtnQuit = new JPanel(new FlowLayout());
+		//panebtnQuit.setBorder(BorderFactory.createEmptyBorder(50,0,0,0));
+		panebtnQuit.add(btnQuitterPartie);
+		camembertPanel.add(btnQuitterPartie);*/
+		camembertPanel.revalidate();
 	}
 
 	private String[] listeImageCamembert(Joueur joueur, int numJoueur) {
@@ -631,8 +657,8 @@ public class IHMPlateau extends JFrame implements  Observer {
 			//reponsePanel.add(valider);
 			this.questionPanel.add(reponsePanel);
 			this.questionPanel.add(panebtnvalider);
-				
-			
+
+
 		}
 		this.plateauPanel.add(questionPanel, BorderLayout.CENTER);	
 		this.revalidate();
@@ -676,7 +702,6 @@ public class IHMPlateau extends JFrame implements  Observer {
 		categorie.add(new JLabel(new ImageIcon("images/super.png")));
 		categorie.add(new JLabel("Super Camembert"));
 
-
 		JTextArea decriptionJoueurCourant = new JTextArea("C'est au tour de "+joueurCourant.getNom());
 		decriptionJoueurCourant.setFont(new Font(policeEcriture,Font.PLAIN,27));
 
@@ -685,16 +710,29 @@ public class IHMPlateau extends JFrame implements  Observer {
 		decriptionJoueurCourant.setBackground(desPanel.getBackground());
 		decriptionJoueurCourant.setLineWrap(true);
 		decriptionJoueurCourant.setWrapStyleWord(true);
+		decriptionJoueurCourant.setBorder(BorderFactory.createEmptyBorder(150,0,0,0));
 		String nomImgJoueur = joueurCourant.getPion().getCouleurPion().toString().toLowerCase();
 
 		ImageIcon icon = new ImageIcon(new ImageIcon("images/"+nomImgJoueur+".png").getImage().getScaledInstance(230, 210, Image.SCALE_DEFAULT));
 		JLabel ImgJoueur = new JLabel(icon);
 
-
+		ButtonJolie btnQuitterPartie = new ButtonJolie("Quitter la partie");
+		btnQuitterPartie.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {	
+				ControleurAccueil controleurAccueil = new ControleurAccueil();
+				controleurAccueil.creerMenu();
+				dispose();
+			}
+		});
+		JPanel panebtnQuit = new JPanel();
+		panebtnQuit.setBorder(BorderFactory.createEmptyBorder(50,0,0,0));
+		panebtnQuit.add(btnQuitterPartie);
 		desPanel.add(btnLancerLesDes);
 		desPanel.add(categorie);
 		desPanel.add(decriptionJoueurCourant);
 		desPanel.add(ImgJoueur);
+		desPanel.add(panebtnQuit);
 	}
 
 	private void placementJoueur(ArrayList<Joueur> listeDesJoueur, Joueur joueurCourant) {
@@ -820,12 +858,15 @@ public class IHMPlateau extends JFrame implements  Observer {
 
 
 
-	private void afficheMessageMystere(String msg, boolean ismystereprochaincam){
+	private void afficheMessageMystere(String msg, boolean ismystereprochaincam, Boolean rejoue,Joueur joueurcourant){
 
 
 		JPanel panelMessage = new JPanel();
 		panelMessage.setLayout(new BoxLayout(panelMessage, BoxLayout.Y_AXIS));
-
+		JLabel imageMystere = new JLabel( new ImageIcon("images/caseMystere.png"));
+		//JLabel imageMystere = new JLabel( new ImageIcon("images/reponse-Juste.png"));
+		JLabel labelMystere = new JLabel("Vous êtes tombé sur une case mystère.");
+		
 		JTextArea message = new JTextArea( msg );
 		message.setEditable(false);
 		message.setBackground(panelMessage.getBackground());
@@ -835,11 +876,8 @@ public class IHMPlateau extends JFrame implements  Observer {
 		// Pour que les mots ne soient pas coupés
 		message.setWrapStyleWord(true);
 		message.setFont(new Font(policeEcriture,Font.PLAIN,27));
-
-		JPanel panelMystere = new JPanel(new GridBagLayout());
-		JLabel imageMystere = new JLabel( new ImageIcon("images/caseMystere.png"));
-		JLabel labelMystere = new JLabel("Vous êtes tombé sur une case mystère.");
 		labelMystere.setFont(new Font(policeEcriture,Font.PLAIN,27));
+		JPanel panelMystere = new JPanel(new GridBagLayout());
 		GridBagConstraints contrainte = new GridBagConstraints();    
 		contrainte.gridx = 0;                                        
 		contrainte.gridy = 0;
@@ -848,7 +886,7 @@ public class IHMPlateau extends JFrame implements  Observer {
 		panelMystere.add(labelMystere,contrainte);
 		panelMessage.add(panelMystere);
 		panelMessage.add(message);
-
+		//panelMessage.setBorder(BorderFactory.createMatteBorder(10, 10, 10, 10, Color.DARK_GRAY));
 		if (ismystereprochaincam) {
 			((JButton )desPanel.getComponent(0)).setEnabled(false);;
 			JPanel panebtn = new JPanel(new GridBagLayout());
@@ -861,8 +899,22 @@ public class IHMPlateau extends JFrame implements  Observer {
 			});
 			panebtn.add(actionCase);
 			panelMessage.add(panebtn);
-		}
+		}else{
+			JPanel paneRejouer = new JPanel(new GridBagLayout());
+			JLabel labelRejouer = new JLabel();
 
+			//paneRejouer.setOpaque(false);
+			if (rejoue) {
+				labelRejouer = new JLabel("Vous pouvez rejouer!!!");
+			}else{
+				labelRejouer = new JLabel("C'est au tour de "+joueurcourant.getNom());
+			}
+			labelRejouer.setFont(new Font(policeEcriture,Font.PLAIN,27));
+			
+			paneRejouer.add(labelRejouer);
+			panelMessage.add(paneRejouer);
+		}
+		
 		this.plateauPanel.add(panelMessage, BorderLayout.CENTER);
 	}
 	private void afficheDescription(String msg,Boolean iswin, Couleur couleurwin, String reponse, Joueur joueurcourant){
@@ -880,7 +932,7 @@ public class IHMPlateau extends JFrame implements  Observer {
 		description.setBackground(paneldescription.getBackground());
 		// Pour un retour à ligne automatique
 		description.setLineWrap(true);
-
+		
 		// Pour que les mots ne soient pas coupés
 		description.setWrapStyleWord(true);
 		messageWin.setFont(new Font(policeEcriture,Font.PLAIN,27));
@@ -915,7 +967,7 @@ public class IHMPlateau extends JFrame implements  Observer {
 		paneldescription.add(description);
 		JPanel paneRejouer = new JPanel(new GridBagLayout());
 		JLabel labelRejouer = new JLabel();
-		
+
 		paneRejouer.setOpaque(false);
 		if (iswin) {
 			labelRejouer = new JLabel("Vous pouvez rejouer!!!");
@@ -925,10 +977,10 @@ public class IHMPlateau extends JFrame implements  Observer {
 		labelRejouer.setFont(new Font(policeEcriture,Font.PLAIN,27));
 		paneRejouer.add(labelRejouer);
 		paneldescription.add(paneRejouer);
-		
-		
-		
-		
+
+
+
+
 		this.plateauPanel.add(paneldescription, BorderLayout.CENTER);
 	}
 	@SuppressWarnings("unchecked")
@@ -1020,10 +1072,11 @@ public class IHMPlateau extends JFrame implements  Observer {
 			if ( typeAffichage == 1){ // si on a une question
 				creationPanelQuestion(question);
 			}else if (typeAffichage == 2) { // si on est sur une case mystère 
-				afficheMessageMystere(message,isMystereProchainCam);
+				afficheMessageMystere(message,isMystereProchainCam,iswin,joueurcourant);
 			}else if (typeAffichage == 3) { // si c'est une desription
 				afficheDescription(message, iswin, couleurwin,reponse,joueurcourant);
 			}else{
+				System.out.println(message);
 				JLabel labelMessage = new JLabel( message );
 				labelMessage.setFont(new Font(policeEcriture,Font.PLAIN,27));
 				JPanel panelmsg = new JPanel(new GridBagLayout());

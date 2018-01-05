@@ -50,19 +50,22 @@ public class ControleurAccueil  extends Observable{
 		trivialPursuite.addObserver((Observer) frame);
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.setVisible(true);
-		frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+		//vérifier taille ici
+		System.out.println("jeu !"+frame.getWidth()+" "+frame.getHeight());
+		//frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
 	}
 
 	public void creerMenu() {
 
 		Menu menu = new Menu("Trivial Pursuit",this);
-
+		System.out.println("menu !"+menu.getWidth()+" "+menu.getHeight());
 		menu.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		menu.setVisible(true);
+		
 		//menu.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		this.addObserver((Observer) menu);
 		this.afficherMenu();
-
+		System.out.println("menu !"+menu.getWidth()+" "+menu.getHeight());
 
 	}
 	public void afficherMenu() {
@@ -91,23 +94,26 @@ public class ControleurAccueil  extends Observable{
 				
 				Boolean dateOk= false;
 				Boolean nomOK= false;
+				Boolean bothOK= false;
 				String date = partie.getDate();
 				String datetmp = date.substring(0, 8);
 				String nom1 = partie.getNomJ1();
 				String nom2 = partie.getNomJ2();
 				if (datetmp.equals(dateAChercher)) {dateOk=true;}
 				if (nom1.equals(pseudoAChercher) || nom2.equals(pseudoAChercher)) {	nomOK=true;	}
+				if ( (nom1.equals(pseudoAChercher) || nom2.equals(pseudoAChercher)) && datetmp.equals(dateAChercher)) {	bothOK=true;	}
 				
-				if (!dateAChercher.equals("") && dateOk) {// si on cherche par date
-					listeRecherche.add(partie);
-					System.out.println("Date =:partie date add="+partie.getNomJ1());
-				}else if (!pseudoAChercher.equals("") && nomOK) { // si on cherche que par speudo
-					listeRecherche.add(partie);
-					System.out.println("Pseudo :partie date add="+partie.getDate());
-				}else if (!pseudoAChercher.equals("") && !dateAChercher.equals("") && dateOk && nomOK) { // si on cherche par date et pseudo
+				if (!pseudoAChercher.equals("") && !dateAChercher.equals("TOUT") && bothOK) {// si on cherche par date
 					listeRecherche.add(partie);
 					System.out.println("BOTH :partie date add="+partie.getDate());
+				}else if (!pseudoAChercher.equals("") && dateAChercher.equals("TOUT") && nomOK) { // si on cherche que par speudo
+					listeRecherche.add(partie);
+					System.out.println("Pseudo :partie date add="+partie.getDate());
+				}else if (!dateAChercher.equals("") && pseudoAChercher.equals("") && dateOk) { // si on cherche par date et pseudo
+					listeRecherche.add(partie);
+					System.out.println("Date =:partie date add="+partie.getNomJ1());
 				}
+				
 			}// end for
 			info.add(listePartie);
 			info.add(listeRecherche);
