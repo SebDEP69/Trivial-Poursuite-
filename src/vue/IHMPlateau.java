@@ -7,7 +7,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.*;
 import javax.imageio.ImageIO;
-import javax.print.DocFlavor;
 import javax.swing.*;
 import javax.swing.border.Border;
 
@@ -799,16 +798,16 @@ public class IHMPlateau extends JFrame implements  Observer {
 				labelGagnant.setText(labelGagnant.getText()+joueur.getNom());
 				gagnant.setText("<html> WINNER </html>");
 				panelJoueur.setBackground(vertColor);
-				//imgJoueur= new JLabel(new ImageIcon("images/"+nomImgJoueur+"_victoire.png"));
+				imgJoueur= new JLabel(new ImageIcon("images/"+nomImgJoueur+"_victoire.png"));
 			}else {
-				//imgJoueur = new JLabel(new ImageIcon("images/"+nomImgJoueur+"_defaite.png"));
+				imgJoueur = new JLabel(new ImageIcon("images/"+nomImgJoueur+"_defaite.png"));
 				panelJoueur.setBorder(BorderFactory.createMatteBorder(10, 10, 10, 5, Color.DARK_GRAY));
 				gagnant.setText("LOSER");
 				panelJoueur.setBackground(rougeColor);
 			}
 			JLabel nom = new JLabel(joueur.getNom());
 
-			imgJoueur = new JLabel(new ImageIcon("images/"+nomImgJoueur+".png"));
+			//imgJoueur = new JLabel(new ImageIcon("images/"+nomImgJoueur+".png"));
 			//imgJoueur.setPreferredSize(new Dimension(100, 100));
 			int scrorePart = joueur.getNbPart();
 			JLabel nbPart = new JLabel( ((Integer)scrorePart).toString());
