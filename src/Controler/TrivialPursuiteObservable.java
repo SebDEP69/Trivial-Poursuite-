@@ -57,8 +57,8 @@ public class TrivialPursuiteObservable extends Observable {
 	// s'occupe de faire toute les etapes d'un tour
 	public void lancerLesDes() {
 
-		//int lancerDes = this.jeu.LanceDeDes();
-		int lancerDes = this.jeu.LanceDeDesDemo();
+		int lancerDes = this.jeu.LanceDeDes();
+		//int lancerDes = this.jeu.LanceDeDesDemo();
 		System.out.println("###################");
 		System.out.println("JOUEUR : "+this.jeu.getJoueurCourant().getNom());
 		System.out.println("lancer : "+ lancerDes);
